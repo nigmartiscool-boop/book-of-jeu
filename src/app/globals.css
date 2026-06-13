@@ -528,6 +528,14 @@
   border-color: var(--ink);
   border-left: 3px solid var(--gold2);
 }
+.hs-item .hs-icon {
+  font-size: 1rem;
+  margin-right: 0.6rem;
+  color: var(--gold2);
+  float: left;
+  line-height: 1;
+  margin-top: 2px;
+}
 .hs-item .hs-name {
   font-family: 'Cinzel', serif;
   font-size: 0.72rem;

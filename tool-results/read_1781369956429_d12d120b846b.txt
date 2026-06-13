@@ -1,0 +1,875 @@
+     1→'use client'
+     2→
+     3→import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react'
+     4→
+     5→/* ═══════════════════════════════════════════════════
+     6→   TYPES
+     7→   ═══════════════════════════════════════════════════ */
+     8→interface Lore {
+     9→  title: string
+    10→  body: string
+    11→}
+    12→interface Hotspot {
+    13→  id: string
+    14→  label: string
+    15→  brief: string
+    16→  detail: string
+    17→}
+    18→interface TreasuryPage {
+    19→  id: string
+    20→  nav: string
+    21→  title: string
+    22→  ref: string
+    23→  desc: string
+    24→  lore: Lore[]
+    25→  hotspots: Hotspot[]
+    26→}
+    27→
+    28→/* ═══════════════════════════════════════════════════
+    29→   TREASURY DATA
+    30→   ═══════════════════════════════════════════════════ */
+    31→const PAGES: TreasuryPage[] = [
+    32→  {
+    33→    id: 'treasury',
+    34→    nav: 'I \u00b7 Treasury of Light',
+    35→    title: 'The Treasury of the Light',
+    36→    ref: 'Book of Jeu I \u00b7 Chapters 1\u201315 \u00b7 Bruce Codex ff. 1r\u201317v',
+    37→    desc: 'The supreme abode of the Divine \u2014 source of all spiritual light. Structured as twelve concentric aeons each sealed by a guardian, enclosing three great curtains, and at the innermost, the Great Invisible: the unknowable source from which all light and life flows downward into creation.',
+    38→    lore: [
+    39→      { title: 'Origin of the Text', body: 'The Book of Jeu was preserved in the Codex Brucianus, discovered in Egypt and acquired by James Bruce in 1769. Written in Coptic, it likely translates earlier Greek originals. The diagrams it contains are unique survivals of actual initiatory seals used in Sethian Gnostic ritual.' },
+    40→      { title: 'The Pleroma', body: 'The Pleroma ("Fullness") is the totality of divine light, comprising all aeons in their perfection. The Treasury stands at its apex. The fall of Sophia and the formation of the material world are understood as a leak of light downward out of the Pleroma.' },
+    41→      { title: 'The Twelve Aeons', body: 'Each of the twelve outer chambers is presided over by an aeon-ruler. Their names include Harmozel (light of grace), Oroiael (light of thought), Daveithe (light of understanding), and Eleleth (light of perception). Each presides over a class of souls.' },
+    42→      { title: 'The Three Curtains', body: 'Three veils (\u03ba\u03b1\u03c4\u03b1\u03c0\u03b5\u03c4\u03ac\u03c3\u03bc\u03b1\u03c4\u03b1) separate the inner sanctum from the Pleroma. The outer veil is penetrable by higher archons; the middle by perfect souls of the elect; the innermost veil can only be crossed by those who have received all five seals of the baptismal rite.' }
+    43→    ],
+    44→    hotspots: [
+    45→      { id: 'aeons', label: 'The Twelve Seals', brief: 'Outer ring of aeon-rulers', detail: 'Twelve seals encircle the Treasury, each governed by an aeon-ruler who acts as guardian of that domain. The ascending soul must know the name of each ruler and present the corresponding counter-seal. The names \u2014 Harmozel, Oroiael, Daveithe, Eleleth, and their companions \u2014 are not mere labels but living words of power, each a key to a specific gate of light.' },
+    46→      { id: 'veils', label: 'The Three Veils', brief: 'Curtains separating the inner sanctum', detail: 'The three veils are boundaries of increasing sanctity. The outermost veil filters the light of the Pleroma so that the lower aeons are not consumed. The middle veil admits only those who have received the baptism of fire. The innermost veil opens solely for the soul bearing all five seals \u2014 water, fire, spirit, chrism, and the seal of the name of Jeu himself.' },
+    47→      { id: 'spark', label: 'The Divine Spark', brief: 'Seed of light within the soul', detail: 'At the heart of every human soul lies a fragment of divine light \u2014 a spark that fell from the Pleroma when Sophia erred. This spark is the reason the Archons cannot fully possess the soul, and it is the beacon by which the Treasury draws the ascending spirit back toward its source. The baptismal rite awakens and fans this spark into a flame.' },
+    48→      { id: 'invisible', label: 'The Great Invisible', brief: 'The unknowable source of all', detail: 'At the innermost point of the Treasury dwells the Great Invisible (\u1f08\u03cc\u03c1\u03b1\u03c4\u03bf\u03c2) \u2014 the Unknowable Father, beyond all names, beyond all aeons, beyond even the Pleroma itself. No mind can comprehend it; no tongue can name it. It is the silence from which all sound emanates, the darkness from which all light shines forth.' }
+    49→    ]
+    50→  },
+    51→  {
+    52→    id: 'jeu',
+    53→    nav: 'II \u00b7 Jeu, the True God',
+    54→    title: 'Jeu, the True God \u2014 Father of the Treasury',
+    55→    ref: 'Book of Jeu I \u00b7 Chapters 2\u20134 \u00b7 Bruce Codex ff. 2r\u20135v',
+    56→    desc: 'Jeu is the Great Overseer, the Father who stands at the apex of the aeons and administers the Treasury. He begat 49 powers arranged in a seven-by-seven matrix, inscribed his name upon the living water, and sent emanations of light into the lower worlds.',
+    57→    lore: [
+    58→      { title: 'Who Is Jeu?', body: 'Jeu (also Ieu or Ieou) occupies a position analogous to the Gnostic figure of Barbelo \u2014 the first self-manifestation of the unknowable God. He is not the Demiurge (the ignorant creator of matter) but the first-born of the highest light. The text states: "Jeu established himself and observed himself and saw that he was alone, and he appointed his powers."' },
+    59→      { title: 'The 49 Powers', body: 'Jeu\'s 49 powers are arranged in a seven-by-seven grid, mirroring the sacred geometry of the Heptad. Each power rules a domain: some govern the movement of souls, others administer the seals of the aeons, others oversee the baptismal waters. Each power has a name, a face, and a number.' },
+    60→      { title: 'The Living Water', body: 'Jeu inscribed his unutterable name upon "the living water" \u2014 a concept related to the baptismal rite. The Book of Jeu II contains extensive rubrics for a "baptism with water, fire, and holy spirit," in which the baptismal water becomes the vehicle for the divine seal.' },
+    61→      { title: 'The Manuscript Diagrams', body: 'The Bruce Codex actually contains circular seal diagrams at this point in the text, with radial divisions, names in Coptic and Greek, and concentric rings \u2014 making the Book of Jeu one of the very few Gnostic texts to survive with its original ritual diagrams intact. Schmidt and MacDermot edited the critical edition in 1978.' }
+    62→    ],
+    63→    hotspots: [
+    64→      { id: 'throne', label: 'The Throne of Jeu', brief: 'Seat of divine authority', detail: 'Jeu sits upon a throne at the apex of the aeonic hierarchy. The throne is not merely a seat but a nexus of power \u2014 the point at which the will of the Unknowable Father is translated into the administration of the Treasury. From this throne Jeu dispatches the 49 powers, receives the ascending souls, and inscribes the seals upon the luminous garments of the redeemed.' },
+    65→      { id: 'head', label: 'The Head of Jeu', brief: 'The first manifestation of divine light', detail: 'The head of Jeu radiates twelve rays, one for each of the aeons. In the center of his brow is inscribed the tetragrammaton of his name \u2014 \u0399\u0395\u03a5 \u2014 a name so sacred it may only be spoken during the baptismal rite and never in the hearing of the Archons, who would use it to bar the soul\'s ascent rather than facilitate it.' },
+    66→      { id: 'staff', label: 'The Staff of Fire', brief: 'Instrument of divine will', detail: 'Jeu holds a staff of fire tipped with a triple flame \u2014 the three fires of purification, sealing, and illumination. With this staff he inscribes his name upon the living water, opens the gates of the Treasury, and brands the counter-seal upon the souls of the baptized. The staff is the instrument by which will becomes action in the realm of light.' },
+    67→      { id: 'powers7', label: 'The 49 Powers (Right)', brief: 'Seven-by-seven matrix of emanations', detail: 'The 49 powers on the right hand of Jeu represent the emanations of grace and blessing. Each of the seven rows corresponds to one of the seven vowels of the sacred name (I E O Y O A O), and each column to one of the seven heavens. Together they form a complete map of the divine administration through which souls are guided back to the Treasury.' }
+    68→    ]
+    69→  },
+    70→  {
+    71→    id: 'archons',
+    72→    nav: 'III \u00b7 Archon Seals',
+    73→    title: 'The Seals of the Archons \u2014 Gates of Ascent',
+    74→    ref: 'Book of Jeu I \u00b7 Chapters 30\u201350 \u00b7 Bruce Codex ff. 20r\u201339v',
+    75→    desc: 'Between the soul and the Treasury stand the Archons \u2014 rulers of the planetary spheres who guard the gates of ascent. Each Archon demands a password, a seal, and a name. The Book of Jeu provides the complete liturgy for passing every gate.',
+    76→    lore: [
+    77→      { title: 'The Archons and Their Origin', body: 'The Archons were created when Ialdabaoth, the Demiurge, formed the material cosmos. Each planet and sphere received an Archon as its ruler. In the Sethian system these rulers are not evil per se but ignorant \u2014 they block the soul\'s ascent not out of malice but because they believe the material realm is the highest reality.' },
+    78→      { title: 'The Baptism of Fire', body: 'Book of Jeu II contains the full ritual script for the baptism of fire, which equips the soul with the counter-seals needed to pass the archonic gates. The text describes the priest anointing the candidate with "the unction of the mysteries of the repentance," followed by sealing with the fire-seal.' },
+    79→      { title: 'Passwords and Seals', body: 'For each gate the initiate must: (1) name the archon correctly, (2) present the appropriate counter-seal, (3) speak the password in the archon\'s own language, and (4) recite the name of the higher aeon who commissioned the soul\'s ascent. Only then does the gate open.' },
+    80→      { title: 'Ialdabaoth the Demiurge', body: 'Ialdabaoth (also Saklas, "the fool," and Samael, "blind god") is the ignorant creator who formed the material world believing himself to be the highest god. The ascending soul must address him: "Withdraw, Saklas, for I descend not into your realm; I come from the height of the Father of the Treasury of Light."' }
+    81→    ],
+    82→    hotspots: [
+    83→      { id: 'ialdabaoth', label: 'Ialdabaoth', brief: 'The lion-faced Demiurge', detail: 'Ialdabaoth stands at the outermost gate of the material world. His seal is a lion-faced serpent biting its own tail \u2014 an image that appears in a number of Gnostic gems from the 2nd\u20134th centuries (the so-called Abraxas gems). The ascending soul must know his true name (Saklas), his counter-name (Samael), and the password: "I am from before the beginning; thy realm has no power over me."' },
+    84→      { id: 'gate1', label: 'First Gate \u00b7 Outermost Sphere', brief: 'Boundary of the material world', detail: 'The first gate marks the boundary between the sublunary material world and the aetheric realm. Its Archon bears the form of a crocodile (a common image of Egyptian origin absorbed into Gnostic iconography). The initiate must present the counter-seal of the first baptism and recite: "Withdraw, judge of falsehood, I am clothed in the garment of the light of my father, the Treasury of Light."' },
+    85→      { id: 'gate2', label: 'Second Gate \u00b7 Aetheric Boundary', brief: 'Entry into the realm of the aethers', detail: 'The second gate separates the material aether from the celestial realm proper. Its Archon bears a ram\'s head. The soul must present the counter-seal of the baptism of fire and speak the second password. The Book of Jeu notes that at this gate the soul sheds its "aetheric body" and proceeds clothed only in light.' },
+    86→      { id: 'gate3', label: 'Third Gate \u00b7 Celestial Boundary', brief: 'Entry into the aeon of the stars', detail: 'The third gate marks the boundary of the fixed-star sphere. Its Archon is described as eagle-headed, and its seal incorporates a seven-pointed star. The initiate must present the fire-seal and recite the names of all seven planetary archons from below. Beyond this gate the soul begins to encounter the lower aeons proper.' },
+    87→      { id: 'counter', label: 'The Counter-Seal', brief: 'Baptismal seal granted to initiates', detail: 'The counter-seal (\u1f00\u03bd\u03c4\u03b9-\u03c3\u03c6\u03c1\u03b1\u03b3\u1f77\u03c2) is imprinted on the soul during the baptismal rite. The Book of Jeu II describes it as a seal "in the form of the name of Jeu written in fire upon the garment of light." It functions as a passport through each archonic gate \u2014 each Archon recognizes the seal as a mark of divine authority and is compelled by the higher power of Jeu to step aside.' }
+    88→    ]
+    89→  },
+    90→  {
+    91→    id: 'baptism',
+    92→    nav: 'IV \u00b7 Baptism Rite',
+    93→    title: 'The Rite of Baptism with Fire and Water',
+    94→    ref: 'Book of Jeu II \u00b7 Chapters 42\u201352 \u00b7 Bruce Codex ff. 103r\u2013114v',
+    95→    desc: 'Book of Jeu II preserves a nearly complete ritual script for the Gnostic baptism \u2014 one of the earliest surviving liturgical documents of Gnostic Christianity. It describes the sealing of candidates with fire, anointing with oil, the binding of vine branches, and the recitation of the names of the aeons.',
+    96→    lore: [
+    97→      { title: 'Three Baptisms', body: 'The Book of Jeu II describes three baptisms performed in sequence: the baptism of water (purification), the baptism of fire (sealing and empowerment), and the baptism of the Holy Spirit (the final reception of the divine name). Each leaves an invisible seal upon the soul\'s "luminous garment."' },
+    98→      { title: 'The Ritual Script', body: 'The text provides direct speech: "Hear me, Father, father of all fatherhood, boundless light: \u03c8\u03b5 \u03b1\u03b9\u03a9 \u03b1\u03b9\u03a9 \u03b1\u03a9\u2026 Let the light-seal descend upon [name], that they may pass through all the rulers of the world and all the rulers of the darkness." Scholars regard this as an actual liturgical formula.' },
+    99→      { title: 'The Vine Branches', body: 'An unusual element is the instruction to bind vine branches around the hands of the candidate \u2014 a possible echo of Dionysiac mystery rites absorbed into the Gnostic synthesis. The vine, associated with the blood of Christ in mainstream Christianity, here becomes a seal-bearer and symbol of enclosed divine light.' },
+   100→      { title: 'The Role of the Priest', body: 'The officiating priest speaks the names of the aeons over the candidate while placing a seal on their forehead, mouth, and chest. The candidate must keep their eyes closed throughout and respond only with "Amen." The priest concludes: "Go in peace, for I set the seal upon you from the Treasury of the Light."' }
+   101→    ],
+   102→    hotspots: [
+   103→      { id: 'fire', label: 'Baptism of Fire', brief: 'The sealing empowerment of the soul', detail: 'The baptism of fire (\u03b2\u03ac\u03c0\u03c4\u03b9\u03c3\u03bc\u03b1 \u03c0\u03c5\u03c1\u03cc\u03c2) is administered after the water baptism. The priest recites a long invocation calling upon Jeu and the 49 powers. A seal of fire is then symbolically traced upon the candidate\'s luminous garment \u2014 described as "living fire that does not consume the soul but illuminates it and makes it invincible before the archons."' },
+   104→      { id: 'water', label: 'Baptism of Water', brief: 'Purification and first sealing', detail: 'The water baptism comes first and performs a cleansing function. The candidate confesses their entrapment in matter and calls upon the name of Jeu. The water used is described as "living water" \u2014 water that has been sealed with the name of Jeu and thus charged with divine power. The baptism is performed by full immersion, after which the candidate receives the anointing with oil.' },
+   105→      { id: 'oil', label: 'Anointing with Oil', brief: 'The unction of the mysteries', detail: 'Between the water and fire baptisms the candidate is anointed with "the unction of the mysteries of the repentance." This anointing corresponds to the Gnostic interpretation of the chrism (\u03c7\u03c1\u1f77\u03c3\u03bc\u03b1). It seals the candidate\'s body against re-infiltration by archonic powers during the remainder of their earthly life, and prepares the luminous garment for the fire-seal to follow.' },
+   106→      { id: 'vine', label: 'The Vine Branches', brief: 'Symbol of enclosed divine light', detail: 'The ritual instruction reads: "Bind vine branches around their hands." This has no direct parallel in mainstream Christian baptismal rites and likely derives from pre-Christian mystery traditions. The vine is a symbol of divine life enclosed in material form \u2014 just as wine contains the spirit of the grape, the initiate\'s body contains the divine spark.' },
+   107→      { id: 'names', label: 'The Sacred Names', brief: 'Living words spoken over the candidate', detail: 'The baptismal invocation includes voces magicae \u2014 sacred sound-words combining Greek vowels, Coptic divine names, and phonetic representations of divine names: \u03c8\u03b5 \u03b1\u03b9\u03a9 \u03b1\u03b9\u03a9 \u03b1\u03a9 \u03c8\u03b5 \u03b1\u03c1\u03a9 \u03b1\u03c1\u03a9 \u03a9 \u03c8\u03b5 \u03a9\u03a9\u03a9. These represent the names of the 49 powers of Jeu and function as the verbal component of the seal imprinted upon the soul.' }
+   108→    ]
+   109→  },
+   110→  {
+   111→    id: 'ch33',
+   112→    nav: 'Ch. 33 \u2022 55th Treasury',
+   113→    title: 'The 55th Treasury of Light',
+   114→    ref: 'First Book of Jeu \u2022 Chapter 33 \u2022 Bruce Codex ff. 25r\u201326v',
+   115→    desc: 'The 55th Treasury is sealed with the sign of the cross-and-circle \u2014 a hieroglyph of the intersection of divine will and cosmic perfection. Six places surround the central figure, each guarded by a watcher who holds a cipher. The initiate must seal themselves with this seal while the cipher is in their hand, speaking the name of the treasury\'s guardian thrice.',
+   116→    lore: [
+   117→      { title: 'The Cross-and-Circle Seal', body: 'The cross within a circle is one of the oldest symbols in Gnostic iconography, predating Christianity by centuries. In the Book of Jeu it represents the intersection of the four directions of divine emanation with the perfection of the Pleroma. The horizontal axis signifies the extension of divine light across all creation; the vertical axis marks the path of the soul\'s ascent and descent.' },
+   118→      { title: 'The Six Watchers', body: 'Six places surround the central figure of the 55th Treasury, each occupied by a watcher (\u03c0\u03b1\u03c1\u03b1\u03c4\u03ae\u03c1\u03b7\u03c4\u03b7\u03c2). These watchers hold ciphers \u2014 coded names that must be spoken aloud in sequence. The text instructs: "Seal yourselves with this seal while the cipher is in your hand," suggesting a physical gesture accompanying the verbal formula.' },
+   119→      { title: 'The Cipher Ritual', body: 'Unlike the more elaborate baptismal rites of Book II, the cipher ritual of the 55th Treasury is brief and self-administered. The initiate traces the cross-and-circle upon their own forehead while reciting the guardian\'s name. This act of self-sealing is unique in the Book of Jeu and may represent a more democratized form of Gnostic practice.' },
+   120→      { title: 'Context in the Codex', body: 'Chapter 33 falls within the central sequence of the First Book of Jeu, where individual treasuries are described with their seals, names, and ritual instructions. The 55th Treasury is notable for its geometric simplicity \u2014 a single cross and circle \u2014 compared to the more elaborate multi-ring seals of other treasuries, suggesting it may represent a foundational or primordial seal.' }
+   121→    ],
+   122→    hotspots: [
+   123→      { id: 'cross', label: 'The Sacred Cross', brief: 'Axis of divine will and emanation', detail: 'The vertical stroke of the cross represents the descent of divine light from the Unknowable Father through Jeu into creation, and the ascent of the soul back toward its source. The horizontal stroke marks the extension of grace across all realms of being. Together they form the most ancient seal of the Treasury \u2014 a sign that predates even the twelve aeons.' },
+   124→      { id: 'circle55', label: 'The Enclosing Circle', brief: 'Perfection of the Pleroma', detail: 'The circle represents the Pleroma in its totality \u2014 perfect, self-contained, without beginning or end. When the cross is inscribed within the circle, it signifies that divine will (the cross) operates within and never exceeds the bounds of divine perfection (the circle). This is the fundamental law of the Treasury: no emanation can exceed its source.' },
+   125→      { id: 'watchers55', label: 'The Six Watchers', brief: 'Guardians holding the ciphers', detail: 'The six watchers occupy the cardinal and intercardinal positions around the central cross. Each holds a cipher \u2014 a coded name that must be decoded and spoken. The ciphers are given in a mixture of Coptic and Greek letters, and their pronunciation transforms them from inert symbols into active keys that unlock the treasury\'s gate.' },
+   126→      { id: 'cipher', label: 'The Cipher', brief: 'The coded name held in hand', detail: 'The cipher of the 55th Treasury is described as being "in your hand" \u2014 possibly a small inscribed tablet or parchment carried by the initiate during the ritual. The physical presence of the cipher during the act of sealing creates a connection between the material and spiritual realms, allowing the divine name to bridge the gap between flesh and light.' }
+   127→    ]
+   128→  },
+   129→  {
+   130→    id: 'ch36',
+   131→    nav: 'Ch. 36 \u2022 58th Treasury',
+   132→    title: 'The 58th Treasury of Light',
+   133→    ref: 'First Book of Jeu \u2022 Chapter 36 \u2022 Bruce Codex ff. 28r\u201329v',
+   134→    desc: 'The 58th Treasury reveals the great wheel of emanation \u2014 twelve rays radiating from an inner ring, bounded by an outer circle. Six places surround it, and the initiate must invoke the name three times while tracing the wheel upon the air. This treasury governs the rotation of the aeons and the cycling of souls through purification.',
+   135→    lore: [
+   136→      { title: 'The Wheel of Emanation', body: 'The twelve-rayed wheel is a cosmological diagram showing how the divine light emanates outward from the central point through twelve channels \u2014 one for each of the aeons. The rotation of the wheel represents the eternal cycling of light outward into creation and inward back toward the Treasury, a process that sustains all existence.' },
+   137→      { title: 'The Twelve Rays', body: 'Each of the twelve rays corresponds to one of the aeon-rulers: Harmozel, Oroiael, Daveithe, Eleleth, Gamaliel, Gabriel, Samblo, Abrasax, Iaoth, Sabaoth, Adonaios, and Sabaoth the Second. The ray of each aeon is a conduit for a specific quality of divine light \u2014 grace, thought, understanding, perception, and so on.' },
+   138→      { title: 'The Triple Invocation', body: 'The instruction to "invoke the name three times" mirrors the three-fold baptismal structure of water, fire, and spirit. Each repetition seals a different layer of the initiate\'s luminous garment. The first invocation opens the outer gate; the second activates the inner ring; the third draws the central light outward to meet the ascending soul.' },
+   139→      { title: 'Rotation of the Aeons', body: 'The 58th Treasury governs the rotation (\u03c0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03bf\u03c6\u03ae) of the aeons \u2014 the cosmic cycle by which each aeon takes its turn presiding over the Pleroma. This rotation ensures that no single aeon dominates eternally, maintaining the harmony and balance of the divine Fullness. The initiate who understands this rotation can align their ascent with the current presiding aeon.' }
+   140→    ],
+   141→    hotspots: [
+   142→      { id: 'outer58', label: 'The Outer Circle', brief: 'Boundary of the treasury', detail: 'The outer circle of the 58th Treasury marks its boundary with the surrounding aeons. Unlike the 55th Treasury\'s simple circle, this outer ring is inscribed with the names of all twelve aeon-rulers, making it both a boundary and a map. The initiate who can read this ring knows the order of the aeons and the direction of their rotation.' },
+   143→      { id: 'inner58', label: 'The Inner Ring', brief: 'Nexus of the twelve emanations', detail: 'The inner ring is where the twelve rays converge. It represents the point of origin from which all divine light radiates outward \u2014 the "navel" of the Treasury, so to speak. In the ritual, the priest traces this ring upon the candidate\'s chest, symbolically placing the nexus of emanation within their own heart.' },
+   144→      { id: 'rays58', label: 'The Twelve Rays', brief: 'Channels of aeonic emanation', detail: 'Each ray is a channel for a specific quality of divine light. The ray of Harmozel carries the light of grace; the ray of Oroiael carries the light of thought; and so forth. The initiate must know which ray corresponds to which aeon, for the soul must ascend through the rays in the correct order \u2014 not randomly, but following the rotation of the wheel.' },
+   145→      { id: 'rotation', label: 'The Rotation', brief: 'Cosmic cycling of the aeons', detail: 'The 58th Treasury is unique in that it governs not a static structure but a dynamic process \u2014 the rotation of the aeons. This rotation is the heartbeat of the Pleroma, the rhythm by which divine light circulates eternally. Understanding this rotation allows the initiate to time their ascent for maximum alignment with the presiding aeon, dramatically easing the passage through the archonic gates.' }
+   146→    ]
+   147→  }
+   148→]
+   149→
+   150→/* ═══════════════════════════════════════════════════
+   151→   SVG CONSTANTS
+   152→   ═══════════════════════════════════════════════════ */
+   153→const INK = '#1a1208'
+   154→const INK2 = 'rgba(26,18,8,0.55)'
+   155→const INK3 = 'rgba(26,18,8,0.25)'
+   156→const INK4 = 'rgba(26,18,8,0.1)'
+   157→const GOLD = '#c8a84a'
+   158→const GOLD2 = '#8a6820'
+   159→const CINZEL = 'Cinzel,serif'
+   160→const BASK = 'Libre Baskerville,Georgia,serif'
+   161→
+   162→/* ═══════════════════════════════════════════════════
+   163→   SVG DIAGRAM COMPONENTS
+   164→   ═══════════════════════════════════════════════════ */
+   165→
+   166→function TreasuryDiagram({ selected, onSelect }: { selected: string | null, onSelect: (id: string) => void }) {
+   167→  const cx = 260, cy = 268
+   168→  const sealNames = ['Harmozel','Oroiael','Daveithe','Eleleth','Gamaliel','Gabriel','Samblo','Abrasax','Iaoth','Sabaoth','Adonaios','Sabaoth II']
+   169→
+   170→  return (
+   171→    <svg viewBox="0 0 520 560" xmlns="http://www.w3.org/2000/svg">
+   172→      {/* Decorative frame */}
+   173→      <rect x={12} y={12} width={496} height={536} fill="none" stroke={INK3} strokeWidth={0.4} rx={3} />
+   174→      <rect x={18} y={18} width={484} height={524} fill="none" stroke={INK4} strokeWidth={0.3} rx={2} />
+   175→      {[[22,22],[510,22],[22,546],[510,546]].map(([ox,oy], i) => {
+   176→        const dx = i%2===0?1:-1, dy = i<2?1:-1
+   177→        return <g key={`corner-${i}`}>
+   178→          <line x1={ox} y1={oy} x2={ox+dx*22} y2={oy} stroke={INK} strokeWidth={0.6} />
+   179→          <line x1={ox} y1={oy} x2={ox} y2={oy+dy*22} stroke={INK} strokeWidth={0.6} />
+   180→          <line x1={ox+dx*6} y1={oy+dy*6} x2={ox+dx*18} y2={oy+dy*6} stroke={INK3} strokeWidth={0.4} />
+   181→          <line x1={ox+dx*6} y1={oy+dy*6} x2={ox+dx*6} y2={oy+dy*18} stroke={INK3} strokeWidth={0.4} />
+   182→        </g>
+   183→      })}
+   184→
+   185→      {/* Rotating outer glow */}
+   186→      <circle cx={cx} cy={cy} r={220} fill="none" stroke="rgba(200,168,74,0.12)" strokeWidth={0.8} className="svg-rotate" />
+   187→      <circle cx={cx} cy={cy} r={215} fill="none" stroke="rgba(200,168,74,0.08)" strokeWidth={0.4} strokeDasharray="4,6" className="svg-rotate" style={{animationDirection:'reverse', animationDuration:'90s'}} />
+   188→
+   189→      {/* Outermost ring: 12 seals */}
+   190→      <circle cx={cx} cy={cy} r={205} fill="none" stroke={INK2} strokeWidth={0.5} />
+   191→      <g className={`svg-clickable ${selected==='aeons'?'selected':''}`} onClick={() => onSelect('aeons')}>
+   192→        {sealNames.map((name, i) => {
+   193→          const a = (i/12)*Math.PI*2 - Math.PI/2
+   194→          const sx = cx+Math.cos(a)*205, sy = cy+Math.sin(a)*205
+   195→          const lx = cx+Math.cos(a)*228, ly = cy+Math.sin(a)*228
+   196→          const la = a*(180/Math.PI)+90
+   197→          return <g key={`seal-${i}`}>
+   198→            <line x1={cx+Math.cos(a)*50} y1={cy+Math.sin(a)*50} x2={cx+Math.cos(a)*196} y2={cy+Math.sin(a)*196} stroke={INK4} strokeWidth={0.4} />
+   199→            <circle cx={sx} cy={sy} r={9} fill="rgba(26,18,8,0.08)" stroke={INK} strokeWidth={0.8} />
+   200→            <circle cx={sx} cy={sy} r={4} fill="rgba(26,18,8,0.15)" />
+   201→            <text x={lx} y={ly} fontSize={7.5} fill={INK2} textAnchor="middle" dominantBaseline="central"
+   202→              fontFamily={CINZEL} letterSpacing="0.06em" transform={`rotate(${la},${lx},${ly})`}>{name}</text>
+   203→          </g>
+   204→        })}
+   205→      </g>
+   206→      <text x={cx} y={cy-218} fontSize={7} fill={INK3} textAnchor="middle" fontFamily={CINZEL} letterSpacing="0.12em">TWELVE SEALS OF THE OUTER RING</text>
+   207→
+   208→      {/* Second veil */}
+   209→      <g className={`svg-clickable ${selected==='veils'?'selected':''}`} onClick={() => onSelect('veils')}>
+   210→        <circle cx={cx} cy={cy} r={155} fill="rgba(26,18,8,0.02)" stroke={INK2} strokeWidth={0.6} />
+   211→        <text x={cx} y={cy-158} fontSize={7.5} fill={INK3} textAnchor="middle" fontFamily={CINZEL} letterSpacing="0.15em">SECOND VEIL</text>
+   212→      </g>
+   213→
+   214→      {/* Third veil */}
+   215→      <g className={`svg-clickable ${selected==='veils'?'selected':''}`} onClick={() => onSelect('veils')}>
+   216→        <circle cx={cx} cy={cy} r={100} fill="rgba(26,18,8,0.03)" stroke={INK} strokeWidth={0.7} />
+   217→        <text x={cx} y={cy-103} fontSize={7} fill={INK2} textAnchor="middle" fontFamily={CINZEL} letterSpacing="0.12em">THIRD VEIL</text>
+   218→      </g>
+   219→
+   220→      {/* Hexagram */}
+   221→      <g className={`svg-clickable ${selected==='spark'?'selected':''}`} onClick={() => onSelect('spark')}>
+   222→        {[0,1].map(tri => {
+   223→          const pts = [0,1,2].map(i => {
+   224→            const a = i*120*Math.PI/180 - Math.PI/2 + (tri*Math.PI/3)
+   225→            return `${cx+Math.cos(a)*64},${cy+Math.sin(a)*64}`
+   226→          }).join(' ')
+   227→          return <polygon key={tri} points={pts} fill="rgba(26,18,8,0.05)" stroke={INK} strokeWidth={0.5} />
+   228→        })}
+   229→      </g>
+   230→
+   231→      {/* Inner sanctum */}
+   232→      <g className={`svg-clickable ${selected==='invisible'?'selected':''}`} onClick={() => onSelect('invisible')}>
+   233→        <circle cx={cx} cy={cy} r={42} fill="rgba(26,18,8,0.08)" stroke={INK} strokeWidth={1.2} className="svg-glow" />
+   234→        <text x={cx} y={cy-10} fontSize={8.5} textAnchor="middle" fontFamily={CINZEL} fontWeight={700} letterSpacing="0.1em">THE GREAT</text>
+   235→        <text x={cx} y={cy+4} fontSize={8.5} textAnchor="middle" fontFamily={CINZEL} fontWeight={700} letterSpacing="0.1em">INVISIBLE</text>
+   236→        <text x={cx} y={cy+19} fontSize={8} textAnchor="middle" fill={INK2} fontStyle="italic">\u1f08\u03cc\u03c1\u03b1\u03c4\u03bf\u03c2</text>
+   237→        <circle cx={cx} cy={cy-16} r={5} fill="rgba(26,18,8,0.25)" stroke={INK} strokeWidth={0.8} className="svg-pulse" />
+   238→        <circle cx={cx} cy={cy-16} r={2} fill={INK} />
+   239→      </g>
+   240→
+   241→      {/* Divine spark label */}
+   242→      <g className={`svg-clickable ${selected==='spark'?'selected':''}`} onClick={() => onSelect('spark')}>
+   243→        <text x={cx+52} y={cy-16} fontSize={7.5} fill={INK3} fontStyle="italic" textAnchor="start">Divine Spark \u203a</text>
+   244→        <line x1={cx+5} y1={cy-16} x2={cx+50} y2={cy-16} stroke={INK4} strokeWidth={0.4} strokeDasharray="3,2" />
+   245→      </g>
+   246→
+   247→      {/* Caption */}
+   248→      <line x1={60} y1={548} x2={460} y2={548} stroke={INK3} strokeWidth={0.5} />
+   249→      <text x={cx} y={557} fontSize={8.5} textAnchor="middle" fill={INK2} fontStyle="italic">\u03c4\u1f78 \u0398\u03b7\u03c3\u03b1\u03c5\u03c1\u03bf\u03c6\u03c5\u03bb\u03ac\u03ba\u03b9\u03bf\u03bd \u03c4\u03bf\u1fe6 \u03a6\u03c9\u03c4\u03cc\u03c2 \u2014 The Treasury of the Light</text>
+   250→    </svg>
+   251→  )
+   252→}
+   253→
+   254→function JeuDiagram({ selected, onSelect }: { selected: string | null, onSelect: (id: string) => void }) {
+   255→  const cx = 260
+   256→  return (
+   257→    <svg viewBox="0 0 520 610" xmlns="http://www.w3.org/2000/svg">
+   258→      {/* Frame */}
+   259→      <rect x={12} y={12} width={496} height={586} fill="none" stroke={INK3} strokeWidth={0.4} rx={3} />
+   260→      <rect x={18} y={18} width={484} height={574} fill="none" stroke={INK4} strokeWidth={0.3} rx={2} />
+   261→      {[[22,22],[510,22],[22,598],[510,598]].map(([ox,oy], i) => {
+   262→        const dx = i%2===0?1:-1, dy = i<2?1:-1
+   263→        return <g key={`c-${i}`}>
+   264→          <line x1={ox} y1={oy} x2={ox+dx*22} y2={oy} stroke={INK} strokeWidth={0.6} />
+   265→          <line x1={ox} y1={oy} x2={ox} y2={oy+dy*22} stroke={INK} strokeWidth={0.6} />
+   266→        </g>
+   267→      })}
+   268→
+   269→      {/* Throne */}
+   270→      <g className={`svg-clickable ${selected==='throne'?'selected':''}`} onClick={() => onSelect('throne')}>
+   271→        <rect x={180} y={530} width={160} height={20} fill="rgba(26,18,8,0.07)" stroke={INK} strokeWidth={0.8} rx={2} />
+   272→        <rect x={170} y={525} width={180} height={12} fill="rgba(26,18,8,0.05)" stroke={INK} strokeWidth={0.5} rx={1} />
+   273→        <rect x={190} y={545} width={140} height={8} fill="rgba(26,18,8,0.04)" stroke={INK2} strokeWidth={0.4} rx={1} />
+   274→        <text x={cx} y={541} fontSize={7.5} textAnchor="middle" fontFamily={CINZEL} letterSpacing="0.12em" fill={INK2}>\u2726 THRONE OF JEU \u2726</text>
+   275→      </g>
+   276→
+   277→      {/* Body */}
+   278→      <ellipse cx={cx} cy={400} rx={68} ry={88} fill="rgba(26,18,8,0.04)" stroke={INK} strokeWidth={0.7} />
+   279→      {[-3,-2,-1,0,1,2,3].map(i => (
+   280→        <line key={`body-${i}`} x1={cx+i*12} y1={330} x2={cx+i*9+3} y2={518} stroke={INK4} strokeWidth={0.35} />
+   281→      ))}
+   282→
+   283→      {/* Arms */}
+   284→      <line x1={192} y1={390} x2={120} y2={360} stroke={INK} strokeWidth={0.7} />
+   285→      <line x1={328} y1={390} x2={400} y2={360} stroke={INK} strokeWidth={0.7} />
+   286→      <circle cx={120} cy={360} r={6} fill="rgba(26,18,8,0.1)" stroke={INK} strokeWidth={0.5} />
+   287→      <circle cx={400} cy={360} r={6} fill="rgba(26,18,8,0.1)" stroke={INK} strokeWidth={0.5} />
+   288→
+   289→      {/* Staff */}
+   290→      <g className={`svg-clickable ${selected==='staff'?'selected':''}`} onClick={() => onSelect('staff')}>
+   291→        <line x1={406} y1={360} x2={432} y2={528} stroke={INK} strokeWidth={1.1} />
+   292→        <polygon points="422,355 432,322 442,355" fill="rgba(26,18,8,0.18)" stroke={INK} strokeWidth={0.6} />
+   293→        <polygon points="426,348 432,318 438,348" fill="rgba(26,18,8,0.1)" stroke={INK2} strokeWidth={0.4} />
+   294→        <text x={448} y={420} fontSize={7} fill={INK3} fontStyle="italic" textAnchor="start">Staff of</text>
+   295→        <text x={448} y={432} fontSize={7} fill={INK3} fontStyle="italic" textAnchor="start">Fire</text>
+   296→      </g>
+   297→
+   298→      {/* Halo rings */}
+   299→      <circle cx={cx} cy={200} r={95} fill="none" stroke={INK3} strokeWidth={0.4} className="svg-pulse" />
+   300→      <circle cx={cx} cy={200} r={80} fill="none" stroke={INK3} strokeWidth={0.5} />
+   301→      <circle cx={cx} cy={200} r={68} fill="none" stroke={INK2} strokeWidth={0.6} className="svg-glow" />
+   302→
+   303→      {/* Head */}
+   304→      <g className={`svg-clickable ${selected==='head'?'selected':''}`} onClick={() => onSelect('head')}>
+   305→        <circle cx={cx} cy={200} r={52} fill="rgba(26,18,8,0.06)" stroke={INK} strokeWidth={1} />
+   306→        {[0,1,2,3,4,5,6,7,8,9,10,11].map(i => {
+   307→          const a = (i/12)*Math.PI*2 - Math.PI/2
+   308→          return <line key={`ray-${i}`} x1={cx+Math.cos(a)*53} y1={200+Math.sin(a)*53} x2={cx+Math.cos(a)*68} y2={200+Math.sin(a)*68} stroke={INK} strokeWidth={0.6} />
+   309→        })}
+   310→        <text x={cx} y={196} fontSize={18} textAnchor="middle" fontFamily={CINZEL} fontWeight={700} letterSpacing="0.08em">\u0399\u0395\u03a5</text>
+   311→        <text x={cx} y={214} fontSize={7.5} textAnchor="middle" fontStyle="italic" fill={INK2}>\u1f38\u03b5\u03cd \u1f41 \u1f08\u03bb\u03b7\u03b8\u03b9\u03bd\u1f78\u03c2 \u0398\u03b5\u03cc\u03c2</text>
+   312→      </g>
+   313→
+   314→      {/* 49 Powers LEFT */}
+   315→      <g className={`svg-clickable ${selected==='powers7'?'selected':''}`} onClick={() => onSelect('powers7')}>
+   316→        <text x={90} y={298} fontSize={7} fontFamily={CINZEL} fill={INK3} letterSpacing="0.06em">Powers of</text>
+   317→        <text x={90} y={309} fontSize={7} fontFamily={CINZEL} fill={INK3} letterSpacing="0.06em">the Right</text>
+   318→        {[0,1,2,3,4,5,6].map(r => [0,1,2,3,4,5,6].map(c => (
+   319→          <circle key={`pl-${r}-${c}`} cx={44+c*15} cy={320+r*15} r={4.5}
+   320→            fill={`rgba(26,18,8,${0.06+(r+c)*0.022})`} stroke={INK} strokeWidth={0.4} />
+   321→        )))}
+   322→        <line x1={192} y1={400} x2={150} y2={325} stroke={INK4} strokeWidth={0.4} strokeDasharray="3,3" />
+   323→      </g>
+   324→
+   325→      {/* 49 Powers RIGHT */}
+   326→      <g className={`svg-clickable ${selected==='powers7'?'selected':''}`} onClick={() => onSelect('powers7')}>
+   327→        <text x={430} y={298} fontSize={7} textAnchor="middle" fontFamily={CINZEL} fill={INK3} letterSpacing="0.06em">Powers of</text>
+   328→        <text x={430} y={309} fontSize={7} textAnchor="middle" fontFamily={CINZEL} fill={INK3} letterSpacing="0.06em">the Left</text>
+   329→        {[0,1,2,3,4,5,6].map(r => [0,1,2,3,4,5,6].map(c => (
+   330→          <circle key={`pr-${r}-${c}`} cx={376+c*15} cy={320+r*15} r={4.5}
+   331→            fill={`rgba(26,18,8,${0.02+(r+c)*0.014})`} stroke={INK2} strokeWidth={0.35} />
+   332→        )))}
+   333→        <line x1={328} y1={400} x2={370} y2={325} stroke={INK4} strokeWidth={0.4} strokeDasharray="3,3" />
+   334→      </g>
+   335→
+   336→      <text x={cx} y={605} fontSize={8.5} textAnchor="middle" fontStyle="italic" fill={INK2}>\u1f38\u03b5\u03cd \u1f41 \u1f08\u03bb\u03b7\u03b8\u03b9\u03bd\u1f78\u03c2 \u0398\u03b5\u03cc\u03c2 \u2014 Jeu, the True God, Father of the Treasury</text>
+   337→    </svg>
+   338→  )
+   339→}
+   340→
+   341→function ArchonsDiagram({ selected, onSelect }: { selected: string | null, onSelect: (id: string) => void }) {
+   342→  const cx = 260
+   343→  const gateData = [
+   344→    { y: 105, label: 'IALDABAOTH', sub: 'Lion-faced Demiurge \u00b7 Saklas \u00b7 Samael', id: 'ialdabaoth', diamond: true },
+   345→    { y: 220, label: 'THIRD GATE', sub: 'Eagle-headed \u00b7 Fixed-star sphere', id: 'gate3', diamond: false },
+   346→    { y: 340, label: 'SECOND GATE', sub: 'Ram-headed \u00b7 Aetheric boundary', id: 'gate2', diamond: false },
+   347→    { y: 455, label: 'FIRST GATE', sub: 'Crocodile-headed \u00b7 Outermost sphere', id: 'gate1', diamond: false },
+   348→  ]
+   349→
+   350→  return (
+   351→    <svg viewBox="0 0 520 610" xmlns="http://www.w3.org/2000/svg">
+   352→      {/* Frame */}
+   353→      <rect x={12} y={12} width={496} height={586} fill="none" stroke={INK3} strokeWidth={0.4} rx={3} />
+   354→      <rect x={18} y={18} width={484} height={574} fill="none" stroke={INK4} strokeWidth={0.3} rx={2} />
+   355→      {[[22,22],[510,22],[22,598],[510,598]].map(([ox,oy], i) => {
+   356→        const dx = i%2===0?1:-1, dy = i<2?1:-1
+   357→        return <g key={`c-${i}`}>
+   358→          <line x1={ox} y1={oy} x2={ox+dx*22} y2={oy} stroke={INK} strokeWidth={0.6} />
+   359→          <line x1={ox} y1={oy} x2={ox} y2={oy+dy*22} stroke={INK} strokeWidth={0.6} />
+   360→        </g>
+   361→      })}
+   362→
+   363→      {/* Treasury at top */}
+   364→      <circle cx={cx} cy={46} r={26} fill="rgba(26,18,8,0.07)" stroke={INK} strokeWidth={0.8} className="svg-glow" />
+   365→      <circle cx={cx} cy={46} r={16} fill="rgba(26,18,8,0.1)" stroke={INK} strokeWidth={0.5} />
+   366→      <text x={cx} y={50} fontSize={8} textAnchor="middle" fontFamily={CINZEL} fontWeight={700}>JEU</text>
+   367→      <text x={cx} y={30} fontSize={6.5} textAnchor="middle" fontFamily={CINZEL} fill={INK3} letterSpacing="0.1em">TREASURY OF LIGHT</text>
+   368→
+   369→      {/* Ascent axis */}
+   370→      <line x1={cx} y1={72} x2={cx} y2={538} stroke={INK3} strokeWidth={0.5} strokeDasharray="5,4" />
+   371→
+   372→      {/* Ascent arrows */}
+   373→      {[130,210,290,370,450].map(y => (
+   374→        <text key={`arr-${y}`} x={cx+18} y={y} fontSize={15} fill={INK3} textAnchor="start">\u2191</text>
+   375→      ))}
+   376→
+   377→      {/* Gates */}
+   378→      {gateData.map(g => (
+   379→        <g key={g.id} className={`svg-clickable ${selected===g.id?'selected':''}`} onClick={() => onSelect(g.id)}>
+   380→          {g.diamond ? (
+   381→            <>
+   382→              <polygon points={`${cx},${g.y-44} ${cx+52},${g.y} ${cx},${g.y+44} ${cx-52},${g.y}`} fill="rgba(26,18,8,0.08)" stroke={INK} strokeWidth={0.9} />
+   383→              <polygon points={`${cx},${g.y-36} ${cx+44},${g.y} ${cx},${g.y+36} ${cx-44},${g.y}`} fill="rgba(26,18,8,0.04)" stroke={INK2} strokeWidth={0.4} />
+   384→            </>
+   385→          ) : (
+   386→            <polygon
+   387→              points={[0,1,2,3,4,5].map(i => {
+   388→                const a = i*60*Math.PI/180 - Math.PI/2
+   389→                return `${cx+Math.cos(a)*42},${g.y+Math.sin(a)*36}`
+   390→              }).join(' ')}
+   391→              fill="rgba(26,18,8,0.06)" stroke={INK} strokeWidth={0.8}
+   392→            />
+   393→          )}
+   394→          <text x={cx} y={g.y-3} fontSize={10} textAnchor="middle" fontFamily={CINZEL} fontWeight={600} letterSpacing="0.08em">{g.label}</text>
+   395→          <text x={cx} y={g.y+12} fontSize={7} textAnchor="middle" fontStyle="italic" fill={INK2}>{g.sub}</text>
+   396→
+   397→          {/* Seal symbol */}
+   398→          <circle cx={82} cy={g.y} r={22} fill="rgba(26,18,8,0.05)" stroke={INK} strokeWidth={0.6} />
+   399→          <circle cx={82} cy={g.y} r={14} fill="none" stroke={INK2} strokeWidth={0.4} />
+   400→          <line x1={60} y1={g.y} x2={104} y2={g.y} stroke={INK3} strokeWidth={0.3} />
+   401→          <line x1={82} y1={g.y-22} x2={82} y2={g.y+22} stroke={INK3} strokeWidth={0.3} />
+   402→          <text x={82} y={g.y+5} fontSize={13} textAnchor="middle" fill={INK2}>\u2629</text>
+   403→          <text x={82} y={g.y+32} fontSize={6} textAnchor="middle" fill={INK3} fontFamily={CINZEL} letterSpacing="0.1em">SEAL</text>
+   404→          <line x1={104} y1={g.y} x2={cx-44} y2={g.y} stroke={INK4} strokeWidth={0.4} strokeDasharray="3,2" />
+   405→
+   406→          {/* Password box */}
+   407→          <rect x={362} y={g.y-18} width={92} height={36} fill="rgba(26,18,8,0.04)" stroke={INK3} strokeWidth={0.4} rx={2} />
+   408→          <text x={408} y={g.y-4} fontSize={6.5} textAnchor="middle" fontFamily={CINZEL} fill={INK3} letterSpacing="0.06em">Password</text>
+   409→          <text x={408} y={g.y+9} fontSize={6.5} textAnchor="middle" fontFamily={CINZEL} fill={INK3} letterSpacing="0.06em">Required</text>
+   410→          <line x1={cx+44} y1={g.y} x2={362} y2={g.y} stroke={INK4} strokeWidth={0.4} strokeDasharray="3,2" />
+   411→        </g>
+   412→      ))}
+   413→
+   414→      {/* Counter-seal */}
+   415→      <g className={`svg-clickable ${selected==='counter'?'selected':''}`} onClick={() => onSelect('counter')}>
+   416→        <circle cx={cx} cy={560} r={26} fill="rgba(26,18,8,0.1)" stroke={INK} strokeWidth={0.9} className="svg-glow" />
+   417→        <circle cx={cx} cy={560} r={16} fill="none" stroke={INK} strokeWidth={0.5} />
+   418→        <text x={cx} y={564} fontSize={15} textAnchor="middle" fill={INK}>\u2726</text>
+   419→        <text x={cx} y={540} fontSize={7} textAnchor="middle" fontFamily={CINZEL} fill={INK3} letterSpacing="0.1em">Counter-Seal \u00b7 Passport of the Soul</text>
+   420→      </g>
+   421→
+   422→      <text x={cx} y={602} fontSize={8.5} textAnchor="middle" fontStyle="italic" fill={INK2}>\u1f21 \u1f08\u03bd\u03bf\u03b4\u03bf\u03c2 \u03c4\u1fc6\u03c2 \u03a8\u03c5\u03c7\u1fc6\u03c2 \u2014 The Ascent of the Soul</text>
+   423→    </svg>
+   424→  )
+   425→}
+   426→
+   427→function BaptismDiagram({ selected, onSelect }: { selected: string | null, onSelect: (id: string) => void }) {
+   428→  const cx = 260
+   429→  const stations = [
+   430→    { a: -Math.PI/2, label: 'WATER', sub: 'Purification', id: 'water', sym: '\u224b' },
+   431→    { a: Math.PI/6, label: 'FIRE', sub: 'Sealing', id: 'fire', sym: '\u22c6' },
+   432→    { a: Math.PI - Math.PI/6, label: 'OIL', sub: 'Anointing', id: 'oil', sym: '\u2726' },
+   433→  ]
+   434→
+   435→  return (
+   436→    <svg viewBox="0 0 520 590" xmlns="http://www.w3.org/2000/svg">
+   437→      {/* Frame */}
+   438→      <rect x={12} y={12} width={496} height={566} fill="none" stroke={INK3} strokeWidth={0.4} rx={3} />
+   439→      <rect x={18} y={18} width={484} height={554} fill="none" stroke={INK4} strokeWidth={0.3} rx={2} />
+   440→      {[[22,22],[510,22],[22,578],[510,578]].map(([ox,oy], i) => {
+   441→        const dx = i%2===0?1:-1, dy = i<2?1:-1
+   442→        return <g key={`c-${i}`}>
+   443→          <line x1={ox} y1={oy} x2={ox+dx*22} y2={oy} stroke={INK} strokeWidth={0.6} />
+   444→          <line x1={ox} y1={oy} x2={ox} y2={oy+dy*22} stroke={INK} strokeWidth={0.6} />
+   445→        </g>
+   446→      })}
+   447→
+   448→      <text x={cx} y={36} fontSize={8.5} textAnchor="middle" fontFamily={CINZEL} fill={INK2} letterSpacing="0.15em">\u2726 \u03a4\u0395\u039b\u0395\u03a4\u0397 \u0392\u0391\u03a0\u03a4\u0399\u03a3\u039c\u0391\u03a4\u039f\u03a3 \u2726</text>
+   449→      <text x={cx} y={52} fontSize={8} textAnchor="middle" fontStyle="italic" fill={INK3}>The Rite of Holy Baptism \u2014 Three-fold Sealing</text>
+   450→      <line x1={60} y1={60} x2={460} y2={60} stroke={INK3} strokeWidth={0.5} />
+   451→
+   452→      {/* Ritual circles */}
+   453→      <circle cx={cx} cy={200} r={155} fill="none" stroke={INK3} strokeWidth={0.4} className="svg-pulse" />
+   454→      <circle cx={cx} cy={200} r={110} fill="none" stroke={INK2} strokeWidth={0.5} />
+   455→      <circle cx={cx} cy={200} r={70} fill="none" stroke={INK2} strokeWidth={0.6} className="svg-glow" />
+   456→
+   457→      {/* Candidate */}
+   458→      <ellipse cx={cx} cy={200} rx={30} ry={40} fill="rgba(26,18,8,0.06)" stroke={INK} strokeWidth={0.8} />
+   459→      <line x1={230} y1={200} x2={310} y2={196} stroke={INK} strokeWidth={0.7} />
+   460→      <line x1={190} y1={200} x2={110} y2={196} stroke={INK} strokeWidth={0.7} />
+   461→      <circle cx={110} cy={196} r={6} fill="rgba(26,18,8,0.1)" stroke={INK} strokeWidth={0.5} />
+   462→      <circle cx={310} cy={196} r={6} fill="rgba(26,18,8,0.1)" stroke={INK} strokeWidth={0.5} />
+   463→      <text x={cx} y={193} fontSize={7} textAnchor="middle" fontFamily={CINZEL} fontWeight={600}>CAND-</text>
+   464→      <text x={cx} y={206} fontSize={7} textAnchor="middle" fontFamily={CINZEL} fontWeight={600}>IDATE</text>
+   465→
+   466→      {/* Sealing points */}
+   467→      {[[cx,164,'Brow'],[cx,188,'Lips'],[cx,216,'Heart']].map(([x,y,l], i) => (
+   468→        <g key={`seal-${i}`}>
+   469→          <circle cx={Number(x)} cy={Number(y)} r={5} fill="rgba(26,18,8,0.15)" stroke={INK} strokeWidth={0.6} className="svg-pulse" />
+   470→          <text x={Number(x)+9} y={Number(y)+4} fontSize={6.5} fill={INK3} fontStyle="italic" textAnchor="start">{l}</text>
+   471→        </g>
+   472→      ))}
+   473→
+   474→      {/* Three stations */}
+   475→      {stations.map(s => {
+   476→        const x = cx+Math.cos(s.a)*110, y = 200+Math.sin(s.a)*110
+   477→        return (
+   478→          <g key={s.id} className={`svg-clickable ${selected===s.id?'selected':''}`} onClick={() => onSelect(s.id)}>
+   479→            <circle cx={x} cy={y} r={30} fill="rgba(26,18,8,0.07)" stroke={INK} strokeWidth={0.8} />
+   480→            <circle cx={x} cy={y} r={20} fill="rgba(26,18,8,0.04)" stroke={INK2} strokeWidth={0.4} />
+   481→            <text x={x} y={y+5} fontSize={14} textAnchor="middle" fill={INK2}>{s.sym}</text>
+   482→            <text x={x} y={y+40} fontSize={8} textAnchor="middle" fontFamily={CINZEL} fontWeight={600} letterSpacing="0.1em">{s.label}</text>
+   483→            <text x={x} y={y+52} fontSize={7} textAnchor="middle" fontStyle="italic" fill={INK3}>{s.sub}</text>
+   484→            <line x1={cx+Math.cos(s.a)*30} y1={200+Math.sin(s.a)*30} x2={x-Math.cos(s.a)*30} y2={y-Math.sin(s.a)*30} stroke={INK4} strokeWidth={0.5} strokeDasharray="4,3" />
+   485→          </g>
+   486→        )
+   487→      })}
+   488→
+   489→      {/* Vine branches */}
+   490→      <g className={`svg-clickable ${selected==='vine'?'selected':''}`} onClick={() => onSelect('vine')}>
+   491→        <rect x={75} y={388} width={370} height={30} fill="rgba(26,18,8,0.04)" stroke={INK2} strokeWidth={0.4} rx={2} />
+   492→        {[0,1,2,3,4,5,6,7,8].map(i => {
+   493→          const x = 90+i*40
+   494→          return <g key={`vine-${i}`}>
+   495→            <ellipse cx={x} cy={378} rx={8} ry={13} fill="rgba(26,18,8,0.07)" stroke={INK2} strokeWidth={0.4} transform={`rotate(-35,${x},378)`} />
+   496→            <line x1={x} y1={385} x2={x} y2={392} stroke={INK3} strokeWidth={0.4} />
+   497→          </g>
+   498→        })}
+   499→        <text x={cx} y={407} fontSize={7.5} textAnchor="middle" fontFamily={CINZEL} fill={INK2} letterSpacing="0.06em">VINE BRANCHES \u2014 bound upon the hands of the candidate</text>
+   500→      </g>
+   501→
+   502→      {/* Voces magicae */}
+   503→      <g className={`svg-clickable ${selected==='names'?'selected':''}`} onClick={() => onSelect('names')}>
+   504→        <rect x={75} y={428} width={370} height={90} fill="rgba(26,18,8,0.04)" stroke={INK2} strokeWidth={0.4} rx={2} />
+   505→        <text x={cx} y={448} fontSize={7.5} textAnchor="middle" fontFamily={CINZEL} fill={INK2} letterSpacing="0.08em">Sacred Invocation \u2014 Voces Magicae</text>
+   506→        <line x1={100} y1={455} x2={420} y2={455} stroke={INK4} strokeWidth={0.4} />
+   507→        <text x={cx} y={472} fontSize={10} textAnchor="middle" fill={INK} fontWeight={700}>\u03c8\u03b5 \u03b1\u03b9\u03a9 \u03b1\u03b9\u03a9 \u03b1\u03a9 \u03c8\u03b5 \u03b1\u03c1\u03a9 \u03b1\u03c1\u03a9 \u03a9 \u03c8\u03b5 \u03a9\u03a9\u03a9</text>
+   508→        <text x={cx} y={490} fontSize={7.5} textAnchor="middle" fontStyle="italic" fill={INK2}>&quot;Hear me, Father of all fatherhood, boundless Light:</text>
+   509→        <text x={cx} y={504} fontSize={7.5} textAnchor="middle" fontStyle="italic" fill={INK2}>let the light-seal descend upon thy servant.&quot;</text>
+   510→      </g>
+   511→
+   512→      {/* Soul names */}
+   513→      <rect x={75} y={530} width={370} height={36} fill="rgba(26,18,8,0.03)" stroke={INK3} strokeWidth={0.3} rx={2} />
+   514→      <text x={cx} y={546} fontSize={7.5} textAnchor="middle" fontFamily={CINZEL} fill={INK3} letterSpacing="0.04em">Names spoken: Jeu \u00b7 Harmozel \u00b7 Oroiael \u00b7 Daveithe \u00b7 Eleleth \u00b7 Sabaoth</text>
+   515→      <text x={cx} y={560} fontSize={7} textAnchor="middle" fontStyle="italic" fill={INK3}>&quot;Go in peace, for I set the seal upon you from the Treasury of the Light.&quot;</text>
+   516→
+   517→      <text x={cx} y={583} fontSize={8.5} textAnchor="middle" fontStyle="italic" fill={INK2}>\u0392\u03ac\u03c0\u03c4\u03b9\u03c3\u03bc\u03b1 \u1f55\u03b4\u03b1\u03c4\u03bf\u03c2 \u03ba\u03b1\u1f76 \u03c0\u03c5\u03c1\u03cc\u03c2 \u2014 Baptism of Water and Fire</text>
+   518→    </svg>
+   519→  )
+   520→}
+   521→
+   522→function Treasury55Diagram({ selected, onSelect }: { selected: string | null, onSelect: (id: string) => void }) {
+   523→  const cx = 260, cy = 260
+   524→
+   525→  return (
+   526→    <svg viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg">
+   527→      {/* Frame */}
+   528→      <rect x={12} y={12} width={496} height={496} fill="none" stroke={INK3} strokeWidth={0.4} rx={3} />
+   529→      <rect x={18} y={18} width={484} height={484} fill="none" stroke={INK4} strokeWidth={0.3} rx={2} />
+   530→
+   531→      {/* Outer glow */}
+   532→      <circle cx={cx} cy={cy} r={200} fill="none" stroke="rgba(200,168,74,0.1)" strokeWidth={0.6} className="svg-pulse" />
+   533→
+   534→      {/* Cross */}
+   535→      <g className={`svg-clickable ${selected==='cross'?'selected':''}`} onClick={() => onSelect('cross')}>
+   536→        <line x1={cx} y1={cy-150} x2={cx} y2={cy+150} stroke="#5c3f20" strokeWidth={26} strokeLinecap="round" />
+   537→        <line x1={cx-150} y1={cy} x2={cx+150} y2={cy} stroke="#5c3f20" strokeWidth={26} strokeLinecap="round" />
+   538→      </g>
+   539→
+   540→      {/* Circle */}
+   541→      <g className={`svg-clickable ${selected==='circle55'?'selected':''}`} onClick={() => onSelect('circle55')}>
+   542→        <circle cx={cx} cy={cy} r={95} fill="none" stroke={GOLD} strokeWidth={16} className="svg-glow" />
+   543→      </g>
+   544→
+   545→      {/* Six watchers */}
+   546→      <g className={`svg-clickable ${selected==='watchers55'?'selected':''}`} onClick={() => onSelect('watchers55')}>
+   547→        {[0,1,2,3,4,5].map(i => {
+   548→          const a = (i/6)*Math.PI*2 - Math.PI/2
+   549→          const wx = cx+Math.cos(a)*185, wy = cy+Math.sin(a)*185
+   550→          return <g key={`w55-${i}`}>
+   551→            <circle cx={wx} cy={wy} r={18} fill="rgba(26,18,8,0.06)" stroke={INK} strokeWidth={0.7} />
+   552→            <circle cx={wx} cy={wy} r={8} fill="rgba(26,18,8,0.1)" stroke={INK2} strokeWidth={0.4} />
+   553→            <line x1={wx-Math.cos(a)*18} y1={wy-Math.sin(a)*18} x2={cx+Math.cos(a)*100} y2={cy+Math.sin(a)*100} stroke={INK4} strokeWidth={0.4} strokeDasharray="3,2" />
+   554→            <text x={wx} y={wy+3} fontSize={9} textAnchor="middle" fill={INK2}>\u2629</text>
+   555→          </g>
+   556→        })}
+   557→      </g>
+   558→
+   559→      {/* Cipher marker */}
+   560→      <g className={`svg-clickable ${selected==='cipher'?'selected':''}`} onClick={() => onSelect('cipher')}>
+   561→        <rect x={cx-40} y={cy-16} width={80} height={32} fill="rgba(26,18,8,0.08)" stroke={GOLD} strokeWidth={0.8} rx={2} />
+   562→        <text x={cx} y={cy+4} fontSize={10} textAnchor="middle" fontFamily={CINZEL} fontWeight={700} fill={GOLD} letterSpacing="0.1em">CIPHER</text>
+   563→      </g>
+   564→
+   565→      {/* Labels */}
+   566→      <text x={cx} y={30} fontSize={7.5} textAnchor="middle" fontFamily={CINZEL} fill={INK3} letterSpacing="0.12em">THE 55TH TREASURY \u2014 CROSS-AND-CIRCLE SEAL</text>
+   567→      <text x={cx} y={500} fontSize={8} textAnchor="middle" fontStyle="italic" fill={INK2}>Seal yourselves with this seal while the cipher is in your hand</text>
+   568→    </svg>
+   569→  )
+   570→}
+   571→
+   572→function Treasury58Diagram({ selected, onSelect }: { selected: string | null, onSelect: (id: string) => void }) {
+   573→  const cx = 260, cy = 260
+   574→
+   575→  return (
+   576→    <svg viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg">
+   577→      {/* Frame */}
+   578→      <rect x={12} y={12} width={496} height={496} fill="none" stroke={INK3} strokeWidth={0.4} rx={3} />
+   579→      <rect x={18} y={18} width={484} height={484} fill="none" stroke={INK4} strokeWidth={0.3} rx={2} />
+   580→
+   581→      {/* Outer glow */}
+   582→      <circle cx={cx} cy={cy} r={210} fill="none" stroke="rgba(200,168,74,0.08)" strokeWidth={0.5} className="svg-rotate" />
+   583→
+   584→      {/* Outer circle */}
+   585→      <g className={`svg-clickable ${selected==='outer58'?'selected':''}`} onClick={() => onSelect('outer58')}>
+   586→        <circle cx={cx} cy={cy} r={155} fill="none" stroke="#5c3f20" strokeWidth={18} className="svg-glow" />
+   587→        {/* Aeon names around outer ring */}
+   588→        {['Harmozel','Oroiael','Daveithe','Eleleth','Gamaliel','Gabriel','Samblo','Abrasax','Iaoth','Sabaoth','Adonaios','Sabaoth II'].map((name, i) => {
+   589→          const a = (i/12)*Math.PI*2 - Math.PI/2
+   590→          const lx = cx+Math.cos(a)*155, ly = cy+Math.sin(a)*155
+   591→          const la = a*(180/Math.PI)+90
+   592→          return <text key={`aeon-${i}`} x={lx} y={ly} fontSize={6} textAnchor="middle" dominantBaseline="central"
+   593→            fill={INK2} fontFamily={CINZEL} letterSpacing="0.04em" transform={`rotate(${la},${lx},${ly})`}>{name}</text>
+   594→        })}
+   595→      </g>
+   596→
+   597→      {/* Inner ring */}
+   598→      <g className={`svg-clickable ${selected==='inner58'?'selected':''}`} onClick={() => onSelect('inner58')}>
+   599→        <circle cx={cx} cy={cy} r={105} fill="none" stroke={GOLD} strokeWidth={14} />
+   600→        <circle cx={cx} cy={cy} r={95} fill="rgba(26,18,8,0.03)" stroke={INK2} strokeWidth={0.4} />
+   601→      </g>
+   602→
+   603→      {/* Twelve rays */}
+   604→      <g className={`svg-clickable ${selected==='rays58'?'selected':''}`} onClick={() => onSelect('rays58')}>
+   605→        {[0,1,2,3,4,5,6,7,8,9,10,11].map(i => {
+   606→          const a = i*30*Math.PI/180
+   607→          const x1 = cx+Math.cos(a)*105, y1 = cy+Math.sin(a)*105
+   608→          const x2 = cx+Math.cos(a)*170, y2 = cy+Math.sin(a)*170
+   609→          return <line key={`ray-${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={GOLD} strokeWidth={9} strokeLinecap="round" />
+   610→        })}
+   611→      </g>
+   612→
+   613→      {/* Rotation symbol */}
+   614→      <g className={`svg-clickable ${selected==='rotation'?'selected':''}`} onClick={() => onSelect('rotation')}>
+   615→        <circle cx={cx} cy={cy} r={50} fill="rgba(26,18,8,0.06)" stroke={INK} strokeWidth={0.8} className="svg-glow" />
+   616→        <text x={cx} y={cy-6} fontSize={8} textAnchor="middle" fontFamily={CINZEL} fontWeight={700} letterSpacing="0.08em">THE</text>
+   617→        <text x={cx} y={cy+8} fontSize={8} textAnchor="middle" fontFamily={CINZEL} fontWeight={700} letterSpacing="0.08em">WHEEL</text>
+   618→        <text x={cx} y={cy+22} fontSize={7} textAnchor="middle" fontStyle="italic" fill={INK2}>\u03a0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03bf\u03c6\u03ae</text>
+   619→      </g>
+   620→
+   621→      {/* Labels */}
+   622→      <text x={cx} y={30} fontSize={7.5} textAnchor="middle" fontFamily={CINZEL} fill={INK3} letterSpacing="0.12em">THE 58TH TREASURY \u2014 WHEEL OF EMANATION</text>
+   623→      <text x={cx} y={500} fontSize={8} textAnchor="middle" fontStyle="italic" fill={INK2}>Invoke the name three times while tracing the wheel upon the air</text>
+   624→    </svg>
+   625→  )
+   626→}
+   627→
+   628→/* ═══════════════════════════════════════════════════
+   629→   DIAGRAM ROUTER
+   630→   ═══════════════════════════════════════════════════ */
+   631→function TreasuryDiagramRenderer({ pageId, selected, onSelect }: { pageId: string, selected: string | null, onSelect: (id: string) => void }) {
+   632→  switch (pageId) {
+   633→    case 'treasury': return <TreasuryDiagram selected={selected} onSelect={onSelect} />
+   634→    case 'jeu': return <JeuDiagram selected={selected} onSelect={onSelect} />
+   635→    case 'archons': return <ArchonsDiagram selected={selected} onSelect={onSelect} />
+   636→    case 'baptism': return <BaptismDiagram selected={selected} onSelect={onSelect} />
+   637→    case 'ch33': return <Treasury55Diagram selected={selected} onSelect={onSelect} />
+   638→    case 'ch36': return <Treasury58Diagram selected={selected} onSelect={onSelect} />
+   639→    default: return null
+   640→  }
+   641→}
+   642→
+   643→/* ═══════════════════════════════════════════════════
+   644→   FLOATING PARTICLES
+   645→   ═══════════════════════════════════════════════════ */
+   646→function Particles() {
+   647→  const [mounted, setMounted] = useState(false)
+   648→  const particles = useMemo(() => Array.from({ length: 25 }, (_, i) => ({
+   649→    id: i,
+   650→    left: Math.random() * 100,
+   651→    delay: Math.random() * 20,
+   652→    duration: 12 + Math.random() * 18,
+   653→    size: 1 + Math.random() * 3,
+   654→  })), [])
+   655→
+   656→  useEffect(() => { setMounted(true) }, [])
+   657→
+   658→  if (!mounted) return null
+   659→
+   660→  return (
+   661→    <div className="particle-field">
+   662→      {particles.map(p => (
+   663→        <div
+   664→          key={p.id}
+   665→          className="particle"
+   666→          style={{
+   667→            left: `${p.left}%`,
+   668→            width: `${p.size}px`,
+   669→            height: `${p.size}px`,
+   670→            animationDelay: `${p.delay}s`,
+   671→            animationDuration: `${p.duration}s`,
+   672→          }}
+   673→        />
+   674→      ))}
+   675→    </div>
+   676→  )
+   677→}
+   678→
+   679→/* ═══════════════════════════════════════════════════
+   680→   MAIN PAGE COMPONENT
+   681→   ═══════════════════════════════════════════════════ */
+   682→export default function Home() {
+   683→  const [currentPage, setCurrentPage] = useState(0)
+   684→  const [selectedHs, setSelectedHs] = useState<string | null>(null)
+   685→  const [isChanting, setIsChanting] = useState(false)
+   686→  const [chantText, setChantText] = useState('')
+   687→  const revRef = useRef<HTMLDivElement>(null)
+   688→  const mainRef = useRef<HTMLDivElement>(null)
+   689→
+   690→  const page = PAGES[currentPage]
+   691→
+   692→  const handlePageChange = useCallback((idx: number) => {
+   693→    setCurrentPage(idx)
+   694→    setSelectedHs(null)
+   695→    setChantText('')
+   696→    if (mainRef.current) {
+   697→      mainRef.current.classList.remove('page-enter')
+   698→      void mainRef.current.offsetWidth
+   699→      mainRef.current.classList.add('page-enter')
+   700→    }
+   701→  }, [])
+   702→
+   703→  const handleSelectHs = useCallback((id: string) => {
+   704→    setSelectedHs(id)
+   705→    if (revRef.current) {
+   706→      revRef.current.classList.remove('revealed')
+   707→      void revRef.current.offsetWidth
+   708→      revRef.current.classList.add('revealed')
+   709→    }
+   710→  }, [])
+   711→
+   712→  const chantSacredNames = useCallback(() => {
+   713→    if (isChanting) return
+   714→    setIsChanting(true)
+   715→    const names = [
+   716→      "\u2c81\u2c93\u2c71\u2c81\u2c65\u2c74 \u2c01\u2c2b\u2c71\u2c01\u2c25\u2c1f\u2c25\u2c1d",
+   717→      "\u2c2b\u2c71\u2c65 \u2c3d\u2c4b\u2c65 \u2c71\u2c71\u2c65 \u2c3a\u2c01\u2c65\u2c71\u2c13\u2c53\u2c17",
+   718→      "\u2c71\u2c65\u2c2d\u2c71\u2c65\u2c1d",
+   719→      "\u2c5f\u2c71\u2c65\u2c71\u2c65\u2c19\u2c71",
+   720→      "\u2c71\u2c3d\u2c3d\u2c01\u2c65\u2c01",
+   721→      "\u2c3d\u2c01\u2c71\u2c01\u2c01\u2c65\u2c4b",
+   722→      "\u2c71\u2c3d\u2c01\u2c3d\u2c4b\u2c71\u2c3d",
+   723→      "\u2c71\u2c2b\u2c01\u2c3a\u2c71\u2c71\u2c3d",
+   724→      "\u2c3d\u2c71\u2c13\u2c71\u2c19\u2c4b\u2c17\u2c13",
+   725→      "\u2c3d\u2c71\u2c01\u2c2b\u2c01\u2c3d\u2c13"
+   726→    ]
+   727→    let i = 0
+   728→    const interval = setInterval(() => {
+   729→      setChantText(names[i])
+   730→      i++
+   731→      if (i >= names.length) {
+   732→        clearInterval(interval)
+   733→        setTimeout(() => {
+   734→          setIsChanting(false)
+   735→          setChantText('')
+   736→        }, 1200)
+   737→      }
+   738→    }, 800)
+   739→  }, [isChanting])
+   740→
+   741→  const selectedHotspot = page.hotspots.find(h => h.id === selectedHs)
+   742→
+   743→  return (
+   744→    <div className="treasury-app">
+   745→      <Particles />
+   746→
+   747→      {/* Top Roller */}
+   748→      <div className="roller">
+   749→        <span className="roller-text">CODEX BRUCIANUS \u00b7 BODLEIAN LIBRARY OXFORD \u00b7 MS BRUCE 96</span>
+   750→      </div>
+   751→
+   752→      {/* Header */}
+   753→      <header className="treasury-header">
+   754→        <div className="greek-subtitle">\u0392\u03af\u03b2\u03bb\u03bf\u03c2 \u03c4\u03bf\u1fe6 \u1f38\u03b5\u03cd \u2014 Sacred Diagrams of the Pleroma</div>
+   755→        <h1>The Book of Jeu</h1>
+   756→      </header>
+   757→
+   758→      {/* Navigation */}
+   759→      <nav className="treasury-nav">
+   760→        {PAGES.map((p, i) => (
+   761→          <button
+   762→            key={p.id}
+   763→            className={`nav-btn ${i === currentPage ? 'active' : ''}`}
+   764→            onClick={() => handlePageChange(i)}
+   765→          >
+   766→            {p.nav}
+   767→          </button>
+   768→        ))}
+   769→      </nav>
+   770→
+   771→      {/* Main Layout */}
+   772→      <div className="treasury-layout">
+   773→        <div className="main-col" ref={mainRef}>
+   774→          {/* Page Header */}
+   775→          <div className="page-header">
+   776→            <div className="divider-line"><span>\u2726</span></div>
+   777→            <h2>{page.title}</h2>
+   778→            <div className="page-ref">{page.ref}</div>
+   779→            <div className="divider-line"><span>\u2726</span></div>
+   780→          </div>
+   781→
+   782→          {/* Interactive Diagram */}
+   783→          <div className="diagram-wrap">
+   784→            <TreasuryDiagramRenderer
+   785→              pageId={page.id}
+   786→              selected={selectedHs}
+   787→              onSelect={handleSelectHs}
+   788→            />
+   789→          </div>
+   790→
+   791→          {/* Chant Button */}
+   792→          <button
+   793→            className={`chant-btn ${isChanting ? 'chanting' : ''}`}
+   794→            onClick={chantSacredNames}
+   795→            disabled={isChanting}
+   796→          >
+   797→            {isChanting ? (
+   798→              <>\u2726 {chantText || 'CHANTING...'} \u2726</>
+   799→            ) : (
+   800→              <>\u2726 CHANT THE SACRED NAMES \u2726</>
+   801→            )}
+   802→          </button>
+   803→
+   804→          {/* Lore Section */}
+   805→          <div className="lore-section">
+   806→            <h3>Scholarly Commentary</h3>
+   807→            <div className="lore-grid">
+   808→              {page.lore.map((l, i) => (
+   809→                <div key={i} className="lore-card">
+   810→                  <strong>{l.title}</strong>
+   811→                  <p>{l.body}</p>
+   812→                </div>
+   813→              ))}
+   814→            </div>
+   815→          </div>
+   816→        </div>
+   817→
+   818→        {/* Side Column */}
+   819→        <div className="side-col">
+   820→          {/* Context */}
+   821→          <div className="side-section">
+   822→            <h3>Context</h3>
+   823→            <p>{page.desc}</p>
+   824→          </div>
+   825→
+   826→          {/* Sacred Elements */}
+   827→          <div className="side-section">
+   828→            <h3>Sacred Elements</h3>
+   829→            <div className="hs-list">
+   830→              {page.hotspots.map(hs => (
+   831→                <div
+   832→                  key={hs.id}
+   833→                  className={`hs-item ${selectedHs === hs.id ? 'selected' : ''}`}
+   834→                  data-id={hs.id}
+   835→                  onClick={() => handleSelectHs(hs.id)}
+   836→                >
+   837→                  <span className="hs-name">{hs.label}</span>
+   838→                  <span className="hs-brief">{hs.brief}</span>
+   839→                </div>
+   840→              ))}
+   841→            </div>
+   842→          </div>
+   843→
+   844→          {/* Revelation */}
+   845→          <div className="side-section">
+   846→            <h3>Revelation</h3>
+   847→            <div
+   848→              ref={revRef}
+   849→              className={`revelation ${selectedHs ? 'revealed' : ''}`}
+   850→            >
+   851→              {selectedHotspot ? (
+   852→                <>
+   853→                  <span className="rev-label">\u2014 Hidden Teaching \u2014</span>
+   854→                  <span className="rev-title">{selectedHotspot.label}</span>
+   855→                  <span className="rev-detail">{selectedHotspot.detail}</span>
+   856→                </>
+   857→              ) : (
+   858→                <>
+   859→                  <span className="rev-label">\u2014</span>
+   860→                  Click upon any element within the diagram to receive its hidden teaching.
+   861→                </>
+   862→              )}
+   863→            </div>
+   864→          </div>
+   865→        </div>
+   866→      </div>
+   867→
+   868→      {/* Bottom Roller */}
+   869→      <div className="roller">
+   870→        <span className="roller-text">\u0392\u03af\u03b2\u03bb\u03bf\u03c2 \u03c4\u03bf\u1fe6 \u1f38\u03b5\u03cd \u00b7 THE TWO BOOKS OF JEU</span>
+   871→      </div>
+   872→    </div>
+   873→  )
+   874→}
+   875→
