@@ -1,0 +1,28 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "The screenshot displays a beige background with text in black. At the top, the title \"The Book of Jeu\" is centered. Below it, a line reads \"60 Treasuries of Light \\u00b7 5 Ranks of Fatherhood \\u00b7 The Path of Ascent\" (with \"\\u00b7\" appearing as bullet symbols). Further down, a larger title states \"The Rite of Baptism with Fire and Water\" (centered). At the bottom, smaller text reads \"Book of Jeu II \\u00b7 Chapters 42–52 \\u00b7 ff. 103r–114v\" (with \"\\u00b7\" as bullet symbols).  \n\n**Visual Issues**:  \n- The text contains Unicode escape sequences (`\\u00b7`) instead of actual bullet symbols, which appear as literal characters rather than formatted bullets.  \n- No other random numbers/letters or diagram layout problems are present; the text is otherwise legible and properly positioned.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1781375525,
+  "id": "20260614023200990ee1dc6c8b4819",
+  "model": "glm-4.6v",
+  "object": "chat.completion",
+  "request_id": "20260614023200990ee1dc6c8b4819",
+  "usage": {
+    "completion_tokens": 212,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "prompt_tokens": 266,
+    "prompt_tokens_details": {
+      "cached_tokens": 6
+    },
+    "total_tokens": 478
+  }
+}

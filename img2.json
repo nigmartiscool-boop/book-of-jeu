@@ -1,0 +1,28 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "The screenshot displays three lines of text on a beige background. Each line contains the Unicode character sequence \"u2694\" (likely intended to represent a symbol, such as a sword, which should render as ✐ but appears as raw text here) followed by a name. The text is arranged vertically, with each line left-aligned. The first line reads \"u2694 Saphayx\", the second \"u2694 Pharpax\", and the third \"u2694 Phainoth\". The primary visual issue is that the Unicode character \"u2694\" is not rendering as a symbol but is instead displayed as plain text, disrupting the intended visual presentation. No other random characters, misaligned text, or diagram layout problems are visible.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1781375536,
+  "id": "202606140232137f5cc9ad1738486d",
+  "model": "glm-4.6v",
+  "object": "chat.completion",
+  "request_id": "202606140232137f5cc9ad1738486d",
+  "usage": {
+    "completion_tokens": 159,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "prompt_tokens": 80,
+    "prompt_tokens_details": {
+      "cached_tokens": 12
+    },
+    "total_tokens": 239
+  }
+}

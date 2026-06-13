@@ -551,6 +551,16 @@
   text-align: right;
 }
 
+/* Pronunciation guide */
+.pron {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.65rem;
+  color: var(--gold);
+  font-style: italic;
+  margin-left: 2px;
+  letter-spacing: 0;
+}
+
 /* Watcher items */
 .watcher-item {
   display: flex;
@@ -567,6 +577,13 @@
   font-size: 0.7rem;
   letter-spacing: 0.04em;
   color: var(--ink);
+}
+.watcher-pron {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.6rem;
+  color: var(--gold);
+  font-style: italic;
+  margin-left: 4px;
 }
 .watcher-gate {
   font-size: 0.7rem;

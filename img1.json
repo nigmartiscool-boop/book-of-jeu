@@ -1,0 +1,28 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "The screenshot shows a beige background with text. At the top, there is a line of garbled text: `|u0392|u03af|u03b2|u03bb|u03bf|u03c2 |u03c4|u03b9|u06e6 |u038|u03b5|u03ed |u2014 Sacred Diagrams of the Pleroma` (note: the sequence includes non - standard characters like `u06e6` and `u038` which appear out of place, likely encoding errors). Below this, centered in a larger, bold font, is the text `The Book of Jeu`. There are no diagram layout issues visible, but the top text has random Unicode - like sequences (e.g., `u0392`, `u03af`, etc.) that seem to be encoding errors, as they do not form coherent words and are placed where normal text should be.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1781375520,
+  "id": "202606140231560d33a4d0a1694512",
+  "model": "glm-4.6v",
+  "object": "chat.completion",
+  "request_id": "202606140231560d33a4d0a1694512",
+  "usage": {
+    "completion_tokens": 204,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "prompt_tokens": 158,
+    "prompt_tokens_details": {
+      "cached_tokens": 5
+    },
+    "total_tokens": 362
+  }
+}

@@ -1,29 +1,25 @@
 ---
-Task ID: 1
+Task ID: 2
 Agent: Main Agent
-Task: Complete overhaul of Book of Jeu interactive panel
+Task: Fix Unicode rendering issues, un-omit diagrams, upgrade archon gates, add pronunciations
 
 Work Log:
-- Researched all treasuries from the Book of Jeu via web search and page reader
-- Discovered the text describes 60 treasuries in 5 ranks of Fatherhood
-- Extracted Coptic/Greek names for all 60 treasury Fathers
-- Built programmatic seal diagram generator with 5 seal types (cross-circle, concentric, star, radial, octagram)
-- Created compact sidebar navigation with collapsible rank sections
-- Added search functionality for filtering treasuries
-- Made SVG shapes directly interactable (removed old dot-based system)
-- Created solid cross for 55th Treasury using single SVG path
-- Fixed sidebar toggle overlap with search input
-- Made watcher names unique per treasury using Coptic-derived prefixes
-- Fixed "JEU 0" label to show "JEU" for special entries
-- Added special entries: Treasury Overview, Jeu the True God, Archon Gates, Baptism Rite, Gnostic Hymn
-- Added Archon gate diagrams with progressive complexity and displayed passwords
-- Added Baptism rite diagram with 5 progressive seals
+- Diagnosed Unicode rendering issues from screenshots: Greek ciphers, symbols, middle dots showing as raw escape sequences
+- Root cause: Greek Unicode characters in SVG text elements and HTML not rendering properly with loaded fonts
+- Replaced ALL Greek cipher names with Latin transliterations (e.g., "Αβρασαξ" → "Abrasax")
+- Replaced Unicode symbols (⚔, ✠, ≋, ▲, etc.) with actual SVG shapes (path-based crosses)
+- Replaced Greek header subtitle with Latin transliteration "Biblos tou Ieu"
+- Changed middle dots from \u00b7 to &middot; HTML entities
+- Added pronunciation guides for ALL 60 treasury Fathers, ciphers, watchers, and passwords
+- Added pronunciations to Archon gate names and passwords (e.g., [PAR-ah-faks], [EE-ah-oh SAH-bah-oth])
+- Un-omitted all diagrams - all 60 treasuries now show seal diagrams (was: only Jeu 2-28 had diagrams)
+- Upgraded Archon Gates: added arch-shaped gate outlines, individual seal complexity, pronunciation guides for gate names and passwords
+- Added .pron and .watcher-pron CSS classes for pronunciation styling
 
 Stage Summary:
-- All 60 treasuries plus 5 special entries now available
-- Compact GUI with sidebar tree navigation, search, and collapsible sections
-- Seal diagrams are manuscript-style with concentric rings, crosses, stars, etc.
-- All SVG shapes are directly interactable (no dots)
-- 55th Treasury shows solid cross (single path, not overlapping shapes)
-- No random numbers appear on interactable elements
-- Build passes, all tests verified via agent browser
+- Zero Unicode escape sequences visible anywhere on the site
+- All special characters render properly as intended glyphs
+- All 60 treasuries have seal diagrams
+- Pronunciations added for Father names, ciphers, watchers, passwords, archon gates
+- Archon gates upgraded with arch shapes, progressive seal complexity, and pronunciations
+- Build passes, all browser tests pass
