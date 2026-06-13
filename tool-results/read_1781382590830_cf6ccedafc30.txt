@@ -1,0 +1,600 @@
+   301→   301→    ]
+   302→   302→  },
+   303→   303→  {
+   304→   304→    id: 'hymn', title: 'Fragment of a Gnostic Hymn', category: 'hymn',
+   305→   305→    desc: 'At the center of the First Book of Jeu lies a fragmentary hymn - a liturgical chant that the initiate must recite during the ascent through the treasuries. The hymn invokes the names of the treasury Fathers in sequence, calling upon each to open his gates and permit the soul to pass.',
+   306→   306→    sealType: 'hymn', book: 1, chapter: 'Chapter 35', folio: 'ff. 25r-26v',
+   307→   307→    lore: [
+   308→   308→      { title: 'The Hymn as Ascent Tool', body: 'The hymn serves a dual purpose: it is both a prayer of supplication and a magical formula of command. By reciting the hymn, the initiate asserts spiritual authority over the treasury guardians and compels them to open the gates. The hymn must be recited in the correct sequence, treasury by treasury, from the outermost to the innermost.' },
+   309→   309→      { title: 'Coptic Liturgical Language', body: 'The hymn is composed in Sahidic Coptic with numerous Greek loan-words, reflecting the bilingual liturgical culture of Egyptian Gnosticism. Many of the names are vowel-sequences (IAO, EIE, OYO) that function as sonic ciphers, each resonating with a specific treasury\'s spiritual frequency.' }
+   310→   310→    ],
+   311→   311→    elements: [
+   312→   312→      { id: 'hy-invocation', label: 'The Invocation', brief: 'Opening prayer of the hymn', detail: 'The hymn begins with an invocation to the Great Invisible Spirit, calling upon the nameless One to grant passage through the treasuries. The initiate declares: "I invoke thee, O Invisible One, who art before all aeons, open the way for my soul."' },
+   313→   313→      { id: 'hy-names', label: 'The Sacred Names', brief: 'Sequential treasury names', detail: 'The core of the hymn consists of the sequential recitation of all 60 treasury Fathers\' names, from the outermost (Proator Jeu) inward to the innermost (Pigeradaphtha Jeu). Each name must be pronounced in its original Coptic form with correct vowel intonation.' },
+   314→   314→      { id: 'hy-cipher', label: 'The Cipher Passage', brief: 'The encoded final section', detail: 'The hymn concludes with a cipher passage - a series of vowel-sequences and symbolic phrases that encode the ultimate password for entry into the Treasury of Light. This passage is the most closely guarded secret of the Gnostic tradition.' }
+   315→   315→    ]
+   316→   316→  }
+   317→   317→]
+   318→   318→
+   319→   319→/* ═══════════════════════════════════════════════════
+   320→   320→   COLOR CONSTANTS
+   321→   321→   ═══════════════════════════════════════════════════ */
+   322→   322→const INK = '#1a1208', INK2 = '#3a2c14', INK3 = '#6a5030'
+   323→   323→const GOLD = '#8a6820', GOLD2 = '#c8a84a', GOLD3 = '#e8c070'
+   324→   324→const PARCH = '#ede0be'
+   325→   325→
+   326→   326→/* ═══════════════════════════════════════════════════
+   327→   327→   SEAL DIAGRAM COMPONENTS
+   328→   328→   ═══════════════════════════════════════════════════ */
+   329→   329→
+   330→   330→// SVG small cross shape (replaces Unicode symbols)
+   331→   331→function SvgCross({ x, y, size, color }: { x: number; y: number; size: number; color: string }) {
+   332→   332→  return <path d={`M${x} ${y - size}L${x + size * 0.3} ${y - size}L${x + size * 0.3} ${y - size * 0.3}L${x + size} ${y - size * 0.3}L${x + size} ${y + size * 0.3}L${x + size * 0.3} ${y + size * 0.3}L${x + size * 0.3} ${y + size}L${x} ${y + size}L${x - size * 0.3} ${y + size}L${x - size * 0.3} ${y + size * 0.3}L${x - size} ${y + size * 0.3}L${x - size} ${y - size * 0.3}L${x - size * 0.3} ${y - size * 0.3}Z`} fill={color} stroke="none" />
+   333→   333→}
+   334→   334→
+   335→   335→/* ── Cross-and-Circle Seal ── */
+   336→   336→function CrossCircleSeal({ cx, cy, r, jeuNum, fatherName, cipher, complexity, onClick, selectedId }: {
+   337→   337→  cx: number; cy: number; r: number; jeuNum: number; fatherName: string; cipher: string; complexity: number; onClick: (id: string, label: string, detail: string) => void; selectedId: string | null
+   338→   338→}) {
+   339→   339→  const armW = r * 0.28, armL = r * 0.85, ringR = r * 0.65, outerR = r * 1.1, innerR = r * 0.25
+   340→   340→  const places = useMemo(() => ['Phaethon', 'Mareph', 'Thalma', 'Aphroph', 'Eratha', 'Bathrax'].map((name, i) => {
+   341→   341→    const angle = (i * 60 - 90) * Math.PI / 180
+   342→   342→    return { name, x: cx + Math.cos(angle) * (ringR + 25), y: cy + Math.sin(angle) * (ringR + 25) }
+   343→   343→  }), [cx, cy, ringR])
+   344→   344→
+   345→   345→  return (
+   346→   346→    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   347→   347→      <circle cx={cx} cy={cy} r={outerR} fill="none" stroke={INK} strokeWidth={2.5} pointerEvents="none" />
+   348→   348→      <circle cx={cx} cy={cy} r={outerR - 6} fill="none" stroke={GOLD2} strokeWidth={1} pointerEvents="none" />
+   349→   349→      {/* SOLID CROSS */}
+   350→   350→      <path
+   351→   351→        d={`M${cx - armW} ${cy - armL}L${cx + armW} ${cy - armL}L${cx + armW} ${cy - armW}L${cx + armL} ${cy - armW}L${cx + armL} ${cy + armW}L${cx + armW} ${cy + armW}L${cx + armW} ${cy + armL}L${cx - armW} ${cy + armL}L${cx - armW} ${cy + armW}L${cx - armL} ${cy + armW}L${cx - armL} ${cy - armW}L${cx - armW} ${cy - armW}Z`}
+   352→   352→        fill={PARCH} stroke={INK} strokeWidth={2}
+   353→   353→        className={`svg-clickable${selectedId === 'cross' ? ' selected' : ''}`}
+   354→   354→        onClick={() => onClick('cross', 'The Sacred Cross', `The seal of the ${ordinal(jeuNum)} Treasury - a solid cross inscribed within the circle, representing the four directions of divine emanation. The Father ${fatherName} places his cipher upon this cross.`)}
+   355→   355→      />
+   356→   356→      <circle cx={cx} cy={cy} r={ringR} fill="none" stroke={GOLD2} strokeWidth={3}
+   357→   357→        className={`svg-clickable${selectedId === 'ring' ? ' selected' : ''}`}
+   358→   358→        onClick={() => onClick('ring', 'The Circle of Places', `Six places surround the Father within this treasury. The cipher "${cipher}" is inscribed at the center. Seal yourselves with this seal while the cipher is in your hand.`)}
+   359→   359→      />
+   360→   360→      <circle cx={cx} cy={cy} r={innerR} fill="none" stroke={INK} strokeWidth={2} pointerEvents="none" />
+   361→   361→      <text x={cx} y={cy + 5} textAnchor="middle" dominantBaseline="middle" fontFamily="Cinzel, serif" fontSize={complexity > 2 ? 18 : 22} fill={GOLD}
+   362→   362→        className={`svg-clickable${selectedId === 'cipher' ? ' selected' : ''}`} style={{ cursor: 'pointer' }}
+   363→   363→        onClick={() => onClick('cipher', `Cipher: ${cipher}`, `The cipher of the ${ordinal(jeuNum)} Treasury is "${cipher}". This sacred name must be held in the hand (inscribed upon a pebble or token) while the initiate passes through the gates.`)}>{cipher}</text>
+   364→   364→      {places.map((p, i) => (
+   365→   365→        <g key={i} className={`svg-clickable${selectedId === `place-${i}` ? ' selected' : ''}`}
+   366→   366→           onClick={() => onClick(`place-${i}`, p.name, `${p.name} is the ${ordinal(i + 1)} place surrounding the Father in the ${ordinal(jeuNum)} Treasury. Each place is governed by an emanation of ${fatherName}.`)}>
+   367→   367→          <circle cx={p.x} cy={p.y} r={14} fill={PARCH} stroke={INK} strokeWidth={1.5} />
+   368→   368→          <text x={p.x} y={p.y + 4} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK}>{p.name.substring(0, 4)}</text>
+   369→   369→        </g>
+   370→   370→      ))}
+   371→   371→      <text x={cx} y={cy - outerR - 15} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK2} letterSpacing={1}>{fatherName}</text>
+   372→   372→      {places.map((p, i) => <line key={`l${i}`} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke={INK3} strokeWidth={0.5} strokeDasharray="3,3" pointerEvents="none" />)}
+   373→   373→    </svg>
+   374→   374→  )
+   375→   375→}
+   376→   376→
+   377→   377→/* ── Concentric Rings Seal ── */
+   378→   378→function ConcentricSeal({ cx, cy, r, jeuNum, fatherName, cipher, complexity, onClick, selectedId }: {
+   379→   379→  cx: number; cy: number; r: number; jeuNum: number; fatherName: string; cipher: string; complexity: number; onClick: (id: string, label: string, detail: string) => void; selectedId: string | null
+   380→   380→}) {
+   381→   381→  const rings = complexity + 1
+   382→   382→  const emanNames = ['Pha', 'Omo', 'Aph', 'Sap', 'Mar', 'Pig', 'Tha', 'Bat', 'Era', 'Arm', 'Phr', 'Aphr']
+   383→   383→
+   384→   384→  return (
+   385→   385→    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   386→   386→      <circle cx={cx} cy={cy} r={r + 20} fill="none" stroke={INK3} strokeWidth={1} pointerEvents="none" />
+   387→   387→      {Array.from({ length: rings }, (_, i) => {
+   388→   388→        const ringR = r - (i * r / rings)
+   389→   389→        return <circle key={i} cx={cx} cy={cy} r={ringR} fill="none" stroke={i === 0 ? INK : GOLD2} strokeWidth={i === 0 ? 3 : 1.5}
+   390→   390→          className={`svg-clickable${selectedId === `ring-${i}` ? ' selected' : ''}`}
+   391→   391→          onClick={() => onClick(`ring-${i}`, `${ordinal(i + 1)} Ring`, i === 0 ? 'This outermost ring represents the boundary of the treasury, beyond which the Archons patrol.' : i === rings - 1 ? 'This innermost ring contains the cipher of the Father, the key to passage.' : 'This intermediate ring contains the names of the emanations and watchers.')} />
+   392→   392→      })}
+   393→   393→      {Array.from({ length: 12 }, (_, i) => {
+   394→   394→        const angle = (i * 30 - 90) * Math.PI / 180
+   395→   395→        return (
+   396→   396→          <g key={i} className={`svg-clickable${selectedId === `em-${i}` ? ' selected' : ''}`}
+   397→   397→             onClick={() => onClick(`em-${i}`, `Emanation ${i + 1}`, `The ${ordinal(i + 1)} emanation of ${fatherName} radiating from the center of the ${ordinal(jeuNum)} Treasury.`)}>
+   398→   398→            <line x1={cx + Math.cos(angle) * 30} y1={cy + Math.sin(angle) * 30} x2={cx + Math.cos(angle) * r} y2={cy + Math.sin(angle) * r} stroke={INK3} strokeWidth={0.8} />
+   399→   399→            <circle cx={cx + Math.cos(angle) * (r + 12)} cy={cy + Math.sin(angle) * (r + 12)} r={8} fill={PARCH} stroke={GOLD2} strokeWidth={1} />
+   400→   400→            <text x={cx + Math.cos(angle) * (r + 12)} y={cy + Math.sin(angle) * (r + 12) + 3} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK2}>{emanNames[i]}</text>
+   401→   401→          </g>
+   402→   402→        )
+   403→   403→      })}
+   404→   404→      <circle cx={cx} cy={cy} r={22} fill={PARCH} stroke={INK} strokeWidth={2}
+   405→   405→        className={`svg-clickable${selectedId === 'cipher' ? ' selected' : ''}`}
+   406→   406→        onClick={() => onClick('cipher', `Cipher: ${cipher}`, `The cipher of the ${ordinal(jeuNum)} Treasury is "${cipher}". This is the name that must be held while passing through the gates of ${fatherName}.`)} />
+   407→   407→      <text x={cx} y={cy + 5} textAnchor="middle" dominantBaseline="middle" fontFamily="Cinzel, serif" fontSize={14} fill={GOLD}>{cipher}</text>
+   408→   408→      <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK2} letterSpacing={1}>{fatherName}</text>
+   409→   409→      <text x={cx} y={475} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK3} letterSpacing={2}>{jeuNum > 0 ? `JEU ${jeuNum}` : 'JEU'}</text>
+   410→   410→    </svg>
+   411→   411→  )
+   412→   412→}
+   413→   413→
+   414→   414→/* ── Star Seal ── */
+   415→   415→function StarSeal({ cx, cy, r, jeuNum, fatherName, cipher, complexity, onClick, selectedId }: {
+   416→   416→  cx: number; cy: number; r: number; jeuNum: number; fatherName: string; cipher: string; complexity: number; onClick: (id: string, label: string, detail: string) => void; selectedId: string | null
+   417→   417→}) {
+   418→   418→  const points = complexity >= 3 ? 8 : 6
+   419→   419→  const innerR = r * 0.5
+   420→   420→  const starPath = useMemo(() => {
+   421→   421→    const pts: string[] = []
+   422→   422→    for (let i = 0; i < points * 2; i++) {
+   423→   423→      const angle = (i * 180 / points - 90) * Math.PI / 180
+   424→   424→      const rad = i % 2 === 0 ? r : innerR
+   425→   425→      pts.push(`${cx + Math.cos(angle) * rad},${cy + Math.sin(angle) * rad}`)
+   426→   426→    }
+   427→   427→    return pts.join(' ')
+   428→   428→  }, [cx, cy, r, innerR, points])
+   429→   429→
+   430→   430→  return (
+   431→   431→    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   432→   432→      <circle cx={cx} cy={cy} r={r + 20} fill="none" stroke={INK3} strokeWidth={1} pointerEvents="none" />
+   433→   433→      <circle cx={cx} cy={cy} r={r + 10} fill="none" stroke={GOLD} strokeWidth={1.5} pointerEvents="none" />
+   434→   434→      <polygon points={starPath} fill="none" stroke={INK} strokeWidth={2.5}
+   435→   435→        className={`svg-clickable${selectedId === 'star' ? ' selected' : ''}`}
+   436→   436→        onClick={() => onClick('star', `The ${points}-Pointed Star`, `The star seal of the ${ordinal(jeuNum)} Treasury. The ${points} points represent the ${points === 8 ? 'eight directions of divine emanation' : 'six places surrounding the Father'}.`)} />
+   437→   437→      <circle cx={cx} cy={cy} r={innerR * 0.6} fill="none" stroke={GOLD2} strokeWidth={2}
+   438→   438→        className={`svg-clickable${selectedId === 'inner' ? ' selected' : ''}`}
+   439→   439→        onClick={() => onClick('inner', 'The Inner Circle', `The inner circle of the ${ordinal(jeuNum)} Treasury contains the Father ${fatherName} and his cipher.`)} />
+   440→   440→      {Array.from({ length: points }, (_, i) => {
+   441→   441→        const angle = (i * 360 / points - 90) * Math.PI / 180
+   442→   442→        return <line key={i} x1={cx} y1={cy} x2={cx + Math.cos(angle) * r} y2={cy + Math.sin(angle) * r} stroke={INK3} strokeWidth={0.7} pointerEvents="none" />
+   443→   443→      })}
+   444→   444→      <text x={cx} y={cy + 5} textAnchor="middle" dominantBaseline="middle" fontFamily="Cinzel, serif" fontSize={16} fill={GOLD}
+   445→   445→        className="svg-clickable" style={{ cursor: 'pointer' }}
+   446→   446→        onClick={() => onClick('cipher', `Cipher: ${cipher}`, `The cipher "${cipher}" of ${fatherName}.`)}>{cipher}</text>
+   447→   447→      <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK2} letterSpacing={1}>{fatherName}</text>
+   448→   448→      <text x={cx} y={475} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK3} letterSpacing={2}>{jeuNum > 0 ? `JEU ${jeuNum}` : 'JEU'}</text>
+   449→   449→    </svg>
+   450→   450→  )
+   451→   451→}
+   452→   452→
+   453→   453→/* ── Radial Division Seal ── */
+   454→   454→function RadialSeal({ cx, cy, r, jeuNum, fatherName, cipher, complexity, onClick, selectedId }: {
+   455→   455→  cx: number; cy: number; r: number; jeuNum: number; fatherName: string; cipher: string; complexity: number; onClick: (id: string, label: string, detail: string) => void; selectedId: string | null
+   456→   456→}) {
+   457→   457→  const sectors = complexity >= 3 ? 12 : 8
+   458→   458→  const innerR = r * 0.35
+   459→   459→  const greekLetters = 'ABGDEZHQIKLMNXOPRSTUFW'
+   460→   460→
+   461→   461→  return (
+   462→   462→    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   463→   463→      <circle cx={cx} cy={cy} r={r + 15} fill="none" stroke={INK3} strokeWidth={1} pointerEvents="none" />
+   464→   464→      <circle cx={cx} cy={cy} r={r} fill="none" stroke={INK} strokeWidth={2.5}
+   465→   465→        className={`svg-clickable${selectedId === 'outer' ? ' selected' : ''}`}
+   466→   466→        onClick={() => onClick('outer', 'The Outer Boundary', `The outer boundary of the ${ordinal(jeuNum)} Treasury seal with ${sectors} sectors.`)} />
+   467→   467→      <circle cx={cx} cy={cy} r={innerR} fill="none" stroke={GOLD2} strokeWidth={2}
+   468→   468→        className={`svg-clickable${selectedId === 'inner' ? ' selected' : ''}`}
+   469→   469→        onClick={() => onClick('inner', 'The Inner Sanctum', `The inner sanctum where the Father ${fatherName} dwells with his cipher.`)} />
+   470→   470→      {Array.from({ length: sectors }, (_, i) => {
+   471→   471→        const angle = (i * 360 / sectors - 90) * Math.PI / 180
+   472→   472→        const midAngle = ((i + 0.5) * 360 / sectors - 90) * Math.PI / 180
+   473→   473→        const labelR = (r + innerR) / 2
+   474→   474→        return (
+   475→   475→          <g key={i}>
+   476→   476→            <line x1={cx + Math.cos(angle) * innerR} y1={cy + Math.sin(angle) * innerR} x2={cx + Math.cos(angle) * r} y2={cy + Math.sin(angle) * r} stroke={INK3} strokeWidth={1}
+   477→   477→              className={`svg-clickable${selectedId === `sec-${i}` ? ' selected' : ''}`}
+   478→   478→              onClick={() => onClick(`sec-${i}`, `Sector ${i + 1}`, `The ${ordinal(i + 1)} sector governed by an emanation of ${fatherName}.`)} />
+   479→   479→            <text x={cx + Math.cos(midAngle) * labelR} y={cy + Math.sin(midAngle) * labelR + 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK3}>{greekLetters[i % greekLetters.length]}</text>
+   480→   480→          </g>
+   481→   481→        )
+   482→   482→      })}
+   483→   483→      <text x={cx} y={cy + 5} textAnchor="middle" dominantBaseline="middle" fontFamily="Cinzel, serif" fontSize={16} fill={GOLD}
+   484→   484→        className="svg-clickable" style={{ cursor: 'pointer' }}
+   485→   485→        onClick={() => onClick('cipher', `Cipher: ${cipher}`, `The cipher "${cipher}" of the ${ordinal(jeuNum)} Treasury.`)}>{cipher}</text>
+   486→   486→      <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK2} letterSpacing={1}>{fatherName}</text>
+   487→   487→    </svg>
+   488→   488→  )
+   489→   489→}
+   490→   490→
+   491→   491→/* ── Octagram Seal ── */
+   492→   492→function OctagramSeal({ cx, cy, r, jeuNum, fatherName, cipher, complexity, onClick, selectedId }: {
+   493→   493→  cx: number; cy: number; r: number; jeuNum: number; fatherName: string; cipher: string; complexity: number; onClick: (id: string, label: string, detail: string) => void; selectedId: string | null
+   494→   494→}) {
+   495→   495→  return (
+   496→   496→    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   497→   497→      <circle cx={cx} cy={cy} r={r + 15} fill="none" stroke={INK3} strokeWidth={1} pointerEvents="none" />
+   498→   498→      {[0, 45].map((offset, si) => (
+   499→   499→        <polygon key={si}
+   500→   500→          points={Array.from({ length: 4 }, (_, i) => { const a = (i * 90 + offset - 90) * Math.PI / 180; return `${cx + Math.cos(a) * r},${cy + Math.sin(a) * r}` }).join(' ')}
+   501→   501→          fill="none" stroke={si === 0 ? INK : GOLD2} strokeWidth={2}
+   502→   502→          className={`svg-clickable${selectedId === `sq-${si}` ? ' selected' : ''}`}
+   503→   503→          onClick={() => onClick(`sq-${si}`, si === 0 ? 'The First Square' : 'The Second Square', si === 0 ? `The first square of the octagram seal representing the four cardinal emanations of ${fatherName}.` : `The second square, rotated 45 degrees, representing the four intermediate emanations.`)} />
+   504→   504→      ))}
+   505→   505→      <circle cx={cx} cy={cy} r={r * 0.45} fill="none" stroke={GOLD2} strokeWidth={2}
+   506→   506→        className={`svg-clickable${selectedId === 'inner' ? ' selected' : ''}`}
+   507→   507→        onClick={() => onClick('inner', 'The Inner Circle', `The inner circle containing the cipher of ${fatherName}.`)} />
+   508→   508→      <text x={cx} y={cy + 5} textAnchor="middle" dominantBaseline="middle" fontFamily="Cinzel, serif" fontSize={16} fill={GOLD}
+   509→   509→        className="svg-clickable" style={{ cursor: 'pointer' }}
+   510→   510→        onClick={() => onClick('cipher', `Cipher: ${cipher}`, `The cipher "${cipher}" of the ${ordinal(jeuNum)} Treasury.`)}>{cipher}</text>
+   511→   511→      <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK2} letterSpacing={1}>{fatherName}</text>
+   512→   512→      <text x={cx} y={475} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK3} letterSpacing={2}>{jeuNum > 0 ? `JEU ${jeuNum}` : 'JEU'}</text>
+   513→   513→    </svg>
+   514→   514→  )
+   515→   515→}
+   516→   516→
+   517→   517→/* ── Treasury Overview Diagram ── */
+   518→   518→function TreasuryOverviewDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+   519→   519→  const cx = 250, cy = 260
+   520→   520→  const rings = [
+   521→   521→    { r: 210, label: '5th Rank', id: 'ov-pleroma' },
+   522→   522→    { r: 170, label: '4th Rank', id: 'ov-pleroma' },
+   523→   523→    { r: 130, label: '3rd Rank', id: 'ov-curtain1' },
+   524→   524→    { r: 90, label: '2nd Rank', id: 'ov-curtain2' },
+   525→   525→    { r: 50, label: '1st Rank', id: 'ov-curtain3' }
+   526→   526→  ]
+   527→   527→
+   528→   528→  return (
+   529→   529→    <svg viewBox="0 0 500 520" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   530→   530→      {rings.map((ring, i) => (
+   531→   531→        <circle key={i} cx={cx} cy={cy} r={ring.r} fill="none" stroke={i < 2 ? INK3 : i < 4 ? GOLD2 : INK} strokeWidth={i === 4 ? 2.5 : 1.5}
+   532→   532→          className={`svg-clickable${selectedId === ring.id ? ' selected' : ''}`}
+   533→   533→          onClick={() => { const el = elements.find(e => e.id === ring.id); if (el) onClick(ring.id, el.label, el.detail) }} />
+   534→   534→      ))}
+   535→   535→      {[160, 120, 70].map((r, i) => (
+   536→   536→        <circle key={`c${i}`} cx={cx} cy={cy} r={r} fill="none" stroke={GOLD} strokeWidth={1} strokeDasharray="6,4"
+   537→   537→          className={`svg-clickable${selectedId === `ov-curtain${i + 1}` ? ' selected' : ''}`}
+   538→   538→          onClick={() => { const el = elements.find(e => e.id === `ov-curtain${i + 1}`); if (el) onClick(`ov-curtain${i + 1}`, el.label, el.detail) }} />
+   539→   539→      ))}
+   540→   540→      <circle cx={cx} cy={cy} r={20} fill={INK} stroke={GOLD3} strokeWidth={2}
+   541→   541→        className={`svg-clickable${selectedId === 'ov-invisible' ? ' selected' : ''}`}
+   542→   542→        onClick={() => { const el = elements.find(e => e.id === 'ov-invisible'); if (el) onClick('ov-invisible', el.label, el.detail) }} />
+   543→   543→      <text x={cx} y={cy + 1} textAnchor="middle" dominantBaseline="middle" fontFamily="Cinzel, serif" fontSize={6} fill={GOLD3}>INVISIBLE</text>
+   544→   544→      {rings.map((ring, i) => <text key={`lb${i}`} x={cx + ring.r + 5} y={cy - 5} fontFamily="Cinzel, serif" fontSize={7} fill={INK3}>{ring.label}</text>)}
+   545→   545→      <text x={cx} y={20} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={14} fill={INK} letterSpacing={2}>THE TREASURY OF LIGHT</text>
+   546→   546→    </svg>
+   547→   547→  )
+   548→   548→}
+   549→   549→
+   550→   550→/* ── Upgraded Archon Gate Diagram ── */
+   551→   551→function ArchonGateDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+   552→   552→  const cx = 250
+   553→   553→
+   554→   554→  const gates = [
+   555→   555→    { y: 70, w: 180, h: 100, label: '1st Gate: Paraphax', pron: 'PAR-ah-faks', pw: 'IAO SABAOTH', pwPron: 'EE-ah-oh SAH-bah-oth', id: 'ar-paraph', color: '#6a5030' },
+   556→   556→    { y: 200, w: 220, h: 110, label: '2nd Gate: Arthax', pron: 'AR-thaks', pw: 'ADONAI ELOHIM', pwPron: 'ah-doh-NYE el-oh-HEEM', id: 'ar-arthax', color: '#5a3818' },
+   557→   557→    { y: 340, w: 260, h: 120, label: '3rd Gate: Aphraphax', pron: 'ah-FRAH-faks', pw: 'EIE AZAPHAX', pwPron: 'AY-ee-ay AZ-ah-faks', id: 'ar-aphr', color: '#3a2c14' }
+   558→   558→  ]
+   559→   559→
+   560→   560→  return (
+   561→   561→    <svg viewBox="0 0 500 510" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   562→   562→      <text x={cx} y={25} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={14} fill={INK} letterSpacing={2}>THE THREE ARCHON GATES</text>
+   563→   563→      <line x1={cx} y1={40} x2={cx} y2={480} stroke={INK3} strokeWidth={1} strokeDasharray="4,4" pointerEvents="none" />
+   564→   564→
+   565→   565→      {gates.map((gate, gi) => {
+   566→   566→        const gateCx = cx, gateCy = gate.y + gate.h / 2
+   567→   567→        return (
+   568→   568→          <g key={gi}>
+   569→   569→            {/* Gate arch shape */}
+   570→   570→            <path d={`M${gateCx - gate.w / 2} ${gate.y + gate.h} L${gateCx - gate.w / 2} ${gate.y + 20} Q${gateCx - gate.w / 2} ${gate.y} ${gateCx - gate.w / 4} ${gate.y} L${gateCx + gate.w / 4} ${gate.y} Q${gateCx + gate.w / 2} ${gate.y} ${gateCx + gate.w / 2} ${gate.y + 20} L${gateCx + gate.w / 2} ${gate.y + gate.h}`}
+   571→   571→              fill="none" stroke={gate.color} strokeWidth={3}
+   572→   572→              className={`svg-clickable${selectedId === gate.id ? ' selected' : ''}`}
+   573→   573→              onClick={() => { const el = elements.find(e => e.id === gate.id); if (el) onClick(gate.id, el.label, el.detail) }} />
+   574→   574→
+   575→   575→            {/* Inner seal based on complexity */}
+   576→   576→            {Array.from({ length: gi + 1 }, (_, ri) => (
+   577→   577→              <circle key={ri} cx={gateCx} cy={gateCy} r={15 + ri * 12} fill="none" stroke={GOLD2} strokeWidth={1.5} pointerEvents="none" />
+   578→   578→            ))}
+   579→   579→
+   580→   580→            {/* Cross for gate 2+ */}
+   581→   581→            {gi >= 1 && <>
+   582→   582→              <line x1={gateCx} y1={gateCy - 28} x2={gateCx} y2={gateCy + 28} stroke={INK} strokeWidth={2} pointerEvents="none" />
+   583→   583→              <line x1={gateCx - 28} y1={gateCy} x2={gateCx + 28} y2={gateCy} stroke={INK} strokeWidth={2} pointerEvents="none" />
+   584→   584→            </>}
+   585→   585→
+   586→   586→            {/* Radiating lines for gate 3 */}
+   587→   587→            {gi >= 2 && <>
+   588→   588→              {[45, 135, 225, 315].map((angle, ai) => {
+   589→   589→                const a = angle * Math.PI / 180
+   590→   590→                return <line key={ai} x1={gateCx} y1={gateCy} x2={gateCx + Math.cos(a) * 35} y2={gateCy + Math.sin(a) * 35} stroke={INK3} strokeWidth={1.5} pointerEvents="none" />
+   591→   591→              })}
+   592→   592→            </>}
+   593→   593→
+   594→   594→            {/* Central seal mark */}
+   595→   595→            <circle cx={gateCx} cy={gateCy} r={8} fill={PARCH} stroke={INK} strokeWidth={1.5} pointerEvents="none" />
+   596→   596→            <text x={gateCx} y={gateCy + 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK}>{gi + 1}</text>
+   597→   597→
+   598→   598→            {/* Gate label and pronunciation */}
+   599→   599→            <text x={gateCx} y={gate.y - 12} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={11} fill={INK} letterSpacing={1}>{gate.label}</text>
+   600→   600→            <text x={gateCx} y={gate.y - 2} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">[{gate.pron}]</text>
+   601→   601→
+   602→   602→            {/* Password and pronunciation */}
+   603→   603→            <text x={gateCx} y={gate.y + gate.h + 16} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={11} fill={GOLD} letterSpacing={1}>{gate.pw}</text>
+   604→   604→            <text x={gateCx} y={gate.y + gate.h + 28} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">[{gate.pwPron}]</text>
+   605→   605→
+   606→   606→            {/* Side labels */}
+   607→   607→            {gi === 0 && <text x={38} y={gateCy} fontFamily="Cinzel, serif" fontSize={7} fill={INK3} transform={`rotate(-90, 38, ${gateCy})`}>ARCHONS OF THE AEONS</text>}
+   608→   608→            {gi === 1 && <text x={38} y={gateCy} fontFamily="Cinzel, serif" fontSize={7} fill={INK3} transform={`rotate(-90, 38, ${gateCy})`}>ARCHONS OF THE SPHERE</text>}
+   609→   609→            {gi === 2 && <text x={38} y={gateCy} fontFamily="Cinzel, serif" fontSize={7} fill={INK3} transform={`rotate(-90, 38, ${gateCy})`}>ARCHONS OF THE MIDST</text>}
+   610→   610→
+   611→   611→            {/* Decorative corner marks */}
+   612→   612→            <line x1={gateCx - gate.w / 2 - 5} y1={gate.y + gate.h} x2={gateCx - gate.w / 2 - 5} y2={gate.y + gate.h + 8} stroke={GOLD2} strokeWidth={1} pointerEvents="none" />
+   613→   613→            <line x1={gateCx + gate.w / 2 + 5} y1={gate.y + gate.h} x2={gateCx + gate.w / 2 + 5} y2={gate.y + gate.h + 8} stroke={GOLD2} strokeWidth={1} pointerEvents="none" />
+   614→   614→          </g>
+   615→   615→        )
+   616→   616→      })}
+   617→   617→
+   618→   618→      <text x={cx} y={495} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK3} letterSpacing={2}>UNTO THE TREASURY OF LIGHT</text>
+   619→   619→    </svg>
+   620→   620→  )
+   621→   621→}
+   622→   622→
+   623→   623→/* ── Baptism Rite Diagram ── */
+   624→   624→function BaptismDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+   625→   625→  const cx = 250
+   626→   626→  const baptisms = [
+   627→   627→    { id: 'bt-water', label: 'Water', y: 80, color: '#3a6a8a' },
+   628→   628→    { id: 'bt-fire', label: 'Fire', y: 165, color: '#8a3a20' },
+   629→   629→    { id: 'bt-spirit', label: 'Spirit', y: 250, color: '#6a5030' },
+   630→   630→    { id: 'bt-light', label: 'Light', y: 335, color: GOLD2 },
+   631→   631→    { id: 'bt-mystery', label: 'Mystery', y: 420, color: INK }
+   632→   632→  ]
+   633→   633→
+   634→   634→  return (
+   635→   635→    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   636→   636→      <text x={cx} y={30} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={14} fill={INK} letterSpacing={2}>THE FIVE BAPTISMS</text>
+   637→   637→      <line x1={cx} y1={55} x2={cx} y2={455} stroke={GOLD2} strokeWidth={1.5} strokeDasharray="6,3" pointerEvents="none" />
+   638→   638→
+   639→   639→      {baptisms.map((b, i) => {
+   640→   640→        const r = 26 + i * 3
+   641→   641→        const el = elements.find(e => e.id === b.id)
+   642→   642→        return (
+   643→   643→          <g key={i}>
+   644→   644→            {Array.from({ length: i + 1 }, (_, ri) => (
+   645→   645→              <circle key={ri} cx={cx} cy={b.y} r={r + ri * 10} fill="none" stroke={ri === 0 ? b.color : INK3} strokeWidth={ri === 0 ? 2 : 0.8} pointerEvents="none" />
+   646→   646→            ))}
+   647→   647→            <circle cx={cx} cy={b.y} r={r} fill={PARCH} stroke={b.color} strokeWidth={2.5}
+   648→   648→              className={`svg-clickable${selectedId === b.id ? ' selected' : ''}`}
+   649→   649→              onClick={() => { if (el) onClick(b.id, el.label, el.detail) }} />
+   650→   650→            <text x={cx} y={b.y + 5} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={16} fill={b.color}>{i + 1}</text>
+   651→   651→            <text x={cx + r + 15} y={b.y + 4} fontFamily="Cinzel, serif" fontSize={11} fill={INK2} letterSpacing={1}>{i + 1}. {b.label}</text>
+   652→   652→            <text x={cx - r - 15} y={b.y + 4} textAnchor="end" fontFamily="Cinzel, serif" fontSize={9} fill={INK3}>Seal {i + 1}</text>
+   653→   653→            {i < 4 && <path d={`M${cx} ${b.y + r + 8} L${cx - 4} ${b.y + r + 16} M${cx} ${b.y + r + 8} L${cx + 4} ${b.y + r + 16}`} stroke={GOLD2} strokeWidth={1.5} pointerEvents="none" />}
+   654→   654→          </g>
+   655→   655→        )
+   656→   656→      })}
+   657→   657→      <text x={cx} y={485} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK3} letterSpacing={2}>UNTO THE TREASURY OF LIGHT</text>
+   658→   658→    </svg>
+   659→   659→  )
+   660→   660→}
+   661→   661→
+   662→   662→/* ── Hymn Diagram ── */
+   663→   663→function HymnDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+   664→   664→  const cx = 250, cy = 250
+   665→   665→  const sections = [
+   666→   666→    { id: 'hy-invocation', label: 'I. The Invocation', y: 130, el: elements.find(e => e.id === 'hy-invocation') },
+   667→   667→    { id: 'hy-names', label: 'II. The Sacred Names', y: 240, el: elements.find(e => e.id === 'hy-names') },
+   668→   668→    { id: 'hy-cipher', label: 'III. The Cipher Passage', y: 350, el: elements.find(e => e.id === 'hy-cipher') }
+   669→   669→  ]
+   670→   670→
+   671→   671→  return (
+   672→   672→    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   673→   673→      <text x={cx} y={30} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={14} fill={INK} letterSpacing={2}>THE GNOSTIC HYMN</text>
+   674→   674→      <rect x={80} y={60} width={340} height={380} rx={8} fill="none" stroke={INK3} strokeWidth={1.5} pointerEvents="none" />
+   675→   675→      <rect x={90} y={70} width={320} height={360} rx={4} fill="none" stroke={GOLD2} strokeWidth={0.8} pointerEvents="none" />
+   676→   676→
+   677→   677→      {sections.map((section, i) => (
+   678→   678→        <g key={i}>
+   679→   679→          <rect x={110} y={section.y - 40} width={280} height={80} rx={4}
+   680→   680→            fill={selectedId === section.id ? 'rgba(200,168,74,0.1)' : 'transparent'}
+   681→   681→            stroke={selectedId === section.id ? GOLD2 : INK3} strokeWidth={1.5}
+   682→   682→            className="svg-clickable"
+   683→   683→            onClick={() => { if (section.el) onClick(section.id, section.el.label, section.el.detail) }} />
+   684→   684→          <text x={cx} y={section.y - 15} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={13} fill={INK2} letterSpacing={1}>{section.label}</text>
+   685→   685→          <text x={cx} y={section.y + 8} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={9} fill={INK3} fontStyle="italic">{section.el?.brief || ''}</text>
+   686→   686→          {/* Small cross shapes instead of Unicode symbols */}
+   687→   687→          <SvgCross x={130} y={section.y} size={6} color={GOLD2} />
+   688→   688→          <SvgCross x={370} y={section.y} size={6} color={GOLD2} />
+   689→   689→        </g>
+   690→   690→      ))}
+   691→   691→      <line x1={130} y1={185} x2={370} y2={185} stroke={GOLD2} strokeWidth={0.5} pointerEvents="none" />
+   692→   692→      <line x1={130} y1={295} x2={370} y2={295} stroke={GOLD2} strokeWidth={0.5} pointerEvents="none" />
+   693→   693→    </svg>
+   694→   694→  )
+   695→   695→}
+   696→   696→
+   697→   697→/* ── Seal Diagram Router ── */
+   698→   698→function SealDiagram({ type, complexity, fatherName, cipher, jeuNum, onElementClick, selectedId, elements }: {
+   699→   699→  type: string; complexity: number; fatherName: string; cipher: string; jeuNum: number
+   700→   700→  onElementClick: (id: string, label: string, detail: string) => void; selectedId: string | null
+   701→   701→  elements?: { id: string; label: string; brief: string; detail: string }[]
+   702→   702→}) {
+   703→   703→  const cx = 250, cy = 250
+   704→   704→  const baseR = [80, 100, 120, 140, 160][Math.min(complexity, 5) - 1] || 100
+   705→   705→  const props = { cx, cy, r: baseR, jeuNum, fatherName, cipher, complexity, onClick: onElementClick, selectedId }
+   706→   706→  const elProps = { onClick: onElementClick, selectedId, elements: elements || [] }
+   707→   707→
+   708→   708→  switch (type) {
+   709→   709→    case 'cross-circle': return <CrossCircleSeal {...props} />
+   710→   710→    case 'concentric': return <ConcentricSeal {...props} />
+   711→   711→    case 'star': return <StarSeal {...props} />
+   712→   712→    case 'radial': return <RadialSeal {...props} />
+   713→   713→    case 'octagram': return <OctagramSeal {...props} />
+   714→   714→    case 'treasury-overview': return <TreasuryOverviewDiagram {...elProps} />
+   715→   715→    case 'archon-gate': return <ArchonGateDiagram {...elProps} />
+   716→   716→    case 'baptism-rite': return <BaptismDiagram {...elProps} />
+   717→   717→    case 'hymn': return <HymnDiagram {...elProps} />
+   718→   718→    default: return <ConcentricSeal {...props} />
+   719→   719→  }
+   720→   720→}
+   721→   721→
+   722→   722→/* ═══════════════════════════════════════════════════
+   723→   723→   MAIN APP
+   724→   724→   ═══════════════════════════════════════════════════ */
+   725→   725→export default function Home() {
+   726→   726→  const [selectedEntry, setSelectedEntry] = useState('overview')
+   727→   727→  const [selectedElement, setSelectedElement] = useState<string | null>(null)
+   728→   728→  const [revelation, setRevelation] = useState<{ title: string; detail: string } | null>(null)
+   729→   729→  const [searchQuery, setSearchQuery] = useState('')
+   730→   730→  const [expandedRanks, setExpandedRanks] = useState<Record<string, boolean>>({ 'rank-1': true, 'rank-2': false, 'rank-3': false, 'rank-4': false, 'rank-5': false, 'specials': true })
+   731→   731→  const [mounted, setMounted] = useState(false)
+   732→   732→  const [sidebarOpen, setSidebarOpen] = useState(true)
+   733→   733→
+   734→   734→  useEffect(() => { setMounted(true) }, [])
+   735→   735→
+   736→   736→  const toggleRank = useCallback((rank: string) => { setExpandedRanks(prev => ({ ...prev, [rank]: !prev[rank] })) }, [])
+   737→   737→  const handleElementClick = useCallback((id: string, label: string, detail: string) => { setSelectedElement(id); setRevelation({ title: label, detail }) }, [])
+   738→   738→  const handleEntrySelect = useCallback((id: string) => { setSelectedEntry(id); setSelectedElement(null); setRevelation(null) }, [])
+   739→   739→
+   740→   740→  const currentSpecial = SPECIALS.find(s => s.id === selectedEntry)
+   741→   741→  const currentTreasury = TREASURIES.find(t => t.id === selectedEntry)
+   742→   742→
+   743→   743→  const filteredTreasuries = useMemo(() => {
+   744→   744→    if (!searchQuery.trim()) return TREASURIES
+   745→   745→    const q = searchQuery.toLowerCase()
+   746→   746→    return TREASURIES.filter(t => t.title.toLowerCase().includes(q) || t.fatherName.toLowerCase().includes(q) || t.cipher.toLowerCase().includes(q) || t.rankName.toLowerCase().includes(q) || String(t.jeuNum).includes(q))
+   747→   747→  }, [searchQuery])
+   748→   748→
+   749→   749→  const groupedTreasuries = useMemo(() => {
+   750→   750→    const groups: Record<string, TreasuryEntry[]> = {}
+   751→   751→    filteredTreasuries.forEach(t => { const key = `rank-${t.rank}`; if (!groups[key]) groups[key] = []; groups[key].push(t) })
+   752→   752→    return groups
+   753→   753→  }, [filteredTreasuries])
+   754→   754→
+   755→   755→  const filteredSpecials = useMemo(() => {
+   756→   756→    if (!searchQuery.trim()) return SPECIALS
+   757→   757→    const q = searchQuery.toLowerCase()
+   758→   758→    return SPECIALS.filter(s => s.title.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q))
+   759→   759→  }, [searchQuery])
+   760→   760→
+   761→   761→  return (
+   762→   762→    <div className="treasury-app">
+   763→   763→      {mounted && <Particles />}
+   764→   764→      <div className="roller"><span className="roller-text">CODEX BRUCIANUS &middot; BODLEIAN LIBRARY OXFORD &middot; MS BRUCE 96</span></div>
+   765→   765→      <header className="treasury-header">
+   766→   766→        <div className="header-greek">Biblos tou Ieu &mdash; Sacred Diagrams of the Pleroma</div>
+   767→   767→        <h1>The Book of Jeu</h1>
+   768→   768→        <div className="header-sub">60 Treasuries of Light &middot; 5 Ranks of Fatherhood &middot; The Path of Ascent</div>
+   769→   769→      </header>
+   770→   770→
+   771→   771→      <div className="main-layout">
+   772→   772→        <aside className={`sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
+   773→   773→          <div className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>{sidebarOpen ? '\u25C0' : '\u25B6'}</div>
+   774→   774→          {sidebarOpen && (
+   775→   775→            <>
+   776→   776→              <div className="sidebar-search">
+   777→   777→                <input type="text" placeholder="Search treasuries..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="search-input" />
+   778→   778→              </div>
+   779→   779→              <div className="sidebar-section">
+   780→   780→                <div className="section-header" onClick={() => toggleRank('specials')}>
+   781→   781→                  <span className="section-arrow">{expandedRanks['specials'] ? '\u25BC' : '\u25B6'}</span>
+   782→   782→                  <span className="section-title">Sacred Texts</span>
+   783→   783→                </div>
+   784→   784→                {expandedRanks['specials'] && filteredSpecials.map(s => (
+   785→   785→                  <div key={s.id} className={`sidebar-item ${selectedEntry === s.id ? 'active' : ''}`} onClick={() => handleEntrySelect(s.id)}>
+   786→   786→                    <span className="item-icon">{s.category === 'overview' ? '\u2720' : s.category === 'archon' ? '\u2694' : s.category === 'baptism' ? '\u224B' : '\u266B'}</span>
+   787→   787→                    <span className="item-text">{s.title.length > 35 ? s.title.substring(0, 35) + '...' : s.title}</span>
+   788→   788→                  </div>
+   789→   789→                ))}
+   790→   790→              </div>
+   791→   791→              {[1, 2, 3, 4, 5].map(rank => {
+   792→   792→                const key = `rank-${rank}`
+   793→   793→                const items = groupedTreasuries[key] || []
+   794→   794→                if (items.length === 0 && searchQuery) return null
+   795→   795→                return (
+   796→   796→                  <div key={rank} className="sidebar-section">
+   797→   797→                    <div className="section-header" onClick={() => toggleRank(key)}>
+   798→   798→                      <span className="section-arrow">{expandedRanks[key] ? '\u25BC' : '\u25B6'}</span>
+   799→   799→                      <span className="section-title">{RANK_NAMES[rank]}</span>
+   800→   800→                      <span className="section-count">{TREASURIES.filter(t => t.rank === rank).length}</span>
+   801→   801→                    </div>
+   802→   802→                    {expandedRanks[key] && items.map(t => (
+   803→   803→                      <div key={t.id} className={`sidebar-item ${selectedEntry === t.id ? 'active' : ''}`} onClick={() => handleEntrySelect(t.id)}>
+   804→   804→                        <span className="item-icon jeu-num">{t.jeuNum}</span>
+   805→   805→                        <span className="item-text">{t.fatherName}</span>
+   806→   806→                      </div>
+   807→   807→                    ))}
+   808→   808→                  </div>
+   809→   809→                )
+   810→   810→              })}
+   811→   811→            </>
+   812→   812→          )}
+   813→   813→        </aside>
+   814→   814→
+   815→   815→        <main className="content-area">
+   816→   816→          <div className="entry-header page-enter" key={selectedEntry}>
+   817→   817→            {currentSpecial && (<><h2>{currentSpecial.title}</h2><div className="entry-ref">Book of Jeu {currentSpecial.book === 1 ? 'I' : 'II'} &middot; {currentSpecial.chapter} &middot; {currentSpecial.folio}</div></>)}
+   818→   818→            {currentTreasury && (<>
+   819→   819→              <h2>{currentTreasury.title}</h2>
+   820→   820→              <div className="entry-ref">Book of Jeu {currentTreasury.book === 1 ? 'I' : 'II'} &middot; {currentTreasury.chapter} &middot; {currentTreasury.folio}</div>
+   821→   821→              <div className="entry-tags">
+   822→   822→                <span className="tag">{currentTreasury.rankName}</span>
+   823→   823→                <span className="tag diagram-tag">Jeu {currentTreasury.jeuNum}</span>
+   824→   824→              </div>
+   825→   825→            </>)}
+   826→   826→          </div>
+   827→   827→
+   828→   828→          <div className="content-grid">
+   829→   829→            <div className="diagram-wrap">
+   830→   830→              {currentSpecial && <SealDiagram type={currentSpecial.sealType} complexity={3} fatherName="" cipher="" jeuNum={0} onElementClick={handleElementClick} selectedId={selectedElement} elements={currentSpecial.elements} />}
+   831→   831→              {currentTreasury && <SealDiagram type={currentTreasury.sealType} complexity={currentTreasury.sealComplexity} fatherName={currentTreasury.fatherName} cipher={currentTreasury.cipher} jeuNum={currentTreasury.jeuNum} onElementClick={handleElementClick} selectedId={selectedElement} />}
+   832→   832→            </div>
+   833→   833→
+   834→   834→            <div className="info-panel">
+   835→   835→              <div className="info-section">
+   836→   836→                <h3>Context</h3>
+   837→   837→                <p>{currentSpecial?.desc || currentTreasury?.desc}</p>
+   838→   838→              </div>
+   839→   839→
+   840→   840→              {currentTreasury && (
+   841→   841→                <div className="info-section">
+   842→   842→                  <h3>Treasury Details</h3>
+   843→   843→                  <div className="detail-grid">
+   844→   844→                    <div className="detail-row"><span className="detail-label">Father</span><span className="detail-value">{currentTreasury.fatherName} <span className="pron">[{currentTreasury.fatherPron}]</span></span></div>
+   845→   845→                    <div className="detail-row"><span className="detail-label">Cipher</span><span className="detail-value cipher">{currentTreasury.cipher} <span className="pron">[{currentTreasury.cipherPron}]</span></span></div>
+   846→   846→                    <div className="detail-row"><span className="detail-label">Rank</span><span className="detail-value">{currentTreasury.rankName}</span></div>
+   847→   847→                    <div className="detail-row"><span className="detail-label">Emanations</span><span className="detail-value">12</span></div>
+   848→   848→                    <div className="detail-row"><span className="detail-label">Watchers</span><span className="detail-value">3</span></div>
+   849→   849→                    <div className="detail-row"><span className="detail-label">Password</span><span className="detail-value password">{currentTreasury.password} <span className="pron">[{currentTreasury.passwordPron}]</span></span></div>
+   850→   850→                  </div>
+   851→   851→                </div>
+   852→   852→              )}
+   853→   853→
+   854→   854→              {currentSpecial && currentSpecial.lore.length > 0 && (
+   855→   855→                <div className="info-section">
+   856→   856→                  <h3>Teachings</h3>
+   857→   857→                  {currentSpecial.lore.map((l, i) => (<div key={i} className="lore-card"><strong>{l.title}</strong><p>{l.body}</p></div>))}
+   858→   858→                </div>
+   859→   859→              )}
+   860→   860→
+   861→   861→              {currentTreasury && (
+   862→   862→                <div className="info-section">
+   863→   863→                  <h3>Watchers</h3>
+   864→   864→                  {currentTreasury.watchers.map((w, i) => (
+   865→   865→                    <div key={i} className="watcher-item">
+   866→   866→                      <span className="watcher-icon"><SvgCross x={0} y={8} size={5} color={GOLD2} /></span>
+   867→   867→                      <span className="watcher-name">{w.name}</span>
+   868→   868→                      <span className="watcher-pron">[{w.pronunciation}]</span>
+   869→   869→                      <span className="watcher-gate">{w.gate}</span>
+   870→   870→                    </div>
+   871→   871→                  ))}
+   872→   872→                </div>
+   873→   873→              )}
+   874→   874→
+   875→   875→              <div className={`revelation ${revelation ? 'revealed' : ''}`}>
+   876→   876→                <span className="rev-label">Revelation</span>
+   877→   877→                {revelation ? (<><span className="rev-title">{revelation.title}</span><span className="rev-detail">{revelation.detail}</span></>) : (<span className="rev-detail">Click upon any element within the diagram to receive its hidden teaching.</span>)}
+   878→   878→              </div>
+   879→   879→            </div>
+   880→   880→          </div>
+   881→   881→        </main>
+   882→   882→      </div>
+   883→   883→
+   884→   884→      <div className="roller bottom"><span className="roller-text">Biblos tou Ieu &middot; THE TWO BOOKS OF JEU</span></div>
+   885→   885→    </div>
+   886→   886→  )
+   887→   887→}
+   888→   888→
+   889→   889→/* ═══════════════════════════════════════════════════
+   890→   890→   PARTICLES
+   891→   891→   ═══════════════════════════════════════════════════ */
+   892→   892→function Particles() {
+   893→   893→  const particles = useMemo(() => Array.from({ length: 20 }, (_, i) => ({ id: i, left: `${(i * 5.3) % 100}%`, size: 1.5 + (i % 3), duration: 12 + (i % 8), delay: (i * 1.7) % 10 })), [])
+   894→   894→  return (
+   895→   895→    <div className="particle-field">
+   896→   896→      {particles.map(p => (<div key={p.id} className="particle" style={{ left: p.left, width: `${p.size}px`, height: `${p.size}px`, animationDuration: `${p.duration}s`, animationDelay: `${p.delay}s` }} />))}
+   897→   897→    </div>
+   898→   898→  )
+   899→   899→}
+   900→   900→
