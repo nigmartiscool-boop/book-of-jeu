@@ -1,0 +1,480 @@
+    30→   348→  desc:'Jeu is the Great Overseer, the Father who stands at the apex of the aeons and administers the Treasury. He begat 49 powers arranged in a seven-by-seven matrix, inscribed his name upon the living water, and sent emanations of light into the lower worlds.',
+    31→   349→  lore:[
+    32→   350→    {title:'Who Is Jeu?',body:'Jeu (also Ieu or Ieou) occupies a position analogous to the Gnostic figure of Barbelo — the first self-manifestation of the unknowable God. He is not the Demiurge (the ignorant creator of matter) but the first-born of the highest light. The text states: "Jeu established himself and observed himself and saw that he was alone, and he appointed his powers."'},
+    33→   351→    {title:'The 49 Powers',body:'Jeu\'s 49 powers are arranged in a seven-by-seven grid, mirroring the sacred geometry of the Heptad. Each power rules a domain: some govern the movement of souls, others administer the seals of the aeons, others oversee the baptismal waters. Each power has a name, a face, and a number.'},
+    34→   352→    {title:'The Living Water',body:'Jeu inscribed his unutterable name upon "the living water" — a concept related to the baptismal rite. The Book of Jeu II contains extensive rubrics for a "baptism with water, fire, and holy spirit," in which the baptismal water becomes the vehicle for the divine seal.'},
+    35→   353→    {title:'The Manuscript Diagrams',body:'The Bruce Codex actually contains circular seal diagrams at this point in the text, with radial divisions, names in Coptic and Greek, and concentric rings — making the Book of Jeu one of the very few Gnostic texts to survive with its original ritual diagrams intact. Schmidt and MacDermot edited the critical edition in 1978.'}
+    36→   354→  ],
+    37→   355→  hotspots:[
+    38→   356→    {id:'head',label:'The Head & Crown',brief:'The unutterable name inscribed in fire',detail:'Upon the head of Jeu is inscribed his true name (ὄνομα ἀληθινόν) in fiery letters that no archon may read. The crown radiates 49 beams, one for each power he has begotten. The Book of Jeu states that to know the name is to command all 49 powers; the names are transmitted orally during initiation and never written in full.'},
+    39→   357→    {id:'powers7',label:'Seven Powers of the Right',brief:'Rulers of the light-world above',detail:'The seven powers of the right hand govern the upper realms: the Treasury of Light, the first Aeon, the middle Aeon, the Veil of the Treasury, the place of the Inheritance, the place of the Right, and the place of the midst. Their names are given as compound divine epithets with numeric values.'},
+    40→   358→    {id:'powers7b',label:'Seven Powers of the Left',brief:'Rulers of the boundary and the aethers',detail:'The seven powers of the left govern the transitional realms between pure light and the material world. They include the rulers of the repentant Sophia, the place of the midst, and the boundary between the aether and the material cosmos. They are described as more ambiguous figures — neither pure light nor darkness.'},
+    41→   359→    {id:'staff',label:'The Staff of Fire',brief:'Scepter of authority over all aeons',detail:'Jeu\'s staff (βακτηρία) is described as "living fire that does not consume." With it he drew the boundaries between the aeons at the beginning of creation, inscribed the names of the 49 powers upon the living water, and struck the veil between the Treasury and the Pleroma, causing the first descent of light.'},
+    42→   360→    {id:'throne',label:'The Throne of Jeu',brief:'Seat above all archons and rulers',detail:'The Throne stands at the summit of the aeons, inaccessible to all material or archonic powers. An ascending soul must pass twelve watchers (φύλακες) before approaching the Throne. The Book of Jeu describes the sound heard near the Throne as "a great noise like the voice of many waters, and a great fire proceeding from before him."'}
+    43→   361→  ],
+    44→   362→  draw:drawJeu
+    45→   363→},
+    46→   364→{
+    47→   365→  id:'archons',nav:'III · Archon Seals',
+    48→   366→  title:'The Seals of the Archons — Gates of Ascent',
+    49→   367→  ref:'Book of Jeu I · Chapters 30–50 · Bruce Codex ff. 20r–39v',
+    50→   368→  desc:'Between the soul and the Treasury stand the Archons — rulers of the material and aetheric realms who guard the gates of ascent. The Book of Jeu provides the name, seal, and counter-password for each gate. The initiate who has received the baptismal rites carries a counter-seal sufficient to compel each Archon to step aside.',
+    51→   369→  lore:[
+    52→   370→    {title:'The Archons and Their Origin',body:'The Archons were created when Ialdabaoth, the Demiurge, formed the material cosmos. Each planet and sphere received an Archon as its ruler. In the Sethian system these rulers are not evil per se but ignorant — they block the soul\'s ascent not out of malice but because they believe the material realm is the highest reality.'},
+    53→   371→    {title:'The Baptism of Fire',body:'Book of Jeu II contains the full ritual script for the baptism of fire, which equips the soul with the counter-seals needed to pass the archonic gates. The text describes the priest anointing the candidate with "the unction of the mysteries of the repentance," followed by sealing with the fire-seal.'},
+    54→   372→    {title:'Passwords and Seals',body:'For each gate the initiate must: (1) name the archon correctly, (2) present the appropriate counter-seal, (3) speak the password in the archon\'s own language, and (4) recite the name of the higher aeon who commissioned the soul\'s ascent. Only then does the gate open.'},
+    55→   373→    {title:'Ialdabaoth the Demiurge',body:'Ialdabaoth (also Saklas, "the fool," and Samael, "blind god") is the ignorant creator who formed the material world believing himself to be the highest god. The ascending soul must address him: "Withdraw, Saklas, for I descend not into your realm; I come from the height of the Father of the Treasury of Light."'}
+    56→   374→  ],
+    57→   375→  hotspots:[
+    58→   376→    {id:'ialdabaoth',label:'Ialdabaoth',brief:'The lion-faced Demiurge',detail:'Ialdabaoth stands at the outermost gate of the material world. His seal is a lion-faced serpent biting its own tail — an image that appears in a number of Gnostic gems from the 2nd–4th centuries (the so-called Abraxas gems). The ascending soul must know his true name (Saklas), his counter-name (Samael), and the password: "I am from before the beginning; thy realm has no power over me."'},
+    59→   377→    {id:'gate1',label:'First Gate · Outermost Sphere',brief:'Boundary of the material world',detail:'The first gate marks the boundary between the sublunary material world and the aetheric realm. Its Archon bears the form of a crocodile (a common image of Egyptian origin absorbed into Gnostic iconography). The initiate must present the counter-seal of the first baptism and recite: "Withdraw, judge of falsehood, I am clothed in the garment of the light of my father, the Treasury of Light."'},
+    60→   378→    {id:'gate2',label:'Second Gate · Aetheric Boundary',brief:'Entry into the realm of the aethers',detail:'The second gate separates the material aether from the celestial realm proper. Its Archon bears a ram\'s head. The soul must present the counter-seal of the baptism of fire and speak the second password. The Book of Jeu notes that at this gate the soul sheds its "aetheric body" and proceeds clothed only in light.'},
+    61→   379→    {id:'gate3',label:'Third Gate · Celestial Boundary',brief:'Entry into the aeon of the stars',detail:'The third gate marks the boundary of the fixed-star sphere. Its Archon is described as eagle-headed, and its seal incorporates a seven-pointed star. The initiate must present the fire-seal and recite the names of all seven planetary archons from below. Beyond this gate the soul begins to encounter the lower aeons proper.'},
+    62→   380→    {id:'counter',label:'The Counter-Seal',brief:'Baptismal seal granted to initiates',detail:'The counter-seal (ἀντι-σφραγίς) is imprinted on the soul during the baptismal rite. The Book of Jeu II describes it as a seal "in the form of the name of Jeu written in fire upon the garment of light." It functions as a passport through each archonic gate — each Archon recognizes the seal as a mark of divine authority and is compelled by the higher power of Jeu to step aside.'}
+    63→   381→  ],
+    64→   382→  draw:drawArchons
+    65→   383→},
+    66→   384→{
+    67→   385→  id:'baptism',nav:'IV · Baptism Rite',
+    68→   386→  title:'The Rite of Baptism with Fire and Water',
+    69→   387→  ref:'Book of Jeu II · Chapters 42–52 · Bruce Codex ff. 103r–114v',
+    70→   388→  desc:'Book of Jeu II preserves a nearly complete ritual script for the Gnostic baptism — one of the earliest surviving liturgical documents of Gnostic Christianity. It describes the sealing of candidates with fire, anointing with oil, the binding of vine branches, and the recitation of the names of the aeons.',
+    71→   389→  lore:[
+    72→   390→    {title:'Three Baptisms',body:'The Book of Jeu II describes three baptisms performed in sequence: the baptism of water (purification), the baptism of fire (sealing and empowerment), and the baptism of the Holy Spirit (the final reception of the divine name). Each leaves an invisible seal upon the soul\'s "luminous garment."'},
+    73→   391→    {title:'The Ritual Script',body:'The text provides direct speech: "Hear me, Father, father of all fatherhood, boundless light: ψε αιΩ αιΩ αΩ… Let the light-seal descend upon [name], that they may pass through all the rulers of the world and all the rulers of the darkness." Scholars regard this as an actual liturgical formula.'},
+    74→   392→    {title:'The Vine Branches',body:'An unusual element is the instruction to bind vine branches around the hands of the candidate — a possible echo of Dionysiac mystery rites absorbed into the Gnostic synthesis. The vine, associated with the blood of Christ in mainstream Christianity, here becomes a seal-bearer and symbol of enclosed divine light.'},
+    75→   393→    {title:'The Role of the Priest',body:'The officiating priest speaks the names of the aeons over the candidate while placing a seal on their forehead, mouth, and chest. The candidate must keep their eyes closed throughout and respond only with "Amen." The priest concludes: "Go in peace, for I set the seal upon you from the Treasury of the Light."'}
+    76→   394→  ],
+    77→   395→  hotspots:[
+    78→   396→    {id:'fire',label:'Baptism of Fire',brief:'The sealing empowerment of the soul',detail:'The baptism of fire (βάπτισμα πυρός) is administered after the water baptism. The priest recites a long invocation calling upon Jeu and the 49 powers. A seal of fire is then symbolically traced upon the candidate\'s luminous garment — described as "living fire that does not consume the soul but illuminates it and makes it invincible before the archons."'},
+    79→   397→    {id:'water',label:'Baptism of Water',brief:'Purification and first sealing',detail:'The water baptism comes first and performs a cleansing function. The candidate confesses their entrapment in matter and calls upon the name of Jeu. The water used is described as "living water" — water that has been sealed with the name of Jeu and thus charged with divine power. The baptism is performed by full immersion, after which the candidate receives the anointing with oil.'},
+    80→   398→    {id:'oil',label:'Anointing with Oil',brief:'The unction of the mysteries',detail:'Between the water and fire baptisms the candidate is anointed with "the unction of the mysteries of the repentance." This anointing corresponds to the Gnostic interpretation of the chrism (χρίσμα). It seals the candidate\'s body against re-infiltration by archonic powers during the remainder of their earthly life, and prepares the luminous garment for the fire-seal to follow.'},
+    81→   399→    {id:'vine',label:'The Vine Branches',brief:'Symbol of enclosed divine light',detail:'The ritual instruction reads: "Bind vine branches around their hands." This has no direct parallel in mainstream Christian baptismal rites and likely derives from pre-Christian mystery traditions. The vine is a symbol of divine life enclosed in material form — just as wine contains the spirit of the grape, the initiate\'s body contains the divine spark.'},
+    82→   400→    {id:'names',label:'The Sacred Names',brief:'Living words spoken over the candidate',detail:'The baptismal invocation includes voces magicae — sacred sound-words combining Greek vowels, Coptic divine names, and phonetic representations of divine names: ψε αιΩ αιΩ αΩ ψε αρΩ αρΩ Ω ψε ΩΩΩ. These represent the names of the 49 powers of Jeu and function as the verbal component of the seal imprinted upon the soul.'}
+    83→   401→  ],
+    84→   402→  draw:drawBaptism
+    85→   403→}
+    86→   404→];
+    87→   405→
+    88→   406→let cur=0,selHs=null;
+    89→   407→
+    90→   408→function ns(t){return document.createElementNS('http://www.w3.org/2000/svg',t);}
+    91→   409→function el(t,a,p){const e=ns(t);Object.entries(a).forEach(([k,v])=>e.setAttribute(k,v));if(p)p.appendChild(e);return e;}
+    92→   410→
+    93→   411→function svgText(parent,x,y,content,opts){
+    94→   412→  const t=ns('text');
+    95→   413→  t.setAttribute('x',x);t.setAttribute('y',y);
+    96→   414→  t.setAttribute('font-size',opts.size||11);
+    97→   415→  t.setAttribute('fill',opts.fill||INK);
+    98→   416→  t.setAttribute('text-anchor',opts.anchor||'middle');
+    99→   417→  t.setAttribute('dominant-baseline',opts.base||'auto');
+   100→   418→  t.setAttribute('font-family',opts.cinzel?F:FB);
+   101→   419→  if(opts.weight)t.setAttribute('font-weight',opts.weight);
+   102→   420→  if(opts.italic)t.setAttribute('font-style','italic');
+   103→   421→  if(opts.ls)t.setAttribute('letter-spacing',opts.ls);
+   104→   422→  t.textContent=content;
+   105→   423→  parent.appendChild(t);return t;
+   106→   424→}
+   107→   425→function circ(p,cx,cy,r,fill,stroke,sw){return el('circle',{cx,cy,r,fill:fill||'none',stroke:stroke||INK,'stroke-width':sw||0.6},p);}
+   108→   426→function ln(p,x1,y1,x2,y2,stroke,sw,dash){
+   109→   427→  const l=el('line',{x1,y1,x2,y2,stroke:stroke||INK2,'stroke-width':sw||0.5},p);
+   110→   428→  if(dash)l.setAttribute('stroke-dasharray',dash);return l;
+   111→   429→}
+   112→   430→function poly(p,pts,fill,stroke,sw){return el('polygon',{points:pts,fill:fill||'none',stroke:stroke||INK,'stroke-width':sw||0.6},p);}
+   113→   431→function rect(p,x,y,w,h,fill,stroke,sw,rx){return el('rect',{x,y,width:w,height:h,fill:fill||'none',stroke:stroke||INK,'stroke-width':sw||0.6,rx:rx||0},p);}
+   114→   432→
+   115→   433→function makeClickable(g,id){
+   116→   434→  g.classList.add('clickable');
+   117→   435→  g.style.cursor='pointer';
+   118→   436→  g.dataset.id=id;
+   119→   437→  g.addEventListener('click',()=>selectHs(id));
+   120→   438→}
+   121→   439→
+   122→   440→function selectHs(id){
+   123→   441→  selHs=id;
+   124→   442→  const p=pages[cur];
+   125→   443→  const hs=p.hotspots.find(h=>h.id===id);
+   126→   444→  if(!hs)return;
+   127→   445→  document.getElementById('rev').innerHTML=`<span class="rev-title">${hs.label}</span>${hs.detail}`;
+   128→   446→  document.querySelectorAll('.hs-item').forEach(e=>e.classList.toggle('sel',e.dataset.id===id));
+   129→   447→  document.querySelectorAll('.clickable').forEach(e=>e.classList.toggle('sel',e.dataset.id===id));
+   130→   448→}
+   131→   449→
+   132→   450→function loadPage(idx){
+   133→   451→  cur=idx;selHs=null;
+   134→   452→  document.querySelectorAll('.nav-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
+   135→   453→  const p=pages[idx];
+   136→   454→  document.getElementById('pg-title').textContent=p.title;
+   137→   455→  document.getElementById('pg-ref').textContent=p.ref;
+   138→   456→  document.getElementById('side-desc').textContent=p.desc;
+   139→   457→  document.getElementById('rev').innerHTML='<span class="rev-title">—</span>Click upon any element within the diagram to receive its hidden teaching.';
+   140→   458→
+   141→   459→  const svg=document.getElementById('diag');
+   142→   460→  svg.innerHTML='';
+   143→   461→  p.draw(svg);
+   144→   462→
+   145→   463→  const lb=document.getElementById('lore-body');
+   146→   464→  lb.innerHTML='';
+   147→   465→  const ls=document.createElement('div');ls.className='lore-section';
+   148→   466→  const h=document.createElement('h3');h.textContent='Scholarly Commentary';ls.appendChild(h);
+   149→   467→  const g=document.createElement('div');g.className='lore-grid';
+   150→   468→  p.lore.forEach(l=>{
+   151→   469→    const c=document.createElement('div');c.className='lore-card';
+   152→   470→    c.innerHTML=`<strong>${l.title}</strong><p>${l.body}</p>`;g.appendChild(c);
+   153→   471→  });
+   154→   472→  ls.appendChild(g);lb.appendChild(ls);
+   155→   473→
+   156→   474→  const list=document.getElementById('hs-list');list.innerHTML='';
+   157→   475→  p.hotspots.forEach(hs=>{
+   158→   476→    const d=document.createElement('div');
+   159→   477→    d.className='hs-item';d.dataset.id=hs.id;
+   160→   478→    d.innerHTML=`<span class="hs-name">${hs.label}</span><span class="hs-brief">${hs.brief}</span>`;
+   161→   479→    d.onclick=()=>selectHs(hs.id);
+   162→   480→    list.appendChild(d);
+   163→   481→  });
+   164→   482→}
+   165→   483→
+   166→   484→// ── DIAGRAM 1: Treasury ──────────────────────────────────────
+   167→   485→function drawTreasury(svg){
+   168→   486→  svg.setAttribute('viewBox','0 0 520 560');
+   169→   487→  const cx=260,cy=268;
+   170→   488→
+   171→   489→  // Decorative outer frame
+   172→   490→  rect(svg,12,12,496,536,'none',INK3,0.4,3);
+   173→   491→  rect(svg,18,18,484,524,'none',INK4,0.3,2);
+   174→   492→  // Corner flourishes
+   175→   493→  [[22,22],[510,22],[22,546],[510,546]].forEach(([ox,oy],i)=>{
+   176→   494→    const dx=i%2===0?1:-1,dy=i<2?1:-1;
+   177→   495→    ln(svg,ox,oy,ox+dx*22,oy,'#1a1208',0.6);
+   178→   496→    ln(svg,ox,oy,ox,oy+dy*22,'#1a1208',0.6);
+   179→   497→    ln(svg,ox+dx*6,oy+dy*6,ox+dx*18,oy+dy*6,INK3,0.4);
+   180→   498→    ln(svg,ox+dx*6,oy+dy*6,ox+dx*6,oy+dy*18,INK3,0.4);
+   181→   499→  });
+   182→   500→
+   183→   501→  // Outermost ring: 12 seals
+   184→   502→  const sealNames=['Harmozel','Oroiael','Daveithe','Eleleth','Gamaliel','Gabriel','Samblo','Abrasax','Iaoth','Sabaoth','Adonaios','Sabaoth II'];
+   185→   503→  circ(svg,cx,cy,205,'none',INK2,0.5);
+   186→   504→
+   187→   505→  const gSeals=ns('g');
+   188→   506→  makeClickable(gSeals,'aeons');
+   189→   507→  for(let i=0;i<12;i++){
+   190→   508→    const a=(i/12)*Math.PI*2-Math.PI/2;
+   191→   509→    const sx=cx+Math.cos(a)*205,sy=cy+Math.sin(a)*205;
+   192→   510→    circ(gSeals,sx,sy,9,'rgba(26,18,8,0.08)',INK,0.8);
+   193→   511→    circ(gSeals,sx,sy,4,'rgba(26,18,8,0.15)','none',0);
+   194→   512→    // radial line
+   195→   513→    ln(svg,cx+Math.cos(a)*50,cy+Math.sin(a)*50,cx+Math.cos(a)*196,cy+Math.sin(a)*196,INK4,0.4);
+   196→   514→    // name label rotated
+   197→   515→    const lx=cx+Math.cos(a)*228,ly=cy+Math.sin(a)*228;
+   198→   516→    const la=a*(180/Math.PI)+90;
+   199→   517→    const t=ns('text');
+   200→   518→    t.setAttribute('x',lx);t.setAttribute('y',ly);
+   201→   519→    t.setAttribute('font-size','7.5');t.setAttribute('fill',INK2);
+   202→   520→    t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','central');
+   203→   521→    t.setAttribute('font-family',F);t.setAttribute('letter-spacing','0.06em');
+   204→   522→    t.setAttribute('transform',`rotate(${la},${lx},${ly})`);
+   205→   523→    t.textContent=sealNames[i];
+   206→   524→    svg.appendChild(t);
+   207→   525→  }
+   208→   526→  svg.appendChild(gSeals);
+   209→   527→  svgText(svg,cx,cy-210,'TWELVE SEALS OF THE OUTER RING',{size:7,fill:INK3,cinzel:true,ls:'0.12em'});
+   210→   528→
+   211→   529→  // Second veil
+   212→   530→  const gV2=ns('g');makeClickable(gV2,'veils');
+   213→   531→  circ(gV2,cx,cy,155,'rgba(26,18,8,0.02)',INK2,0.6);
+   214→   532→  svgText(gV2,cx,cy-158,'SECOND VEIL',{size:7.5,fill:INK3,cinzel:true,ls:'0.15em'});
+   215→   533→  svg.appendChild(gV2);
+   216→   534→
+   217→   535→  // Third veil
+   218→   536→  const gV3=ns('g');makeClickable(gV3,'veils');
+   219→   537→  circ(gV3,cx,cy,100,'rgba(26,18,8,0.03)',INK,0.7);
+   220→   538→  svgText(gV3,cx,cy-103,'THIRD VEIL',{size:7,fill:INK2,cinzel:true,ls:'0.12em'});
+   221→   539→  svg.appendChild(gV3);
+   222→   540→
+   223→   541→  // Hexagram
+   224→   542→  const gHex=ns('g');makeClickable(gHex,'spark');
+   225→   543→  for(let tri=0;tri<2;tri++){
+   226→   544→    const pts=[];
+   227→   545→    for(let i=0;i<3;i++){
+   228→   546→      const a=i*120*Math.PI/180-Math.PI/2+(tri*Math.PI/3);
+   229→   547→      pts.push(`${cx+Math.cos(a)*64},${cy+Math.sin(a)*64}`);
+   230→   548→    }
+   231→   549→    poly(gHex,pts.join(' '),'rgba(26,18,8,0.05)',INK,0.5);
+   232→   550→  }
+   233→   551→  svg.appendChild(gHex);
+   234→   552→
+   235→   553→  // Inner sanctum
+   236→   554→  const gIn=ns('g');makeClickable(gIn,'invisible');
+   237→   555→  circ(gIn,cx,cy,42,'rgba(26,18,8,0.08)',INK,1.2);
+   238→   556→  svgText(gIn,cx,cy-10,'THE GREAT',{size:8.5,cinzel:true,weight:700,ls:'0.1em'});
+   239→   557→  svgText(gIn,cx,cy+4,'INVISIBLE',{size:8.5,cinzel:true,weight:700,ls:'0.1em'});
+   240→   558→  svgText(gIn,cx,cy+19,'Ἀόρατος',{size:8,italic:true,fill:INK2});
+   241→   559→  // centre spark
+   242→   560→  circ(gIn,cx,cy-16,5,'rgba(26,18,8,0.25)',INK,0.8);
+   243→   561→  circ(gIn,cx,cy-16,2,INK,'none',0);
+   244→   562→  svg.appendChild(gIn);
+   245→   563→
+   246→   564→  // Spark label + group
+   247→   565→  const gSp=ns('g');makeClickable(gSp,'spark');
+   248→   566→  svgText(gSp,cx+52,cy-16,'Divine Spark ›',{size:7.5,fill:INK3,italic:true,anchor:'start'});
+   249→   567→  ln(gSp,cx+5,cy-16,cx+50,cy-16,INK4,0.4,'3,2');
+   250→   568→  svg.appendChild(gSp);
+   251→   569→
+   252→   570→  // Caption
+   253→   571→  ln(svg,60,548,460,548,INK3,0.5);
+   254→   572→  svgText(svg,cx,557,'τὸ Θησαυροφυλάκιον τοῦ Φωτός — The Treasury of the Light',{size:8.5,fill:INK2,italic:true});
+   255→   573→}
+   256→   574→
+   257→   575→// ── DIAGRAM 2: Jeu ──────────────────────────────────────────
+   258→   576→function drawJeu(svg){
+   259→   577→  svg.setAttribute('viewBox','0 0 520 610');
+   260→   578→  const cx=260;
+   261→   579→  rect(svg,12,12,496,586,'none',INK3,0.4,3);
+   262→   580→  rect(svg,18,18,484,574,'none',INK4,0.3,2);
+   263→   581→  [[22,22],[510,22],[22,598],[510,598]].forEach(([ox,oy],i)=>{
+   264→   582→    const dx=i%2===0?1:-1,dy=i<2?1:-1;
+   265→   583→    ln(svg,ox,oy,ox+dx*22,oy,INK,0.6);ln(svg,ox,oy,ox,oy+dy*22,INK,0.6);
+   266→   584→  });
+   267→   585→
+   268→   586→  // Throne
+   269→   587→  const gTh=ns('g');makeClickable(gTh,'throne');
+   270→   588→  rect(gTh,180,530,160,20,'rgba(26,18,8,0.07)',INK,0.8,2);
+   271→   589→  rect(gTh,170,525,180,12,'rgba(26,18,8,0.05)',INK,0.5,1);
+   272→   590→  rect(gTh,190,545,140,8,'rgba(26,18,8,0.04)',INK2,0.4,1);
+   273→   591→  svgText(gTh,cx,541,'✦  THRONE OF JEU  ✦',{size:7.5,cinzel:true,ls:'0.12em',fill:INK2});
+   274→   592→  svg.appendChild(gTh);
+   275→   593→
+   276→   594→  // Body
+   277→   595→  el('ellipse',{cx,cy:400,rx:68,ry:88,fill:'rgba(26,18,8,0.04)',stroke:INK,'stroke-width':0.7},svg);
+   278→   596→  for(let i=-3;i<=3;i++)ln(svg,cx+i*12,330,cx+i*9+3,518,INK4,0.35);
+   279→   597→
+   280→   598→  // Arms
+   281→   599→  ln(svg,192,390,120,360,INK,0.7);ln(svg,328,390,400,360,INK,0.7);
+   282→   600→  circ(svg,120,360,6,'rgba(26,18,8,0.1)',INK,0.5);
+   283→   601→  circ(svg,400,360,6,'rgba(26,18,8,0.1)',INK,0.5);
+   284→   602→
+   285→   603→  // Staff
+   286→   604→  const gSt=ns('g');makeClickable(gSt,'staff');
+   287→   605→  ln(gSt,406,360,432,528,INK,1.1);
+   288→   606→  poly(gSt,`${422},355 ${432},322 ${442},355`,'rgba(26,18,8,0.18)',INK,0.6);
+   289→   607→  poly(gSt,`${426},348 ${432},318 ${438},348`,'rgba(26,18,8,0.1)',INK2,0.4);
+   290→   608→  svgText(gSt,448,420,'Staff of',{size:7,fill:INK3,italic:true,anchor:'start'});
+   291→   609→  svgText(gSt,448,432,'Fire',{size:7,fill:INK3,italic:true,anchor:'start'});
+   292→   610→  svg.appendChild(gSt);
+   293→   611→
+   294→   612→  // Halo rings
+   295→   613→  circ(svg,cx,200,95,'none',INK3,0.4);
+   296→   614→  circ(svg,cx,200,80,'none',INK3,0.5);
+   297→   615→  circ(svg,cx,200,68,'none',INK2,0.6);
+   298→   616→
+   299→   617→  // Head
+   300→   618→  const gHd=ns('g');makeClickable(gHd,'head');
+   301→   619→  circ(gHd,cx,200,52,'rgba(26,18,8,0.06)',INK,1);
+   302→   620→  for(let i=0;i<12;i++){
+   303→   621→    const a=(i/12)*Math.PI*2-Math.PI/2;
+   304→   622→    ln(gHd,cx+Math.cos(a)*53,200+Math.sin(a)*53,cx+Math.cos(a)*68,200+Math.sin(a)*68,INK,0.6);
+   305→   623→  }
+   306→   624→  svgText(gHd,cx,196,'ΙΕΥ',{size:18,cinzel:true,weight:700,ls:'0.08em'});
+   307→   625→  svgText(gHd,cx,214,'Ἰεύ ὁ Ἀληθινὸς Θεός',{size:7.5,italic:true,fill:INK2});
+   308→   626→  svg.appendChild(gHd);
+   309→   627→
+   310→   628→  // 49 powers LEFT
+   311→   629→  const gPL=ns('g');makeClickable(gPL,'powers7');
+   312→   630→  svgText(gPL,90,298,'Powers of',{size:7,cinzel:true,fill:INK3,ls:'0.06em'});
+   313→   631→  svgText(gPL,90,309,'the Right',{size:7,cinzel:true,fill:INK3,ls:'0.06em'});
+   314→   632→  for(let r=0;r<7;r++) for(let c=0;c<7;c++){
+   315→   633→    circ(gPL,44+c*15,320+r*15,4.5,`rgba(26,18,8,${0.06+(r+c)*0.022})`,INK,0.4);
+   316→   634→  }
+   317→   635→  ln(gPL,192,400,150,325,INK4,0.4,'3,3');
+   318→   636→  svg.appendChild(gPL);
+   319→   637→
+   320→   638→  // 49 powers RIGHT
+   321→   639→  const gPR=ns('g');makeClickable(gPR,'powers7b');
+   322→   640→  svgText(gPR,430,298,'Powers of',{size:7,cinzel:true,fill:INK3,ls:'0.06em',anchor:'middle'});
+   323→   641→  svgText(gPR,430,309,'the Left',{size:7,cinzel:true,fill:INK3,ls:'0.06em',anchor:'middle'});
+   324→   642→  for(let r=0;r<7;r++) for(let c=0;c<7;c++){
+   325→   643→    circ(gPR,376+c*15,320+r*15,4.5,`rgba(26,18,8,${0.02+(r+c)*0.014})`,INK2,0.35);
+   326→   644→  }
+   327→   645→  ln(gPR,328,400,370,325,INK4,0.4,'3,3');
+   328→   646→  svg.appendChild(gPR);
+   329→   647→
+   330→   648→  svgText(svg,cx,605,'Ἰεύ ὁ Ἀληθινὸς Θεός — Jeu, the True God, Father of the Treasury',{size:8.5,italic:true,fill:INK2});
+   331→   649→}
+   332→   650→
+   333→   651→// ── DIAGRAM 3: Archons ──────────────────────────────────────
+   334→   652→function drawArchons(svg){
+   335→   653→  svg.setAttribute('viewBox','0 0 520 610');
+   336→   654→  const cx=260;
+   337→   655→  rect(svg,12,12,496,586,'none',INK3,0.4,3);
+   338→   656→  rect(svg,18,18,484,574,'none',INK4,0.3,2);
+   339→   657→  [[22,22],[510,22],[22,598],[510,598]].forEach(([ox,oy],i)=>{
+   340→   658→    const dx=i%2===0?1:-1,dy=i<2?1:-1;
+   341→   659→    ln(svg,ox,oy,ox+dx*22,oy,INK,0.6);ln(svg,ox,oy,ox,oy+dy*22,INK,0.6);
+   342→   660→  });
+   343→   661→
+   344→   662→  // Treasury at top
+   345→   663→  circ(svg,cx,46,26,'rgba(26,18,8,0.07)',INK,0.8);
+   346→   664→  circ(svg,cx,46,16,'rgba(26,18,8,0.1)',INK,0.5);
+   347→   665→  svgText(svg,cx,50,'JEU',{size:8,cinzel:true,weight:700});
+   348→   666→  svgText(svg,cx,30,'TREASURY OF LIGHT',{size:6.5,cinzel:true,fill:INK3,ls:'0.1em'});
+   349→   667→
+   350→   668→  // Ascent axis
+   351→   669→  ln(svg,cx,72,cx,538,INK3,0.5,'5,4');
+   352→   670→
+   353→   671→  // Ascent arrows
+   354→   672→  for(let y=130;y<=490;y+=80){
+   355→   673→    const arr=ns('text');arr.setAttribute('x',cx+18);arr.setAttribute('y',y);
+   356→   674→    arr.setAttribute('font-size','15');arr.setAttribute('fill',INK3);arr.setAttribute('text-anchor','start');
+   357→   675→    arr.textContent='↑';svg.appendChild(arr);
+   358→   676→  }
+   359→   677→
+   360→   678→  const gateData=[
+   361→   679→    {y:105,label:'IALDABAOTH',sub:'Lion-faced Demiurge · Saklas · Samael',id:'ialdabaoth',diamond:true},
+   362→   680→    {y:220,label:'THIRD GATE',sub:'Eagle-headed · Fixed-star sphere',id:'gate3',diamond:false},
+   363→   681→    {y:340,label:'SECOND GATE',sub:'Ram-headed · Aetheric boundary',id:'gate2',diamond:false},
+   364→   682→    {y:455,label:'FIRST GATE',sub:'Crocodile-headed · Outermost sphere',id:'gate1',diamond:false},
+   365→   683→  ];
+   366→   684→
+   367→   685→  gateData.forEach(g=>{
+   368→   686→    const gg=ns('g');makeClickable(gg,g.id);
+   369→   687→    if(g.diamond){
+   370→   688→      poly(gg,`${cx},${g.y-44} ${cx+52},${g.y} ${cx},${g.y+44} ${cx-52},${g.y}`,'rgba(26,18,8,0.08)',INK,0.9);
+   371→   689→      poly(gg,`${cx},${g.y-36} ${cx+44},${g.y} ${cx},${g.y+36} ${cx-44},${g.y}`,'rgba(26,18,8,0.04)',INK2,0.4);
+   372→   690→    } else {
+   373→   691→      const pts=[];
+   374→   692→      for(let i=0;i<6;i++){const a=i*60*Math.PI/180-Math.PI/2;pts.push(`${cx+Math.cos(a)*42},${g.y+Math.sin(a)*36}`);}
+   375→   693→      poly(gg,pts.join(' '),'rgba(26,18,8,0.06)',INK,0.8);
+   376→   694→    }
+   377→   695→    svgText(gg,cx,g.y-3,g.label,{size:10,cinzel:true,weight:600,ls:'0.08em'});
+   378→   696→    svgText(gg,cx,g.y+12,g.sub,{size:7,italic:true,fill:INK2});
+   379→   697→
+   380→   698→    // Seal symbol left
+   381→   699→    const sx=82,sy=g.y;
+   382→   700→    circ(gg,sx,sy,22,'rgba(26,18,8,0.05)',INK,0.6);
+   383→   701→    circ(gg,sx,sy,14,'none',INK2,0.4);
+   384→   702→    ln(gg,sx-22,sy,sx+22,sy,INK3,0.3);ln(gg,sx,sy-22,sx,sy+22,INK3,0.3);
+   385→   703→    const sym=ns('text');sym.setAttribute('x',sx);sym.setAttribute('y',sy+5);
+   386→   704→    sym.setAttribute('font-size','13');sym.setAttribute('fill',INK2);sym.setAttribute('text-anchor','middle');
+   387→   705→    sym.textContent='☩';gg.appendChild(sym);
+   388→   706→    svgText(gg,sx,sy+32,'SEAL',{size:6,fill:INK3,cinzel:true,ls:'0.1em'});
+   389→   707→    ln(gg,sx+22,sy,cx-44,g.y,INK4,0.4,'3,2');
+   390→   708→
+   391→   709→    // Password box right
+   392→   710→    const px=400;
+   393→   711→    rect(gg,px-38,g.y-18,92,36,'rgba(26,18,8,0.04)',INK3,0.4,2);
+   394→   712→    svgText(gg,px+8,g.y-4,'Password',{size:6.5,cinzel:true,fill:INK3,ls:'0.06em'});
+   395→   713→    svgText(gg,px+8,g.y+9,'Required',{size:6.5,cinzel:true,fill:INK3,ls:'0.06em'});
+   396→   714→    ln(gg,cx+44,g.y,px-38,g.y,INK4,0.4,'3,2');
+   397→   715→
+   398→   716→    svg.appendChild(gg);
+   399→   717→  });
+   400→   718→
+   401→   719→  // Counter-seal
+   402→   720→  const gCs=ns('g');makeClickable(gCs,'counter');
+   403→   721→  circ(gCs,cx,560,26,'rgba(26,18,8,0.1)',INK,0.9);
+   404→   722→  circ(gCs,cx,560,16,'none',INK,0.5);
+   405→   723→  const cst=ns('text');cst.setAttribute('x',cx);cst.setAttribute('y',564);
+   406→   724→  cst.setAttribute('font-size','15');cst.setAttribute('fill',INK);cst.setAttribute('text-anchor','middle');
+   407→   725→  cst.textContent='✦';gCs.appendChild(cst);
+   408→   726→  svgText(gCs,cx,540,'Counter-Seal · Passport of the Soul',{size:7,cinzel:true,fill:INK3,ls:'0.1em'});
+   409→   727→  svg.appendChild(gCs);
+   410→   728→
+   411→   729→  svgText(svg,cx,602,'ἡ Ἄνοδος τῆς Ψυχῆς — The Ascent of the Soul',{size:8.5,italic:true,fill:INK2});
+   412→   730→}
+   413→   731→
+   414→   732→// ── DIAGRAM 4: Baptism ──────────────────────────────────────
+   415→   733→function drawBaptism(svg){
+   416→   734→  svg.setAttribute('viewBox','0 0 520 590');
+   417→   735→  const cx=260;
+   418→   736→  rect(svg,12,12,496,566,'none',INK3,0.4,3);
+   419→   737→  rect(svg,18,18,484,554,'none',INK4,0.3,2);
+   420→   738→  [[22,22],[510,22],[22,578],[510,578]].forEach(([ox,oy],i)=>{
+   421→   739→    const dx=i%2===0?1:-1,dy=i<2?1:-1;
+   422→   740→    ln(svg,ox,oy,ox+dx*22,oy,INK,0.6);ln(svg,ox,oy,ox,oy+dy*22,INK,0.6);
+   423→   741→  });
+   424→   742→
+   425→   743→  svgText(svg,cx,36,'✦  ΤΕΛΕΤΗ ΒΑΠΤΙΣΜΑΤΟΣ  ✦',{size:8.5,cinzel:true,fill:INK2,ls:'0.15em'});
+   426→   744→  svgText(svg,cx,52,'The Rite of Holy Baptism — Three-fold Sealing',{size:8,italic:true,fill:INK3});
+   427→   745→  ln(svg,60,60,460,60,INK3,0.5);
+   428→   746→
+   429→   747→  // Concentric ritual circles
+   430→   748→  circ(svg,cx,200,155,'none',INK3,0.4);
+   431→   749→  circ(svg,cx,200,110,'none',INK2,0.5);
+   432→   750→  circ(svg,cx,200,70,'none',INK2,0.6);
+   433→   751→
+   434→   752→  // Candidate
+   435→   753→  el('ellipse',{cx,cy:200,rx:30,ry:40,fill:'rgba(26,18,8,0.06)',stroke:INK,'stroke-width':0.8},svg);
+   436→   754→  ln(svg,230,200,310,196,INK,0.7);ln(svg,190,200,110,196,INK,0.7);
+   437→   755→  circ(svg,110,196,6,'rgba(26,18,8,0.1)',INK,0.5);
+   438→   756→  circ(svg,310,196,6,'rgba(26,18,8,0.1)',INK,0.5);
+   439→   757→  svgText(svg,cx,193,'CAND-',{size:7,cinzel:true,weight:600});
+   440→   758→  svgText(svg,cx,206,'IDATE',{size:7,cinzel:true,weight:600});
+   441→   759→
+   442→   760→  // Sealing points
+   443→   761→  [[cx,164,'Brow'],[cx,188,'Lips'],[cx,216,'Heart']].forEach(([x,y,l])=>{
+   444→   762→    circ(svg,x,y,5,'rgba(26,18,8,0.15)',INK,0.6);
+   445→   763→    svgText(svg,x+9,y+4,l,{size:6.5,fill:INK3,italic:true,anchor:'start'});
+   446→   764→  });
+   447→   765→
+   448→   766→  // Three stations
+   449→   767→  const stations=[
+   450→   768→    {a:-Math.PI/2,label:'WATER',sub:'Purification',id:'water',sym:'≋'},
+   451→   769→    {a:Math.PI/6,label:'FIRE',sub:'Sealing',id:'fire',sym:'⋆'},
+   452→   770→    {a:Math.PI-Math.PI/6,label:'OIL',sub:'Anointing',id:'oil',sym:'✦'},
+   453→   771→  ];
+   454→   772→  stations.forEach(s=>{
+   455→   773→    const x=cx+Math.cos(s.a)*110,y=200+Math.sin(s.a)*110;
+   456→   774→    const gs=ns('g');makeClickable(gs,s.id);
+   457→   775→    circ(gs,x,y,30,'rgba(26,18,8,0.07)',INK,0.8);
+   458→   776→    circ(gs,x,y,20,'rgba(26,18,8,0.04)',INK2,0.4);
+   459→   777→    const sym=ns('text');sym.setAttribute('x',x);sym.setAttribute('y',y+5);
+   460→   778→    sym.setAttribute('font-size','14');sym.setAttribute('fill',INK2);sym.setAttribute('text-anchor','middle');
+   461→   779→    sym.textContent=s.sym;gs.appendChild(sym);
+   462→   780→    svgText(gs,x,y+40,s.label,{size:8,cinzel:true,weight:600,ls:'0.1em'});
+   463→   781→    svgText(gs,x,y+52,s.sub,{size:7,italic:true,fill:INK3});
+   464→   782→    ln(gs,cx+Math.cos(s.a)*30,200+Math.sin(s.a)*30,x-Math.cos(s.a)*30,y-Math.sin(s.a)*30,INK4,0.5,'4,3');
+   465→   783→    svg.appendChild(gs);
+   466→   784→  });
+   467→   785→
+   468→   786→  // Vine branches
+   469→   787→  const gV=ns('g');makeClickable(gV,'vine');
+   470→   788→  rect(gV,75,388,370,30,'rgba(26,18,8,0.04)',INK2,0.4,2);
+   471→   789→  for(let i=0;i<9;i++){
+   472→   790→    const x=90+i*40;
+   473→   791→    el('ellipse',{cx:x,cy:378,rx:8,ry:13,fill:'rgba(26,18,8,0.07)',stroke:INK2,'stroke-width':0.4,transform:`rotate(-35,${x},378)`},gV);
+   474→   792→    ln(gV,x,385,x,392,INK3,0.4);
+   475→   793→  }
+   476→   794→  svgText(gV,cx,407,'VINE BRANCHES — bound upon the hands of the candidate',{size:7.5,cinzel:true,fill:INK2,ls:'0.06em'});
+   477→   795→  svg.appendChild(gV);
+   478→   796→
+   479→   797→  // Voces magicae
+   480→   798→  const gN=ns('g');makeClickable(gN,'names');
+   481→   799→  rect(gN,75,428,370,90,'rgba(26,18,8,0.04)',INK2,0.4,2);
+   482→   800→  svgText(gN,cx,448,'Sacred Invocation — Voces Magicae',{size:7.5,cinzel:true,fill:INK2,ls:'0.08em'});
+   483→   801→  ln(gN,100,455,420,455,INK4,0.4);
+   484→   802→  svgText(gN,cx,472,'ψε αιΩ αιΩ αΩ ψε αρΩ αρΩ Ω ψε ΩΩΩ',{size:10,fill:INK,weight:700});
+   485→   803→  svgText(gN,cx,490,'"Hear me, Father of all fatherhood, boundless Light:',{size:7.5,italic:true,fill:INK2});
+   486→   804→  svgText(gN,cx,504,'let the light-seal descend upon thy servant."',{size:7.5,italic:true,fill:INK2});
+   487→   805→  svg.appendChild(gN);
+   488→   806→
+   489→   807→  // Soul names
+   490→   808→  rect(svg,75,530,370,36,'rgba(26,18,8,0.03)',INK3,0.3,2);
+   491→   809→  svgText(svg,cx,546,'Names spoken: Jeu · Harmozel · Oroiael · Daveithe · Eleleth · Sabaoth',{size:7.5,cinzel:true,fill:INK3,ls:'0.04em'});
+   492→   810→  svgText(svg,cx,560,'"Go in peace, for I set the seal upon you from the Treasury of the Light."',{size:7,italic:true,fill:INK3});
+   493→   811→
+   494→   812→  svgText(svg,cx,583,'Βάπτισμα ὕδατος καὶ πυρός — Baptism of Water and Fire',{size:8.5,italic:true,fill:INK2});
+   495→   813→}
+   496→   814→
+   497→   815→// ── INIT ────────────────────────────────────────────────────
+   498→   816→const nav=document.getElementById('nav');
+   499→   817→pages.forEach((p,i)=>{
+   500→   818→  const b=document.createElement('button');
+   501→   819→  b.className='nav-btn'+(i===0?' active':'');
+   502→   820→  b.textContent=p.nav;b.onclick=()=>loadPage(i);
+   503→   821→  nav.appendChild(b);
+   504→   822→});
+   505→   823→loadPage(0);
+   506→   824→</script>
+   507→   825→</body>
+   508→
+   509→[showing lines 319-825 of 827; use offset=826 with limit to continue reading]
