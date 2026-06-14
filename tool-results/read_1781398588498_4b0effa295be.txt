@@ -1,0 +1,302 @@
+   201→
+   202→    treasuries.push({
+   203→      id: `jeu-${i}`, jeuNum: i,
+   204→      title: `The ${ordinal(i)} Treasury of Light`,
+   205→      rank, rankName: RANK_NAMES[rank],
+   206→      fatherName: `${f.name} Jeu`, fatherPron: `${f.pron} jyoo`,
+   207→      cipher: c.name, cipherPron: c.pron,
+   208→      watchers: [
+   209→        { name: w1, pronunciation: w1.replace('yx', '-iks').replace('oth', '-oth'), gate: `Gate 1 of ${f.name}` },
+   210→        { name: w2, pronunciation: w2.replace('ax', '-aks').replace('oth', '-oth'), gate: `Gate 2 of ${f.name}` },
+   211→        { name: w3, pronunciation: w3.replace('oth', '-oth'), gate: `Gate 3 of ${f.name}` }
+   212→      ],
+   213→      emanations: ['Phaethon', 'Omorpha', 'Aphroph', 'Saphapha', 'Mareph', 'Pigeraph', 'Thalmaoph', 'Bathraoth', 'Eratha', 'Armatha', 'Pharmatha', 'Aphreph'].map((n, ei) => ({ name: n, role: `Emanation ${ei + 1}` })),
+   214→      sealType: sealTypeMap[i] || (['cross-circle', 'concentric', 'star', 'radial', 'octagram'] as const)[(i - 1) % 5],
+   215→      sealComplexity: Math.min(5, Math.ceil(i / 12)),
+   216→      desc: `The ${ordinal(i)} Treasury presided over by ${f.name} Jeu (${f.pron}), situated in the ${RANK_NAMES[rank]} of the divine Pleroma. Twelve emanations radiate from the Father, and three watchers guard the gates. The initiate must possess the cipher "${c.name}" and recite the sacred names to pass through.`,
+   217→      hasDiagram: true, // ALL treasuries show diagrams now
+   218→      book: i <= 41 ? 1 : 2,
+   219→      chapter: `Chapter ${i + 5}`,
+   220→      folio: `ff. ${(i * 2 + 1)}r-${(i * 2 + 2)}v`,
+   221→      password: `I invoke ${f.name} Jeu - ${c.name}`,
+   222→      passwordPron: `I invoke ${f.pron} jyoo - ${c.pron}`
+   223→    })
+   224→  }
+   225→  return treasuries
+   226→}
+   227→
+   228→const TREASURIES = buildTreasuries()
+   229→
+   230→/* ═══════════════════════════════════════════════════
+   231→   SPECIAL ENTRIES
+   232→   ═══════════════════════════════════════════════════ */
+   233→const SPECIALS: SpecialEntry[] = [
+   234→  {
+   235→    id: 'overview', title: 'The Treasury of the Light', category: 'overview',
+   236→    desc: 'The supreme abode of the Divine - source of all spiritual light. Structured as twelve concentric aeons each sealed by a guardian, enclosing three great curtains, and at the innermost, the Great Invisible: the unknowable source from which all light and life flows downward into creation.',
+   237→    sealType: 'treasury-overview', book: 1, chapter: 'Chapters 1-15', folio: 'ff. 1r-17v',
+   238→    lore: [
+   239→      { title: 'Origin of the Text', body: 'The Book of Jeu was preserved in the Codex Brucianus, discovered in Egypt and acquired by James Bruce in 1769. Written in Coptic, it likely translates earlier Greek originals. The diagrams it contains are unique survivals of actual initiatory seals used in Sethian Gnostic ritual.' },
+   240→      { title: 'The Pleroma', body: 'The Pleroma ("Fullness") is the totality of divine light, comprising all aeons in their perfection. The Treasury stands at its apex. The fall of Sophia and the formation of the material world are understood as a leak of light downward out of the Pleroma.' },
+   241→      { title: 'The Twelve Aeons', body: 'Each of the twelve outer chambers is presided over by an aeon-ruler. Their names include Harmozel (har-MOH-zel, light of grace), Oroiael (or-OY-ah-el, light of thought), Daveithai (dah-VAY-thay, light of understanding), and Eleleth (el-EL-eth, light of perception). Each presides over a class of souls.' },
+   242→      { title: 'The Three Curtains', body: 'Three veils separate the inner sanctum from the Pleroma. The outer veil is penetrable by higher archons; the middle by perfect souls of the elect; the innermost veil can only be crossed by those who have received all five seals of the baptismal rite.' }
+   243→    ],
+   244→    elements: [
+   245→      { id: 'ov-pleroma', label: 'The Pleroma', brief: 'Totality of divine light', detail: 'The Pleroma encompasses all 60 treasuries arranged in five ranks of Fatherhood. The innermost ranks are closest to the ineffable source, while the outermost ranks border the material cosmos. Each rank contains 12 treasuries, and each treasury is governed by a Father bearing a mystic name suffixed with "Jeu" (pronounced jyoo).' },
+   246→      { id: 'ov-curtain1', label: 'First Curtain', brief: 'The outer veil', detail: 'The first of three veils that separate the inner sanctum from the outer Pleroma. This outer veil is penetrable by higher archons who still retain some light. It marks the boundary between the ordered aeonic realms and the chaotic margins where archons patrol.' },
+   247→      { id: 'ov-curtain2', label: 'Second Curtain', brief: 'The middle veil', detail: 'The middle veil can only be crossed by perfect souls of the elect who have received the first three seals. Souls who lack these seals are turned back by the guardians at this curtain and must undergo further purification in the aeonic cycles.' },
+   248→      { id: 'ov-curtain3', label: 'Third Curtain', brief: 'The innermost veil', detail: 'The innermost veil guards the Great Invisible itself. Only those who have received all five seals of the baptismal rite may pass through. This curtain is described as being made of pure light, impenetrable to any being still bound by material or aetheric attachments.' },
+   249→      { id: 'ov-invisible', label: 'The Great Invisible', brief: 'The unknowable source', detail: 'At the very heart of the Treasury of Light dwells the Great Invisible Spirit - the unknowable, ineffable source from which all light and life emanates. No name can encompass it, no diagram can represent it. It is the alpha and omega of the Gnostic cosmology, the silent ground of all being.' }
+   250→    ]
+   251→  },
+   252→  {
+   253→    id: 'jeu-father', title: 'Jeu, the True God', category: 'overview',
+   254→    desc: 'Jeu (pronounced jyoo) is the Great Overseer, the Father who stands at the apex of the aeons and administers the Treasury of Light. He is the first emanation of the Great Invisible Spirit, and through him all other treasuries and their Fathers receive their authority and their names.',
+   255→    sealType: 'treasury-overview', book: 1, chapter: 'Chapters 2-4', folio: 'ff. 2r-5v',
+   256→    lore: [
+   257→      { title: 'The Nature of Jeu', body: 'Jeu is not the highest God but the first revealed God - the interface between the unknowable One and the manifold aeons. He is called "the true God" because he is the first being who can be named and addressed in prayer. Above him is only the Great Invisible Spirit, which is beyond all naming.' },
+   258→      { title: 'The Character of Jeu', body: 'Each treasury Father bears a "character" - a sacred seal or diagram that represents his spiritual essence. Jeu\'s character is the primordial seal from which all others derive. The manuscript shows it as a complex of concentric circles with inscribed names, surrounded by emanation rays.' },
+   259→      { title: 'The Three Watchers', body: 'Three watchers stand at the gates of every treasury. They are not hostile but serve as guardians who test the initiate\'s knowledge. The soul must recite the correct names and show the proper cipher to pass. Each watcher has a specific name and office within the treasury\'s hierarchy.' }
+   260→    ],
+   261→    elements: [
+   262→      { id: 'jf-jeu', label: 'Jeu the True God', brief: 'The Great Overseer', detail: 'Jeu (jyoo) stands at the apex of the Treasury hierarchy. He is the first named divinity, the one who organizes the Pleroma and assigns each Father to his treasury. He emanated the 60 treasuries and established the watchers at their gates.' },
+   263→      { id: 'jf-character', label: 'The Character (Seal)', brief: 'Primordial sacred seal', detail: 'The character of Jeu is depicted as a complex seal of concentric rings with divine names inscribed within them. This pattern serves as the template for all subsequent treasury diagrams in the manuscript.' },
+   264→      { id: 'jf-emanations', label: 'The Twelve Emanations', brief: 'Radiant powers of Jeu', detail: 'From Jeu proceed twelve emanations - radiant powers that fill the treasury with light. Each emanation has a name and a role in the divine economy. They are the first "places" within the treasury, and each contains further subsidiary emanations.' },
+   265→      { id: 'jf-watchers', label: 'The Three Watchers', brief: 'Guardians of the gates', detail: 'Three watchers guard the approach to Jeu\'s treasury. Their names must be known and spoken by the ascending soul. They test whether the initiate possesses the correct cipher and has received the necessary seals.' }
+   266→    ]
+   267→  },
+   268→  {
+   269→    id: 'archons', title: 'The Seals of the Archons', category: 'archon',
+   270→    desc: 'Between the soul and the Treasury stand the Archons - rulers of the material and aetheric realms who seek to keep souls imprisoned in the cycle of rebirth. The Book of Jeu provides the exact seals, names, and passwords needed to bypass each Archon gate during the soul\'s ascent.',
+   271→    sealType: 'archon-gate', book: 1, chapter: 'Chapters 30-50', folio: 'ff. 20r-39v',
+   272→    lore: [
+   273→      { title: 'The Archon Hierarchy', body: 'The Archons are organized into three tiers: the Archons of the Aeons (who rule the outermost ring), the Archons of the Sphere (who control the zodiacal belt), and the Archons of the Midst (who govern the atmospheric realm between earth and the firmament). Each tier has its own seals and passwords.' },
+   274→      { title: 'The Seals as Passwords', body: 'The Gnostic seals function as mystical passwords. They are not merely symbols to be recognized but active powers that must be invoked by name. The ascending soul must recite the cipher while mentally imprinting the seal\'s pattern upon itself. This is described as "sealing yourself with this seal."' },
+   275→      { title: 'Progressive Complexity', body: 'The gates become progressively more complex and dangerous as the soul ascends. The lower gates require only a single name and seal, while the higher gates demand multiple names, ciphers, and the combined power of all previously received seals.' }
+   276→    ],
+   277→    elements: [
+   278→      { id: 'ar-aeons', label: 'Archons of the Aeons', brief: 'Rulers of the outer aeonic ring', detail: 'The outermost tier of Archons rules over the twelve aeons. Each Archon governs a thirtieth part of the aeonic cycle and commands legions of subordinate powers. The soul must pass through all twelve aeonic gates, reciting the name of each Archon and showing the corresponding seal.' },
+   279→      { id: 'ar-sphere', label: 'Archons of the Sphere', brief: 'Controllers of the zodiacal belt', detail: 'The Archons of the Sphere control the seven planetary spheres through which the soul must ascend. Each sphere is governed by a planetary Archon who demands a password. These passwords are encoded in the diagram seals and must be spoken in the correct sequence.' },
+   280→      { id: 'ar-midst', label: 'Archons of the Midst', brief: 'Governors of the atmospheric realm', detail: 'The three Archons of the Midst patrol the boundary between the material cosmos and the Pleroma. They are the most dangerous adversaries of the ascending soul, for they can strip away the soul\'s accumulated seals if the correct counter-seals are not employed.' },
+   281→      { id: 'ar-paraph', label: 'Paraphax - 1st Gate', brief: 'Password: IAO SABAOTH (EE-ah-oh SAH-bah-oth)', detail: 'The first Archon gate is guarded by Paraphax (PAR-ah-faks), who commands the lowest of the aeonic gates. The password "IAO SABAOTH" (EE-ah-oh SAH-bah-oth) must be spoken while tracing the seal of the first gate. This seal is a simple cross within a circle.' },
+   282→      { id: 'ar-arthax', label: 'Arthax - 2nd Gate', brief: 'Password: ADONAI ELOHIM (ah-doh-NYE el-oh-HEEM)', detail: 'The second gate is guarded by Arthax (AR-thaks). The password "ADONAI ELOHIM" (ah-doh-NYE el-oh-HEEM) is spoken while imprinting the double-circle seal. This gate marks the transition from the material to the aetheric realm.' },
+   283→      { id: 'ar-aphr', label: 'Aphraphax - 3rd Gate', brief: 'Password: EIE AZAPHAX (AY-ee-ay AZ-ah-faks)', detail: 'The third and final Archon gate is guarded by Aphraphax (ah-FRAH-faks), the mightiest of the gatekeepers. The password "EIE AZAPHAX" (AY-ee-ay AZ-ah-faks) must be combined with all previously received seals. The seal of this gate is the most complex: a triple circle with radiating lines.' }
+   284→    ]
+   285→  },
+   286→  {
+   287→    id: 'baptism', title: 'The Rite of Baptism', category: 'baptism',
+   288→    desc: 'Book of Jeu II preserves a nearly complete ritual script for the Gnostic baptism - one of the earliest surviving Christian initiation liturgies. The rite involves five successive baptisms, each conferring a seal upon the initiate: water, fire, spirit, light, and the seal of the ineffable mystery.',
+   289→    sealType: 'baptism-rite', book: 2, chapter: 'Chapters 42-52', folio: 'ff. 103r-114v',
+   290→    lore: [
+   291→      { title: 'The Five Baptisms', body: 'The baptismal rite consists of five distinct immersions, each in a different element and each conferring a specific spiritual seal. The baptisms of water and fire purify the body; the baptism of the Holy Spirit illuminates the soul; the baptism of light unites the soul with the Pleroma; and the final mystery seal opens the way to the Treasury of Light.' },
+   292→      { title: 'The Ritual Sequence', body: 'Each baptism follows the same pattern: invocation of sacred names, immersion in the element, recitation of the cipher, and sealing of the initiate. The officiant draws the seal upon the forehead of the candidate while speaking the password. The candidate then rises from the element transformed and sealed.' },
+   293→      { title: 'The Sacred Names', body: 'The names invoked during each baptism are drawn from the hierarchy of treasury Fathers. The officiant must know the correct names for each of the five baptisms and must possess the authority to pronounce them. These names are themselves considered powerful spiritual entities, not mere words.' }
+   294→    ],
+   295→    elements: [
+   296→      { id: 'bt-water', label: 'Baptism of Water', brief: 'First seal: purification', detail: 'The first baptism purifies the body and soul of material defilement. The initiate is immersed in living water while the officiant invokes the name of the first Father of the treasuries. Upon emerging, the first seal is drawn upon the forehead.' },
+   297→      { id: 'bt-fire', label: 'Baptism of Fire', brief: 'Second seal: transformation', detail: 'The second baptism transforms the soul, burning away residual attachment to the material world. The fire is both literal (candles or lamps) and spiritual (the fire of the Pleroma). The second seal is inscribed while the initiate stands within the circle of flame.' },
+   298→      { id: 'bt-spirit', label: 'Baptism of the Holy Spirit', brief: 'Third seal: illumination', detail: 'The third baptism brings illumination - the direct experience of the divine light. The initiate receives the breath of the Spirit and is filled with gnosis. This is the baptism that distinguishes the Gnostic rite from conventional Christian baptism.' },
+   299→      { id: 'bt-light', label: 'Baptism of Light', brief: 'Fourth seal: union', detail: 'The fourth baptism unites the soul with the Pleroma. The initiate is enveloped in divine light and sees the Treasury of Light with spiritual eyes. The fourth seal marks the soul as a citizen of the Pleroma, no longer subject to the Archons\' authority.' },
+   300→      { id: 'bt-mystery', label: 'The Ineffable Mystery', brief: 'Fifth seal: transcendence', detail: 'The fifth and final seal cannot be described in words. It is the seal of the Great Invisible Spirit itself, and it confers the right of passage through the innermost curtain into the Treasury of Light. Only those who have received all five seals may ascend to the presence of Jeu.' }
+   301→    ]
+   302→  },
+   303→  {
+   304→    id: 'hymn', title: 'Fragment of a Gnostic Hymn', category: 'hymn',
+   305→    desc: 'At the center of the First Book of Jeu lies a fragmentary hymn - a liturgical chant that the initiate must recite during the ascent through the treasuries. The hymn invokes the names of the treasury Fathers in sequence, calling upon each to open his gates and permit the soul to pass.',
+   306→    sealType: 'hymn', book: 1, chapter: 'Chapter 35', folio: 'ff. 25r-26v',
+   307→    lore: [
+   308→      { title: 'The Hymn as Ascent Tool', body: 'The hymn serves a dual purpose: it is both a prayer of supplication and a magical formula of command. By reciting the hymn, the initiate asserts spiritual authority over the treasury guardians and compels them to open the gates. The hymn must be recited in the correct sequence, treasury by treasury, from the outermost to the innermost.' },
+   309→      { title: 'Coptic Liturgical Language', body: 'The hymn is composed in Sahidic Coptic with numerous Greek loan-words, reflecting the bilingual liturgical culture of Egyptian Gnosticism. Many of the names are vowel-sequences (IAO, EIE, OYO) that function as sonic ciphers, each resonating with a specific treasury\'s spiritual frequency.' }
+   310→    ],
+   311→    elements: [
+   312→      { id: 'hy-invocation', label: 'The Invocation', brief: 'Opening prayer of the hymn', detail: 'The hymn begins with an invocation to the Great Invisible Spirit, calling upon the nameless One to grant passage through the treasuries. The initiate declares: "I invoke thee, O Invisible One, who art before all aeons, open the way for my soul."' },
+   313→      { id: 'hy-names', label: 'The Sacred Names', brief: 'Sequential treasury names', detail: 'The core of the hymn consists of the sequential recitation of all 60 treasury Fathers\' names, from the outermost (Proator Jeu) inward to the innermost (Pigeradaphtha Jeu). Each name must be pronounced in its original Coptic form with correct vowel intonation.' },
+   314→      { id: 'hy-cipher', label: 'The Cipher Passage', brief: 'The encoded final section', detail: 'The hymn concludes with a cipher passage - a series of vowel-sequences and symbolic phrases that encode the ultimate password for entry into the Treasury of Light. This passage is the most closely guarded secret of the Gnostic tradition.' }
+   315→    ]
+   316→  }
+   317→]
+   318→
+   319→/* ═══════════════════════════════════════════════════
+   320→   COLOR CONSTANTS
+   321→   ═══════════════════════════════════════════════════ */
+   322→const INK = '#1a1208', INK2 = '#3a2c14', INK3 = '#6a5030'
+   323→const GOLD = '#8a6820', GOLD2 = '#c8a84a', GOLD3 = '#e8c070'
+   324→const PARCH = '#ede0be'
+   325→
+   326→/* ═══════════════════════════════════════════════════
+   327→   SEAL DIAGRAM COMPONENTS
+   328→   ═══════════════════════════════════════════════════ */
+   329→
+   330→// SVG small cross shape (replaces Unicode symbols)
+   331→function SvgCross({ x, y, size, color }: { x: number; y: number; size: number; color: string }) {
+   332→  return <path d={`M${x} ${y - size}L${x + size * 0.3} ${y - size}L${x + size * 0.3} ${y - size * 0.3}L${x + size} ${y - size * 0.3}L${x + size} ${y + size * 0.3}L${x + size * 0.3} ${y + size * 0.3}L${x + size * 0.3} ${y + size}L${x} ${y + size}L${x - size * 0.3} ${y + size}L${x - size * 0.3} ${y + size * 0.3}L${x - size} ${y + size * 0.3}L${x - size} ${y - size * 0.3}L${x - size * 0.3} ${y - size * 0.3}Z`} fill={color} stroke="none" />
+   333→}
+   334→
+   335→/* ── Cross-and-Circle Seal ── */
+   336→function CrossCircleSeal({ cx, cy, r, jeuNum, fatherName, cipher, complexity, onClick, selectedId }: {
+   337→  cx: number; cy: number; r: number; jeuNum: number; fatherName: string; cipher: string; complexity: number; onClick: (id: string, label: string, detail: string) => void; selectedId: string | null
+   338→}) {
+   339→  const armW = r * 0.28, armL = r * 0.85, ringR = r * 0.65, outerR = r * 1.1, innerR = r * 0.25
+   340→  const places = useMemo(() => ['Phaethon', 'Mareph', 'Thalma', 'Aphroph', 'Eratha', 'Bathrax'].map((name, i) => {
+   341→    const angle = (i * 60 - 90) * Math.PI / 180
+   342→    return { name, x: cx + Math.cos(angle) * (ringR + 25), y: cy + Math.sin(angle) * (ringR + 25) }
+   343→  }), [cx, cy, ringR])
+   344→
+   345→  return (
+   346→    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   347→      <circle cx={cx} cy={cy} r={outerR} fill="none" stroke={INK} strokeWidth={2.5} pointerEvents="none" />
+   348→      <circle cx={cx} cy={cy} r={outerR - 6} fill="none" stroke={GOLD2} strokeWidth={1} pointerEvents="none" />
+   349→      {/* SOLID CROSS */}
+   350→      <path
+   351→        d={`M${cx - armW} ${cy - armL}L${cx + armW} ${cy - armL}L${cx + armW} ${cy - armW}L${cx + armL} ${cy - armW}L${cx + armL} ${cy + armW}L${cx + armW} ${cy + armW}L${cx + armW} ${cy + armL}L${cx - armW} ${cy + armL}L${cx - armW} ${cy + armW}L${cx - armL} ${cy + armW}L${cx - armL} ${cy - armW}L${cx - armW} ${cy - armW}Z`}
+   352→        fill={PARCH} stroke={INK} strokeWidth={2}
+   353→        className={`svg-clickable${selectedId === 'cross' ? ' selected' : ''}`}
+   354→        onClick={() => onClick('cross', 'The Sacred Cross', `The seal of the ${ordinal(jeuNum)} Treasury - a solid cross inscribed within the circle, representing the four directions of divine emanation. The Father ${fatherName} places his cipher upon this cross.`)}
+   355→      />
+   356→      <circle cx={cx} cy={cy} r={ringR} fill="none" stroke={GOLD2} strokeWidth={3}
+   357→        className={`svg-clickable${selectedId === 'ring' ? ' selected' : ''}`}
+   358→        onClick={() => onClick('ring', 'The Circle of Places', `Six places surround the Father within this treasury. The cipher "${cipher}" is inscribed at the center. Seal yourselves with this seal while the cipher is in your hand.`)}
+   359→      />
+   360→      <circle cx={cx} cy={cy} r={innerR} fill="none" stroke={INK} strokeWidth={2} pointerEvents="none" />
+   361→      <text x={cx} y={cy + 5} textAnchor="middle" dominantBaseline="middle" fontFamily="Cinzel, serif" fontSize={complexity > 2 ? 18 : 22} fill={GOLD}
+   362→        className={`svg-clickable${selectedId === 'cipher' ? ' selected' : ''}`} style={{ cursor: 'pointer' }}
+   363→        onClick={() => onClick('cipher', `Cipher: ${cipher}`, `The cipher of the ${ordinal(jeuNum)} Treasury is "${cipher}". This sacred name must be held in the hand (inscribed upon a pebble or token) while the initiate passes through the gates.`)}>{cipher}</text>
+   364→      {places.map((p, i) => (
+   365→        <g key={i} className={`svg-clickable${selectedId === `place-${i}` ? ' selected' : ''}`}
+   366→           onClick={() => onClick(`place-${i}`, p.name, `${p.name} is the ${ordinal(i + 1)} place surrounding the Father in the ${ordinal(jeuNum)} Treasury. Each place is governed by an emanation of ${fatherName}.`)}>
+   367→          <circle cx={p.x} cy={p.y} r={14} fill={PARCH} stroke={INK} strokeWidth={1.5} />
+   368→          <text x={p.x} y={p.y + 4} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK}>{p.name.substring(0, 4)}</text>
+   369→        </g>
+   370→      ))}
+   371→      <text x={cx} y={cy - outerR - 15} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK2} letterSpacing={1}>{fatherName}</text>
+   372→      {places.map((p, i) => <line key={`l${i}`} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke={INK3} strokeWidth={0.5} strokeDasharray="3,3" pointerEvents="none" />)}
+   373→    </svg>
+   374→  )
+   375→}
+   376→
+   377→/* ── Concentric Rings Seal ── */
+   378→function ConcentricSeal({ cx, cy, r, jeuNum, fatherName, cipher, complexity, onClick, selectedId }: {
+   379→  cx: number; cy: number; r: number; jeuNum: number; fatherName: string; cipher: string; complexity: number; onClick: (id: string, label: string, detail: string) => void; selectedId: string | null
+   380→}) {
+   381→  const rings = complexity + 1
+   382→  const emanNames = ['Pha', 'Omo', 'Aph', 'Sap', 'Mar', 'Pig', 'Tha', 'Bat', 'Era', 'Arm', 'Phr', 'Aphr']
+   383→
+   384→  return (
+   385→    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   386→      <circle cx={cx} cy={cy} r={r + 20} fill="none" stroke={INK3} strokeWidth={1} pointerEvents="none" />
+   387→      {Array.from({ length: rings }, (_, i) => {
+   388→        const ringR = r - (i * r / rings)
+   389→        return <circle key={i} cx={cx} cy={cy} r={ringR} fill="none" stroke={i === 0 ? INK : GOLD2} strokeWidth={i === 0 ? 3 : 1.5}
+   390→          className={`svg-clickable${selectedId === `ring-${i}` ? ' selected' : ''}`}
+   391→          onClick={() => onClick(`ring-${i}`, `${ordinal(i + 1)} Ring`, i === 0 ? 'This outermost ring represents the boundary of the treasury, beyond which the Archons patrol.' : i === rings - 1 ? 'This innermost ring contains the cipher of the Father, the key to passage.' : 'This intermediate ring contains the names of the emanations and watchers.')} />
+   392→      })}
+   393→      {Array.from({ length: 12 }, (_, i) => {
+   394→        const angle = (i * 30 - 90) * Math.PI / 180
+   395→        return (
+   396→          <g key={i} className={`svg-clickable${selectedId === `em-${i}` ? ' selected' : ''}`}
+   397→             onClick={() => onClick(`em-${i}`, `Emanation ${i + 1}`, `The ${ordinal(i + 1)} emanation of ${fatherName} radiating from the center of the ${ordinal(jeuNum)} Treasury.`)}>
+   398→            <line x1={cx + Math.cos(angle) * 30} y1={cy + Math.sin(angle) * 30} x2={cx + Math.cos(angle) * r} y2={cy + Math.sin(angle) * r} stroke={INK3} strokeWidth={0.8} />
+   399→            <circle cx={cx + Math.cos(angle) * (r + 12)} cy={cy + Math.sin(angle) * (r + 12)} r={8} fill={PARCH} stroke={GOLD2} strokeWidth={1} />
+   400→            <text x={cx + Math.cos(angle) * (r + 12)} y={cy + Math.sin(angle) * (r + 12) + 3} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK2}>{emanNames[i]}</text>
+   401→          </g>
+   402→        )
+   403→      })}
+   404→      <circle cx={cx} cy={cy} r={22} fill={PARCH} stroke={INK} strokeWidth={2}
+   405→        className={`svg-clickable${selectedId === 'cipher' ? ' selected' : ''}`}
+   406→        onClick={() => onClick('cipher', `Cipher: ${cipher}`, `The cipher of the ${ordinal(jeuNum)} Treasury is "${cipher}". This is the name that must be held while passing through the gates of ${fatherName}.`)} />
+   407→      <text x={cx} y={cy + 5} textAnchor="middle" dominantBaseline="middle" fontFamily="Cinzel, serif" fontSize={14} fill={GOLD}>{cipher}</text>
+   408→      <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK2} letterSpacing={1}>{fatherName}</text>
+   409→      <text x={cx} y={475} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK3} letterSpacing={2}>{jeuNum > 0 ? `JEU ${jeuNum}` : 'JEU'}</text>
+   410→    </svg>
+   411→  )
+   412→}
+   413→
+   414→/* ── Star Seal ── */
+   415→function StarSeal({ cx, cy, r, jeuNum, fatherName, cipher, complexity, onClick, selectedId }: {
+   416→  cx: number; cy: number; r: number; jeuNum: number; fatherName: string; cipher: string; complexity: number; onClick: (id: string, label: string, detail: string) => void; selectedId: string | null
+   417→}) {
+   418→  const points = complexity >= 3 ? 8 : 6
+   419→  const innerR = r * 0.5
+   420→  const starPath = useMemo(() => {
+   421→    const pts: string[] = []
+   422→    for (let i = 0; i < points * 2; i++) {
+   423→      const angle = (i * 180 / points - 90) * Math.PI / 180
+   424→      const rad = i % 2 === 0 ? r : innerR
+   425→      pts.push(`${cx + Math.cos(angle) * rad},${cy + Math.sin(angle) * rad}`)
+   426→    }
+   427→    return pts.join(' ')
+   428→  }, [cx, cy, r, innerR, points])
+   429→
+   430→  return (
+   431→    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   432→      <circle cx={cx} cy={cy} r={r + 20} fill="none" stroke={INK3} strokeWidth={1} pointerEvents="none" />
+   433→      <circle cx={cx} cy={cy} r={r + 10} fill="none" stroke={GOLD} strokeWidth={1.5} pointerEvents="none" />
+   434→      <polygon points={starPath} fill="none" stroke={INK} strokeWidth={2.5}
+   435→        className={`svg-clickable${selectedId === 'star' ? ' selected' : ''}`}
+   436→        onClick={() => onClick('star', `The ${points}-Pointed Star`, `The star seal of the ${ordinal(jeuNum)} Treasury. The ${points} points represent the ${points === 8 ? 'eight directions of divine emanation' : 'six places surrounding the Father'}.`)} />
+   437→      <circle cx={cx} cy={cy} r={innerR * 0.6} fill="none" stroke={GOLD2} strokeWidth={2}
+   438→        className={`svg-clickable${selectedId === 'inner' ? ' selected' : ''}`}
+   439→        onClick={() => onClick('inner', 'The Inner Circle', `The inner circle of the ${ordinal(jeuNum)} Treasury contains the Father ${fatherName} and his cipher.`)} />
+   440→      {Array.from({ length: points }, (_, i) => {
+   441→        const angle = (i * 360 / points - 90) * Math.PI / 180
+   442→        return <line key={i} x1={cx} y1={cy} x2={cx + Math.cos(angle) * r} y2={cy + Math.sin(angle) * r} stroke={INK3} strokeWidth={0.7} pointerEvents="none" />
+   443→      })}
+   444→      <text x={cx} y={cy + 5} textAnchor="middle" dominantBaseline="middle" fontFamily="Cinzel, serif" fontSize={16} fill={GOLD}
+   445→        className="svg-clickable" style={{ cursor: 'pointer' }}
+   446→        onClick={() => onClick('cipher', `Cipher: ${cipher}`, `The cipher "${cipher}" of ${fatherName}.`)}>{cipher}</text>
+   447→      <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK2} letterSpacing={1}>{fatherName}</text>
+   448→      <text x={cx} y={475} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK3} letterSpacing={2}>{jeuNum > 0 ? `JEU ${jeuNum}` : 'JEU'}</text>
+   449→    </svg>
+   450→  )
+   451→}
+   452→
+   453→/* ── Radial Division Seal ── */
+   454→function RadialSeal({ cx, cy, r, jeuNum, fatherName, cipher, complexity, onClick, selectedId }: {
+   455→  cx: number; cy: number; r: number; jeuNum: number; fatherName: string; cipher: string; complexity: number; onClick: (id: string, label: string, detail: string) => void; selectedId: string | null
+   456→}) {
+   457→  const sectors = complexity >= 3 ? 12 : 8
+   458→  const innerR = r * 0.35
+   459→  const greekLetters = 'ABGDEZHQIKLMNXOPRSTUFW'
+   460→
+   461→  return (
+   462→    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   463→      <circle cx={cx} cy={cy} r={r + 15} fill="none" stroke={INK3} strokeWidth={1} pointerEvents="none" />
+   464→      <circle cx={cx} cy={cy} r={r} fill="none" stroke={INK} strokeWidth={2.5}
+   465→        className={`svg-clickable${selectedId === 'outer' ? ' selected' : ''}`}
+   466→        onClick={() => onClick('outer', 'The Outer Boundary', `The outer boundary of the ${ordinal(jeuNum)} Treasury seal with ${sectors} sectors.`)} />
+   467→      <circle cx={cx} cy={cy} r={innerR} fill="none" stroke={GOLD2} strokeWidth={2}
+   468→        className={`svg-clickable${selectedId === 'inner' ? ' selected' : ''}`}
+   469→        onClick={() => onClick('inner', 'The Inner Sanctum', `The inner sanctum where the Father ${fatherName} dwells with his cipher.`)} />
+   470→      {Array.from({ length: sectors }, (_, i) => {
+   471→        const angle = (i * 360 / sectors - 90) * Math.PI / 180
+   472→        const midAngle = ((i + 0.5) * 360 / sectors - 90) * Math.PI / 180
+   473→        const labelR = (r + innerR) / 2
+   474→        return (
+   475→          <g key={i}>
+   476→            <line x1={cx + Math.cos(angle) * innerR} y1={cy + Math.sin(angle) * innerR} x2={cx + Math.cos(angle) * r} y2={cy + Math.sin(angle) * r} stroke={INK3} strokeWidth={1}
+   477→              className={`svg-clickable${selectedId === `sec-${i}` ? ' selected' : ''}`}
+   478→              onClick={() => onClick(`sec-${i}`, `Sector ${i + 1}`, `The ${ordinal(i + 1)} sector governed by an emanation of ${fatherName}.`)} />
+   479→            <text x={cx + Math.cos(midAngle) * labelR} y={cy + Math.sin(midAngle) * labelR + 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK3}>{greekLetters[i % greekLetters.length]}</text>
+   480→          </g>
+   481→        )
+   482→      })}
+   483→      <text x={cx} y={cy + 5} textAnchor="middle" dominantBaseline="middle" fontFamily="Cinzel, serif" fontSize={16} fill={GOLD}
+   484→        className="svg-clickable" style={{ cursor: 'pointer' }}
+   485→        onClick={() => onClick('cipher', `Cipher: ${cipher}`, `The cipher "${cipher}" of the ${ordinal(jeuNum)} Treasury.`)}>{cipher}</text>
+   486→      <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK2} letterSpacing={1}>{fatherName}</text>
+   487→    </svg>
+   488→  )
+   489→}
+   490→
+   491→/* ── Octagram Seal ── */
+   492→function OctagramSeal({ cx, cy, r, jeuNum, fatherName, cipher, complexity, onClick, selectedId }: {
+   493→  cx: number; cy: number; r: number; jeuNum: number; fatherName: string; cipher: string; complexity: number; onClick: (id: string, label: string, detail: string) => void; selectedId: string | null
+   494→}) {
+   495→  return (
+   496→    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+   497→      <circle cx={cx} cy={cy} r={r + 15} fill="none" stroke={INK3} strokeWidth={1} pointerEvents="none" />
+   498→      {[0, 45].map((offset, si) => (
+   499→        <polygon key={si}
+   500→          points={Array.from({ length: 4 }, (_, i) => { const a = (i * 90 + offset - 90) * Math.PI / 180; return `${cx + Math.cos(a) * r},${cy + Math.sin(a) * r}` }).join(' ')}
+
+[showing lines 201-500 of 900; use offset=501 with limit to continue reading]
