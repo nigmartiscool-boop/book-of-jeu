@@ -17,7 +17,7 @@ interface TreasuryEntry {
   password?: string; passwordPron?: string
 }
 
-type SacredCategory = 'overview' | 'cosmos' | 'liturgy' | 'hymn' | 'archon' | 'related' | 'names' | 'dialogue'
+type SacredCategory = 'overview' | 'cosmos' | 'liturgy' | 'hymn' | 'archon' | 'related' | 'names' | 'dialogue' | 'emanation' | 'spaces'
 
 interface SacredEntry {
   id: string; title: string; category: SacredCategory
@@ -32,11 +32,13 @@ interface SacredEntry {
 const RANK_NAMES = ['', 'First Rank (Innermost)', 'Second Rank (Inner)', 'Third Rank (Middle)', 'Fourth Rank (Outer)', 'Fifth Rank (Outermost)']
 const CATEGORY_LABELS: Record<SacredCategory, string> = {
   overview: 'Overview', cosmos: 'Cosmos Map', liturgy: 'Liturgy & Rites', hymn: 'Hymns & Prayers',
-  archon: 'Archon Gates', related: 'Related Texts', names: 'Sacred Names', dialogue: 'Dialogues'
+  archon: 'Archon Gates', related: 'Related Texts', names: 'Sacred Names', dialogue: 'Dialogues',
+  emanation: 'Emanations', spaces: 'Three Spaces'
 }
 const CATEGORY_ICONS: Record<SacredCategory, string> = {
   overview: '\u2720', cosmos: '\u25CE', liturgy: '\u2699', hymn: '\u266B',
-  archon: '\u2694', related: '\u2606', names: '\u2735', dialogue: '\u2756'
+  archon: '\u2694', related: '\u2606', names: '\u2735', dialogue: '\u2756',
+  emanation: '\u2734', spaces: '\u25C7'
 }
 
 function ordinal(n: number): string {
@@ -806,6 +808,247 @@ const SACRED_ENTRIES: SacredEntry[] = [
       { name: 'PARAPHAX', pron: 'PAR-ah-faks' },
       { name: 'ARTHAX', pron: 'AR-thaks' },
       { name: 'APHRAPHAX', pron: 'ah-FRAH-faks' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     THREE SPACES — Unique Bruce Codex cosmology
+     ═══════════════════════════════════════ */
+  {
+    id: 'three-spaces', title: 'The Three Spaces', category: 'spaces',
+    desc: 'The Bruce Codex presents a unique cosmological framework dividing all existence into three Spaces: the First Space (the Ineffable, the Unnamable One), the Middle Space (the Pleroma, the realm of the 60 Treasuries and the divine emanations), and the Third Space (the realm of the Archons, the Kenoma, the material cosmos). Unlike other Sethian texts that describe a simple Pleroma/Kenoma duality, the Bruce Codex introduces this tripartite division as essential to understanding the soul\'s journey — each Space has its own guardians, its own laws, and its own requirements for passage.',
+    sealType: 'three-spaces', book: 1, chapter: 'Chapters 1-5', folio: 'ff. 1r-8v',
+    lore: [
+      { title: 'The First Space — The Ineffable', body: 'The First Space is the domain of the Unnamable, the Ineffable One who exists before all names and forms. No eye has perceived it; no tongue has described it. It is not "light" as the lower spaces understand light, for it precedes the distinction between light and darkness. The Great Invisible Spirit dwells here as the outermost emanation of the Ineffable — the closest that any being below can approach. Jeu the True God proceeds from this Space into the Middle Space, carrying with him the first light that makes the Treasuries visible. The First Space is also called the "Space of Spaces" because all other spaces exist within it, yet it transcends them all.' },
+      { title: 'The Middle Space — The Pleroma', body: 'The Middle Space is the Pleroma — the Fullness — where the 60 Treasuries of Light are arranged in their five ranks. This is the domain of the Fathers, the Watchers, the Emanations, and the Four Luminaries. The Virgin of Light dwells here, distributing souls according to their destiny. The Three Curtains divide the Middle Space into concentric regions of increasing sanctity, culminating in the innermost Treasury where Jeu himself presides. The soul that has passed through the Third Space and its Archon gates enters the Middle Space at the outermost rank and must ascend inward through all 60 Treasuries.' },
+      { title: 'The Third Space — The Kenoma', body: 'The Third Space is the realm of deficiency, the Kenoma, where the Demiurge Yaldabaoth rules and the Archons of the planets and zodiac enforce the cycles of fate. This is the space of material existence — of birth, suffering, death, and rebirth. Every soul incarnated in a physical body dwells in the Third Space. The three Archon gates guard the boundary between the Third Space and the Middle Space, and the ascending soul must speak the three supreme names (IAO, EIE, OYO) to pass through them. The Third Space is not evil in itself but is a shadow — a flawed reflection of the Middle Space, created by a being who did not understand what he was copying.' },
+      { title: 'Passage Between Spaces', body: 'The Bruce Codex describes specific rituals and knowledge required for passage between the three Spaces. To move from the Third Space to the Middle Space, the soul must have received the Five Seals and know the three Archon passwords. To move from the Middle Space toward the First Space, the soul must ascend through all 60 Treasuries, speaking the name and cipher of each Father. No soul can enter the First Space directly — it can only approach the Great Invisible Spirit at the boundary, where the Ineffable Mystery is revealed. Christ alone has passed through all three Spaces in both directions, opening the way for others.' }
+    ],
+    elements: [
+      { id: 'sp-ineffable', label: 'The First Space', brief: 'The Ineffable, the Unnamable', detail: 'The First Space contains only the Ineffable One and the Great Invisible Spirit. It is the "Space of Spaces" — all other spaces exist within it yet it transcends them. No being below can enter it; the soul can only approach its boundary where the Ineffable Mystery is revealed.' },
+      { id: 'sp-middle', label: 'The Middle Space', brief: 'The Pleroma, 60 Treasuries', detail: 'The Middle Space is the Pleroma containing the 60 Treasuries arranged in 5 ranks. The Four Luminaries sustain it. The Three Curtains divide it. The Virgin of Light distributes souls here. Jeu presides over its innermost Treasury.' },
+      { id: 'sp-third', label: 'The Third Space', brief: 'The Kenoma, Archons, matter', detail: 'The Third Space is the material cosmos ruled by Yaldabaoth and his Archons. Seven planetary Archons and twelve zodiac Archons enforce Heimarmene (fate). The three Archon gates guard the boundary to the Middle Space. All incarnated souls dwell here.' },
+      { id: 'sp-boundary-32', label: 'Archon Gates', brief: 'Boundary between 3rd and Middle', detail: 'Three gates separate the Third Space from the Middle Space. Each is guarded by an Archon who demands a password: IAO at the first gate (Aeons), EIE at the second (Sphere), OYO at the third (Midst). Without these names, the soul is cast back into the cycle of rebirth.' },
+      { id: 'sp-boundary-21', label: 'The Ineffable Mystery', brief: 'Boundary between Middle and 1st', detail: 'At the innermost boundary of the Middle Space, where the Great Invisible Spirit dwells, the Ineffable Mystery is revealed. No soul passes beyond this point — it is the limit of all ascent. Christ received the revelation of this Mystery and transmitted it to the disciples.' }
+    ],
+    pronunciations: [
+      { name: 'Pleroma', pron: 'ple-ROH-mah' },
+      { name: 'Kenoma', pron: 'ken-OH-mah' },
+      { name: 'Heimarmene', pron: 'hi-MAR-men-ee' },
+      { name: 'Ineffable', pron: 'in-EFF-ah-bl' },
+      { name: 'Yaldabaoth', pron: 'yal-dah-BAH-oth' },
+      { name: 'IAO', pron: 'EE-ah-oh' },
+      { name: 'EIE', pron: 'AY-ee-ay' },
+      { name: 'OYO', pron: 'oh-EE-oh' }
+    ]
+  },
+
+  {
+    id: 'spaces-map', title: 'The Map of the Three Spaces', category: 'spaces',
+    desc: 'A visual map of the Three Spaces as described in the Bruce Codex — from the Ineffable core of the First Space, through the radiant Pleroma of the Middle Space with its 60 Treasuries and Three Curtains, to the darkening spheres of the Third Space where the Archons rule and mortal souls are bound. Click any region on the map to learn its nature and the requirements for passage.',
+    sealType: 'spaces-map', book: 1, chapter: 'Chapters 1-5', folio: 'ff. 1r-8v',
+    lore: [
+      { title: 'The Architecture of Three', body: 'The tripartite division of the cosmos into Three Spaces is unique to the Bruce Codex among surviving Gnostic texts. While other Sethian writings (the Apocryphon of John, the Gospel of the Egyptians) describe a binary Pleroma/Kenoma structure, the Book of Jeu introduces the First Space as a transcendent reality beyond even the Pleroma. This threefold cosmology reflects the three baptisms, the three Archon gates, the three sacred vowel-names (IAO, EIE, OYO), and the three Curtains — all organized according to the same tripartite principle that pervades the entire text.' },
+      { title: 'The Light Gradient', body: 'Light diminishes as one moves outward from the First Space through the Middle to the Third. In the First Space, light is not a quality but the substance of being itself — the Ineffable radiates without radiating, illuminates without being light. In the Middle Space, light becomes visible and structured, dividing into the lights of the Four Luminaries and the 60 Treasuries. In the Third Space, light is trapped in matter — the divine sparks hidden within mortal bodies are fragments of the Treasury light that fell with Sophia. The entire cosmic structure can be understood as a gradient of light, from absolute brilliance to darkness.' }
+    ],
+    elements: [
+      { id: 'sm-first', label: 'First Space Core', brief: 'Ineffable + Great Invisible', detail: 'At the absolute center, the Ineffable One and the Great Invisible Spirit. Pure being beyond all categories. Jeu proceeds from here into the Middle Space as the first light.' },
+      { id: 'sm-pleroma', label: 'Middle Space Ring', brief: '60 Treasuries + Curtains + Luminaries', detail: 'The vast ring of the Pleroma. Four Luminaries at the quarters, 60 Treasuries in 5 ranks, Three Curtains dividing the ranks, and the Virgin of Light distributing souls.' },
+      { id: 'sm-kenoma', label: 'Third Space Shell', brief: 'Planetary + Zodiac Archons', detail: 'The outer shell of material existence. Seven planetary spheres, twelve zodiac gates, the realm of Heimarmene and rebirth. This is where incarnated souls dwell.' },
+      { id: 'sm-gate1', label: 'Gate of the Aeons', brief: 'IAO — 1st Archon Gate', detail: 'The first of three gates between the Third Space and Middle Space. Password: IAO. Guards the passage from the realm of the planetary Archons to the outer courts of the Pleroma.' },
+      { id: 'sm-gate2', label: 'Gate of the Sphere', brief: 'EIE — 2nd Archon Gate', detail: 'The second gate. Password: EIE. Guards the passage from the zodiacal sphere to the middle region of the Pleroma. The soul must have already passed the first gate.' },
+      { id: 'sm-gate3', label: 'Gate of the Midst', brief: 'OYO — 3rd Archon Gate', detail: 'The third and final gate. Password: OYO. Guards the passage from the border regions into the Pleroma proper. Only after passing this gate can the soul begin its ascent through the 60 Treasuries.' }
+    ],
+    pronunciations: [
+      { name: 'Pleroma', pron: 'ple-ROH-mah' },
+      { name: 'Kenoma', pron: 'ken-OH-mah' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     EMANATIONS — The divine hierarchy
+     ═══════════════════════════════════════ */
+  {
+    id: 'emanation-tree', title: 'The Emanation Tree', category: 'emanation',
+    desc: 'The complete hierarchy of divine emanation as taught in the Bruce Codex — from the Ineffable One, through the Great Invisible Spirit, Jeu the True God, the Four Luminaries, the twelve Aeons, the sixty Fathers of the Treasuries, and down to the Watchers, Receivers, and Emanations that guard each gate. Every being in the Pleroma exists because a higher being contemplated and emanated it. This chain of contemplation-and-emanation is the fundamental mechanism of existence in the Book of Jeu.',
+    sealType: 'emanation-tree', book: 1, chapter: 'Chapters 1-42', folio: 'ff. 1r-55v',
+    lore: [
+      { title: 'The Principle of Emanation', body: 'In the Bruce Codex cosmology, nothing creates ex nihilo. The Ineffable does not "make" things — it emanates them, the way light emanates from a flame without diminishing the flame. Each emanated being is a reflection of its emanator, carrying a portion of its power and knowledge, but at a reduced intensity. The further an emanation is from the source, the dimmer its light, until at the outermost boundaries, the light is so faint that beings there are ignorant of their own origin. This is why the Archons of the Third Space do not know the Ineffable — they are too many removes from the source to remember it.' },
+      { title: 'The Great Chain of Being', body: 'The emanation chain in the Book of Jeu follows a precise hierarchy: the Ineffable contemplates and emanates the Great Invisible Spirit; the Great Invisible Spirit emanates Jeu the True God; Jeu emanates the Four Luminaries (Harmozel, Oroiael, Daveithai, Eleleth); each Luminary emanates three Aeons (twelve total); each Aeon contains five ranks of Treasuries; each Treasury is presided over by a Father who emanates twelve sub-emanations and three Watchers. The total number of beings increases at each level: 1 → 1 → 1 → 4 → 12 → 60 → 720 emanations + 180 Watchers.' },
+      { title: 'Contemplation as Generation', body: 'Each level of the hierarchy generates the next through contemplation. The Ineffable contemplates itself, and the Great Invisible Spirit arises as its self-image. The Great Invisible Spirit contemplates the possibility of multiplicity, and Jeu arises as the first "other." Jeu contemplates the four directions of being, and the Four Luminaries arise. Each Father in a Treasury contemplates the twelve aspects of his cipher, and twelve emanations arise. This is not mere metaphor — in the Bruce Codex, contemplation IS generation. To think is to create; to be thought is to exist.' },
+      { title: 'The Return Upward', body: 'The path of Gnostic ascent reverses the emanation chain. The soul moves from the many to the One, from the outermost Watchers back through the Fathers, the Aeons, the Luminaries, Jeu, the Great Invisible Spirit, and finally to the boundary of the Ineffable. At each stage, the soul must know the name and cipher of the being who emanated that level — because the name is the key to the contemplation that created it. To speak the name is to participate in the original act of emanation and thereby earn the right to pass through.' }
+    ],
+    elements: [
+      { id: 'et-ineffable', label: 'The Ineffable', brief: 'The Unnamable One', detail: 'The source of all emanation. Exists before all names, all light, all being. Contemplates itself and emanates the Great Invisible Spirit. No being can know it directly.' },
+      { id: 'et-invisible', label: 'Great Invisible Spirit', brief: 'First emanation', detail: 'The first emanation of the Ineffable. Called "Invisible" because no aeon has seen its form, "Great" because it encompasses all. It emanates Jeu and guards the boundary of the First Space.' },
+      { id: 'et-jeu', label: 'Jeu the True God', brief: 'Second emanation, Lord of Treasuries', detail: 'Jeu is the True God who presides over the Treasury of Light. He is the first being who can be named and known. He emanates the Four Luminaries and establishes the structure of the 60 Treasuries.' },
+      { id: 'et-luminaries', label: 'Four Luminaries', brief: 'Harmozel, Oroiael, Daveithai, Eleleth', detail: 'The four great lights at the quarters of the Pleroma. Each emanates three Aeons and sustains fifteen Treasuries. They are the first division of divine light into multiplicity.' },
+      { id: 'et-aeons', label: 'Twelve Aeons', brief: 'Armedon, Sigen, Matricula + 9 more', detail: 'Twelve aeons emanated from the Four Luminaries, three per Luminary. They constitute the Pleromic Fullness. The 60 Treasuries are distributed among them, five per Aeon.' },
+      { id: 'et-fathers', label: 'Sixty Fathers', brief: 'Presiders of the Treasuries', detail: 'Each of the 60 Treasuries is presided over by a Father (e.g., Pigeradaphtha, Abrasax, Athoth). Each Father holds a cipher name and emanates twelve sub-emanations and three Watchers.' },
+      { id: 'et-watchers', label: 'Watchers', brief: '3 per Treasury = 180 total', detail: 'Three Watchers guard the gates of each Treasury. They test the ascending soul by demanding the cipher name and password. If the soul cannot answer, it is cast back.' },
+      { id: 'et-receivers', label: 'Receivers', brief: 'Beings who receive ascending souls', detail: 'The Receivers are emanations that greet and guide the soul after it has passed through a Treasury gate. They are mentioned in the Bruce Codex as the "Receivers of Light" who lead the soul from one Treasury to the next.' }
+    ],
+    pronunciations: [
+      { name: 'Harmozel', pron: 'har-MOH-zel' },
+      { name: 'Oroiael', pron: 'or-OY-ah-el' },
+      { name: 'Daveithai', pron: 'dah-VAY-thay' },
+      { name: 'Eleleth', pron: 'el-EL-eth' },
+      { name: 'Armedon', pron: 'AR-med-on' },
+      { name: 'Sigen', pron: 'SEE-gen' },
+      { name: 'Matricula', pron: 'mah-TRIK-yoo-lah' }
+    ]
+  },
+
+  {
+    id: 'jeu-true-god', title: 'Jeu the True God', category: 'emanation',
+    desc: 'Jeu is the central divine figure of the Bruce Codex — the True God, the True Man, the Lord of the Treasury of Light. He is the second emanation from the Ineffable (after the Great Invisible Spirit) and the first being who can be named and known. All 60 Treasuries exist within his domain, and every Father, Watcher, and Emanation ultimately derives its authority from him. The text is called "The Book of Jeu" because it is his revelation — the knowledge he transmitted through Christ to the disciples.',
+    sealType: 'jeu-figure', book: 1, chapter: 'Throughout', folio: 'Codex Brucianus passim',
+    lore: [
+      { title: 'The Nature of Jeu', body: 'Jeu occupies a unique position in the Bruce Codex cosmology. He is neither the ultimate source (the Ineffable) nor a created being (like the Archons). He is the first emanation who possesses self-knowledge — the first being who can say "I AM" and know what it means. This self-knowledge makes him the "True God" in a sense that even the Great Invisible Spirit is not, for the Great Invisible Spirit is beyond all self-reference. Jeu is the divine principle made conscious of itself, and this consciousness is the light that fills the 60 Treasuries.' },
+      { title: 'Jeu and Christ', body: 'In the Bruce Codex, Christ is the emissary of Jeu — the one who descends through all three Spaces, learning every name and cipher, and then ascends again, opening the way for all souls. Christ is not identical to Jeu but is sent by Jeu from the Treasury of Light. When Christ reveals the mysteries to the disciples on the Mount of Olives, he is transmitting the knowledge that Jeu has given him — the names, ciphers, passwords, and seal-structures that the soul needs for ascent. The Book of Jeu is therefore both Christ\'s revelation and Jeu\'s gift.' },
+      { title: 'The Treasury as Jeu\'s Body', body: 'The 60 Treasuries of Light can be understood as the "body" of Jeu — the spatial extension of his self-knowledge into organized, traversable realms. Just as the Ineffable emanates the Great Invisible Spirit as its "face" toward the lower realms, Jeu emanates the Treasuries as his "body" — a structure that the ascending soul can enter, traverse, and ultimately pass through. Each Treasury is an aspect of Jeu\'s knowledge, and to know all 60 ciphers is to know Jeu completely.' }
+    ],
+    elements: [
+      { id: 'jtg-name', label: 'The Name "Jeu"', brief: 'The True God, True Man', detail: 'Jeu [jyoo] is the name of the True God who presides over the Treasury of Light. He is called "True" because he alone possesses authentic self-knowledge. He is both God (divine) and Man (conscious) — the union of transcendence and immanence.' },
+      { id: 'jtg-treasury', label: 'Lord of the Treasury', brief: 'All 60 Treasuries are his domain', detail: 'Jeu presides over the entire Treasury of Light — all 60 treasuries in their five ranks. He established the structure, appointed the Fathers, and set the Watchers at the gates. Every cipher and password derives its power from his authority.' },
+      { id: 'jtg-emissary', label: 'Christ as Emissary', brief: 'Sent by Jeu to open the way', detail: 'Christ is sent by Jeu from the Treasury of Light to descend through all three Spaces, learn every name and cipher, and ascend again. The revelation on the Mount of Olives transmits Jeu\'s knowledge through Christ to the disciples.' },
+      { id: 'jtg-first', label: 'First Named Being', brief: 'Second emanation, first namable', detail: 'After the Great Invisible Spirit (which is a description, not truly a name), Jeu is the first emanation that can be named and addressed. To know the name "Jeu" is to have access to the first principle that can be known.' }
+    ],
+    pronunciations: [
+      { name: 'Jeu', pron: 'jyoo' },
+      { name: 'Pigeradaphtha', pron: 'PIG-er-ah-DAHF-thah' },
+      { name: 'Abrasax', pron: 'ah-BRAH-saks' }
+    ]
+  },
+
+  {
+    id: 'virgin-of-light', title: 'The Virgin of Light', category: 'emanation',
+    desc: 'The Virgin of Light is one of the most important and distinctive figures in the Bruce Codex. She is the divine being who distributes souls to their fates and receives the souls of the ascending righteous. She stands at the boundary between the Middle Space and the Third Space, and her role is dual: she assigns souls to incarnation in the material world, and she receives them back when they have acquired the gnosis necessary for ascent. No other Sethian text gives such a prominent role to a specifically named female divine figure in the mechanics of soul-circulation.',
+    sealType: 'virgin-light', book: 1, chapter: 'Chapters 3-8', folio: 'ff. 5r-12v',
+    lore: [
+      { title: 'The Distributor of Souls', body: 'The Virgin of Light is the being who takes purified light from the Treasuries and casts it downward into incarnation. Each soul receives its portion of light from her hands, and she determines the circumstances of its earthly life — its body, its fate, its challenges. This role makes her both the agent of the soul\'s fall (for incarnation is a descent into matter) and the guarantor of its eventual return (for no soul descends without receiving enough light to find its way back). She is called "Virgin" not because she is chaste but because she is pure — her light is unmixed with matter, and she has not fallen into the Kenoma.' },
+      { title: 'The Receiver of the Righteous', body: 'When a soul has acquired the gnosis and passed through the three Archon gates, the Virgin of Light is the first divine being to receive it. She greets the ascending soul at the border of the Middle Space, verifies its seals and passwords, and escorts it to the outermost Treasury (the 60th) where the ascent through the 60 Treasuries begins. She is the cosmic gatekeeper of redemption — without her reception, the soul cannot enter the Pleroma even if it has passed the Archon gates. Her role as both distributor and receiver makes her the great mediator between the divine and the mortal.' },
+      { title: 'The Seven Virginities', body: 'The Bruce Codex describes the Virgin of Light as possessing seven "virginities" or aspects of purity, each corresponding to one of the seven vowels and one of the seven planetary spheres. These seven virginities are: Armothes (truth), Eileithya (grace), Barpharanghes (wisdom), Opsimothe (prudence), Chthaeth (fortitude), Marept (justice), and Pharphaxoth (temperance). Each virginity is also the name of a Father in the 60 Treasuries (Fathers 29, 21, 22, 23, 24, 25, 26), linking the Virgin directly to the Treasury structure.' }
+    ],
+    elements: [
+      { id: 'vol-distributor', label: 'Distributor of Souls', brief: 'Sends souls into incarnation', detail: 'The Virgin of Light takes purified light from the Treasuries and casts it into incarnation. She determines each soul\'s body, fate, and challenges. She is the agent of the soul\'s descent into matter.' },
+      { id: 'vol-receiver', label: 'Receiver of the Righteous', brief: 'Receives ascending souls at the border', detail: 'When a soul has passed the three Archon gates, the Virgin of Light greets it at the border of the Middle Space, verifies its seals, and escorts it to the outermost Treasury to begin the ascent.' },
+      { id: 'vol-seven', label: 'Seven Virginities', brief: 'Armothes, Eileithya, Barpharanghes + 4 more', detail: 'Seven aspects of purity, each corresponding to a vowel and a planetary sphere. They are also names of Treasury Fathers (29, 21-26), linking the Virgin directly to the Treasury structure.' },
+      { id: 'vol-mediator', label: 'Mediator Between Spaces', brief: 'Stands between Middle and Third Spaces', detail: 'The Virgin of Light stands at the boundary between the Middle Space and the Third Space. She is the great mediator — the last divine being the descending soul sees, and the first the ascending soul meets.' }
+    ],
+    pronunciations: [
+      { name: 'Armothes', pron: 'ar-MOH-thes' },
+      { name: 'Eileithya', pron: 'ay-LAY-thyah' },
+      { name: 'Barpharanghes', pron: 'bar-far-ANG-gez' },
+      { name: 'Opsimothe', pron: 'op-SIM-oh-thee' },
+      { name: 'Chthaeth', pron: 'KTHAY-eth' },
+      { name: 'Marept', pron: 'mah-REPT' },
+      { name: 'Pharphaxoth', pron: 'far-FAK-soth' }
+    ]
+  },
+
+  {
+    id: 'receivers', title: 'The Receivers of Light', category: 'emanation',
+    desc: 'The Receivers of Light are a class of divine beings mentioned throughout the Bruce Codex who greet, verify, and guide the ascending soul from one Treasury to the next. They are distinct from the Watchers (who test the soul) and the Fathers (who preside over the Treasuries). Where Watchers challenge and Fathers rule, Receivers welcome and guide — they are the shepherds of the ascent, ensuring that no soul that has earned the right to ascend becomes lost in the vastness of the Pleroma.',
+    sealType: 'receivers', book: 1, chapter: 'Chapters 6-42', folio: 'ff. 9r-55v',
+    lore: [
+      { title: 'The Role of the Receivers', body: 'After the soul passes through a Treasury gate by speaking the correct name, cipher, and password to the Watchers, a Receiver appears to guide it to the next Treasury. The Receivers are described as luminous beings who know every path through the Pleroma — they never err, never delay, and never lead a soul astray. They are emanations of the Virgin of Light herself, dispatched from her station at the border to accompany each ascending soul through all 60 stages. Without the Receivers, the soul would be lost in the vastness of the Pleroma, for the 60 Treasuries are not arranged in a simple line but in a complex spiral pattern that requires divine guidance to navigate.' },
+      { title: 'Receivers and the Baptismal Rites', body: 'The Receivers also play a role in the Five Baptismal rites described in the Bruce Codex. After each baptism, a Receiver presents the soul with a new seal — a mark of authenticity that the Watchers of the next rank will recognize. These five seals correspond to the five ranks of the Treasuries, and a soul cannot ascend past a rank without possessing the seal of the baptism associated with that rank. The Receivers are therefore not merely guides but the agents of the soul\'s progressive authentication in the eyes of the Treasury guardians.' },
+      { title: 'The Hierarchy of Receivers', body: 'Just as there are five ranks of Treasuries, there are five orders of Receivers, each matching the light-frequency of its corresponding rank. The Receivers of the fifth rank (outermost) are the dimmest, appearing as faintly luminous guides; the Receivers of the first rank (innermost) are so brilliant that the ascending soul can barely perceive them. The final Receiver — the one who guides the soul from the first Treasury to the presence of Jeu — is described as being almost indistinguishable from Jeu himself, so closely does it reflect his light.' }
+    ],
+    elements: [
+      { id: 'rcv-guide', label: 'Guides of Ascent', brief: 'Lead the soul Treasury to Treasury', detail: 'Receivers appear after each Treasury gate is passed, guiding the soul along the spiral path to the next Treasury. They know every path through the Pleroma and never lead a soul astray.' },
+      { id: 'rcv-seals', label: 'Bearer of Seals', brief: 'Present new seals after each baptism', detail: 'After each of the Five Baptisms, a Receiver presents the soul with a new seal — a mark of authenticity recognized by the Watchers of the next rank. Five ranks = five seals.' },
+      { id: 'rcv-five-orders', label: 'Five Orders', brief: 'One order per Treasury rank', detail: 'Five orders of Receivers match the five Treasury ranks. Outermost (5th rank) are dimmest; innermost (1st rank) are nearly as brilliant as Jeu himself. Each order reflects the light of its rank.' },
+      { id: 'rcv-virgin', label: 'Emanations of the Virgin', brief: 'Dispatched by the Virgin of Light', detail: 'All Receivers are emanations of the Virgin of Light, dispatched from her station at the border between the Middle Space and Third Space to accompany each ascending soul.' }
+    ],
+    pronunciations: [
+      { name: 'Receiver', pron: 'ree-SEE-ver' },
+      { name: 'Pleroma', pron: 'ple-ROH-mah' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     SACRED NUMEROLOGY — The mathematical structure
+     ═══════════════════════════════════════ */
+  {
+    id: 'sacred-numbers', title: 'The Sacred Numerology', category: 'overview',
+    desc: 'The Bruce Codex is built upon a precise mathematical architecture. Every structure — the Treasuries, the ranks, the Watchers, the emanations, the baptisms, the Archon gates — follows a numerological logic that is not arbitrary but reflects the fundamental relationships within the divine Pleroma. Understanding these numbers is not merely academic; it is essential to the practice of ascent, for the soul must know how many gates it will face, how many names it must speak, and how many ranks it must traverse.',
+    sealType: 'numerology', book: 1, chapter: 'Throughout', folio: 'Codex Brucianus passim',
+    lore: [
+      { title: 'The Number 60', body: 'The most fundamental number in the Bruce Codex is 60 — the total number of Treasuries of Light. This number is not arbitrary: it is the product of 12 (the number of Aeons) and 5 (the number of ranks), and it is also the product of 5 (ranks) and 12 (Treasuries per rank). The number 60 was sacred throughout the ancient Near East as the base of the sexagesimal number system (inherited from Sumer and Babylon), and its use in the Bruce Codex connects the Gnostic cosmology to the deepest strata of sacred mathematics. Each of the 60 Treasuries requires its own name, cipher, and password — meaning the ascending soul must possess 180 pieces of sacred knowledge (60 names + 60 ciphers + 60 passwords) to complete the ascent.' },
+      { title: 'The Number 12', body: 'The number 12 appears at every level of the Bruce Codex cosmology: 12 Aeons, 12 Treasuries per rank, 12 emanations per Father, and 12 zodiac Archons. This is not coincidence but reflects the principle that the same divine pattern repeats at every scale. The 12 Aeons correspond to the 12 zodiac signs (but inverted — the spiritual originals of which the zodiac is a material shadow). The 12 emanations of each Father are the 12 "faces" of his cipher. The soul that masters the number 12 masters the principle of cosmic completeness, for 12 is the number of the full cycle — the twelve hours of the day, the twelve months of the year, the twelve gates of the New Jerusalem.' },
+      { title: 'The Number 5', body: 'Five is the number of ranks in the Treasury structure, the number of baptisms, the number of seals the soul must receive, and the number of orders of Receivers. It corresponds to the five points of the pentagram, the five wounds of Christ, and the five senses through which the material world is perceived. The five baptisms are: water, fire, spirit, light, and the Ineffable Mystery. Each baptism grants access to one rank of the Treasuries, so the soul must receive all five before it can reach the innermost Treasury where Jeu dwells.' },
+      { title: 'The Number 3', body: 'Three is the number of the sacred vowel-names (IAO, EIE, OYO), the three Archon gates, the three Curtains of Light, the three Watchers per Treasury, and the three Spaces of the Bruce Codex cosmology. The tripartite structure pervades the entire text: three spaces, three gates, three passwords, three curtains, three watchers. Even the emanation from the Ineffable follows a triple pattern: Ineffable → Great Invisible Spirit → Jeu. The number 3 represents the minimum structure needed for relationship — the One contemplates itself (1), produces an image (2), and the image returns to the One (3). This is the fundamental dynamism of the Pleroma.' },
+      { title: 'The Number 7', body: 'Seven is the number of planetary Archons, the number of sacred vowels, the number of virginities of the Virgin of Light, and the number of days of the material week. The seven vowels (A, E, I, O, U, O, Silence) correspond to the seven planetary spheres, and chanting them in sequence aligns the soul with the entire structure of the Third Space. The Bruce Codex teaches that the seven Archons can be overcome by the seven vowels — each vowel nullifies one Archon\'s power, and the final Silence defeats them all, for it represents the Ineffable that no Archon can comprehend.' }
+    ],
+    elements: [
+      { id: 'sn-60', label: '60 Treasuries', brief: '12 Aeons x 5 Ranks', detail: 'The fundamental number. 60 Treasuries = 60 names + 60 ciphers + 60 passwords = 180 sacred words for complete ascent. Rooted in the ancient sexagesimal system.' },
+      { id: 'sn-12', label: '12 / Rank', brief: 'Aeons, emanations, zodiac', detail: 'Twelve appears at every scale: 12 Aeons, 12 Treasuries per rank, 12 emanations per Father, 12 zodiac Archons. The number of cosmic completeness and the full cycle.' },
+      { id: 'sn-5', label: '5 Ranks', brief: 'Ranks, baptisms, seals', detail: 'Five ranks, five baptisms (water, fire, spirit, light, Ineffable Mystery), five seals, five orders of Receivers. Each rank requires its own baptism and seal.' },
+      { id: 'sn-3', label: '3 Gates', brief: 'Archon gates, vowels, curtains', detail: 'Three Archon gates (IAO, EIE, OYO), three Curtains, three Watchers per Treasury, three Spaces. The number of relationship and dynamism.' },
+      { id: 'sn-7', label: '7 Archons', brief: 'Planets, vowels, virginities', detail: 'Seven planetary Archons, seven sacred vowels (A, E, I, O, U, O, Silence), seven virginities of the Virgin of Light. Each vowel defeats one Archon.' },
+      { id: 'sn-180', label: '180 Watchers', brief: '3 per Treasury', detail: '180 Watchers guard the 60 Treasuries (3 per Treasury). Each demands the cipher name and password. The total number of sacred words needed: 180 names/ciphers/passwords + 3 Archon passwords = 183.' }
+    ],
+    pronunciations: [
+      { name: 'Sexagesimal', pron: 'sek-SAJ-es-ih-mal' },
+      { name: 'Heimarmene', pron: 'hi-MAR-men-ee' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     THE BRUCE CODEX — The manuscript itself
+     ═══════════════════════════════════════ */
+  {
+    id: 'bruce-codex', title: 'The Bruce Codex (Codex Brucianus)', category: 'related',
+    desc: 'The Bruce Codex (Codex Brucianus, Bodleian Library MS Bruce 96) is the sole surviving manuscript containing the Books of Jeu and the Untitled Gnostic Work. Acquired by the Scottish traveler James Bruce in 1769 in Upper Egypt, it is a Coptic codex likely dating to the 4th-5th century CE, translating earlier Greek originals from the 2nd-3rd century. Without this single manuscript, the entire Jeu tradition — the 60 Treasuries, the cipher system, the Three Spaces, the Virgin of Light — would be completely unknown to history.',
+    sealType: 'codex', book: 1, chapter: 'Provenance', folio: 'Bodleian Library, Oxford, MS Bruce 96',
+    lore: [
+      { title: 'Discovery and Provenance', body: 'James Bruce of Kinnaird (1730-1794), a Scottish explorer famous for discovering the source of the Blue Nile, acquired the codex in 1769 during his travels in Upper Egypt, likely at Thebes (modern Luxor). The manuscript had been preserved in the dry Egyptian climate for over a millennium. Bruce brought it back to Scotland, and it eventually entered the collection of the Bodleian Library at Oxford University, where it remains today as MS Bruce 96. The codex was not fully published until 1892, when Carl Schmidt produced the first edition, with an English translation by Violet MacDermot appearing in 1967 and a revised edition in 1992.' },
+      { title: 'Physical Description', body: 'The codex is a papyrus manuscript written in Coptic (Subakhmimic dialect) using Greek uncial script. It contains approximately 78 folios (156 pages), though many are fragmentary or damaged. The text is arranged in two columns per page with numbered chapters, suggesting it was a working liturgical document rather than a library copy. Unique among Gnostic manuscripts, it contains actual diagrams — the seal-figures that illustrate the Treasury structure — drawn in red and black ink alongside the text. These diagrams are the oldest surviving examples of Gnostic sacred art.' },
+      { title: 'Contents', body: 'The codex contains two main works: The First Book of Jeu (chapters 1-41), describing the 60 Treasuries of Light and their presiding Fathers; and The Second Book of Jeu (chapters 42-untitled), containing additional Treasury descriptions and the Untitled Gnostic Work — a separate treatise describing the soul\'s ascent through the Archon realms. The Untitled Text is sometimes called "The Gnostic Apocalypse of Paul" because it describes an apostolic ascent vision similar to the Nag Hammadi "Apocalypse of Paul." Together, these texts provide the most detailed surviving account of Sethian Gnostic ritual practice and cosmological speculation.' },
+      { title: 'Relationship to Nag Hammadi', body: 'The Bruce Codex was discovered 175 years before the Nag Hammadi library (found in 1945), and for nearly two centuries it was the only source for Sethian Gnostic cosmology. After the Nag Hammadi texts were published, scholars recognized that the Apocryphon of John, the Gospel of the Egyptians, Zostrianos, the Three Steles of Seth, and Allogenes described the same divine hierarchy — the Ineffable, Barbelo, the Autogenes, the Four Luminaries — but without the detailed Treasury structure and cipher system unique to the Book of Jeu. The Bruce Codex therefore remains indispensable for understanding the ritual and practical dimension of Sethian Gnosticism that the Nag Hammadi texts describe only in theological terms.' }
+    ],
+    elements: [
+      { id: 'bc-discovery', label: 'Discovery', brief: 'James Bruce, Upper Egypt, 1769', detail: 'Acquired by James Bruce in 1769 at Thebes, Upper Egypt. Brought to Scotland, now at the Bodleian Library, Oxford, as MS Bruce 96.' },
+      { id: 'bc-date', label: 'Date', brief: '4th-5th century CE manuscript', detail: 'The physical manuscript dates to the 4th-5th century CE. The Greek originals it translates are likely from the 2nd-3rd century. The traditions it records may be even older.' },
+      { id: 'bc-language', label: 'Language', brief: 'Coptic (Subakhmimic dialect)', detail: 'Written in the Subakhmimic dialect of Coptic using Greek uncial script. The Coptic is a translation of earlier Greek originals that have not survived.' },
+      { id: 'bc-diagrams', label: 'Diagrams', brief: 'Oldest surviving Gnostic sacred art', detail: 'Unique among Gnostic manuscripts for containing actual diagrams — seal-figures in red and black ink illustrating the Treasury structure. These are the oldest surviving examples of Gnostic sacred art.' },
+      { id: 'bc-contents', label: 'Contents', brief: 'Two Books of Jeu + Untitled Text', detail: 'Book I (ch. 1-41): 60 Treasuries and their Fathers. Book II (ch. 42+): Additional Treasuries and the Untitled Gnostic Work describing the soul\'s ascent through Archon realms.' },
+      { id: 'bc-naghammadi', label: 'Nag Hammadi Connection', brief: 'Same divine hierarchy, more ritual detail', detail: 'Discovered 175 years before Nag Hammadi. Shares the same Sethian hierarchy (Ineffable, Barbelo, Autogenes, Luminaries) but uniquely preserves the Treasury structure and cipher system.' }
+    ],
+    pronunciations: [
+      { name: 'Brucianus', pron: 'broo-see-AH-nus' },
+      { name: 'Subakhmimic', pron: 'soob-AHK-mim-ik' },
+      { name: 'Thebes', pron: 'THEEBZ' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     THE CIPHER SYSTEM — How ciphers function
+     ═══════════════════════════════════════ */
+  {
+    id: 'cipher-system', title: 'The Cipher System of the Gates', category: 'names',
+    desc: 'The cipher system of the Book of Jeu is one of the most distinctive features of the Bruce Codex — a cryptographic framework in which every Treasury gate is sealed by a specific cipher name that must be spoken to gain passage. These ciphers are not passwords in the modern sense but are sacred names that function as keys to specific vibrational frequencies of divine light. When spoken correctly, the cipher name resonates with the Treasury it opens, causing the gate to recognize the speaker as one who possesses authentic gnosis.',
+    sealType: 'cipher-system', book: 1, chapter: 'Throughout', folio: 'Codex Brucianus passim',
+    lore: [
+      { title: 'The Nature of Cipher Names', body: 'Each of the 60 Treasuries is sealed by a cipher name — a word or phrase that acts as the vibrational key to that Treasury\'s gate. The cipher names in the Book of Jeu include both recognizable divine names from Hebrew and Greek traditions (Adonai, Sabaoth, Iao, Abrasax) and apparently untranslatable strings (Pigeradaphtha, Barpharanghes, Aphrempht) that may be cryptographic transformations of known names, vocalizations of angelic languages, or formulaic combinations of sacred syllables. The Bruce Codex treats these names with absolute seriousness: they are not symbols or metaphors but actual words of power that the ascending soul must speak aloud at each gate.' },
+      { title: 'The Threefold Authentication', body: 'At each Treasury gate, the ascending soul must provide three pieces of information: the name of the Father who presides over the Treasury, the cipher name that seals the gate, and the password that combines both into a formula of invocation. For example, at the First Treasury: Father name "Pigeradaphtha Jeu," cipher "Maiion," password "I invoke Pigeradaphtha Jeu - Maiion." This threefold authentication mirrors the three Watchers who guard each gate — each Watcher verifies one component of the invocation. The first Watcher demands the Father\'s name, the second demands the cipher, and the third demands the password.' },
+      { title: 'The Pronunciation Requirement', body: 'The Bruce Codex implies that correct pronunciation is essential — the cipher names must be spoken with precise vowel sounds and stress patterns. This is why the text includes pronunciation guides (in the form of sacred vowel sequences) alongside the cipher names. A mispronounced cipher would fail to resonate with the Treasury\'s frequency, and the gate would remain sealed. The emphasis on pronunciation connects the Jeu tradition to the broader ancient practice of "voces magicae" — magical words of power found throughout Greco-Egyptian ritual texts, where precise vocalization was believed to produce tangible effects in the spiritual realm.' },
+      { title: 'The Cipher as Light-Frequency', body: 'In the Jeu cosmology, each cipher name corresponds to a specific frequency of divine light. Just as white light separates into a spectrum of colors through a prism, the light of the Great Invisible Spirit separates into 60 distinct frequencies as it passes through the emanation hierarchy. Each Treasury "resonates" at one of these frequencies, and the cipher name is the vocal equivalent of that frequency. To speak the cipher is to produce a sound that matches the Treasury\'s light, causing the gate to open as naturally as a resonating string responds to its own frequency. This is why the ciphers cannot be guessed or improvised — they must be learned from one who already knows them, for they are not logical constructs but resonant patterns embedded in the structure of the Pleroma.' }
+    ],
+    elements: [
+      { id: 'cs-cipher', label: 'Cipher Names', brief: '60 vibrational keys', detail: 'Each Treasury is sealed by a cipher name — a word of power that resonates with the Treasury\'s specific light-frequency. Includes both recognizable names (Adonai, Iao) and untranslatable strings (Pigeradaphtha, Aphrempht).' },
+      { id: 'cs-threefold', label: 'Threefold Auth', brief: 'Name + Cipher + Password', detail: 'At each gate: Father\'s name, cipher name, and password (invocation formula). Three Watchers each verify one component. Example: "I invoke Pigeradaphtha Jeu - Maiion."' },
+      { id: 'cs-pronunciation', label: 'Pronunciation', brief: 'Must be spoken precisely', detail: 'Correct pronunciation is essential. Mispronounced ciphers fail to resonate. The text includes pronunciation guides (sacred vowel sequences). Connects to the "voces magicae" tradition of Greco-Egyptian ritual.' },
+      { id: 'cs-frequency', label: 'Light-Frequency', brief: 'Ciphers match Treasury light', detail: 'Each cipher corresponds to a specific frequency of divine light. Speaking it produces a sound matching the Treasury\'s resonance. This is why ciphers cannot be guessed — they are resonant patterns embedded in the Pleroma.' }
+    ],
+    pronunciations: [
+      { name: 'Pigeradaphtha', pron: 'PIG-er-ah-DAHF-thah' },
+      { name: 'Maiion', pron: 'MY-ee-on' },
+      { name: 'Aphrempht', pron: 'ah-FREMPT' },
+      { name: 'Barpharanghes', pron: 'bar-far-ANG-gez' },
+      { name: 'Voces magicae', pron: 'VOH-kays mah-JIK-ay' }
     ]
   }
 ]
@@ -2302,6 +2545,497 @@ function DialogueDiagram({ onClick, selectedId, elements }: { onClick: (id: stri
   )
 }
 
+/* ── Three Spaces Diagram ── */
+function ThreeSpacesDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+  const cx = 400, cy = 340
+  const R1 = 55, R2 = 155, R3 = 280
+  return (
+    <svg viewBox="0 0 800 700" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+      <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={14} fill={INK} letterSpacing={3}>THE THREE SPACES</text>
+
+      {/* Third Space - Kenoma - outermost */}
+      <circle cx={cx} cy={cy} r={R3} fill="rgba(60,40,20,0.08)" stroke={INK3} strokeWidth={2} className="svg-clickable" onClick={() => onClick('sp-third', 'The Third Space', elements.find(e => e.id === 'sp-third')?.detail || '')} />
+      <text x={cx} y={cy - R3 + 22} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={10} fill={INK2} letterSpacing={2}>THIRD SPACE</text>
+      <text x={cx} y={cy - R3 + 36} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">The Kenoma — Deficiency</text>
+
+      {/* 7 planetary circles */}
+      {['Saturn', 'Jupiter', 'Mars', 'Sun', 'Venus', 'Mercury', 'Moon'].map((p, i) => {
+        const a = (i * 51.4 - 90) * Math.PI / 180
+        const pr = R3 - 50
+        return <g key={i}>
+          <circle cx={cx + Math.cos(a) * pr} cy={cy + Math.sin(a) * pr} r={14} fill="rgba(100,70,30,0.1)" stroke={INK3} strokeWidth={1} />
+          <text x={cx + Math.cos(a) * pr} y={cy + Math.sin(a) * pr + 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={INK3}>{p}</text>
+        </g>
+      })}
+
+      {/* 12 zodiac marks */}
+      {Array.from({ length: 12 }, (_, i) => {
+        const a = (i * 30 - 90) * Math.PI / 180
+        const zr = R3 - 15
+        return <circle key={`z${i}`} cx={cx + Math.cos(a) * zr} cy={cy + Math.sin(a) * zr} r={3} fill={INK3} />
+      })}
+
+      {/* Archon Gates between 3rd and Middle */}
+      <circle cx={cx} cy={cy} r={R2 + 22} fill="none" stroke={GOLD2} strokeWidth={1.5} strokeDasharray="6 3" pointerEvents="none" />
+      {elements.filter(e => e.id.startsWith('sm-gate') || e.id === 'sp-boundary-32').map((el, i) => {
+        const a = (-90 + i * 120) * Math.PI / 180
+        const gr = R2 + 22
+        return <g key={el.id}>
+          <rect x={cx + Math.cos(a) * gr - 30} y={cy + Math.sin(a) * gr - 12} width={60} height={24}
+            fill={selectedId === el.id ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.06)'}
+            stroke={selectedId === el.id ? GOLD3 : GOLD} strokeWidth={1.5}
+            className="svg-clickable" onClick={() => onClick(el.id, el.label, el.detail)} />
+          <text x={cx + Math.cos(a) * gr} y={cy + Math.sin(a) * gr + 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={GOLD2}>{el.label.substring(0, 14)}</text>
+        </g>
+      })}
+
+      {/* Middle Space - Pleroma */}
+      <circle cx={cx} cy={cy} r={R2} fill="rgba(200,168,74,0.06)" stroke={GOLD2} strokeWidth={2} className="svg-clickable" onClick={() => onClick('sp-middle', 'The Middle Space', elements.find(e => e.id === 'sp-middle')?.detail || '')} />
+      <text x={cx} y={cy - R2 + 22} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={10} fill={INK2} letterSpacing={2}>MIDDLE SPACE</text>
+      <text x={cx} y={cy - R2 + 36} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">The Pleroma — Fullness</text>
+
+      {/* 3 Curtains */}
+      {[90, 130].map((cr, ci) => (
+        <circle key={`cur${ci}`} cx={cx} cy={cy} r={cr} fill="none" stroke={GOLD3} strokeWidth={0.5} strokeDasharray="3 5" pointerEvents="none" />
+      ))}
+
+      {/* 60 treasury dots */}
+      {Array.from({ length: 60 }, (_, i) => {
+        const ring = Math.floor(i / 12)
+        const idx = i % 12
+        const rByRing = [75, 95, 115, 135, 148][ring]
+        const a = (idx * 30 - 90 + ring * 6) * Math.PI / 180
+        return <circle key={`t${i}`} cx={cx + Math.cos(a) * rByRing} cy={cy + Math.sin(a) * rByRing} r={2} fill={GOLD2} />
+      })}
+
+      {/* First Space - Ineffable */}
+      <circle cx={cx} cy={cy} r={R1} fill="rgba(232,192,112,0.15)" stroke={GOLD3} strokeWidth={2.5} className="svg-clickable" onClick={() => onClick('sp-ineffable', 'The First Space', elements.find(e => e.id === 'sp-ineffable')?.detail || '')} />
+      <text x={cx} y={cy - 8} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK} letterSpacing={1}>FIRST SPACE</text>
+      <text x={cx} y={cy + 8} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK2} fontStyle="italic">The Ineffable</text>
+      <text x={cx} y={cy + 22} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3}>"Space of Spaces"</text>
+
+      {/* Ineffable Mystery boundary */}
+      <circle cx={cx} cy={cy} r={R1 + 8} fill="none" stroke={GOLD3} strokeWidth={0.7} strokeDasharray="2 4" pointerEvents="none" />
+      {elements.filter(e => e.id === 'sp-boundary-21').map(el => (
+        <g key={el.id}>
+          <rect x={cx - 45} y={cy + R1 + 14} width={90} height={18}
+            fill={selectedId === el.id ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.06)'}
+            stroke={selectedId === el.id ? GOLD3 : GOLD} strokeWidth={1}
+            className="svg-clickable" onClick={() => onClick(el.id, el.label, el.detail)} />
+          <text x={cx} y={cy + R1 + 26} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={GOLD2}>{el.label}</text>
+        </g>
+      ))}
+
+      {/* Light gradient arrows */}
+      <line x1={cx + R3 + 15} y1={cy} x2={cx + R3 + 50} y2={cy} stroke={INK3} strokeWidth={1} markerEnd="url(#arrow)" pointerEvents="none" />
+      <text x={cx + R3 + 55} y={cy - 8} fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">Darkness</text>
+      <line x1={cx - R1 - 15} y1={cy} x2={cx - R1 - 50} y2={cy} stroke={GOLD3} strokeWidth={1} markerEnd="url(#arrowL)" pointerEvents="none" />
+      <text x={cx - R1 - 55} y={cy - 8} fontFamily="Libre Baskerville, serif" fontSize={7} fill={GOLD2} fontStyle="italic" textAnchor="end">Light</text>
+
+      <defs>
+        <marker id="arrow" markerWidth={6} markerHeight={4} refX={6} refY={2} orient="auto"><path d="M0,0 L6,2 L0,4" fill={INK3} /></marker>
+        <marker id="arrowL" markerWidth={6} markerHeight={4} refX={6} refY={2} orient="auto"><path d="M0,0 L6,2 L0,4" fill={GOLD3} /></marker>
+      </defs>
+    </svg>
+  )
+}
+
+/* ── Emanation Tree Diagram ── */
+function EmanationTreeDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+  const levels = [
+    { id: 'et-ineffable', label: 'THE INEFFABLE', sub: 'Unnamable One', color: GOLD3, y: 60 },
+    { id: 'et-invisible', label: 'GREAT INVISIBLE SPIRIT', sub: 'First Emanation', color: GOLD3, y: 155 },
+    { id: 'et-jeu', label: 'JEU THE TRUE GOD', sub: 'Lord of Treasuries', color: GOLD2, y: 250 },
+    { id: 'et-luminaries', label: 'FOUR LUMINARIES', sub: 'Harmozel · Oroiael · Daveithai · Eleleth', color: GOLD2, y: 345 },
+    { id: 'et-aeons', label: 'TWELVE AEONS', sub: '3 per Luminary', color: GOLD, y: 440 },
+    { id: 'et-fathers', label: 'SIXTY FATHERS', sub: 'Presiders of the Treasuries', color: GOLD, y: 535 },
+    { id: 'et-watchers', label: '180 WATCHERS', sub: '3 per Treasury', color: INK3, y: 625 },
+  ]
+  const cx = 350
+  return (
+    <svg viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+      <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={14} fill={INK} letterSpacing={3}>THE EMANATION TREE</text>
+      <text x={cx} y={44} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">From the Ineffable to the Watchers — each level emanates the next</text>
+
+      {levels.map((lv, i) => {
+        const w = 160 + (i >= 3 ? i * 30 : 0)
+        const isSelected = selectedId === lv.id
+        const el = elements.find(e => e.id === lv.id)
+        return <g key={lv.id}>
+          {/* Connector line */}
+          {i > 0 && <line x1={cx} y1={levels[i - 1].y + 28} x2={cx} y2={lv.y - 18} stroke={GOLD} strokeWidth={0.8} strokeDasharray="4 3" pointerEvents="none" />}
+          {/* Contemplation arrow */}
+          {i > 0 && <text x={cx + 6} y={(levels[i - 1].y + 28 + lv.y - 18) / 2} fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3} fontStyle="italic" transform={`rotate(-90, ${cx + 14}, ${(levels[i - 1].y + 28 + lv.y - 18) / 2})`}>contemplates</text>}
+
+          {/* Node box */}
+          <rect x={cx - w / 2} y={lv.y - 16} width={w} height={42}
+            fill={isSelected ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.04)'}
+            stroke={isSelected ? GOLD3 : lv.color} strokeWidth={isSelected ? 2 : 1.2}
+            className="svg-clickable" onClick={() => onClick(lv.id, lv.label, el?.detail || '')} />
+          <text x={cx} y={lv.y + 2} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK} letterSpacing={1}>{lv.label}</text>
+          <text x={cx} y={lv.y + 16} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">{lv.sub}</text>
+
+          {/* Count badge for multi-beings */}
+          {i >= 3 && <circle cx={cx + w / 2 + 14} cy={lv.y + 5} r={10} fill={lv.color} stroke={INK} strokeWidth={0.5} pointerEvents="none" />}
+          {i === 3 && <text x={cx + w / 2 + 14} y={lv.y + 8} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={PARCH}>4</text>}
+          {i === 4 && <text x={cx + w / 2 + 14} y={lv.y + 8} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={PARCH}>12</text>}
+          {i === 5 && <text x={cx + w / 2 + 14} y={lv.y + 8} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={PARCH}>60</text>}
+          {i === 6 && <text x={cx + w / 2 + 14} y={lv.y + 8} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={5} fill={PARCH}>180</text>}
+        </g>
+      })}
+
+      {/* Receivers side branch */}
+      {elements.filter(e => e.id === 'et-receivers').map(el => {
+        const ry = 535
+        return <g key={el.id}>
+          <line x1={cx + 120} y1={ry} x2={cx + 180} y2={ry} stroke={GOLD} strokeWidth={0.8} strokeDasharray="4 3" pointerEvents="none" />
+          <rect x={cx + 182} y={ry - 14} width={120} height={36}
+            fill={selectedId === el.id ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.04)'}
+            stroke={selectedId === el.id ? GOLD3 : GOLD} strokeWidth={1.2}
+            className="svg-clickable" onClick={() => onClick(el.id, el.label, el.detail)} />
+          <text x={cx + 242} y={ry + 2} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK} letterSpacing={1}>RECEIVERS</text>
+          <text x={cx + 242} y={ry + 14} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3} fontStyle="italic">Guides of Ascent</text>
+        </g>
+      })}
+
+      {/* Direction arrow on left */}
+      <line x1={40} y1={640} x2={40} y2={60} stroke={GOLD2} strokeWidth={1.5} markerEnd="url(#ascArrow)" pointerEvents="none" />
+      <text x={28} y={350} fontFamily="Cinzel, serif" fontSize={8} fill={GOLD2} letterSpacing={2} transform="rotate(-90, 28, 350)">ASCENT</text>
+      <line x1={55} y1={60} x2={55} y2={640} stroke={INK3} strokeWidth={1} markerEnd="url(#descArrow)" pointerEvents="none" />
+      <text x={68} y={350} fontFamily="Cinzel, serif" fontSize={7} fill={INK3} letterSpacing={1} transform="rotate(90, 68, 350)">EMANATION</text>
+
+      <defs>
+        <marker id="ascArrow" markerWidth={8} markerHeight={6} refX={4} refY={3} orient="auto"><path d="M0,6 L4,0 L8,6" fill={GOLD2} /></marker>
+        <marker id="descArrow" markerWidth={8} markerHeight={6} refX={4} refY={3} orient="auto"><path d="M0,6 L4,0 L8,6" fill={INK3} /></marker>
+      </defs>
+    </svg>
+  )
+}
+
+/* ── Jeu Figure Diagram ── */
+function JeuFigureDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+  const cx = 250, cy = 250
+  return (
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+      <text x={cx} y={25} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={13} fill={INK} letterSpacing={3}>JEU THE TRUE GOD</text>
+
+      {/* Outer radiance */}
+      {Array.from({ length: 24 }, (_, i) => {
+        const a = (i * 15) * Math.PI / 180
+        return <line key={`r${i}`} x1={cx + Math.cos(a) * 120} y1={cy + Math.sin(a) * 120} x2={cx + Math.cos(a) * 200} y2={cy + Math.sin(a) * 200} stroke={GOLD3} strokeWidth={0.4} pointerEvents="none" />
+      })}
+
+      {/* Treasury rings */}
+      <circle cx={cx} cy={cy} r={180} fill="none" stroke={GOLD} strokeWidth={1} strokeDasharray="4 6" pointerEvents="none" />
+      <circle cx={cx} cy={cy} r={140} fill="none" stroke={GOLD} strokeWidth={0.8} strokeDasharray="3 5" pointerEvents="none" />
+      <circle cx={cx} cy={cy} r={100} fill="none" stroke={GOLD} strokeWidth={0.6} strokeDasharray="2 4" pointerEvents="none" />
+      <text x={cx} y={cy - 185} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={GOLD} letterSpacing={1}>60 TREASURIES OF LIGHT</text>
+
+      {/* Central figure */}
+      <circle cx={cx} cy={cy} r={60} fill="rgba(232,192,112,0.12)" stroke={GOLD3} strokeWidth={2.5} className="svg-clickable" onClick={() => onClick('jtg-name', 'The Name "Jeu"', elements.find(e => e.id === 'jtg-name')?.detail || '')} />
+      <text x={cx} y={cy - 10} textAnchor="middle" fontFamily="Cinzel Decorative, serif" fontSize={18} fill={INK}>JEU</text>
+      <text x={cx} y={cy + 10} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK2} letterSpacing={2}>TRUE GOD</text>
+      <text x={cx} y={cy + 25} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">The True Man</text>
+
+      {/* Element boxes */}
+      {elements.filter(e => e.id !== 'jtg-name').map((el, i) => {
+        const positions = [
+          { x: cx - 210, y: cy - 100 },
+          { x: cx + 110, y: cy - 100 },
+          { x: cx - 210, y: cy + 60 },
+        ]
+        const pos = positions[i]
+        if (!pos) return null
+        return <g key={el.id}>
+          <rect x={pos.x} y={pos.y} width={100} height={50}
+            fill={selectedId === el.id ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.04)'}
+            stroke={selectedId === el.id ? GOLD3 : GOLD} strokeWidth={1.2}
+            className="svg-clickable" onClick={() => onClick(el.id, el.label, el.detail)} />
+          <text x={pos.x + 50} y={pos.y + 20} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={INK} letterSpacing={0.5}>{el.label}</text>
+          <text x={pos.x + 50} y={pos.y + 35} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3} fontStyle="italic">{el.brief}</text>
+        </g>
+      })}
+
+      {/* Connecting lines */}
+      <line x1={cx - 110} y1={cy - 75} x2={cx - 60} y2={cy - 30} stroke={GOLD} strokeWidth={0.5} pointerEvents="none" />
+      <line x1={cx + 110} y1={cy - 75} x2={cx + 60} y2={cy - 30} stroke={GOLD} strokeWidth={0.5} pointerEvents="none" />
+      <line x1={cx - 110} y1={cy + 85} x2={cx - 60} y2={cy + 30} stroke={GOLD} strokeWidth={0.5} pointerEvents="none" />
+    </svg>
+  )
+}
+
+/* ── Virgin of Light Diagram ── */
+function VirginOfLightDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+  const cx = 350, cy = 320
+  const VIRGIN_NAMES = ['Armothes', 'Eileithya', 'Barpharanghes', 'Opsimothe', 'Chthaeth', 'Marept', 'Pharphaxoth']
+  return (
+    <svg viewBox="0 0 700 650" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+      <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={13} fill={INK} letterSpacing={3}>THE VIRGIN OF LIGHT</text>
+
+      {/* Third Space below */}
+      <rect x={50} y={460} width={600} height={80} fill="rgba(60,40,20,0.06)" stroke={INK3} strokeWidth={1} pointerEvents="none" />
+      <text x={cx} y={490} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK3} letterSpacing={2}>THIRD SPACE</text>
+      <text x={cx} y={510} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">Souls descend into incarnation</text>
+      {/* Downward arrows */}
+      <line x1={cx - 50} y1={430} x2={cx - 50} y2={455} stroke={INK3} strokeWidth={1} markerEnd="url(#downArr)" pointerEvents="none" />
+      <line x1={cx + 50} y1={430} x2={cx + 50} y2={455} stroke={INK3} strokeWidth={1} markerEnd="url(#downArr)" pointerEvents="none" />
+      <text x={cx} y={448} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3} fontStyle="italic">distributes</text>
+
+      {/* Upward arrows */}
+      <line x1={cx - 30} y1={455} x2={cx - 30} y2={430} stroke={GOLD2} strokeWidth={1} markerEnd="url(#upArr)" pointerEvents="none" />
+      <line x1={cx + 30} y1={455} x2={cx + 30} y2={430} stroke={GOLD2} strokeWidth={1} markerEnd="url(#upArr)" pointerEvents="none" />
+      <text x={cx} y={425} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={GOLD2} fontStyle="italic">receives</text>
+
+      {/* Virgin central figure */}
+      <circle cx={cx} cy={cy} r={80} fill="rgba(232,192,112,0.1)" stroke={GOLD3} strokeWidth={2} className="svg-clickable" onClick={() => onClick('vol-mediator', 'Mediator Between Spaces', elements.find(e => e.id === 'vol-mediator')?.detail || '')} />
+      <circle cx={cx} cy={cy} r={55} fill="rgba(232,192,112,0.08)" stroke={GOLD2} strokeWidth={1} pointerEvents="none" />
+      <text x={cx} y={cy - 15} textAnchor="middle" fontFamily="Cinzel Decorative, serif" fontSize={12} fill={INK}>VIRGIN</text>
+      <text x={cx} y={cy + 2} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK2} letterSpacing={2}>OF LIGHT</text>
+      <text x={cx} y={cy + 18} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">Mediator</text>
+
+      {/* Seven Virginities - star pattern */}
+      {VIRGIN_NAMES.map((name, i) => {
+        const a = (i * 51.4 - 90) * Math.PI / 180
+        const vr = 155
+        const vx = cx + Math.cos(a) * vr
+        const vy = cy + Math.sin(a) * vr
+        return <g key={i}>
+          <line x1={cx + Math.cos(a) * 82} y1={cy + Math.sin(a) * 82} x2={cx + Math.cos(a) * 140} y2={cy + Math.sin(a) * 140} stroke={GOLD} strokeWidth={0.5} pointerEvents="none" />
+          <circle cx={vx} cy={vy} r={22} fill="rgba(200,168,74,0.06)" stroke={GOLD2} strokeWidth={1} className="svg-clickable" onClick={() => onClick('vol-seven', 'Seven Virginities', elements.find(e => e.id === 'vol-seven')?.detail || '')} />
+          <text x={vx} y={vy + 1} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={5.5} fill={INK2}>{name}</text>
+        </g>
+      })}
+
+      {/* Middle Space above */}
+      <rect x={50} y={50} width={600} height={80} fill="rgba(200,168,74,0.04)" stroke={GOLD2} strokeWidth={1} pointerEvents="none" />
+      <text x={cx} y={80} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={GOLD2} letterSpacing={2}>MIDDLE SPACE</text>
+      <text x={cx} y={100} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">60 Treasuries of the Pleroma</text>
+
+      {/* Connecting lines to middle space */}
+      <line x1={cx} y1={240} x2={cx} y2={133} stroke={GOLD2} strokeWidth={0.8} strokeDasharray="4 3" pointerEvents="none" />
+
+      {/* Side element boxes */}
+      {elements.filter(e => e.id === 'vol-distributor' || e.id === 'vol-receiver').map((el, i) => {
+        const isLeft = i === 0
+        const bx = isLeft ? 20 : 530
+        const by = 260
+        return <g key={el.id}>
+          <rect x={bx} y={by} width={150} height={55}
+            fill={selectedId === el.id ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.04)'}
+            stroke={selectedId === el.id ? GOLD3 : GOLD} strokeWidth={1.2}
+            className="svg-clickable" onClick={() => onClick(el.id, el.label, el.detail)} />
+          <text x={bx + 75} y={by + 22} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK} letterSpacing={0.5}>{el.label}</text>
+          <text x={bx + 75} y={by + 38} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3} fontStyle="italic">{el.brief}</text>
+        </g>
+      })}
+
+      <defs>
+        <marker id="downArr" markerWidth={6} markerHeight={4} refX={3} refY={4} orient="auto"><path d="M0,0 L3,4 L6,0" fill={INK3} /></marker>
+        <marker id="upArr" markerWidth={6} markerHeight={4} refX={3} refY={0} orient="auto"><path d="M0,4 L3,0 L6,4" fill={GOLD2} /></marker>
+      </defs>
+    </svg>
+  )
+}
+
+/* ── Receivers Diagram ── */
+function ReceiversDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+  const cx = 250, cy = 250
+  return (
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+      <text x={cx} y={25} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={13} fill={INK} letterSpacing={3}>THE RECEIVERS OF LIGHT</text>
+
+      {/* Spiral path from outer to inner */}
+      {Array.from({ length: 60 }, (_, i) => {
+        const t = i / 60
+        const a = t * Math.PI * 6 - Math.PI / 2
+        const r = 200 - t * 150
+        const x = cx + Math.cos(a) * r
+        const y = cy + Math.sin(a) * r + 15
+        return <circle key={`p${i}`} cx={x} cy={y} r={1.5} fill={i % 5 === 0 ? GOLD2 : INK3} />
+      })}
+
+      {/* 5 Receiver orders */}
+      {[1, 2, 3, 4, 5].map((rank, i) => {
+        const a = (i * 72 - 90) * Math.PI / 180
+        const r = 180
+        const rx = cx + Math.cos(a) * r
+        const ry = cy + Math.sin(a) * r + 15
+        const el = elements.find(e => e.id === 'rcv-five-orders')
+        return <g key={`rank${rank}`}>
+          <circle cx={rx} cy={ry} r={25} fill={`rgba(200,168,74,${0.04 + (5 - rank) * 0.03})`} stroke={GOLD2} strokeWidth={1}
+            className="svg-clickable" onClick={() => el && onClick(el.id, el.label, el.detail)} />
+          <text x={rx} y={ry - 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK}>Rank {rank}</text>
+          <text x={rx} y={ry + 10} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5.5} fill={INK3} fontStyle="italic">{rank === 1 ? 'Brightest' : rank === 5 ? 'Dimmest' : `Order ${rank}`}</text>
+        </g>
+      })}
+
+      {/* Center - Virgin of Light */}
+      <circle cx={cx} cy={cy + 15} r={35} fill="rgba(232,192,112,0.1)" stroke={GOLD3} strokeWidth={2} className="svg-clickable" onClick={() => { const el = elements.find(e => e.id === 'rcv-virgin'); if (el) onClick(el.id, el.label, el.detail) }} />
+      <text x={cx} y={cy + 8} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={INK} letterSpacing={1}>VIRGIN</text>
+      <text x={cx} y={cy + 20} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3} fontStyle="italic">Source</text>
+
+      {/* Side elements */}
+      {elements.filter(e => e.id === 'rcv-guide' || e.id === 'rcv-seals').map((el, i) => {
+        const isLeft = i === 0
+        return <g key={el.id}>
+          <rect x={isLeft ? 10 : 350} y={440} width={140} height={45}
+            fill={selectedId === el.id ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.04)'}
+            stroke={selectedId === el.id ? GOLD3 : GOLD} strokeWidth={1}
+            className="svg-clickable" onClick={() => onClick(el.id, el.label, el.detail)} />
+          <text x={isLeft ? 80 : 420} y={460} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={INK} letterSpacing={0.5}>{el.label}</text>
+          <text x={isLeft ? 80 : 420} y={474} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3} fontStyle="italic">{el.brief}</text>
+        </g>
+      })}
+    </svg>
+  )
+}
+
+/* ── Numerology Diagram ── */
+function NumerologyDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+  const cx = 350, cy = 300
+  const numbers = [
+    { id: 'sn-60', num: '60', label: 'TREASURIES', size: 70 },
+    { id: 'sn-12', num: '12', label: 'PER RANK', size: 55 },
+    { id: 'sn-5', num: '5', label: 'RANKS', size: 48 },
+    { id: 'sn-3', num: '3', label: 'GATES', size: 42 },
+    { id: 'sn-7', num: '7', label: 'ARCHONS', size: 45 },
+    { id: 'sn-180', num: '180', label: 'WATCHERS', size: 52 },
+  ]
+  return (
+    <svg viewBox="0 0 700 620" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+      <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={14} fill={INK} letterSpacing={3}>THE SACRED NUMEROLOGY</text>
+      <text x={cx} y={46} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">The mathematical architecture of the Bruce Codex</text>
+
+      {/* Central formula */}
+      <text x={cx} y={80} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={10} fill={GOLD2} letterSpacing={1}>12 AEONS x 5 RANKS = 60 TREASURIES</text>
+
+      {/* Number nodes in a circle */}
+      {numbers.map((n, i) => {
+        const a = (i * 60 - 90) * Math.PI / 180
+        const nr = 200
+        const nx = cx + Math.cos(a) * nr
+        const ny = cy + Math.sin(a) * nr
+        const isSelected = selectedId === n.id
+        const el = elements.find(e => e.id === n.id)
+        return <g key={n.id}>
+          <line x1={cx} y1={cy} x2={cx + Math.cos(a) * (nr - n.size)} y2={cy + Math.sin(a) * (nr - n.size)} stroke={GOLD} strokeWidth={0.4} pointerEvents="none" />
+          <circle cx={nx} cy={ny} r={n.size}
+            fill={isSelected ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.04)'}
+            stroke={isSelected ? GOLD3 : GOLD2} strokeWidth={isSelected ? 2 : 1.2}
+            className="svg-clickable" onClick={() => onClick(n.id, n.label, el?.detail || '')} />
+          <text x={nx} y={ny - 8} textAnchor="middle" fontFamily="Cinzel Decorative, serif" fontSize={n.num.length > 2 ? 20 : 28} fill={INK}>{n.num}</text>
+          <text x={nx} y={ny + 16} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={INK2} letterSpacing={1}>{n.label}</text>
+          <text x={nx} y={ny + 30} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3} fontStyle="italic">{el?.brief || ''}</text>
+        </g>
+      })}
+
+      {/* Central connecting circle */}
+      <circle cx={cx} cy={cy} r={45} fill="rgba(232,192,112,0.08)" stroke={GOLD3} strokeWidth={1.5} pointerEvents="none" />
+      <text x={cx} y={cy - 5} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK} letterSpacing={1}>183</text>
+      <text x={cx} y={cy + 10} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3} fontStyle="italic">sacred words</text>
+
+      {/* Relationship lines between numbers */}
+      <line x1={cx + Math.cos(-90 * Math.PI / 180) * 130} y1={cy + Math.sin(-90 * Math.PI / 180) * 130} x2={cx + Math.cos(-30 * Math.PI / 180) * 150} y2={cy + Math.sin(-30 * Math.PI / 180) * 150} stroke={GOLD3} strokeWidth={0.3} strokeDasharray="2 4" pointerEvents="none" />
+      <line x1={cx + Math.cos(30 * Math.PI / 180) * 150} y1={cy + Math.sin(30 * Math.PI / 180) * 150} x2={cx + Math.cos(-30 * Math.PI / 180) * 150} y2={cy + Math.sin(-30 * Math.PI / 180) * 150} stroke={GOLD3} strokeWidth={0.3} strokeDasharray="2 4" pointerEvents="none" />
+    </svg>
+  )
+}
+
+/* ── Codex Diagram ── */
+function CodexDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+  const cx = 250
+  return (
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+      <text x={cx} y={25} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK} letterSpacing={2}>THE BRUCE CODEX</text>
+
+      {/* Codex book shape */}
+      <rect x={120} y={50} width={260} height={360} fill="rgba(200,168,74,0.06)" stroke={INK3} strokeWidth={1.5} />
+      <rect x={125} y={55} width={250} height={350} fill="rgba(200,168,74,0.03)" stroke={GOLD} strokeWidth={0.5} />
+      {/* Spine */}
+      <line x1={130} y1={55} x2={130} y2={405} stroke={INK3} strokeWidth={1.5} pointerEvents="none" />
+
+      {/* Elements as pages */}
+      {elements.map((el, i) => {
+        const y = 75 + i * 55
+        return <g key={el.id}>
+          <rect x={145} y={y} width={215} height={42}
+            fill={selectedId === el.id ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.03)'}
+            stroke={selectedId === el.id ? GOLD3 : INK3} strokeWidth={1}
+            className="svg-clickable" onClick={() => onClick(el.id, el.label, el.detail)} />
+          <text x={155} y={y + 16} fontFamily="Cinzel, serif" fontSize={8} fill={INK} letterSpacing={0.5}>{el.label}</text>
+          <text x={155} y={y + 32} fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">{el.brief}</text>
+          <SvgCross x={340} y={y + 20} size={4} color={GOLD2} />
+        </g>
+      })}
+
+      {/* Seal decoration */}
+      <circle cx={cx} cy={445} r={20} fill="none" stroke={GOLD2} strokeWidth={1} />
+      <text x={cx} y={448} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={GOLD2}>MS 96</text>
+    </svg>
+  )
+}
+
+/* ── Cipher System Diagram ── */
+function CipherSystemDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+  const cx = 300, cy = 260
+  return (
+    <svg viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+      <text x={cx} y={25} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={13} fill={INK} letterSpacing={3}>THE CIPHER SYSTEM</text>
+
+      {/* Gate shape */}
+      <rect x={cx - 100} y={70} width={200} height={120} fill="rgba(200,168,74,0.04)" stroke={GOLD2} strokeWidth={2} />
+      <text x={cx} y={95} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={10} fill={INK} letterSpacing={2}>TREASURY GATE</text>
+
+      {/* 3 Watchers at gate */}
+      {['Watcher 1', 'Watcher 2', 'Watcher 3'].map((w, i) => {
+        const wx = cx - 80 + i * 80
+        return <g key={i}>
+          <circle cx={wx} cy={155} r={20} fill="rgba(100,70,30,0.08)" stroke={INK3} strokeWidth={1} pointerEvents="none" />
+          <text x={wx} y={153} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={INK2}>{w}</text>
+          <text x={wx} y={168} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5} fill={INK3} fontStyle="italic">{['Name', 'Cipher', 'Password'][i]}</text>
+        </g>
+      })}
+
+      {/* 3 authentication components */}
+      {elements.filter(e => e.id === 'cs-threefold').map(el => (
+        <g key={el.id}>
+          <text x={cx} y={220} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={GOLD2} letterSpacing={1}>THREEFOLD AUTHENTICATION</text>
+          {/* Arrow from gate to auth */}
+          <line x1={cx} y1={190} x2={cx} y2={230} stroke={GOLD} strokeWidth={0.8} pointerEvents="none" />
+        </g>
+      ))}
+
+      {/* Example invocation */}
+      <rect x={50} y={240} width={500} height={55} fill="rgba(232,192,112,0.06)" stroke={GOLD} strokeWidth={1} />
+      <text x={cx} y={260} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK} letterSpacing={1}>EXAMPLE: FIRST TREASURY</text>
+      <text x={cx - 180} y={280} fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK2}>Name: </text>
+      <text x={cx - 130} y={280} fontFamily="Cinzel, serif" fontSize={7} fill={GOLD2}>Pigeradaphtha Jeu</text>
+      <text x={cx - 180} y={293} fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK2}>Cipher: </text>
+      <text x={cx - 125} y={293} fontFamily="Cinzel, serif" fontSize={7} fill={GOLD2}>Maiion</text>
+      <text x={cx - 180} y={306} fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK2}>Password: </text>
+      <text x={cx - 115} y={306} fontFamily="Cinzel, serif" fontSize={7} fill={GOLD2}>I invoke Pigeradaphtha Jeu - Maiion</text>
+
+      {/* Element boxes */}
+      {elements.filter(e => e.id !== 'cs-threefold').map((el, i) => {
+        const y = 320 + i * 55
+        return <g key={el.id}>
+          <rect x={50} y={y} width={500} height={42}
+            fill={selectedId === el.id ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.04)'}
+            stroke={selectedId === el.id ? GOLD3 : GOLD} strokeWidth={1}
+            className="svg-clickable" onClick={() => onClick(el.id, el.label, el.detail)} />
+          <text x={65} y={y + 16} fontFamily="Cinzel, serif" fontSize={8} fill={INK} letterSpacing={0.5}>{el.label}</text>
+          <text x={65} y={y + 32} fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">{el.brief}</text>
+        </g>
+      })}
+    </svg>
+  )
+}
+
+/* ── Spaces Map Diagram ── */
+function SpacesMapDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+  return <ThreeSpacesDiagram onClick={onClick} selectedId={selectedId} elements={elements} />
+}
+
 /* ── Seal Diagram Router ── */
 function SealDiagram({ type, complexity, fatherName, cipher, jeuNum, onElementClick, selectedId, elements, onNavigateEntry }: {
   type: string; complexity: number; fatherName: string; cipher: string; jeuNum: number
@@ -2330,6 +3064,15 @@ function SealDiagram({ type, complexity, fatherName, cipher, jeuNum, onElementCl
     case 'steles': return <StelesDiagram {...elProps} />
     case 'names': return <NamesDiagram {...elProps} />
     case 'dialogue': return <DialogueDiagram {...elProps} />
+    case 'three-spaces': return <ThreeSpacesDiagram {...elProps} />
+    case 'spaces-map': return <SpacesMapDiagram {...elProps} />
+    case 'emanation-tree': return <EmanationTreeDiagram {...elProps} />
+    case 'jeu-figure': return <JeuFigureDiagram {...elProps} />
+    case 'virgin-light': return <VirginOfLightDiagram {...elProps} />
+    case 'receivers': return <ReceiversDiagram {...elProps} />
+    case 'numerology': return <NumerologyDiagram {...elProps} />
+    case 'codex': return <CodexDiagram {...elProps} />
+    case 'cipher-system': return <CipherSystemDiagram {...elProps} />
     default: return <ConcentricSeal {...props} />
   }
 }
@@ -2379,7 +3122,7 @@ export default function Home() {
   }, [searchQuery])
 
   const groupedSacreds = useMemo(() => {
-    const groups: Record<SacredCategory, SacredEntry[]> = { overview: [], cosmos: [], liturgy: [], hymn: [], archon: [], related: [], names: [], dialogue: [] }
+    const groups: Record<SacredCategory, SacredEntry[]> = { overview: [], cosmos: [], liturgy: [], hymn: [], archon: [], related: [], names: [], dialogue: [], emanation: [], spaces: [] }
     filteredSacreds.forEach(s => { groups[s.category].push(s) })
     return groups
   }, [filteredSacreds])
@@ -2391,7 +3134,7 @@ export default function Home() {
       <header className="treasury-header">
         <div className="header-greek">Biblos tou Ieu &mdash; Sacred Diagrams of the Pleroma</div>
         <h1>The Book of Jeu</h1>
-        <div className="header-sub">60 Treasuries &middot; Sacred Rites &middot; Hymns &middot; Related Gnostic Texts</div>
+        <div className="header-sub">60 Treasuries &middot; Three Spaces &middot; Emanations &middot; Sacred Rites &middot; Hymns &middot; Cipher System</div>
       </header>
 
       <div className="main-layout">
@@ -2561,7 +3304,7 @@ export default function Home() {
         </main>
       </div>
 
-      <div className="roller bottom"><span className="roller-text">Biblos tou Ieu &middot; THE TWO BOOKS OF JEU &middot; RELATED SETHIAN TEXTS</span></div>
+      <div className="roller bottom"><span className="roller-text">Biblos tou Ieu &middot; THE TWO BOOKS OF JEU &middot; THREE SPACES &middot; EMANATIONS &middot; CIPHER SYSTEM</span></div>
     </div>
   )
 }

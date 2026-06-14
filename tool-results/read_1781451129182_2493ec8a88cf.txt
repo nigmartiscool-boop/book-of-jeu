@@ -1,0 +1,402 @@
+   300→   300→      { name: 'Daveithai', pron: 'dah-VAY-thay' },
+   301→   301→      { name: 'Eleleth', pron: 'el-EL-eth' },
+   302→   302→      { name: 'Sophia', pron: 'so-FEE-ah' }
+   303→   303→    ]
+   304→   304→  },
+   305→   305→
+   306→   306→  /* ── DIALOGUES ── */
+   307→   307→  {
+   308→   308→    id: 'revelation', title: 'The Revelation of Jeu', category: 'dialogue',
+   309→   309→    desc: 'The First Book of Jeu opens with the risen Christ appearing to his disciples on the Mount of Olives. He reveals the structure of the sixty treasuries, the names of the Fathers, the ciphers, and the passwords by which the soul may ascend through each gate after death. This is the foundational revelation from which all subsequent teachings derive.',
+   310→   310→    sealType: 'dialogue', book: 1, chapter: 'Chapters 1-2', folio: 'ff. 1r-3v',
+   311→   311→    lore: [
+   312→   312→      { title: 'The Setting', body: 'Twelve years after the resurrection, the disciples gathered on the Mount of Olives. They asked Jesus: "Lord, teach us the way that we may ascend to the Treasury of Light, for we fear lest the Archons of the Aeons, the Archons of the Sphere, and the Archons of the Midst shall seize our souls and cast them into the outer darkness." Jesus rejoiced and began to reveal the mysteries.' },
+   313→   313→      { title: 'The Structure Revealed', body: 'Jesus described how the Treasury of Light is surrounded by five ranks of twelve treasuries each. Each treasury is presided over by a Father who holds a cipher name. Three watchers guard the gates of each treasury, and twelve emanations radiate from each Father. The soul must know the name, the cipher, and the password for every treasury through which it passes.' },
+   314→   314→      { title: 'The Command to Seal', body: 'Jesus commanded his disciples: "Seal yourselves with this seal while the cipher is in your hand. Write the cipher upon a pure white stone and hold it in your left hand as you pass through the gates. Recite the name of the Father three times, and the watchers will open the gates before you."' }
+   315→   315→    ],
+   316→   316→    sacredText: [
+   317→   317→      'It came to pass, when Jesus had risen from the dead, that he sat on the Mount of Olives and his disciples gathered around him, saying: Lord, reveal to us the mysteries of the Treasury of Light, that we may ascend unto it when we depart from the body.',
+   318→   318→      'And Jesus rejoiced in spirit and said: Blessed are you, for you have asked concerning the greatest of mysteries. Hearken then, and I will reveal to you the names and the ciphers and the seals of every treasury, from the outermost even unto the innermost, that no Archon may have power over your souls.',
+   319→   319→      'He who would ascend unto the Treasury must first know the names of the sixty Fathers, and the ciphers which they hold, and the passwords which must be spoken at each gate. For without these, the watchers will not open the gates, and the Archons will seize the soul and cast it into the cycle of rebirth.',
+   320→   320→      'The first Father is Pigeradaphtha Jeu, and his cipher is Maiion. The second is Saphaed Jeu, and his cipher is Adonai. The third is Abraoth Jeu, and his cipher is Sabaoth. So also for each of the sixty, the name and cipher must be known and spoken in the proper order.'
+   321→   321→    ],
+   322→   322→    elements: [
+   323→   323→      { id: 'dr-mount', label: 'The Mount of Olives', brief: 'Where the revelation occurred', detail: 'The traditional site of ascension, where the risen Christ appeared to his disciples. In Gnostic tradition, this mountain symbolizes the boundary between the material world below and the spiritual realms above.' },
+   324→   324→      { id: 'dr-disciples', label: 'The Twelve Disciples', brief: 'Recipients of the revelation', detail: 'The twelve disciples correspond to the twelve aeons of the Pleroma. Each disciple represents a class of soul that will ascend through a different rank of treasuries. Their questions drive the revelation forward.' },
+   325→   325→      { id: 'dr-command', label: 'The Command to Seal', brief: 'Instructions for the initiate', detail: 'Jesus commands each disciple to inscribe the cipher names upon a white stone and carry it through the gates. This physical token represents the spiritual knowledge that grants passage. The seal must be made with pure intent.' },
+   326→   326→      { id: 'dr-warning', label: 'The Warning', brief: 'Dangers of the Archons', detail: 'Jesus warns that without the correct names and ciphers, the Archons of the three gates will seize the soul and return it to the cycle of rebirth. The three Archon gates - of the Aeons, of the Sphere, and of the Midst - are the greatest obstacles on the path of ascent.' }
+   327→   327→    ]
+   328→   328→  },
+   329→   329→  {
+   330→   330→    id: 'dialogue-treasuries', title: 'The Dialogue on the Treasuries', category: 'dialogue',
+   331→   331→    desc: 'Following the initial revelation, the disciples question Jesus in detail about each rank of treasuries. Jesus explains the nature of the emanations, the role of the watchers, and the significance of each cipher. This dialogue provides the theological framework for understanding why the treasuries are arranged as they are.',
+   332→   332→    sealType: 'dialogue', book: 1, chapter: 'Chapters 3-8', folio: 'ff. 3v-10r',
+   333→   333→    lore: [
+   334→   334→      { title: 'The Five Ranks Explained', body: 'Jesus teaches that the five ranks correspond to five degrees of divine light. The innermost rank shines with the pure light of the Great Invisible; the outermost with reflected light filtered through many veils. Each rank contains twelve treasuries, and each treasury is a complete world unto itself, with its own emanations, watchers, and gatekeepers.' },
+   335→   335→      { title: 'The Nature of the Emanations', body: 'Each Father within a treasury produces twelve emanations - spiritual forces that radiate outward like light from a flame. These emanations are not separate beings but extensions of the Father\'s being. They fill the treasury with divine presence and maintain the seal that keeps the Archons at bay.' },
+   336→   336→      { title: 'The Role of the Watchers', body: 'Three watchers stand at each treasury gate. The first watcher examines the cipher; the second examines the seal; the third examines the purity of the soul. All three must be satisfied before the gate opens. The watchers are not enemies of the soul but guardians of the Treasury who ensure that only those properly prepared may enter.' }
+   337→   337→    ],
+   338→   338→    sacredText: [
+   339→   339→      'And John asked: Lord, how many are the treasuries of Light? And Jesus answered: There are sixty treasuries, arranged in five ranks of twelve. The innermost twelve are of the First Rank, and they shine with the purest light, nearest to the Great Invisible Spirit.',
+   340→   340→      'Each treasury has a Father who presides over it, and each Father holds a cipher which is the key to his gate. Twelve emanations proceed from each Father, filling the treasury with his light. And three watchers guard the approaches, that no impure soul may enter.',
+   341→   341→      'Mary asked: Lord, why are the treasuries arranged in ranks? And Jesus said: Because the light diminishes as it radiates outward from the source. The innermost treasuries shine with direct light; the outermost with light that has passed through many veils. Each rank is a degree of separation from the Great Invisible, and the soul must ascend through all five to reach the Treasury of Light.'
+   342→   342→    ],
+   343→   343→    elements: [
+   344→   344→      { id: 'dt-ranks', label: 'The Five Ranks', brief: 'Degrees of divine light', detail: 'The five ranks represent decreasing proximity to the divine source. The 1st Rank (innermost) treasuries contain Fathers who see the Great Invisible directly; the 5th Rank (outermost) Fathers see only reflected light through multiple veils.' },
+   345→   345→      { id: 'dt-emanations', label: 'The Emanations', brief: 'Twelve rays per Father', detail: 'Each Father produces twelve emanations, analogous to the twelve rays of a crown. These emanations are named: Phaethon, Omorpha, Aphroph, Saphapha, Mareph, Pigeraph, Thalmaoph, Bathraoth, Eratha, Armatha, Pharmatha, and Aphreph.' },
+   346→   346→      { id: 'dt-watchers', label: 'The Watchers', brief: 'Gate guardians', detail: 'Three watchers guard each treasury gate. The first examines the cipher name inscribed on the stone; the second verifies the seal upon the initiate; the third judges the purity of the soul. Only when all three are satisfied does the gate open.' }
+   347→   347→    ]
+   348→   348→  },
+   349→   349→
+   350→   350→  /* ── LITURGY & RITES ── */
+   351→   351→  {
+   352→   352→    id: 'baptism', title: 'The Rite of the Five Seals', category: 'liturgy',
+   353→   353→    desc: 'The Second Book of Jeu preserves a nearly complete ritual script for a fivefold baptism - the central sacrament of the Jeu community. The initiate receives five successive baptisms of water, fire, spirit, light, and the ineffable mystery, each accompanied by invocations, seal-inscriptions, and sacred names that must be spoken in precise Coptic formulas.',
+   354→   354→    sealType: 'baptism-rite', book: 2, chapter: 'Chapters 42-52', folio: 'ff. 103r-114v',
+   355→   355→    lore: [
+   356→   356→      { title: 'The Five Baptisms', body: 'The rite progresses through five baptisms, each more exalted than the last. The baptism of water cleanses the body; fire purifies the soul; the spirit consecrates the mind; light illuminates the inner vision; and the ineffable mystery unites the initiate with the divine source. Each baptism requires its own seal, its own invocation, and its own sacred name.' },
+   357→   357→      { title: 'Ritual Setting', body: 'The baptism takes place in a specially prepared chamber with a font of living (flowing) water. The officiant is a priest who has himself received all five seals. The initiate fasts for three days, recites preparatory prayers, and renounces the Archons of the Aeons, the Sphere, and the Midst before the first immersion.' },
+   358→   358→      { title: 'The Renunciation', body: 'Before the first baptism, the initiate must face the four directions and renounce the Archon of each quarter by name. This renunciation severs the soul\'s allegiance to the cosmic powers and declares its intention to ascend to the Treasury of Light. The names of the Archons are spoken aloud, each followed by the formula: "I renounce thee, N., and all thy works."' }
+   359→   359→    ],
+   360→   360→    sacredText: [
+   361→   361→      'The priest shall lead the candidate to the font of living water and shall say: Renounce the Archon of the Aeons, whose name is Paraphax, and all his works. And the candidate shall say: I renounce thee, Paraphax, and all thy works.',
+   362→   362→      'Renounce the Archon of the Sphere, whose name is Arthax, and all his works. And the candidate shall say: I renounce thee, Arthax, and all thy works.',
+   363→   363→      'Renounce the Archon of the Midst, whose name is Aphraphax, and all his works. And the candidate shall say: I renounce thee, Aphraphax, and all thy works.',
+   364→   364→      'Then the priest shall immerse the candidate in the water, saying: I baptize thee with the baptism of water, in the name of Iao Sabaoth [EE-ah-oh SAH-bah-oth], that thou mayest be cleansed of all impurity and made worthy to receive the seal of fire.',
+   365→   365→      'And when the candidate arises from the water, the priest shall anoint the forehead with oil, saying: Receive the seal of water, and may the watchers of the first gate permit thee to pass. And the candidate shall say: Amen [ah-MEN].',
+   366→   366→      'Then the priest shall lay his hands upon the candidate and breathe upon the forehead, saying: Receive the baptism of fire, in the name of Adonai Elohim [ah-doh-NYE el-oh-HEEM], that thy soul may be purified as gold in the furnace.',
+   367→   367→      'And the candidate shall feel the heat of the spirit within, and shall say: I receive the fire. And the priest shall inscribe the seal of fire upon the candidate\'s right hand, saying: May this seal protect thee from the flames of judgment.',
+   368→   368→      'The third baptism is of the Holy Spirit. The priest shall speak: Receive the baptism of the Holy Spirit, in the name of Eie Azaphax [AY-ee-ay AZ-ah-faks], that thy mind may be opened to perceive the mysteries. And the candidate shall speak in tongues as the spirit gives utterance.',
+   369→   369→      'The fourth baptism is of light. The priest shall raise his hands toward the east and say: Receive the baptism of light, in the name of the Great Invisible Spirit, that thine eyes may be opened to see the Treasury. And a great light shall appear before the candidate\'s inner vision.',
+   370→   370→      'The fifth baptism is of the Ineffable Mystery. Of this baptism nothing may be spoken, save that the candidate is united with the divine source and shall never again be subject to the Archons. The seal of this baptism is inscribed upon the heart and cannot be removed by any power.'
+   371→   371→    ],
+   372→   372→    elements: [
+   373→   373→      { id: 'bt-water', label: 'First Baptism: Water', brief: 'Cleansing of the body', detail: 'The initiate is immersed in living water while the priest invokes Iao Sabaoth. This baptism cleanses the physical body and severs the soul\'s attachment to material impurity. The seal of water is inscribed upon the forehead.' },
+   374→   374→      { id: 'bt-fire', label: 'Second Baptism: Fire', brief: 'Purification of the soul', detail: 'The priest breathes upon the initiate and invokes Adonai Elohim. The soul is purified as gold in a furnace. The seal of fire is inscribed upon the right hand as protection against judgment.' },
+   375→   375→      { id: 'bt-spirit', label: 'Third Baptism: Spirit', brief: 'Consecration of the mind', detail: 'The priest invokes Eie Azaphax and the initiate receives the Holy Spirit. The mind is opened to perceive spiritual mysteries. The initiate may speak in tongues. The seal of spirit is inscribed upon the left hand.' },
+   376→   376→      { id: 'bt-light', label: 'Fourth Baptism: Light', brief: 'Illumination of inner vision', detail: 'The priest raises hands toward the east and invokes the Great Invisible Spirit. The initiate\'s inner vision is opened and the Treasury of Light appears before them. The seal of light is inscribed between the eyes.' },
+   377→   377→      { id: 'bt-mystery', label: 'Fifth Baptism: The Ineffable Mystery', brief: 'Union with the divine', detail: 'The fifth and final seal cannot be described in words. It is inscribed upon the heart and unites the initiate with the divine source. One who has received this seal can never again be seized by the Archons.' }
+   378→   378→    ]
+   379→   379→  },
+   380→   380→  {
+   381→   381→    id: 'eucharist', title: 'The Eucharist Rite', category: 'liturgy',
+   382→   382→    desc: 'Following the five baptisms, the newly sealed initiate participates in the sacred meal - the Eucharist of Light. This rite transforms bread and wine into tokens of the Pleroma, allowing the community to partake in the divine substance of the Treasury. The prayers spoken over the elements invoke the names of the four luminaries and the Great Invisible Spirit.',
+   383→   383→    sealType: 'liturgy', book: 2, chapter: 'Chapter 53', folio: 'ff. 115r-117v',
+   384→   384→    lore: [
+   385→   385→      { title: 'The Sacred Meal', body: 'The Eucharist of Light differs substantially from orthodox Christian communion. The bread represents not the body of Christ but the substance of the Pleroma - the divine fullness that fills the Treasury. The wine represents not the blood of sacrifice but the light of the Great Invisible Spirit, which flows downward through all the treasuries like a river of illumination.' },
+   386→   386→      { title: 'The Four Luminaries', body: 'The prayer over the bread invokes the four luminaries of the Pleroma: Harmozel (har-MOH-zel), Oroiael (or-OY-ah-el), Daveithai (dah-VAY-thay), and Eleleth (el-EL-eth). These four beings stand at the four corners of the Treasury and their light sustains all existence. By invoking them over the bread, the priest draws their light into the elements.' },
+   387→   387→      { title: 'Communion Formula', body: 'After the prayers, each communicant approaches the altar, holds the bread in the left hand (where the seal of fire was inscribed) and the cup in the right hand (where the seal of spirit was inscribed). The formula spoken is: "I receive the light of the Pleroma into my body, that it may be a temple of the Invisible Spirit."' }
+   388→   388→    ],
+   389→   389→    sacredText: [
+   390→   390→      'The priest shall take the bread and raise it toward the east, saying: We invoke thee, O Harmozel, light of grace; O Oroiael, light of thought; O Daveithai, light of understanding; O Eleleth, light of perception. Send forth thy light into this bread, that it may become the substance of the Pleroma for thy servants.',
+   391→   391→      'And the priest shall break the bread into twelve pieces, one for each of the aeons, saying: As the Father has divided his light among the twelve, so do we partake of the fullness together.',
+   392→   392→      'Then the priest shall take the cup and raise it toward the east, saying: We invoke thee, O Great Invisible Spirit, who art before all aeons. Let the light of the Treasury flow into this cup as a river of illumination, that we may drink of thy radiance and be filled with thy presence.',
+   393→   393→      'And each communicant shall come forward and receive the bread in the left hand and the cup in the right hand, and shall say: I receive the light of the Pleroma into my body, that it may be a temple of the Invisible Spirit. Amen [ah-MEN]. Amen [ah-MEN]. Amen [ah-MEN].'
+   394→   394→    ],
+   395→   395→    elements: [
+   396→   396→      { id: 'eu-bread', label: 'The Bread of the Pleroma', brief: 'Substance of divine fullness', detail: 'The bread is consecrated by invoking the four luminaries. It represents the substance of the Pleroma - the divine fullness that fills all the treasuries. Twelve pieces are broken, one for each aeon.' },
+   397→   397→      { id: 'eu-wine', label: 'The Cup of Light', brief: 'River of illumination', detail: 'The wine is consecrated by invoking the Great Invisible Spirit. It represents the light of the Treasury flowing downward like a river of illumination through all the ranks of treasuries.' },
+   398→   398→      { id: 'eu-luminaries', label: 'The Four Luminaries', brief: 'Harmozel, Oroiael, Daveithai, Eleleth', detail: 'The four luminaries stand at the four corners of the Treasury. Harmozel represents grace, Oroiael represents thought, Daveithai represents understanding, and Eleleth represents perception. Their combined light sustains all existence within the Pleroma.' },
+   399→   399→      { id: 'eu-formula', label: 'The Communion Formula', brief: 'Reception of divine light', detail: 'Each communicant holds the bread in the sealed left hand and the cup in the sealed right hand, saying: "I receive the light of the Pleroma into my body, that it may be a temple of the Invisible Spirit." The triple Amen seals the communion.' }
+   400→   400→    ]
+   401→   401→  },
+   402→   402→  {
+   403→   403→    id: 'ascent', title: 'The Rite of Ascent', category: 'liturgy',
+   404→   404→    desc: 'The Rite of Ascent is the supreme ritual of the Book of Jeu - a guided meditation and liturgical drama in which the initiate, while still living, experiences the soul\'s passage through the three Archon gates and all sixty treasuries of Light. This rite serves as both rehearsal and empowerment for the soul\'s journey after death.',
+   405→   405→    sealType: 'ascent', book: 2, chapter: 'Chapters 55-60', folio: 'ff. 118r-126v',
+   406→   406→    lore: [
+   407→   407→      { title: 'The Living Ascent', body: 'Unlike the post-mortem ascent that every soul must undertake, the Rite of Ascent allows the initiate to experience the journey while still in the body. This living ascent imprints the pathways upon the soul, making the post-mortem journey automatic - the soul will follow the familiar path as naturally as a river follows its course.' },
+   408→   408→      { title: 'The Three Gates', body: 'The ascent begins at the three Archon gates: the Gate of the Aeons (guarded by Paraphax), the Gate of the Sphere (guarded by Arthax), and the Gate of the Midst (guarded by Aphraphax). At each gate, the initiate must speak the correct password and display the appropriate seal. Failure at any gate results in the soul being seized and returned to rebirth.' },
+   409→   409→      { title: 'The Sixty Treasuries', body: 'Beyond the three gates, the soul must pass through all sixty treasuries in reverse order - from the 60th (outermost) to the 1st (innermost). At each treasury, the initiate calls upon the Father by name, displays the cipher, and recites the password. The watchers examine the seals upon the initiate\'s body and, finding them valid, open the gates.' }
+   410→   410→    ],
+   411→   411→    sacredText: [
+   412→   412→      'The priest shall lead the initiate to the center of the chamber and shall say: Close thine eyes and behold with the inner vision. See before thee the three gates of the Archons, rising like mountains of darkness against the light of the Treasury above.',
+   413→   413→      'Approach the first gate, the Gate of the Aeons, where Paraphax [PAR-ah-faks] stands guard. Speak the password: IAO SABAOTH [EE-ah-oh SAH-bah-oth]. And the gate shall open, for the Archon cannot refuse the name of the true God.',
+   414→   414→      'Approach the second gate, the Gate of the Sphere, where Arthax [AR-thaks] stands guard. Speak the password: ADONAI ELOHIM [ah-doh-NYE el-oh-HEEM]. And the gate shall open, for the Archon must yield to the name of the Lord of Hosts.',
+   415→   415→      'Approach the third gate, the Gate of the Midst, where Aphraphax [ah-FRAH-faks] stands guard. Speak the password: EIE AZAPHAX [AY-ee-ay AZ-ah-faks]. And the gate shall open, for the Archon is bound by the cipher of the Ineffable.',
+   416→   416→      'Now ascend through the treasuries, calling upon each Father by name. Begin with the sixtieth, Proator Jeu [pro-AY-tor jyoo], and say: I invoke thee, Proator Jeu, by thy cipher Proator - open thy gate that my soul may pass through. Continue thus through all sixty treasuries until thou comest to the first, Pigeradaphtha Jeu, and the Treasury of Light is before thee.',
+   417→   417→      'And when thou hast passed through all sixty treasuries, thou shalt behold the three curtains of light. Pass through them by the power of the five seals, and thou shalt stand before the Great Invisible Spirit in the Treasury of Light. And the Great Invisible shall say: Welcome, my child, for thou hast overcome the world.'
+   418→   418→    ],
+   419→   419→    elements: [
+   420→   420→      { id: 'as-gate1', label: 'Gate of the Aeons', brief: 'First Archon gate', detail: 'Guarded by Paraphax [PAR-ah-faks]. Password: IAO SABAOTH [EE-ah-oh SAH-bah-oth]. This gate separates the material cosmos from the lower spiritual realms.' },
+   421→   421→      { id: 'as-gate2', label: 'Gate of the Sphere', brief: 'Second Archon gate', detail: 'Guarded by Arthax [AR-thaks]. Password: ADONAI ELOHIM [ah-doh-NYE el-oh-HEEM]. This gate separates the planetary spheres from the aeonic realms.' },
+   422→   422→      { id: 'as-gate3', label: 'Gate of the Midst', brief: 'Third Archon gate', detail: 'Guarded by Aphraphax [ah-FRAH-faks]. Password: EIE AZAPHAX [AY-ee-ay AZ-ah-faks]. This gate separates the lower aeons from the Treasury of Light.' },
+   423→   423→      { id: 'as-treasuries', label: 'The Sixty Treasuries', brief: 'Reverse ascent through all ranks', detail: 'The initiate must pass through all 60 treasuries from the 60th to the 1st, calling upon each Father by name and displaying the cipher. This reverse journey mirrors the outward flow of creation and returns the soul to its source.' },
+   424→   424→      { id: 'as-curtains', label: 'The Three Curtains', brief: 'Final veils before the Treasury', detail: 'Beyond the 60 treasuries lie the three curtains of light. The seal of water opens the first, the seal of fire the second, and the seal of the mystery the third. Beyond the third curtain shines the Treasury of Light itself.' }
+   425→   425→    ]
+   426→   426→  },
+   427→   427→  {
+   428→   428→    id: 'sealing', title: 'The Sealing Ritual', category: 'liturgy',
+   429→   429→    desc: 'The Sealing Ritual is performed immediately after the five baptisms. The priest inscribes five protective seals upon the initiate\'s body - upon the forehead, the right hand, the left hand, between the eyes, and upon the heart. Each seal corresponds to one of the five baptisms and carries the power to open a specific class of gates in the post-mortem ascent.',
+   430→   430→    sealType: 'liturgy', book: 2, chapter: 'Chapters 51-52', folio: 'ff. 112r-114v',
+   431→   431→    lore: [
+   432→   432→      { title: 'The Five Seals', body: 'The five seals are the initiate\'s passport through the Treasury. Each seal is inscribed with sacred characters and anointed with oil. The seal of water goes on the forehead, fire on the right hand, spirit on the left hand, light between the eyes, and the mystery upon the heart. Together they form a complete spiritual armor.' },
+   433→   433→      { title: 'The Triple Sealing', body: 'Each seal is applied three times - once in the name of the Father, once in the name of the cipher, and once in the name of the emanation. This triple application ensures that the seal corresponds to the three aspects of each treasury: the presiding Father, the key (cipher), and the power (emanation) that enforces it.' },
+   434→   434→      { title: 'Protective Power', body: 'The seals render the initiate invisible to the Archons. When an Archon examines a sealed soul, it sees only the light of the seal and cannot perceive the soul beneath. This is why the correct inscription is essential - a flawed seal would be transparent to the Archons, who would then seize the soul.' }
+   435→   435→    ],
+   436→   436→    sacredText: [
+   437→   437→      'The priest shall anoint the forehead of the initiate with holy oil, saying: I seal thee with the seal of water, in the name of Iao [EE-ah-oh], the Father, the cipher, and the emanation. Three times I seal thee: Iao, Iao, Iao. May the watchers of the first gate recognize this seal and permit thee to pass.',
+   438→   438→      'The priest shall anoint the right hand, saying: I seal thee with the seal of fire, in the name of Sabaoth [SAH-bah-oth], the Father, the cipher, and the emanation. Three times I seal thee: Sabaoth, Sabaoth, Sabaoth. May the watchers of the second gate recognize this seal and permit thee to pass.',
+   439→   439→      'The priest shall anoint the left hand, saying: I seal thee with the seal of spirit, in the name of Adonai [ah-doh-NYE], the Father, the cipher, and the emanation. Three times I seal thee: Adonai, Adonai, Adonai. May the watchers of the third gate recognize this seal and permit thee to pass.',
+   440→   440→      'The priest shall anoint between the eyes, saying: I seal thee with the seal of light, in the name of the Great Invisible Spirit. Three times I seal thee: Invisible, Invisible, Invisible. May the curtains of the Treasury part before thee.',
+   441→   441→      'The priest shall place his hand upon the initiate\'s heart, saying: I seal thee with the seal of the Ineffable Mystery, which no tongue may speak and no hand may write. This seal is inscribed by the Spirit itself upon thy heart, and it shall be thy final passport into the Treasury of Light.'
+   442→   442→    ],
+   443→   443→    elements: [
+   444→   444→      { id: 'sl-forehead', label: 'Seal of Water (Forehead)', brief: 'First seal - cleansing', detail: 'Inscribed on the forehead in the name of Iao. The triple sealing: Iao, Iao, Iao. Opens the gates of the first rank of treasuries.' },
+   445→   445→      { id: 'sl-right', label: 'Seal of Fire (Right Hand)', brief: 'Second seal - purification', detail: 'Inscribed on the right hand in the name of Sabaoth. The triple sealing: Sabaoth, Sabaoth, Sabaoth. Opens the gates of the second and third ranks.' },
+   446→   446→      { id: 'sl-left', label: 'Seal of Spirit (Left Hand)', brief: 'Third seal - consecration', detail: 'Inscribed on the left hand in the name of Adonai. The triple sealing: Adonai, Adonai, Adonai. Opens the gates of the fourth rank.' },
+   447→   447→      { id: 'sl-eyes', label: 'Seal of Light (Between Eyes)', brief: 'Fourth seal - illumination', detail: 'Inscribed between the eyes in the name of the Great Invisible Spirit. The triple sealing: Invisible, Invisible, Invisible. Parts the three curtains of the Treasury.' },
+   448→   448→      { id: 'sl-heart', label: 'Seal of Mystery (Heart)', brief: 'Fifth seal - ineffable union', detail: 'Inscribed upon the heart by the Spirit itself. No tongue may speak it, no hand may write it. This is the final passport into the Treasury of Light, and no Archon can contest it.' }
+   449→   449→    ]
+   450→   450→  },
+   451→   451→
+   452→   452→  /* ── HYMNS & PRAYERS ── */
+   453→   453→  {
+   454→   454→    id: 'hymn-invisible', title: 'Hymn to the Great Invisible', category: 'hymn',
+   455→   455→    desc: 'The opening invocation of the Jeu liturgy, addressed to the Great Invisible Spirit - the unknowable first principle that stands before all aeons. This hymn is sung before every ritual and is considered the most sacred of all the Gnostic chants. It cannot be translated; only the original Coptic vowel-sequences carry the full power of the invocation.',
+   456→   456→    sealType: 'hymn', book: 1, chapter: 'Chapter 1', folio: 'ff. 1r-2v',
+   457→   457→    lore: [
+   458→   458→      { title: 'The Unknowable God', body: 'The Great Invisible Spirit cannot be named, seen, or comprehended by any being within the Pleroma. Even Jeu, the True God and first emanation, has never seen the Spirit\'s form. The hymn therefore uses a series of negations and paradoxes: "Thou art before all, yet after nothing; thou art within all, yet outside everything; thou art seen by none, yet beholdest all."' },
+   459→   459→      { title: 'The Vowel Sequences', body: 'The hymn contains seven sacred vowel sequences: IAO, EIE, OYO, AOE, UOA, EOA, and the ineffable seventh. Each sequence resonates with a different rank of the Treasury and must be intoned with precise vowel length. IAO [EE-ah-oh] opens the first three ranks; EIE [AY-ee-ay] opens the fourth; OYO [oh-EE-oh] opens the fifth.' }
+   460→   460→    ],
+   461→   461→    sacredText: [
+   462→   462→      'I invoke thee, O Invisible One, who art before all aeons,',
+   463→   463→      'Whom no eye has seen and no tongue has named,',
+   464→   464→      'Who art the source of all light and the wellspring of all life,',
+   465→   465→      'Open the way for my soul through the treasuries of light.',
+   466→   466→      '',
+   467→   467→      'Iao [EE-ah-oh] - I call upon thy first name, O Father of the Treasury,',
+   468→   468→      'Eie [AY-ee-ay] - I call upon thy second name, O Guardian of the Gates,',
+   469→   469→      'Oyo [oh-EE-oh] - I call upon thy third name, O Opener of the Way.',
+   470→   470→      '',
+   471→   471→      'Thou art before all, yet after nothing;',
+   472→   472→      'Thou art within all, yet outside everything;',
+   473→   473→      'Thou art seen by none, yet beholdest all.',
+   474→   474→      'Open the way for my soul, O Great Invisible Spirit,',
+   475→   475→      'That I may ascend unto the Treasury of Light.'
+   476→   476→    ],
+   477→   477→    elements: [
+   478→   478→      { id: 'hi-invocation', label: 'The Invocation', brief: 'Opening prayer', detail: 'The hymn opens with a direct address to the Great Invisible Spirit, using paradoxes and negations to describe the indescribable. Each line builds in intensity, calling upon the Spirit to open the way for the soul\'s ascent.' },
+   479→   479→      { id: 'hi-iao', label: 'The Name IAO', brief: 'First sacred vowel sequence', detail: 'IAO [EE-ah-oh] is the supreme name of the divine in Gnostic tradition. It combines three vowel-sounds representing the three aspects of divinity: the Father (I), the Mother (A), and the Child (O). This name opens the gates of the first three ranks of treasuries.' },
+   480→   480→      { id: 'hi-eie', label: 'The Name EIE', brief: 'Second sacred vowel sequence', detail: 'EIE [AY-ee-ay] is the name that opens the fourth rank of treasuries. Its palindromic structure (read the same forward and backward) symbolizes the eternal, self-reflective nature of the divine.' },
+   481→   481→      { id: 'hi-oyo', label: 'The Name OYO', brief: 'Third sacred vowel sequence', detail: 'OYO [oh-EE-oh] is the name that opens the fifth and innermost rank of treasuries. Like EIE, it is a palindrome, but its sounds are deeper and more resonant, symbolizing the profound mystery at the heart of the Pleroma.' },
+   482→   482→      { id: 'hi-paradox', label: 'The Paradoxes', brief: 'Divine negations', detail: 'The hymn uses divine negations (apophatic theology) to describe the Great Invisible: "before all yet after nothing," "within all yet outside everything," "seen by none yet beholdest all." These paradoxes point toward a reality that transcends all categories of human understanding.' }
+   483→   483→    ]
+   484→   484→  },
+   485→   485→  {
+   486→   486→    id: 'hymn-aeons', title: 'The Hymn of the Aeons', category: 'hymn',
+   487→   487→    desc: 'A choral hymn sung in twelve parts, each part dedicated to one of the twelve aeons of the Pleroma. The hymn describes the qualities and functions of each aeon-ruler and petitions them to intercede for the ascending soul. In ritual performance, twelve priests each sing one verse while standing at one of twelve stations arranged in a circle.',
+   488→   488→    sealType: 'hymn', book: 1, chapter: 'Chapter 35', folio: 'ff. 25r-27v',
+   489→   489→    lore: [
+   490→   490→      { title: 'The Twelve Aeon-Rulers', body: 'Each of the twelve aeons is governed by a ruler whose name encodes their function. Harmozel (har-MOH-zel) is the light of grace; Oroiael (or-OY-ah-el) is the light of thought; Daveithai (dah-VAY-thay) is the light of understanding; Eleleth (el-EL-eth) is the light of perception. The remaining eight rulers govern the intermediate regions between these four cardinal luminaries.' },
+   491→   491→      { title: 'Ritual Performance', body: 'The hymn is performed by twelve priests standing in a circle, each facing outward toward one of the twelve directions. Each priest sings his verse and then turns inward, symbolizing the soul\'s turn from the outer world toward the inner Treasury. By the end of the hymn, all twelve priests face inward, representing the soul\'s arrival at the center of the Pleroma.' }
+   492→   492→    ],
+   493→   493→    sacredText: [
+   494→   494→      'I. Harmozel [har-MOH-zel], light of grace, shine upon my path; open the first gate that my soul may enter in.',
+   495→   495→      'II. Oroiael [or-OY-ah-el], light of thought, illuminate my mind; open the second gate that my soul may understand.',
+   496→   496→      'III. Daveithai [dah-VAY-thay], light of understanding, grant me wisdom; open the third gate that my soul may comprehend.',
+   497→   497→      'IV. Eleleth [el-EL-eth], light of perception, open my eyes; open the fourth gate that my soul may see.',
+   498→   498→      'V. Phaoph [FAY-off], light of the east, guide my steps; open the fifth gate that my soul may ascend.',
+   499→   499→      'VI. Aphroph [AHF-roff], light of the west, protect my going; open the sixth gate that my soul may pass through.',
+   500→   500→      'VII. Saphaph [SAH-fahf], light of the north, guard my ascent; open the seventh gate that my soul may be received.',
+   501→   501→      'VIII. Phthahoth [FTHAH-hoth], light of the south, warm my spirit; open the eighth gate that my soul may enter.',
+   502→   502→      'IX. Bathmoth [BAHTH-moth], light of the depths, raise me up; open the ninth gate that my soul may rise.',
+   503→   503→      'X. Mares [MAH-res], light of the heights, lift me higher; open the tenth gate that my soul may soar.',
+   504→   504→      'XI. Machmoth [MAHK-moth], light of the center, draw me inward; open the eleventh gate that my soul may approach.',
+   505→   505→      'XII. Plesithea [ple-SITH-ee-ah], light of lights, unite me with the source; open the twelfth gate that my soul may enter the Treasury.'
+   506→   506→    ],
+   507→   507→    elements: [
+   508→   508→      { id: 'ha-harmozel', label: 'Harmozel - Light of Grace', brief: 'First aeon-ruler', detail: 'Harmozel [har-MOH-zel] governs the first aeon and the first rank of treasuries. His name means "light of grace" and he presides over souls who have received the grace of the first baptism.' },
+   509→   509→      { id: 'ha-oroiael', label: 'Oroiael - Light of Thought', brief: 'Second aeon-ruler', detail: 'Oroiael [or-OY-ah-el] governs the second aeon. His name means "light of thought" and he illuminates the minds of those who seek understanding of the divine mysteries.' },
+   510→   510→      { id: 'ha-daveithai', label: 'Daveithai - Light of Understanding', brief: 'Third aeon-ruler', detail: 'Daveithai [dah-VAY-thay] governs the third aeon. His name means "light of understanding" and he grants wisdom to those who have passed through the first two gates.' },
+   511→   511→      { id: 'ha-eleleth', label: 'Eleleth - Light of Perception', brief: 'Fourth aeon-ruler', detail: 'Eleleth [el-EL-eth] governs the fourth aeon. His name means "light of perception" and he opens the eyes of the soul to see the Treasury of Light.' }
+   512→   512→    ]
+   513→   513→  },
+   514→   514→  {
+   515→   515→    id: 'three-amens', title: 'The Three Amens', category: 'hymn',
+   516→   516→    desc: 'The triple Amen formula that concludes every prayer and ritual in the Book of Jeu. Each Amen is spoken with a different emphasis - the first as affirmation, the second as sealing, the third as empowerment. The Three Amens correspond to the three watchers at each treasury gate and to the three Archon gates that must be passed in the ascent.',
+   517→   517→    sealType: 'hymn', book: 1, chapter: 'Passim', folio: 'Throughout',
+   518→   518→    lore: [
+   519→   519→      { title: 'The Power of the Triple', body: 'In Gnostic numerology, three is the number of completion. The Three Amens seal any prayer or ritual, making it irrevocable in the spiritual realm. The first Amen is spoken facing east (affirmation), the second facing south (sealing), the third facing west (empowerment). The initiate never faces north, for that is the direction of the Archons.' },
+   520→   520→      { title: 'Pronunciation', body: 'Each Amen [ah-MEN] is intoned on a descending pitch: the first high and clear (affirmation), the second middle and firm (sealing), the third low and resonant (empowerment). The vowel sound "ah" opens the throat and allows the spirit to flow; the closing "en" seals the sound and makes it permanent.' }
+   521→   521→    ],
+   522→   522→    sacredText: [
+   523→   523→      'Amen [ah-MEN] - the first: So it is affirmed in the Treasury of Light.',
+   524→   524→      'Amen [ah-MEN] - the second: So it is sealed by the watchers of the gates.',
+   525→   525→      'Amen [ah-MEN] - the third: So it is established forever and ever.',
+   526→   526→      'The Three Amens: Affirmation, Sealing, Empowerment.',
+   527→   527→      'By these three words is every prayer completed and every seal confirmed.'
+   528→   528→    ],
+   529→   529→    elements: [
+   530→   530→      { id: 'am-first', label: 'First Amen - Affirmation', brief: 'Spoken facing east', detail: 'The first Amen affirms the truth of what has been spoken. It is intoned high and clear, facing east toward the source of light. This corresponds to the first watcher who examines the cipher.' },
+   531→   531→      { id: 'am-second', label: 'Second Amen - Sealing', brief: 'Spoken facing south', detail: 'The second Amen seals what has been affirmed, making it irrevocable. It is intoned middle and firm, facing south. This corresponds to the second watcher who examines the seal.' },
+   532→   532→      { id: 'am-third', label: 'Third Amen - Empowerment', brief: 'Spoken facing west', detail: 'The third Amen empowers what has been sealed, activating its spiritual force. It is intoned low and resonant, facing west. This corresponds to the third watcher who judges the purity of the soul.' }
+   533→   533→    ]
+   534→   534→  },
+   535→   535→  {
+   536→   536→    id: 'vowel-chant', title: 'The Vowel Chant', category: 'hymn',
+   537→   537→    desc: 'The seven sacred vowels - A, E, I, O, U, O, and the silent seventh - chanted in sequence to open the seven levels of the Treasury. Each vowel resonates with a different rank of spiritual being, and the complete chant aligns the initiate\'s soul with the entire structure of the Pleroma. This is the most ancient element of the Jeu liturgy, predating even the Coptic text itself.',
+   538→   538→    sealType: 'hymn', book: 1, chapter: 'Chapter 1', folio: 'f. 1v',
+   539→   539→    lore: [
+   540→   540→      { title: 'The Seven Vowels', body: 'In ancient Gnostic and magical practice, the seven Greek vowels (alpha, epsilon, eta, iota, omicron, upsilon, omega) correspond to the seven planetary spheres and the seven ranks of spiritual being. Chanting them in sequence aligns the soul with the cosmic structure and opens a pathway through the celestial barriers.' },
+   541→   541→      { title: 'The Silent Seventh', body: 'The seventh vowel is never spoken aloud - it is the vowel of silence, representing the Great Invisible Spirit that transcends all sound. After chanting the six audible vowels, the initiate falls silent, and in that silence the seventh vowel is "heard" by the spirit within. This silence is the most powerful element of the chant.' }
+   542→   542→    ],
+   543→   543→    sacredText: [
+   544→   544→      'A [ah] - the vowel of the beginning, the first emanation, the breath of creation',
+   545→   545→      'E [eh] - the vowel of the way, the path between the worlds, the bridge of light',
+   546→   546→      'I [ee] - the vowel of the spirit, the divine spark within, the fire of gnosis',
+   547→   547→      'O [oh] - the vowel of the fullness, the completion of the circuit, the circle of the Pleroma',
+   548→   548→      'U [oo] - the vowel of the depths, the wellspring of light, the fountain of the Treasury',
+   549→   549→      'O [aw] - the vowel of the mystery, the gate of the ineffable, the threshold of the Invisible',
+   550→   550→      '[Silence] - the seventh vowel, unspoken, unheard by mortals, known only to the Great Invisible Spirit'
+   551→   551→    ],
+   552→   552→    elements: [
+   553→   553→      { id: 'vc-a', label: 'Alpha - The Beginning', brief: 'First vowel', detail: 'A [ah] corresponds to the first emanation and the breath of creation. It opens the outermost gate and aligns the initiate with the cosmic beginning.' },
+   554→   554→      { id: 'vc-e', label: 'Epsilon - The Way', brief: 'Second vowel', detail: 'E [eh] corresponds to the path between worlds. It builds the bridge of light that the soul must cross in its ascent.' },
+   555→   555→      { id: 'vc-i', label: 'Iota - The Spirit', brief: 'Third vowel', detail: 'I [ee] corresponds to the divine spark within. It kindles the fire of gnosis in the initiate\'s soul.' },
+   556→   556→      { id: 'vc-o', label: 'Omicron - The Fullness', brief: 'Fourth vowel', detail: 'O [oh] corresponds to the Pleroma, the divine fullness. It completes the circuit of light that encloses the Treasury.' },
+   557→   557→      { id: 'vc-u', label: 'Upsilon - The Depths', brief: 'Fifth vowel', detail: 'U [oo] corresponds to the wellspring of light at the bottom of the Treasury. It draws the initiate inward toward the source.' },
+   558→   558→      { id: 'vc-omega', label: 'Omega - The Mystery', brief: 'Sixth vowel', detail: 'O [aw] corresponds to the gate of the Ineffable. It is the threshold of the Great Invisible Spirit, beyond which lies the seventh and silent vowel.' },
+   559→   559→      { id: 'vc-silence', label: 'The Seventh Vowel - Silence', brief: 'The unspoken mystery', detail: 'The seventh vowel is never spoken. It is heard only in the silence of the spirit. It represents the Great Invisible Spirit itself - beyond all sound, beyond all naming, beyond all comprehension.' }
+   560→   560→    ]
+   561→   561→  },
+   562→   562→  {
+   563→   563→    id: 'prayer-thanks', title: 'Prayer of Thanksgiving', category: 'hymn',
+   564→   564→    desc: 'A prayer of gratitude recited after receiving the five seals and participating in the Eucharist. The prayer thanks the Great Invisible Spirit for the gift of gnosis, for the protection of the seals, and for the promise of ascent to the Treasury of Light. It is the final prayer of the initiation rite.',
+   565→   565→    sealType: 'hymn', book: 2, chapter: 'Chapter 54', folio: 'ff. 117r-118r',
+   566→   566→    lore: [
+   567→   567→      { title: 'Gratitude as Spiritual Power', body: 'In the Jeu cosmology, gratitude is not merely an emotion but a spiritual force. The Prayer of Thanksgiving generates a light that surrounds the newly sealed initiate, making them visible to the watchers of the Treasury as a "son of light" rather than a stranger to be examined. This is why the prayer must be recited sincerely and completely after every initiation.' },
+   568→   568→      { title: 'The Closing Formula', body: 'The prayer ends with the triple Amen and the words: "I am a vessel of thy light. Let me ascend unto the Treasury and dwell therein forever." This formula seals the entire initiation and commits the initiate to the path of ascent. From this point forward, the initiate is known as a "Child of the Light" within the community.' }
+   569→   569→    ],
+   570→   570→    sacredText: [
+   571→   571→      'I give thanks to thee, O Great Invisible Spirit, for thou hast revealed thyself to me, a lowly creature of the material world. Thou hast given me the knowledge of the treasuries and the names of the Fathers. Thou hast sealed me with the five seals and made me worthy to partake of the Pleroma.',
+   572→   572→      'I give thanks to thee, O Jeu, True God, for thou hast opened the way before me. Thou hast shown me the ciphers and the passwords. Thou hast taught me the hymns and the invocations. Through thee I shall ascend unto the Treasury of Light.',
+   573→   573→      'I give thanks to the four luminaries - Harmozel, Oroiael, Daveithai, and Eleleth - for they have shed their light upon my path and guided my steps through the veils.',
+   574→   574→      'I am a vessel of thy light. Let me ascend unto the Treasury and dwell therein forever. Amen [ah-MEN]. Amen [ah-MEN]. Amen [ah-MEN].'
+   575→   575→    ],
+   576→   576→    elements: [
+   577→   577→      { id: 'pt-spirit', label: 'Thanksgiving to the Invisible', brief: 'Gratitude for revelation', detail: 'The initiate thanks the Great Invisible Spirit for the gift of gnosis - the knowledge of the treasuries, the names of the Fathers, and the five seals that make ascent possible.' },
+   578→   578→      { id: 'pt-jeu', label: 'Thanksgiving to Jeu', brief: 'Gratitude for the way', detail: 'The initiate thanks Jeu, the True God, for opening the way of ascent - revealing the ciphers, the passwords, the hymns, and the invocations that are the soul\'s passport through the Treasury.' },
+   579→   579→      { id: 'pt-luminaries', label: 'Thanksgiving to the Luminaries', brief: 'Gratitude for guidance', detail: 'The initiate thanks the four luminaries - Harmozel, Oroiael, Daveithai, and Eleleth - for shedding their light upon the path and guiding the initiate through the veils of the Pleroma.' }
+   580→   580→    ]
+   581→   581→  },
+   582→   582→  {
+   583→   583→    id: 'doxology', title: 'The Doxology of the Pleroma', category: 'hymn',
+   584→   584→    desc: 'The final hymn of the Jeu liturgy, sung by the entire community in unison. The Doxology of the Pleroma is a hymn of praise that extols every rank and every treasury of the divine fullness. It is sung on high holy days and at the consecration of new priests, and is considered too sacred for casual recitation.',
+   585→   585→    sealType: 'hymn', book: 2, chapter: 'Chapter 60', folio: 'ff. 126r-128v',
+   586→   586→    lore: [
+   587→   587→      { title: 'The Cosmic Hymn', body: 'The Doxology is structured as a series of blessings, each one praising a different aspect of the Pleroma. It begins with the outermost rank (the 5th) and spirals inward through each rank until it reaches the Great Invisible Spirit at the center. This structure mirrors the soul\'s own journey of ascent.' },
+   588→   588→      { title: 'Community Performance', body: 'The Doxology must be sung by the entire community together, for no single voice can encompass the fullness of the Pleroma. Each member of the community sings the blessings of a different rank, and their combined voices create a harmonic resonance that opens the spiritual ears of all present to the sounds of the Treasury.' }
+   589→   589→    ],
+   590→   590→    sacredText: [
+   591→   591→      'Glory to the fifth rank, where the outermost treasuries shine with reflected light, and the watchers stand guard over the gates of the outer courts.',
+   592→   592→      'Glory to the fourth rank, where the treasuries glow with the light of the aeons, and the emanations of the Fathers radiate outward like flames.',
+   593→   593→      'Glory to the third rank, where the treasuries blaze with the light of the luminaries, and the four corners of the Pleroma are illuminated.',
+   594→   594→      'Glory to the second rank, where the treasuries shine with the light of the curtains, and the veils between the worlds grow thin.',
+   595→   595→      'Glory to the first rank, where the treasuries burn with the light of the Great Invisible, and the soul stands at the threshold of the Treasury itself.',
+   596→   596→      'Glory to the Great Invisible Spirit, who is before all and after all, within all and beyond all, the source and the destination, the beginning and the end of all light.',
+   597→   597→      'Amen [ah-MEN]. Amen [ah-MEN]. Amen [ah-MEN].'
+   598→   598→    ],
+   599→   599→    elements: [
+   600→   600→      { id: 'dx-rank5', label: 'Fifth Rank - Reflected Light', brief: 'Outermost treasuries', detail: 'The fifth rank shines with reflected light filtered through many veils. Its treasuries are guarded by the most formidable watchers, and its Fathers are the most accessible to human souls beginning their ascent.' },
+   601→   601→      { id: 'dx-rank1', label: 'First Rank - Direct Light', brief: 'Innermost treasuries', detail: 'The first rank burns with the direct light of the Great Invisible Spirit. Its treasuries are the most luminous and its Fathers are the most exalted. Only souls who have received all five seals may enter here.' },
+   602→   602→      { id: 'dx-spirit', label: 'The Great Invisible', brief: 'Source and destination', detail: 'The Great Invisible Spirit is both the source from which all light flows and the destination to which all souls aspire. It is the alpha and omega of the Gnostic cosmology - the unnamable mystery at the heart of all existence.' }
+   603→   603→    ]
+   604→   604→  },
+   605→   605→
+   606→   606→  /* ── ARCHON GATES ── */
+   607→   607→  {
+   608→   608→    id: 'archons', title: 'The Three Archon Gates', category: 'archon',
+   609→   609→    desc: 'Between the soul and the Treasury stand the three great gates of the Archons: the Gate of the Aeons, the Gate of the Sphere, and the Gate of the Midst. Each gate is guarded by an Archon who must be overcome by the correct password. These are the most dangerous obstacles on the path of ascent, for the Archons will seize any soul that cannot speak the proper names.',
+   610→   610→    sealType: 'archon-gate', book: 1, chapter: 'Chapters 30-50', folio: 'ff. 20r-39v',
+   611→   611→    lore: [
+   612→   612→      { title: 'The Archons', body: 'The Archons are the rulers of the material cosmos - beings of immense power who govern the planets, the stars, and the cycles of fate. They are not evil in themselves but serve the Demiurge, the creator of the material world, who keeps souls trapped in flesh. The three great Archons guard the boundaries between the material and spiritual realms.' },
+   613→   613→      { title: 'The Gate of the Aeons', body: 'Paraphax [PAR-ah-faks] guards the first gate, the Gate of the Aeons. This gate separates the planetary spheres from the lower reaches of the spiritual realm. The password is IAO SABAOTH [EE-ah-oh SAH-bah-oth], the name of the Lord of Hosts. When Paraphax hears this name, he must yield, for it is the name of the true God who stands above all Archons.' },
+   614→   614→      { title: 'The Gate of the Sphere', body: 'Arthax [AR-thaks] guards the second gate, the Gate of the Sphere. This gate controls the zodiac and the planetary influences that bind souls to fate. The password is ADONAI ELOHIM [ah-doh-NYE el-oh-HEEM], the sacred name of the God of Gods. When Arthax hears this name, the zodiac wheel stops and the soul is freed from astrological determination.' },
+   615→   615→      { title: 'The Gate of the Midst', body: 'Aphraphax [ah-FRAH-faks] guards the third and most terrible gate, the Gate of the Midst. This gate stands at the boundary between the spiritual and the divine - between the realm of the Archons and the realm of the Treasury. The password is EIE AZAPHAX [AY-ee-ay AZ-ah-faks], a cipher-name of immense power. When Aphraphax hears this name, the final barrier dissolves and the Treasury of Light becomes visible.' }
+   616→   616→    ],
+   617→   617→    elements: [
+   618→   618→      { id: 'ar-paraph', label: '1st Gate: Paraphax', brief: 'Gate of the Aeons - Password: IAO SABAOTH', detail: 'Paraphax [PAR-ah-faks], Archon of the Aeons, guards the first gate between the planetary spheres and the spiritual realm. Password: IAO SABAOTH [EE-ah-oh SAH-bah-oth]. When spoken, the Archon must yield to the name of the true Lord of Hosts.' },
+   619→   619→      { id: 'ar-arthax', label: '2nd Gate: Arthax', brief: 'Gate of the Sphere - Password: ADONAI ELOHIM', detail: 'Arthax [AR-thaks], Archon of the Sphere, guards the second gate that controls the zodiac and fate. Password: ADONAI ELOHIM [ah-doh-NYE el-oh-HEEM]. When spoken, the zodiac wheel ceases and the soul is freed from astrological determination.' },
+   620→   620→      { id: 'ar-aphr', label: '3rd Gate: Aphraphax', brief: 'Gate of the Midst - Password: EIE AZAPHAX', detail: 'Aphraphax [ah-FRAH-faks], Archon of the Midst, guards the final and most terrible gate between the spiritual and the divine. Password: EIE AZAPHAX [AY-ee-ay AZ-ah-faks]. When spoken, the last barrier dissolves and the Treasury of Light becomes visible.' }
+   621→   621→    ]
+   622→   622→  },
+   623→   623→
+   624→   624→  /* ── RELATED TEXTS ── */
+   625→   625→  {
+   626→   626→    id: 'untitled', title: 'The Untitled Text (Codex Brucianus)', category: 'related',
+   627→   627→    desc: 'Found alongside the Book of Jeu in the Codex Brucianus, the Untitled Text is a cosmological treatise that describes the emanation of the divine hierarchy from the unknowable One, through the divine triad, the four luminaries, the twelve aeons, and the creation of the material world by the Demiurge Yaldabaoth. It provides the mythological framework that underlies the Treasury system.',
+   628→   628→    sealType: 'names', book: 1, chapter: 'Untitled', folio: 'ff. 57r-78v',
+   629→   629→    lore: [
+   630→   630→      { title: 'The Divine Triad', body: 'The Untitled Text begins with the One - the ineffable first principle that exists beyond being and non-being. From the One proceeds the divine Triad: Father, Mother (Barbelo), and Child (Autogenes). This Triad is the first movement within the stillness of the One, the first differentiation of the undifferentiated divine source.' },
+   631→   631→      { title: 'The Fall of Sophia', body: 'Sophia [so-FEE-ah], the youngest of the aeons, desired to emanate without her consort, producing an imperfect offspring - Yaldabaoth [yal-dah-BAH-oth], the Demiurge. This act of unauthorized creation introduced deficiency into the Pleroma and resulted in the formation of the material world. Sophia\'s error is the cosmological explanation for the existence of evil and suffering.' },
+   632→   632→      { title: 'The Creation of the Material World', body: 'Yaldabaoth, ignorant of his origin, created the material cosmos as a flawed copy of the Pleroma. He appointed seven Archons to rule over the seven planetary spheres and twelve Archons to rule over the zodiac. These Archons trap souls in flesh and subject them to the cycles of fate, preventing their ascent to the Treasury.' },
+   633→   633→      { title: 'The Redemption', body: 'The Great Invisible Spirit sent Christ down through the aeons to teach the spiritual seed the knowledge (gnosis) of their origin and the passwords needed for ascent. Christ descended through each treasury, learning the names and ciphers, and then ascended again, opening the way for all who would follow.' }
+   634→   634→    ],
+   635→   635→    sacredText: [
+   636→   636→      'There exists before all things the One, the unnamable, the incomprehensible, the invisible, the eternal. From the One proceeded the first thought, which is Barbelo [bar-BEH-loh], the Mother of all. And from the One and Barbelo proceeded the Autogenes [ow-TOJ-en-ees], the Self-Begotten One, who is the first light.',
+   637→   637→      'The Autogenes caused four luminaries to stand before him: Harmozel [har-MOH-zel], who is the light of grace and stands at the right; Oroiael [or-OY-ah-el], who is the light of thought and stands at the left; Daveithai [dah-VAY-thay], who is the light of understanding and stands above; and Eleleth [el-EL-eth], who is the light of perception and stands below.',
+   638→   638→      'From the four luminaries proceeded twelve aeons, and from the twelve aeons proceeded seventy-two powers, and from the seventy-two powers proceeded three hundred and sixty emanations. And the Pleroma was complete, lacking nothing.',
+   639→   639→      'But Sophia [so-FEE-ah], the youngest of the aeons, desired to emanate without her consort, and her thought produced an imperfect thing - a lion-faced serpent called Yaldabaoth [yal-dah-BAH-oth], who became the Demiurge, the creator of the material world. And when Sophia saw what she had produced, she was ashamed and cast him out of the Pleroma.',
+   640→   640→      'Yaldabaoth, being ignorant of the Pleroma from which he had fallen, created seven Archons to rule the seven heavens and twelve Archons to rule the zodiac. And he said to them: I am a jealous God, and there is no other beside me - thus proving himself ignorant, for if there were no other, of whom could he be jealous?',
+   641→   641→      'But the Great Invisible Spirit sent Christ down through the treasuries, and he passed through every gate, learning the names and ciphers, and he descended even into the material world and took on flesh, that he might teach the spiritual seed the way of ascent back to the Treasury of Light.'
+   642→   642→    ],
+   643→   643→    elements: [
+   644→   644→      { id: 'ut-one', label: 'The One', brief: 'The ineffable first principle', detail: 'The One exists beyond being and non-being, beyond name and form. It is the source from which all things proceed and the destination to which all things return. No aeon has ever comprehended it; no word can describe it.' },
+   645→   645→      { id: 'ut-triad', label: 'The Divine Triad', brief: 'Father, Mother (Barbelo), Child (Autogenes)', detail: 'From the One proceeds the divine Triad: the Father (the will to emanate), Barbelo [bar-BEH-loh] (the first thought, the womb of creation), and the Autogenes [ow-TOJ-en-ees] (the self-begotten child, the first light). Together they constitute the first movement within the divine stillness.' },
+   646→   646→      { id: 'ut-luminaries', label: 'The Four Luminaries', brief: 'Harmozel, Oroiael, Daveithai, Eleleth', detail: 'The Autogenes causes four luminaries to stand at the four corners: Harmozel (grace, right), Oroiael (thought, left), Daveithai (understanding, above), Eleleth (perception, below). These four sustain the Pleroma with their light.' },
+   647→   647→      { id: 'ut-sophia', label: 'The Fall of Sophia', brief: 'The origin of the material world', detail: 'Sophia [so-FEE-ah], desiring to create without her consort, produces the lion-faced Demiurge Yaldabaoth [yal-dah-BAH-oth]. This unauthorized emanation introduces deficiency into the Pleroma and results in the creation of the material cosmos as a flawed imitation of the divine fullness.' },
+   648→   648→      { id: 'ut-yaldabaoth', label: 'Yaldabaoth the Demiurge', brief: 'Creator of the material world', detail: 'Yaldabaoth [yal-dah-BAH-oth] is the lion-faced serpent who created the material world in ignorance. He appoints seven Archons over the seven heavens and twelve over the zodiac. His declaration "I am a jealous God and there is no other" reveals his ignorance of the higher divine realms from which he fell.' },
+   649→   649→      { id: 'ut-redemption', label: 'The Redemption', brief: 'Christ descends to teach gnosis', detail: 'The Great Invisible Spirit sends Christ through the treasuries to teach the spiritual seed the knowledge of their origin and the passwords for ascent. Christ descends through every gate, learning each name and cipher, then ascends again, opening the way for all who follow.' }
+   650→   650→    ]
+   651→   651→  },
+   652→   652→  {
+   653→   653→    id: 'apocryphon-john', title: 'The Apocryphon of John', category: 'related',
+   654→   654→    desc: 'The most important Sethian Gnostic text, preserving the full creation myth from the One through the fall of Sophia to the creation of humanity. The Apocryphon of John provides the theological foundation for the entire Sethian tradition and is directly parallel to the cosmology of the Book of Jeu and the Untitled Text.',
+   655→   655→    sealType: 'dialogue', book: 1, chapter: 'Nag Hammadi Codex II,1', folio: 'NHC II,1; IV,1; BG 8502,2',
+   656→   656→    lore: [
+   657→   657→      { title: 'The Three Revelations', body: 'The Apocryphon of John exists in four manuscript copies - more than any other Sethian text. It presents itself as a secret revelation given by the risen Christ to John, son of Zebedee, in response to John\'s distress after a Pharisee mocked his teacher. Three versions survive: a short recension (NHC II) and a long recension (NHC IV, BG).' },
+   658→   658→      { title: 'The Sethian Creation Myth', body: 'The text describes the emanation of the divine hierarchy from the One: the divine Triad (Father, Mother Barbelo, Child Autogenes), the four luminaries (Harmozel, Oroiael, Daveithai, Eleleth), the fall of Sophia, and the creation of Yaldabaoth. This is the same hierarchy that structures the Treasury of Light in the Book of Jeu.' },
+   659→   659→      { title: 'The Creation of Adam', body: 'Yaldabaoth creates Adam as a material copy of the divine Anthropos (the heavenly humanity). But the Spiritual Seed - a fragment of divine light stolen by Sophia - becomes trapped within Adam\'s material body. Christ descends to teach Adam the knowledge of his true origin and the path of ascent back to the Pleroma.' }
+   660→   660→    ],
+   661→   661→    sacredText: [
+   662→   662→      'It happened one day when John, the brother of James, was going up to the Temple, that a Pharisee named Arimanios approached him and said: Where is your master, the one you followed? And John said: He has returned to the place from which he came. Then Arimanios laughed and said: Has he not walked in error, this Nazarene?',
+   663→   663→      'And John was troubled in his heart and went to a desolate place. And the heavens opened and a great light surrounded him, and a voice spoke: John, why are you troubled? I am the Father, I am the Mother, I am the Child. I am the undefiled and incorruptible one.',
+   664→   664→      'The One is a sovereign that has nothing above it. It is God and Father of the All, the holy one, the invisible one, the one that is over all, that is incorruptible, that is pure light at which no eye can gaze. It is the invisible Spirit. We should not think of it as gods or as something like that, for it is superior to divinity.',
+   665→   665→      'From the One appeared the first power, Barbelo [bar-BEH-loh], the perfect forethought of the all. She is the womb of the all, for she is prior to them all - the Mother-Father, the first Man, the holy Spirit, the thrice-male, the androgynous one of three names.',
+   666→   666→      'And the Autogenes, the Self-Begotten One, caused to stand four luminaries before him. Harmozel [har-MOH-zel] - he stands at the first aeon with Armogenai. Oroiael [or-OY-ah-el] - he stands at the second aeon with Phaion. Daveithai [dah-VAY-thay] - he stands at the third aeon with Ophiel. Eleleth [el-EL-eth] - he stands at the fourth aeon with the virgin of the four lights.',
+   667→   667→      'And Sophia [so-FEE-ah] of the Epinoia [ep-ih-NOY-ah], being an aeon, conceived a thought from herself, with the reflection of the Invisible Spirit. Because of this, his image became a counterfeit in the waters. And from that appeared the lion-faced serpent, whose name is Yaldabaoth [yal-dah-BAH-oth].'
+   668→   668→    ],
+   669→   669→    elements: [
+   670→   670→      { id: 'aj-one', label: 'The One', brief: 'The unknowable first principle', detail: 'The One in the Apocryphon is described in the same apophatic terms as in the Untitled Text: "superior to divinity," "pure light at which no eye can gaze," "the invisible Spirit." This is the same Great Invisible Spirit that stands at the apex of the Treasury system.' },
+   671→   671→      { id: 'aj-barbelo', label: 'Barbelo', brief: 'The first emanation, divine Mother', detail: 'Barbelo [bar-BEH-loh] is the first thought of the One, the divine Mother-Father, the womb of the Pleroma. She contains within herself the blueprint of all that will emanate from the divine source. She is called "thrice-male" because she contains the power of Father, Mother, and Child.' },
+   672→   672→      { id: 'aj-autogenes', label: 'The Autogenes', brief: 'The Self-Begotten Child', detail: 'The Autogenes [ow-TOJ-en-ees] is the first-begotten of the Pleroma, the Self-Begotten One who proceeds from the Father and Barbelo. He establishes the four luminaries and organizes the structure of the Pleroma into its final form.' },
+   673→   673→      { id: 'aj-sophia', label: 'Sophia', brief: 'The Wisdom whose fall created the world', detail: 'Sophia [so-FEE-ah], the youngest aeon, emanates without her consort and produces Yaldabaoth. Her error introduces deficiency into the Pleroma and results in the creation of the material world. Her redemption - the recovery of the light she lost - is the purpose of the Gnostic ascent.' },
+   674→   674→      { id: 'aj-yaldabaoth', label: 'Yaldabaoth', brief: 'The Demiurge, creator of matter', detail: 'Yaldabaoth [yal-dah-BAH-oth], the lion-faced serpent, is the Demiurge who creates the material world in ignorance. He is called "Samael" (the blind god) and "Saklas" (the fool). Despite his power, he is ultimately a deficient being who cannot prevent the ascent of souls who possess the correct gnosis.' }
+   675→   675→    ]
+   676→   676→  },
+   677→   677→  {
+   678→   678→    id: 'gospel-egyptians', title: 'The Gospel of the Egyptians', category: 'related',
+   679→   679→    desc: 'A Sethian Gnostic dialogue between Jesus and his female disciples, focusing on the nature of the divine triad, the role of the Sethian redeemer, and the ultimate dissolution of the material world. The Gospel of the Egyptians shares the same cosmological framework as the Book of Jeu but emphasizes the destruction of death and the restoration of the Pleroma.',
+   680→   680→    sealType: 'hymn', book: 1, chapter: 'Nag Hammadi Codex III,2; IV,2', folio: 'NHC III,2; IV,2',
+   681→   681→    lore: [
+   682→   682→      { title: 'The Holy Book of the Great Invisible Spirit', body: 'The Gospel of the Egyptians is also known by its subtitle: "The Holy Book of the Great Invisible Spirit." This title directly connects it to the Book of Jeu, where the Great Invisible Spirit stands at the apex of the Treasury system. The text presents the same hierarchy of beings but focuses on the eschatological promise of the Pleroma\'s restoration.' },
+   683→   683→      { title: 'The Sethian Redeemer', body: 'The Gospel of the Egyptians identifies Seth as the paradigmatic Gnostic redeemer - the seed of the divine that passes through generation after generation, preserving the knowledge of the Pleroma. Each time the Archons try to destroy the spiritual seed, Seth is reborn and the knowledge is preserved. This cyclical redemption echoes the Treasury system\'s promise of ascent.' },
+   684→   684→      { title: 'The Dissolution of Death', body: 'The text promises that eventually the entire material cosmos will be dissolved and all the divine light that was stolen by the Demiurge will be recovered. This "dissolution of death" is the final act of the cosmic drama - when the last soul ascends to the Treasury and the material world ceases to exist.' }
+   685→   685→    ],
+   686→   686→    sacredText: [
+   687→   687→      'The Great Invisible Spirit is the one from whom the all has come. He is the one who exists before the all, who contains the all, who is contained by none. From him proceeded the Autogenes, and from the Autogenes proceeded the four luminaries, and from the four luminaries proceeded the twelve aeons.',
+   688→   688→      'Seth, the son of Adam, who is the seed of the great race, was placed in the world as a planting of the great unshakeable race. And his seed shall endure through every generation, preserving the knowledge of the Pleroma.',
+   689→   689→      'And when the consummation of the all comes to pass, then shall the Archons be stripped of their power, and the material world shall be dissolved, and all the light that was hidden within it shall ascend unto the Treasury. And death shall be no more.',
+   690→   690→      'This is the holy book of the Great Invisible Spirit. Blessed is he who reads it and keeps the words thereof, for the time is near when all shall be fulfilled.'
+   691→   691→    ],
+   692→   692→    elements: [
+   693→   693→      { id: 'ge-spirit', label: 'The Great Invisible Spirit', brief: 'Supreme divinity', detail: 'The Great Invisible Spirit in the Gospel of the Egyptians is the same supreme divinity as in the Book of Jeu - the unknowable source from which all things emanate and to which all things return.' },
+   694→   694→      { id: 'ge-seth', label: 'Seth the Redeemer', brief: 'Seed of the divine race', detail: 'Seth is the paradigmatic Gnostic redeemer, the seed of the divine that is reborn in every generation to preserve the knowledge of the Pleroma. His lineage carries the gnosis through the ages.' },
+   695→   695→      { id: 'ge-dissolution', label: 'The Dissolution of Death', brief: 'Final eschatological promise', detail: 'The ultimate promise of the Gospel of the Egyptians: the material world will be dissolved, the Archons stripped of power, and all divine light will ascend to the Treasury. Death shall be no more.' }
+   696→   696→    ]
+   697→   697→  },
+   698→   698→  {
+   699→   699→    id: 'zostrianos', title: 'Zostrianos', category: 'related',
+
+[showing lines 300-699 of 2002; use offset=700 with limit to continue reading]
