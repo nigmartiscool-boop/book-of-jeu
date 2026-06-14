@@ -17,7 +17,7 @@ interface TreasuryEntry {
   password?: string; passwordPron?: string
 }
 
-type SacredCategory = 'overview' | 'liturgy' | 'hymn' | 'archon' | 'related' | 'names' | 'dialogue'
+type SacredCategory = 'overview' | 'cosmos' | 'liturgy' | 'hymn' | 'archon' | 'related' | 'names' | 'dialogue'
 
 interface SacredEntry {
   id: string; title: string; category: SacredCategory
@@ -31,11 +31,11 @@ interface SacredEntry {
 
 const RANK_NAMES = ['', 'First Rank (Innermost)', 'Second Rank (Inner)', 'Third Rank (Middle)', 'Fourth Rank (Outer)', 'Fifth Rank (Outermost)']
 const CATEGORY_LABELS: Record<SacredCategory, string> = {
-  overview: 'Overview', liturgy: 'Liturgy & Rites', hymn: 'Hymns & Prayers',
+  overview: 'Overview', cosmos: 'Cosmos Map', liturgy: 'Liturgy & Rites', hymn: 'Hymns & Prayers',
   archon: 'Archon Gates', related: 'Related Texts', names: 'Sacred Names', dialogue: 'Dialogues'
 }
 const CATEGORY_ICONS: Record<SacredCategory, string> = {
-  overview: '\u2720', liturgy: '\u2699', hymn: '\u266B',
+  overview: '\u2720', cosmos: '\u25CE', liturgy: '\u2699', hymn: '\u266B',
   archon: '\u2694', related: '\u2606', names: '\u2735', dialogue: '\u2756'
 }
 
@@ -258,6 +258,48 @@ const SACRED_ENTRIES: SacredEntry[] = [
       { id: 'ov-curtain2', label: 'Second Curtain', brief: 'Middle veil of light', detail: 'The second curtain is woven from the light of the twelve aeons themselves. The initiate must have received the seal of each treasury in the 3rd and 4th ranks and must speak the three sacred vowels IAO, EIE, and OYO in succession.' },
       { id: 'ov-curtain3', label: 'Third Curtain', brief: 'Inner veil before the Invisible', detail: 'The third and final curtain is woven from the light of the Great Invisible Spirit itself. It parts only for one who has received all five baptisms and bears the seal of the Ineffable Mystery upon their forehead.' },
       { id: 'ov-invisible', label: 'The Great Invisible', brief: 'The unknowable source', detail: 'The Great Invisible Spirit is the first principle, the unnamable source of all that exists. It is called "Invisible" because no aeon has ever seen its form, and "Great" because it encompasses all things. Jeu, the True God, is its first emanation and the guardian of the Treasury.' }
+    ]
+  },
+
+  /* ── COSMOS MAP ── */
+  {
+    id: 'cosmos-map', title: 'The Gnostic Cosmos', category: 'cosmos',
+    desc: 'A complete map of the Gnostic cosmos — from the ineffable One at the center of all being, through the divine Triad, the Four Luminaries, the Twelve Aeons, the Boundary of the Pleroma, the domain of Yaldabaoth the Demiurge, the Seven Planetary Archons, the Twelve Zodiac Archons, the Wheel of Fate, and out into the material heavens of the Kenoma. Click any realm or entity on the map to receive its teaching. Every name is given with its pronunciation for the English-speaking initiate.',
+    sealType: 'cosmos', book: 1, chapter: 'Composite Cosmology', folio: 'Codex Brucianus; NHC II,1; NHC III,2; NHC XI,3',
+    lore: [
+      { title: 'The Architecture of the Cosmos', body: 'The Gnostic cosmos is structured as a series of concentric spheres, radiating outward from the pure divine source at the center into increasing degrees of material density and spiritual darkness. At the absolute center sits the One — the ineffable, unknowable first principle that transcends all being and all naming. No eye has seen it; no tongue has named it. It is the still point around which all existence turns.' },
+      { title: 'The Pleroma and the Kenoma', body: 'The cosmos is divided into two fundamental regions. The Pleroma ("Fullness") is the realm of divine light, containing the Triad, the Luminaries, the Aeons, and the 60 Treasuries of Light. The Kenoma ("Deficiency") is the realm of matter and fate, created by the Demiurge Yaldabaoth as a flawed copy of the Pleroma. Between them stands the Stauros — the Cross or Limit — which marks the boundary no Archon can cross.' },
+      { title: 'The Descent and the Ascent', body: 'The cosmic drama unfolds in two movements. The Descent: Sophia falls from the Pleroma, producing Yaldabaoth, who creates the material world and traps divine light within mortal flesh. The Ascent: Christ descends through every realm, learning every name and cipher, then ascends again — opening the way for all souls who possess the gnosis to follow. The path of ascent reverses the path of descent, passing through the 60 treasuries from the outermost to the innermost.' },
+      { title: 'The Material Heavens', body: 'Beyond the Pleroma, the material cosmos is ruled by the seven Planetary Archons (Saturn through Moon) and the twelve Zodiac Archons (Aries through Pisces). These beings govern the cycles of fate — Heimarmene — that bind souls to rebirth. The constellations of the material heavens are their domain, and every star is a seal upon the prison of flesh. Only by knowing the names and passwords can the soul pass through their gates.' }
+    ],
+    elements: [
+      { id: 'cos-one', label: 'The One', brief: 'The ineffable first principle', detail: 'The One exists beyond being and non-being, beyond name and form. It is the source from which all things proceed and the destination to which all things return. No aeon has comprehended it; no word can describe it. In the Book of Jeu, the Great Invisible Spirit is its first revealed aspect — the One made barely knowable.' },
+      { id: 'cos-triad', label: 'The Divine Triad', brief: 'Father, Barbelo, Autogenes', detail: 'From the One proceeds the divine Triad: the Father (the will to emanate), Barbelo [bar-BEH-loh] (the first thought, the womb of all creation), and the Autogenes [aw-TOJ-en-eez] (the self-begotten child, the first light). The Father contemplates; Barbelo receives the thought; the Autogenes brings it into being. These three are the first movement within the divine stillness.' },
+      { id: 'cos-luminaries', label: 'The Four Luminaries', brief: 'Harmozel, Oroiael, Daveithai, Eleleth', detail: 'The Autogenes establishes four great Luminaries at the four quarters: Harmozel [har-MOH-zel] in the east (grace and truth), Oroiael [or-OY-ah-el] in the west (conception and perception), Daveithai [dah-VAY-thay] in the south (understanding and love), Eleleth [el-EL-eth] in the north (wisdom and prudence). Each Luminary sustains three of the twelve aeons with its light.' },
+      { id: 'cos-aeons', label: 'The Twelve Aeons', brief: 'Armedon, Sigen, Matricula, and nine more', detail: 'Twelve aeons emanate from the four Luminaries, three per Luminary. They are: Armedon, Sigen, Matricula under Harmozel; Haram, Ei, Ogen under Oroiael; Mixanther, Astere, Aphria under Daveithai; Mirothea, Synel, Thales under Eleleth. These twelve aeons constitute the Pleromic Fullness — the complete divine realm. The 60 Treasuries of Light are distributed among them.' },
+      { id: 'cos-boundary', label: 'The Stauros (Limit)', brief: 'The boundary of the Pleroma', detail: 'The Stauros [STOW-ros] — the Cross — is the limit that separates the Pleroma from the Kenoma. It is both a boundary and a protective wall: no Archon can cross it, no impure being can approach it. Sophia stands at this boundary after her fall, unable to re-enter the Pleroma she has defiled. Christ passes through the Stauros in both directions — descending and ascending — because he possesses the full gnosis.' },
+      { id: 'cos-sophia', label: 'Sophia (Wisdom)', brief: 'The fallen aeon', detail: 'Sophia [so-FEE-ah], the youngest and most beautiful of the aeons, desired to emanate without her consort. Her unauthorized desire produced the lion-faced Demiurge Yaldabaoth — a being of power but without wisdom. Sophia was cast to the boundary of the Pleroma, where she grieves for her error and longs for redemption. Her story is the origin of all suffering — and the promise that even the deepest fall can be redeemed.' },
+      { id: 'cos-yaldabaoth', label: 'Yaldabaoth the Demiurge', brief: 'Creator of the material world', detail: 'Yaldabaoth [yal-dah-BAH-oth] is the lion-faced serpent born from Sophia\'s error. Ignorant of his divine origin, he creates the material world as a flawed copy of the Pleroma. He appoints seven Archons over the planets and twelve over the zodiac, and he declares "I am a jealous God and there is no other" — thereby proving his ignorance, for if there were no other, of whom could he be jealous? He is also called Samael (the blind god) and Saklas (the fool).' },
+      { id: 'cos-planets', label: 'The Seven Planetary Archons', brief: 'Rulers of the seven spheres', detail: 'Seven Archons govern the seven planetary spheres: Ialdabaoth [yal-dah-BAH-oth] (Saturn), Iao [EE-ah-oh] (Jupiter), Sabaoth [SAH-bah-oth] (Mars), Adonai [ah-DON-eye] (Sun), Eloai [el-OH-eye] (Venus), Oraios [or-AY-os] (Mercury), and Astaphaios [as-tah-FAY-os] (Moon). Each demands a password from the ascending soul. The seven sacred vowels — A, E, I, O, U, O, Silence — correspond to their seven spheres.' },
+      { id: 'cos-zodiac', label: 'The Twelve Zodiac Archons', brief: 'Rulers of the zodiacal signs', detail: 'Twelve Archons govern the zodiac: Arioth (Aries), Thaum (Taurus), Gair (Gemini), Kark (Cancer), Leon (Leo), Parthen (Virgo), Mozn (Libra), Akrab (Scorpio), Qeshet (Sagittarius), Gadi (Capricorn), Deli (Aquarius), Nuni (Pisces). They shape the circumstances of each soul\'s incarnation — its body, its fate, its personality — keeping it bound to the wheel of rebirth.' },
+      { id: 'cos-fate', label: 'Heimarmene (Fate)', brief: 'The wheel of destiny', detail: 'Heimarmene [hi-MAR-men-ee] is the inexorable wheel of fate that binds every soul to the cycle of birth, death, and rebirth. The Planetary Archons and Zodiac Archons are its agents, assigning each soul its destiny at birth. Only the gnosis — the knowledge of the sacred names and ciphers — can free the soul from Heimarmene and allow it to ascend past the Archon gates.' },
+      { id: 'cos-kenoma', label: 'The Kenoma (Deficiency)', brief: 'The material world', detail: 'The Kenoma [ken-OH-mah] is the material cosmos — the realm of deficiency, darkness, and death. It is not evil in itself but is a flawed copy of the Pleroma, created by a being who did not understand what he was copying. The constellations in the material heavens are the seals of the Archons, and every star is a bar in the prison of flesh. Yet even here, fragments of divine light are hidden, awaiting the gnosis that will set them free.' },
+      { id: 'cos-treasuries', label: 'The 60 Treasuries of Light', brief: 'The path of ascent through the Pleroma', detail: 'Within the Pleroma, 60 Treasuries of Light are arranged in five ranks of twelve. The soul must ascend through all 60 in reverse order — from the 60th (outermost) to the 1st (innermost) — speaking the name, cipher, and password at each gate. The 60 Treasury dots orbiting the Aeon ring on this map represent this path of ascent. Each dot is a world, a gate, and a test of knowledge.' },
+      { id: 'cos-ascent', label: 'The Path of Ascent', brief: 'From matter to the divine', detail: 'The golden line curving upward on this map traces the Path of Ascent — the route Christ opened through all the realms, from the depths of the Kenoma back to the One. The dashed brown line traces Sophia\'s Descent — the path of the fall that created the material world. Every soul must choose: to follow Sophia downward into matter, or to follow Christ upward into light.' }
+    ],
+    pronunciations: [
+      { name: 'Pleroma', pron: 'ple-ROH-mah' },
+      { name: 'Kenoma', pron: 'ken-OH-mah' },
+      { name: 'Stauros', pron: 'STOW-ros' },
+      { name: 'Heimarmene', pron: 'hi-MAR-men-ee' },
+      { name: 'Barbelo', pron: 'bar-BEH-loh' },
+      { name: 'Autogenes', pron: 'aw-TOJ-en-eez' },
+      { name: 'Yaldabaoth', pron: 'yal-dah-BAH-oth' },
+      { name: 'Harmozel', pron: 'har-MOH-zel' },
+      { name: 'Oroiael', pron: 'or-OY-ah-el' },
+      { name: 'Daveithai', pron: 'dah-VAY-thay' },
+      { name: 'Eleleth', pron: 'el-EL-eth' },
+      { name: 'Sophia', pron: 'so-FEE-ah' }
     ]
   },
 
@@ -583,7 +625,7 @@ const SACRED_ENTRIES: SacredEntry[] = [
   {
     id: 'untitled', title: 'The Untitled Text (Codex Brucianus)', category: 'related',
     desc: 'Found alongside the Book of Jeu in the Codex Brucianus, the Untitled Text is a cosmological treatise that describes the emanation of the divine hierarchy from the unknowable One, through the divine triad, the four luminaries, the twelve aeons, and the creation of the material world by the Demiurge Yaldabaoth. It provides the mythological framework that underlies the Treasury system.',
-    sealType: 'cosmos', book: 1, chapter: 'Untitled', folio: 'ff. 57r-78v',
+    sealType: 'names', book: 1, chapter: 'Untitled', folio: 'ff. 57r-78v',
     lore: [
       { title: 'The Divine Triad', body: 'The Untitled Text begins with the One - the ineffable first principle that exists beyond being and non-being. From the One proceeds the divine Triad: Father, Mother (Barbelo), and Child (Autogenes). This Triad is the first movement within the stillness of the One, the first differentiation of the undifferentiated divine source.' },
       { title: 'The Fall of Sophia', body: 'Sophia [so-FEE-ah], the youngest of the aeons, desired to emanate without her consort, producing an imperfect offspring - Yaldabaoth [yal-dah-BAH-oth], the Demiurge. This act of unauthorized creation introduced deficiency into the Pleroma and resulted in the formation of the material world. Sophia\'s error is the cosmological explanation for the existence of evil and suffering.' },
@@ -610,7 +652,7 @@ const SACRED_ENTRIES: SacredEntry[] = [
   {
     id: 'apocryphon-john', title: 'The Apocryphon of John', category: 'related',
     desc: 'The most important Sethian Gnostic text, preserving the full creation myth from the One through the fall of Sophia to the creation of humanity. The Apocryphon of John provides the theological foundation for the entire Sethian tradition and is directly parallel to the cosmology of the Book of Jeu and the Untitled Text.',
-    sealType: 'cosmos', book: 1, chapter: 'Nag Hammadi Codex II,1', folio: 'NHC II,1; IV,1; BG 8502,2',
+    sealType: 'dialogue', book: 1, chapter: 'Nag Hammadi Codex II,1', folio: 'NHC II,1; IV,1; BG 8502,2',
     lore: [
       { title: 'The Three Revelations', body: 'The Apocryphon of John exists in four manuscript copies - more than any other Sethian text. It presents itself as a secret revelation given by the risen Christ to John, son of Zebedee, in response to John\'s distress after a Pharisee mocked his teacher. Three versions survive: a short recension (NHC II) and a long recension (NHC IV, BG).' },
       { title: 'The Sethian Creation Myth', body: 'The text describes the emanation of the divine hierarchy from the One: the divine Triad (Father, Mother Barbelo, Child Autogenes), the four luminaries (Harmozel, Oroiael, Daveithai, Eleleth), the fall of Sophia, and the creation of Yaldabaoth. This is the same hierarchy that structures the Treasury of Light in the Book of Jeu.' },
@@ -635,7 +677,7 @@ const SACRED_ENTRIES: SacredEntry[] = [
   {
     id: 'gospel-egyptians', title: 'The Gospel of the Egyptians', category: 'related',
     desc: 'A Sethian Gnostic dialogue between Jesus and his female disciples, focusing on the nature of the divine triad, the role of the Sethian redeemer, and the ultimate dissolution of the material world. The Gospel of the Egyptians shares the same cosmological framework as the Book of Jeu but emphasizes the destruction of death and the restoration of the Pleroma.',
-    sealType: 'cosmos', book: 1, chapter: 'Nag Hammadi Codex III,2; IV,2', folio: 'NHC III,2; IV,2',
+    sealType: 'hymn', book: 1, chapter: 'Nag Hammadi Codex III,2; IV,2', folio: 'NHC III,2; IV,2',
     lore: [
       { title: 'The Holy Book of the Great Invisible Spirit', body: 'The Gospel of the Egyptians is also known by its subtitle: "The Holy Book of the Great Invisible Spirit." This title directly connects it to the Book of Jeu, where the Great Invisible Spirit stands at the apex of the Treasury system. The text presents the same hierarchy of beings but focuses on the eschatological promise of the Pleroma\'s restoration.' },
       { title: 'The Sethian Redeemer', body: 'The Gospel of the Egyptians identifies Seth as the paradigmatic Gnostic redeemer - the seed of the divine that passes through generation after generation, preserving the knowledge of the Pleroma. Each time the Archons try to destroy the spiritual seed, Seth is reborn and the knowledge is preserved. This cyclical redemption echoes the Treasury system\'s promise of ascent.' },
@@ -698,7 +740,7 @@ const SACRED_ENTRIES: SacredEntry[] = [
   {
     id: 'allogenes', title: 'Allogenes', category: 'related',
     desc: 'A Sethian revelation text in which the stranger Allogenes receives a vision of the divine hierarchy and the process of spiritual ascent. Allogenes ("the Stranger") represents the alien nature of the Gnostic soul in the material world - a citizen of the Pleroma temporarily exiled in flesh. His revelation parallels the ascent teachings of the Book of Jeu.',
-    sealType: 'cosmos', book: 1, chapter: 'Nag Hammadi Codex XI,3', folio: 'NHC XI,3; Codex Tchacos',
+    sealType: 'ascent', book: 1, chapter: 'Nag Hammadi Codex XI,3', folio: 'NHC XI,3; Codex Tchacos',
     lore: [
       { title: 'The Stranger', body: 'Allogenes [al-OJ-en-ees] means "the Stranger" or "the One of Another Race." This name describes the Gnostic soul itself - a stranger in the material world, belonging to another race (the spiritual seed) and another homeland (the Pleroma). Allogenes\' vision is therefore the soul\'s own vision of its true origin and destiny.' },
       { title: 'The Triple Power', body: 'The text describes the divine as a Triple Power - Existence (that it is), Vitality (that it lives), and Mentality (that it knows). These three powers correspond to the divine Triad of the Book of Jeu: the Father (Existence), Barbelo (Vitality/Mother), and the Autogenes (Mentality/Child). The same threefold structure underlies both texts.' },
@@ -1169,10 +1211,10 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
 
   /* ── Four Luminaries with sub-aeons ── */
   const luminaries = [
-    { name: 'Harmozel [har-MOH-zel]', id: 'ut-luminaries', subAeons: ['Grace', 'Truth'], angle: 315 },
-    { name: 'Oroiael [or-OY-ah-el]', id: 'ut-luminaries', subAeons: ['Conception', 'Perception'], angle: 45 },
-    { name: 'Daveithai [dah-VAY-thay]', id: 'ut-luminaries', subAeons: ['Understanding', 'Love'], angle: 135 },
-    { name: 'Eleleth [el-EL-eth]', id: 'ut-luminaries', subAeons: ['Wisdom', 'Prudence'], angle: 225 }
+    { name: 'Harmozel [har-MOH-zel]', id: 'cos-luminaries', subAeons: ['Grace', 'Truth'], angle: 315 },
+    { name: 'Oroiael [or-OY-ah-el]', id: 'cos-luminaries', subAeons: ['Conception', 'Perception'], angle: 45 },
+    { name: 'Daveithai [dah-VAY-thay]', id: 'cos-luminaries', subAeons: ['Understanding', 'Love'], angle: 135 },
+    { name: 'Eleleth [el-EL-eth]', id: 'cos-luminaries', subAeons: ['Wisdom', 'Prudence'], angle: 225 }
   ]
 
   /* ── Twelve Aeons ── */
@@ -1193,13 +1235,13 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
 
   /* ── Seven Planetary Archons ── */
   const planetaryArchons = [
-    { name: 'Ialdabaoth [yal-dah-BAH-oth]', planet: 'Saturn', id: 'ut-yaldabaoth', angle: 270 },
-    { name: 'Iao [EE-ah-oh]', planet: 'Jupiter', id: 'ut-yaldabaoth', angle: 320 },
-    { name: 'Sabaoth [SAH-bah-oth]', planet: 'Mars', id: 'ut-yaldabaoth', angle: 10 },
-    { name: 'Adonai [ah-DON-eye]', planet: 'Sun', id: 'ut-yaldabaoth', angle: 60 },
-    { name: 'Eloai [el-OH-eye]', planet: 'Venus', id: 'ut-yaldabaoth', angle: 110 },
-    { name: 'Oraios [or-AY-os]', planet: 'Mercury', id: 'ut-yaldabaoth', angle: 160 },
-    { name: 'Astaphaios [as-tah-FAY-os]', planet: 'Moon', id: 'ut-yaldabaoth', angle: 210 }
+    { name: 'Ialdabaoth [yal-dah-BAH-oth]', planet: 'Saturn', id: 'cos-planets', angle: 270 },
+    { name: 'Iao [EE-ah-oh]', planet: 'Jupiter', id: 'cos-planets', angle: 320 },
+    { name: 'Sabaoth [SAH-bah-oth]', planet: 'Mars', id: 'cos-planets', angle: 10 },
+    { name: 'Adonai [ah-DON-eye]', planet: 'Sun', id: 'cos-planets', angle: 60 },
+    { name: 'Eloai [el-OH-eye]', planet: 'Venus', id: 'cos-planets', angle: 110 },
+    { name: 'Oraios [or-AY-os]', planet: 'Mercury', id: 'cos-planets', angle: 160 },
+    { name: 'Astaphaios [as-tah-FAY-os]', planet: 'Moon', id: 'cos-planets', angle: 210 }
   ]
 
   /* ── Twelve Zodiac Archons ── */
@@ -1421,11 +1463,11 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
       {ornateRing(R_KENOMA, INK3, 2.5, 72, 3)}
       {ornateRing(R_KENOMA - 5, INK3, 1)}
       {/* Label: Material World */}
-      <g className={`svg-clickable${selectedId === 'ut-yaldabaoth' ? ' selected' : ''}`}
-        onClick={() => handleClick('ut-yaldabaoth')}>
+      <g className={`svg-clickable${selectedId === 'cos-yaldabaoth' ? ' selected' : ''}`}
+        onClick={() => handleClick('cos-yaldabaoth')}>
         <rect x={cx - 110} y={cy - R_KENOMA - 28} width={220} height={24} rx={4}
-          fill={selectedId === 'ut-yaldabaoth' ? 'rgba(200,168,74,0.12)' : 'transparent'}
-          stroke={selectedId === 'ut-yaldabaoth' ? GOLD2 : 'transparent'} strokeWidth={1} />
+          fill={selectedId === 'cos-yaldabaoth' ? 'rgba(200,168,74,0.12)' : 'transparent'}
+          stroke={selectedId === 'cos-yaldabaoth' ? GOLD2 : 'transparent'} strokeWidth={1} />
         <text x={cx} y={cy - R_KENOMA - 12} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={13} fill={INK3} letterSpacing={3}>MATERIAL WORLD</text>
       </g>
       <text x={cx + R_KENOMA + 10} y={cy + 5} fontFamily="Libre Baskerville, serif" fontSize={9} fill={INK3} fontStyle="italic">Kenoma [ken-OH-mah] — Deficiency</text>
@@ -1445,8 +1487,8 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
         return (
           <g key={`zod-${i}`}>
             <line x1={pInner.x} y1={pInner.y} x2={pOuter.x} y2={pOuter.y} stroke={INK3} strokeWidth={0.4} opacity={0.5} pointerEvents="none" />
-            <g className={`svg-clickable${selectedId === 'ut-yaldabaoth' ? ' selected' : ''}`}
-              onClick={() => handleClick('ut-yaldabaoth')}>
+            <g className={`svg-clickable${selectedId === 'cos-zodiac' ? ' selected' : ''}`}
+              onClick={() => handleClick('cos-zodiac')}>
               <circle cx={p.x} cy={p.y} r={16} fill="transparent" stroke={INK3} strokeWidth={0.8} />
               <text x={p.x} y={p.y - 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={INK3}>{za.sign}</text>
               <text x={p.x} y={p.y + 7} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5} fill={INK3} fontStyle="italic">{za.name}</text>
@@ -1482,11 +1524,11 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
       {ornateRing(R_DEMIURGE, '#5a3818', 2.5, 24, 4)}
       {ornateRing(R_DEMIURGE - 5, '#5a3818', 0.6)}
       {/* Demiurge label */}
-      <g className={`svg-clickable${selectedId === 'ut-yaldabaoth' ? ' selected' : ''}`}
-        onClick={() => handleClick('ut-yaldabaoth')}>
+      <g className={`svg-clickable${selectedId === 'cos-yaldabaoth' ? ' selected' : ''}`}
+        onClick={() => handleClick('cos-yaldabaoth')}>
         <rect x={cx - 85} y={cy + R_DEMIURGE - 24} width={170} height={44} rx={5}
-          fill={selectedId === 'ut-yaldabaoth' ? 'rgba(200,168,74,0.12)' : 'rgba(90,56,24,0.06)'}
-          stroke={selectedId === 'ut-yaldabaoth' ? GOLD2 : '#5a3818'} strokeWidth={1.2} />
+          fill={selectedId === 'cos-yaldabaoth' ? 'rgba(200,168,74,0.12)' : 'rgba(90,56,24,0.06)'}
+          stroke={selectedId === 'cos-yaldabaoth' ? GOLD2 : '#5a3818'} strokeWidth={1.2} />
         <text x={cx} y={cy + R_DEMIURGE - 4} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={10} fill="#5a3818" letterSpacing={2}>YALDABAOTH</text>
         <text x={cx} y={cy + R_DEMIURGE + 10} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={7.5} fill="#5a3818" fontStyle="italic">[yal-dah-BAH-oth] — The Demiurge</text>
       </g>
@@ -1509,11 +1551,11 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
       <text x={cx - R_BOUNDARY - 10} y={cy - 10} textAnchor="end" fontFamily="Cinzel, serif" fontSize={9} fill={GOLD2} letterSpacing={1}>STAUROS [STOW-ros]</text>
       <text x={cx - R_BOUNDARY - 10} y={cy + 4} textAnchor="end" fontFamily="Libre Baskerville, serif" fontSize={7} fill={GOLD2} fontStyle="italic">The Cross / Limit of the Pleroma</text>
       {/* Sophia at the boundary */}
-      <g className={`svg-clickable${selectedId === 'ut-sophia' ? ' selected' : ''}`}
-        onClick={() => handleClick('ut-sophia')}>
+      <g className={`svg-clickable${selectedId === 'cos-sophia' ? ' selected' : ''}`}
+        onClick={() => handleClick('cos-sophia')}>
         <rect x={cx - R_BOUNDARY - 10} y={cy + 12} width={170} height={38} rx={4}
-          fill={selectedId === 'ut-sophia' ? 'rgba(200,168,74,0.12)' : 'transparent'}
-          stroke={selectedId === 'ut-sophia' ? GOLD2 : 'transparent'} strokeWidth={1} />
+          fill={selectedId === 'cos-sophia' ? 'rgba(200,168,74,0.12)' : 'transparent'}
+          stroke={selectedId === 'cos-sophia' ? GOLD2 : 'transparent'} strokeWidth={1} />
         <text x={cx - R_BOUNDARY + 75} y={cy + 30} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={GOLD2}>SOPHIA [so-FEE-ah]</text>
         <text x={cx - R_BOUNDARY + 75} y={cy + 43} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6.5} fill={GOLD2} fontStyle="italic">Wisdom — The Fallen Aeon</text>
       </g>
@@ -1533,11 +1575,11 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
             {/* Radial connector lines */}
             <line x1={pInner.x} y1={pInner.y} x2={p.x} y2={p.y} stroke={GOLD2} strokeWidth={0.4} opacity={0.4} pointerEvents="none" />
             <line x1={p.x} y1={p.y} x2={pOuter.x} y2={pOuter.y} stroke={GOLD2} strokeWidth={0.3} opacity={0.3} pointerEvents="none" />
-            <g className={`svg-clickable${selectedId === 'ut-luminaries' ? ' selected' : ''}`}
-              onClick={() => handleClick('ut-luminaries')}>
+            <g className={`svg-clickable${selectedId === 'cos-luminaries' ? ' selected' : ''}`}
+              onClick={() => handleClick('cos-luminaries')}>
               <rect x={p.x - 34} y={p.y - 14} width={68} height={28} rx={3}
-                fill={selectedId === 'ut-luminaries' ? 'rgba(200,168,74,0.12)' : 'transparent'}
-                stroke={selectedId === 'ut-luminaries' ? GOLD2 : GOLD2} strokeWidth={0.6} />
+                fill={selectedId === 'cos-luminaries' ? 'rgba(200,168,74,0.12)' : 'transparent'}
+                stroke={selectedId === 'cos-luminaries' ? GOLD2 : GOLD2} strokeWidth={0.6} />
               <text x={p.x} y={p.y - 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={GOLD}>{aeon.name.split(' [')[0]}</text>
               <text x={p.x} y={p.y + 8} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5} fill={GOLD2} fontStyle="italic">{aeon.name.split(' [')[1]?.replace(']', '') || ''}</text>
             </g>
@@ -1587,8 +1629,8 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
       {/* Divine glow */}
       <circle cx={cx} cy={cy} r={R_TRIAD} fill="url(#divineGlow)" pointerEvents="none" />
       {/* Triangular arrangement of the Triad */}
-      <g className={`svg-clickable${selectedId === 'ut-triad' ? ' selected' : ''}`}
-        onClick={() => handleClick('ut-triad')}>
+      <g className={`svg-clickable${selectedId === 'cos-triad' ? ' selected' : ''}`}
+        onClick={() => handleClick('cos-triad')}>
         {/* Triangle connecting the three persons */}
         <polygon
           points={`${cx},${cy - 42} ${cx - 40},${cy + 24} ${cx + 40},${cy + 24}`}
@@ -1605,8 +1647,8 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
       </g>
 
       {/* ═══════════════ THE ONE ═══════════════ */}
-      <g className={`svg-clickable${selectedId === 'ut-one' ? ' selected' : ''}`}
-        onClick={() => handleClick('ut-one')}>
+      <g className={`svg-clickable${selectedId === 'cos-one' ? ' selected' : ''}`}
+        onClick={() => handleClick('cos-one')}>
         <circle cx={cx} cy={cy} r={R_ONE} fill={INK} stroke={GOLD3} strokeWidth={3}
           style={{ filter: 'drop-shadow(0 0 10px rgba(232,192,112,0.7))' }} />
         {/* Inner radiating lines */}
@@ -1957,7 +1999,7 @@ export default function Home() {
   const [revelation, setRevelation] = useState<{ title: string; detail: string } | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
-    'cat-overview': true, 'cat-liturgy': false, 'cat-hymn': false,
+    'cat-overview': true, 'cat-cosmos': false, 'cat-liturgy': false, 'cat-hymn': false,
     'cat-archon': false, 'cat-related': false, 'cat-names': false, 'cat-dialogue': false,
     'rank-1': false, 'rank-2': false, 'rank-3': false, 'rank-4': false, 'rank-5': false
   })
@@ -1993,7 +2035,7 @@ export default function Home() {
   }, [searchQuery])
 
   const groupedSacreds = useMemo(() => {
-    const groups: Record<SacredCategory, SacredEntry[]> = { overview: [], liturgy: [], hymn: [], archon: [], related: [], names: [], dialogue: [] }
+    const groups: Record<SacredCategory, SacredEntry[]> = { overview: [], cosmos: [], liturgy: [], hymn: [], archon: [], related: [], names: [], dialogue: [] }
     filteredSacreds.forEach(s => { groups[s.category].push(s) })
     return groups
   }, [filteredSacreds])
