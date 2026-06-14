@@ -748,3 +748,44 @@
     font-size: 1.3rem;
   }
 }
+
+/* Sacred text display */
+.sacred-text-block {
+  border: 1px solid var(--ink4);
+  border-left: 3px solid var(--gold2);
+  padding: 0.6rem 0.8rem;
+  background: rgba(255,255,255,0.08);
+  margin-top: 0.3rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.sacred-text-block::-webkit-scrollbar {
+  width: 3px;
+}
+.sacred-text-block::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 2px;
+}
+.sacred-line {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: var(--ink2);
+  margin-bottom: 0.3rem;
+}
+.sacred-preview {
+  border: 1px solid var(--ink5);
+  padding: 0.5rem 0.7rem;
+  border-radius: 2px;
+  margin-top: 0.3rem;
+}
+
+/* Category section headers in sidebar */
+.sidebar-section .section-title {
+  font-size: 8.5px;
+}
+
+/* Expanded content area for larger texts */
+.content-area {
+  max-height: calc(100vh - 140px);
+}
