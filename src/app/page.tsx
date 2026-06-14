@@ -1020,33 +1020,376 @@ function OctagramSeal({ cx, cy, r, jeuNum, fatherName, cipher, complexity, onCli
 }
 
 /* ── Treasury Overview Diagram ── */
-function TreasuryOverviewDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
-  const cx = 250, cy = 260
-  const rings = [
-    { r: 210, label: '5th Rank (Outer)', id: 'ov-pleroma' },
-    { r: 170, label: '4th Rank', id: 'ov-pleroma' },
-    { r: 130, label: '3rd Rank', id: 'ov-curtain1' },
-    { r: 90, label: '2nd Rank', id: 'ov-curtain2' },
-    { r: 50, label: '1st Rank (Inner)', id: 'ov-curtain3' }
-  ]
+function TreasuryOverviewDiagram({ onClick, selectedId, elements, onNavigateEntry }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[]; onNavigateEntry?: (id: string) => void }) {
+  const W = 1100, H = 1200
+  const cx = 550, cy = 620
+
+  /* ── Rank ring radii ── */
+  const R_RANK: Record<number, number> = { 1: 90, 2: 185, 3: 280, 4: 375, 5: 470 }
+  const R_CURTAIN_1 = 135
+  const R_CURTAIN_2 = 230
+  const R_CURTAIN_3 = 325
+  const R_OUTER_BOUNDARY = 510
+  const R_INNER = 38
+
+  /* ── Helper: radial position ── */
+  const rad = (angle: number, r: number) => ({
+    x: cx + Math.cos(angle * Math.PI / 180) * r,
+    y: cy + Math.sin(angle * Math.PI / 180) * r
+  })
+
+  /* ── Decorative double-ring with tick marks ── */
+  const ornateRing = (r: number, stroke: string, sw: number, ticks = 0, tickLen = 4, dashArray?: string) => (
+    <g pointerEvents="none">
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke={stroke} strokeWidth={sw} strokeDasharray={dashArray} />
+      {ticks > 0 && Array.from({ length: ticks }).map((_, i) => {
+        const a = (i * 360 / ticks) * Math.PI / 180
+        const x1 = cx + Math.cos(a) * (r - tickLen), y1 = cy + Math.sin(a) * (r - tickLen)
+        const x2 = cx + Math.cos(a) * (r + tickLen), y2 = cy + Math.sin(a) * (r + tickLen)
+        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={stroke} strokeWidth={0.8} />
+      })}
+    </g>
+  )
+
+  /* ── Group treasuries by rank ── */
+  const byRank: Record<number, typeof TREASURIES> = { 1: [], 2: [], 3: [], 4: [], 5: [] }
+  TREASURIES.forEach(t => { byRank[t.rank].push(t) })
+
+  /* ── Seal mini-glyph for a treasury ── */
+  const sealGlyph = (t: typeof TREASURIES[0], px: number, py: number, isSelected: boolean) => {
+    const sel = isSelected
+    const fill = sel ? 'rgba(200,168,74,0.18)' : 'transparent'
+    const stroke = sel ? GOLD : (t.rank <= 2 ? GOLD2 : INK3)
+    const sw = sel ? 1.5 : 0.8
+    const baseR = 28
+    const g = (
+      <g key={t.id}
+        className={`svg-clickable${sel ? ' selected' : ''}`}
+        onClick={() => { if (onNavigateEntry) onNavigateEntry(t.id); else onClick(t.id, t.fatherName, `${t.title} — Rank ${t.rank}: ${t.rankName}. Cipher: ${t.cipher} [${t.cipherPron}]. Watchers: ${t.watchers.map(w => w.name).join(', ')}.`) }}>
+        {/* Outer ring */}
+        <circle cx={px} cy={py} r={baseR} fill={fill} stroke={stroke} strokeWidth={sw} />
+        {/* Inner seal shape based on seal type */}
+        {t.sealType === 'concentric' && <>
+          <circle cx={px} cy={py} r={baseR - 6} fill="none" stroke={stroke} strokeWidth={0.5} />
+          <circle cx={px} cy={py} r={baseR - 11} fill="none" stroke={stroke} strokeWidth={0.5} />
+          <circle cx={px} cy={py} r={4} fill={stroke} opacity={0.6} />
+        </>}
+        {t.sealType === 'cross-circle' && <>
+          <line x1={px} y1={py - baseR + 7} x2={px} y2={py + baseR - 7} stroke={stroke} strokeWidth={0.7} />
+          <line x1={px - baseR + 7} y1={py} x2={px + baseR - 7} y2={py} stroke={stroke} strokeWidth={0.7} />
+          <circle cx={px} cy={py} r={6} fill="none" stroke={stroke} strokeWidth={0.7} />
+        </>}
+        {t.sealType === 'star' && <>
+          {[0, 72, 144, 216, 288].map((a, ai) => {
+            const sa = a * Math.PI / 180
+            return <line key={ai} x1={px} y1={py} x2={px + Math.cos(sa) * (baseR - 7)} y2={py + Math.sin(sa) * (baseR - 7)} stroke={stroke} strokeWidth={0.6} />
+          })}
+          <circle cx={px} cy={py} r={3} fill={stroke} opacity={0.5} />
+        </>}
+        {t.sealType === 'radial' && <>
+          {[0, 60, 120, 180, 240, 300].map((a, ai) => {
+            const sa = a * Math.PI / 180
+            return <line key={ai} x1={px} y1={py} x2={px + Math.cos(sa) * (baseR - 7)} y2={py + Math.sin(sa) * (baseR - 7)} stroke={stroke} strokeWidth={0.5} />
+          })}
+          <circle cx={px} cy={py} r={5} fill="none" stroke={stroke} strokeWidth={0.6} />
+        </>}
+        {t.sealType === 'octagram' && <>
+          {[0, 45, 90, 135, 180, 225, 270, 315].map((a, ai) => {
+            const sa = a * Math.PI / 180
+            return <line key={ai} x1={px} y1={py} x2={px + Math.cos(sa) * (baseR - 8)} y2={py + Math.sin(sa) * (baseR - 8)} stroke={stroke} strokeWidth={0.4} />
+          })}
+          <polygon
+            points={[0, 45, 90, 135, 180, 225, 270, 315].map(a => {
+              const sa = a * Math.PI / 180
+              return `${px + Math.cos(sa) * 10},${py + Math.sin(sa) * 10}`
+            }).join(' ')}
+            fill="none" stroke={stroke} strokeWidth={0.5} />
+        </>}
+        {/* Jeu number */}
+        <text x={px} y={py + 1} textAnchor="middle" dominantBaseline="middle" fontFamily="Cinzel, serif" fontSize={7} fill={sel ? GOLD : (t.rank <= 2 ? GOLD : INK2)}>{t.jeuNum}</text>
+        {/* Father name below seal */}
+        <text x={px} y={py + baseR + 10} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6.5} fill={sel ? GOLD : (t.rank <= 2 ? GOLD2 : INK3)}>{t.fatherName.split(' ')[0]}</text>
+        {/* Cipher name above seal */}
+        <text x={px} y={py - baseR - 4} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5} fill={sel ? GOLD2 : INK3} fontStyle="italic">{t.cipher}</text>
+      </g>
+    )
+    return g
+  }
+
   return (
-    <svg viewBox="0 0 500 520" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
-      {rings.map((ring, i) => (
-        <circle key={i} cx={cx} cy={cy} r={ring.r} fill="none" stroke={i < 2 ? INK3 : i < 4 ? GOLD2 : INK} strokeWidth={i === 4 ? 2.5 : 1.5}
-          className={`svg-clickable${selectedId === ring.id ? ' selected' : ''}`}
-          onClick={() => { const el = elements.find(e => e.id === ring.id); if (el) onClick(ring.id, el.label, el.detail) }} />
-      ))}
-      {[160, 120, 70].map((r, i) => (
-        <circle key={`c${i}`} cx={cx} cy={cy} r={r} fill="none" stroke={GOLD} strokeWidth={1} strokeDasharray="6,4"
-          className={`svg-clickable${selectedId === `ov-curtain${i+1}` ? ' selected' : ''}`}
-          onClick={() => { const el = elements.find(e => e.id === `ov-curtain${i+1}`); if (el) onClick(`ov-curtain${i+1}`, el.label, el.detail) }} />
-      ))}
-      <circle cx={cx} cy={cy} r={20} fill={INK} stroke={GOLD3} strokeWidth={2}
-        className={`svg-clickable${selectedId === 'ov-invisible' ? ' selected' : ''}`}
-        onClick={() => { const el = elements.find(e => e.id === 'ov-invisible'); if (el) onClick('ov-invisible', el.label, el.detail) }} />
-      <text x={cx} y={cy + 1} textAnchor="middle" dominantBaseline="middle" fontFamily="Cinzel, serif" fontSize={5} fill={GOLD3}>INVISIBLE</text>
-      {rings.map((ring, i) => <text key={`lb${i}`} x={cx + ring.r + 5} y={cy - 5} fontFamily="Cinzel, serif" fontSize={6.5} fill={INK3}>{ring.label}</text>)}
-      <text x={cx} y={20} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={13} fill={INK} letterSpacing={2}>THE TREASURY OF LIGHT</text>
+    <svg viewBox={`0 0 ${W} ${H}`} xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+      <defs>
+        {/* Divine center glow */}
+        <radialGradient id="treasuryGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#e8c070" stopOpacity={0.7} />
+          <stop offset="40%" stopColor="#c8a84a" stopOpacity={0.2} />
+          <stop offset="100%" stopColor="#c8a84a" stopOpacity={0} />
+        </radialGradient>
+        {/* Outer boundary glow */}
+        <radialGradient id="outerTreasuryGloom" cx="50%" cy="50%" r="50%">
+          <stop offset="70%" stopColor="#1a1208" stopOpacity={0} />
+          <stop offset="100%" stopColor="#1a1208" stopOpacity={0.12} />
+        </radialGradient>
+        {/* Fine pattern for inner ranks */}
+        <pattern id="rankPattern" width="16" height="16" patternUnits="userSpaceOnUse">
+          <circle cx="8" cy="8" r="0.5" fill="#c8a84a" opacity={0.15} />
+        </pattern>
+        {/* Pattern for outer ranks */}
+        <pattern id="outerRankPattern" width="10" height="10" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="10" x2="10" y2="0" stroke="#6a5030" strokeWidth={0.25} opacity={0.2} />
+        </pattern>
+      </defs>
+
+      {/* ═══════════════ TITLE ═══════════════ */}
+      <text x={cx} y={34} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={24} fill={INK} letterSpacing={5} fontWeight="bold">THE TREASURY OF LIGHT</text>
+      <text x={cx} y={58} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={12} fill={INK3} fontStyle="italic">All Sixty Treasuries in Five Ranks — From the Great Invisible to the Outermost Gate</text>
+      <line x1={cx - 280} y1={68} x2={cx + 280} y2={68} stroke={GOLD2} strokeWidth={1} />
+      <line x1={cx - 260} y1={72} x2={cx + 260} y2={72} stroke={GOLD2} strokeWidth={0.5} />
+      <SvgCross x={cx - 285} y={70} size={4} color={GOLD2} />
+      <SvgCross x={cx + 281} y={70} size={4} color={GOLD2} />
+
+      {/* ═══════════════ OUTER BOUNDARY ═══════════════ */}
+      <circle cx={cx} cy={cy} r={R_OUTER_BOUNDARY + 30} fill="url(#outerTreasuryGloom)" pointerEvents="none" />
+      {ornateRing(R_OUTER_BOUNDARY, INK3, 2.5, 60, 3)}
+      {ornateRing(R_OUTER_BOUNDARY - 5, INK3, 1)}
+      {/* Boundary label */}
+      <text x={cx} y={cy - R_OUTER_BOUNDARY - 14} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={11} fill={INK3} letterSpacing={3}>THE OUTERMOST VEIL</text>
+
+      {/* ═══════════════ RANK 5 (OUTERMOST) ═══════════════ */}
+      <circle cx={cx} cy={cy} r={R_RANK[5]} fill="url(#outerRankPattern)" pointerEvents="none" />
+      {ornateRing(R_RANK[5], INK3, 2, 12, 4)}
+      {ornateRing(R_RANK[5] - 4, INK3, 0.6)}
+      {/* Radial connector lines from rank 5 to boundary */}
+      {byRank[5].map((t, i) => {
+        const angle = i * 30 - 90
+        const pInner = rad(angle, R_RANK[5] - 5)
+        const pOuter = rad(angle, R_OUTER_BOUNDARY - 8)
+        return <line key={`r5conn-${i}`} x1={pInner.x} y1={pInner.y} x2={pOuter.x} y2={pOuter.y} stroke={INK3} strokeWidth={0.3} opacity={0.4} pointerEvents="none" />
+      })}
+      {/* Rank 5 label */}
+      <text x={cx + R_RANK[5] + 14} y={cy - 12} fontFamily="Cinzel, serif" fontSize={9} fill={INK3} letterSpacing={1}>5TH RANK</text>
+      <text x={cx + R_RANK[5] + 14} y={cy + 2} fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">Outermost — Reflected Light</text>
+      {/* Treasury seals for rank 5 */}
+      {byRank[5].map((t, i) => {
+        const angle = i * 30 - 90
+        const p = rad(angle, R_RANK[5])
+        return sealGlyph(t, p.x, p.y, selectedId === t.id)
+      })}
+
+      {/* ═══════════════ CURTAIN 3 (between Rank 5 and Rank 4) ═══════════════ */}
+      {ornateRing(R_CURTAIN_3, GOLD2, 1.8, 36, 3, '4 3')}
+      <g className={`svg-clickable${selectedId === 'ov-curtain3' ? ' selected' : ''}`}
+        onClick={() => { const el = elements.find(e => e.id === 'ov-curtain3'); if (el) onClick('ov-curtain3', el.label, el.detail) }}>
+        <text x={cx - R_CURTAIN_3 - 8} y={cy + 4} textAnchor="end" fontFamily="Cinzel, serif" fontSize={8} fill={GOLD2} letterSpacing={1}>THIRD CURTAIN</text>
+      </g>
+
+      {/* ═══════════════ RANK 4 ═══════════════ */}
+      <circle cx={cx} cy={cy} r={R_RANK[4]} fill="url(#outerRankPattern)" pointerEvents="none" />
+      {ornateRing(R_RANK[4], INK3, 1.8, 12, 4)}
+      {ornateRing(R_RANK[4] - 4, INK3, 0.5)}
+      {byRank[4].map((t, i) => {
+        const angle = i * 30 - 90 + 15
+        const pInner = rad(angle, R_RANK[4] - 5)
+        const pOuter = rad(angle, R_CURTAIN_3 - 5)
+        return <line key={`r4conn-${i}`} x1={pInner.x} y1={pInner.y} x2={pOuter.x} y2={pOuter.y} stroke={INK3} strokeWidth={0.3} opacity={0.35} pointerEvents="none" />
+      })}
+      <text x={cx + R_RANK[4] + 14} y={cy - 12} fontFamily="Cinzel, serif" fontSize={9} fill={INK3} letterSpacing={1}>4TH RANK</text>
+      <text x={cx + R_RANK[4] + 14} y={cy + 2} fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">Outer — Filtered Light</text>
+      {byRank[4].map((t, i) => {
+        const angle = i * 30 - 90 + 15
+        const p = rad(angle, R_RANK[4])
+        return sealGlyph(t, p.x, p.y, selectedId === t.id)
+      })}
+
+      {/* ═══════════════ CURTAIN 2 ═══════════════ */}
+      {ornateRing(R_CURTAIN_2, GOLD2, 1.8, 36, 3, '4 3')}
+      <g className={`svg-clickable${selectedId === 'ov-curtain2' ? ' selected' : ''}`}
+        onClick={() => { const el = elements.find(e => e.id === 'ov-curtain2'); if (el) onClick('ov-curtain2', el.label, el.detail) }}>
+        <text x={cx - R_CURTAIN_2 - 8} y={cy + 4} textAnchor="end" fontFamily="Cinzel, serif" fontSize={8} fill={GOLD2} letterSpacing={1}>SECOND CURTAIN</text>
+      </g>
+
+      {/* ═══════════════ RANK 3 ═══════════════ */}
+      <circle cx={cx} cy={cy} r={R_RANK[3]} fill="url(#rankPattern)" pointerEvents="none" />
+      {ornateRing(R_RANK[3], GOLD2, 1.8, 12, 4)}
+      {ornateRing(R_RANK[3] - 4, GOLD2, 0.5)}
+      {byRank[3].map((t, i) => {
+        const angle = i * 30 - 90
+        const pInner = rad(angle, R_RANK[3] - 5)
+        const pOuter = rad(angle, R_CURTAIN_2 - 5)
+        return <line key={`r3conn-${i}`} x1={pInner.x} y1={pInner.y} x2={pOuter.x} y2={pOuter.y} stroke={GOLD2} strokeWidth={0.4} opacity={0.35} pointerEvents="none" />
+      })}
+      <text x={cx + R_RANK[3] + 14} y={cy - 12} fontFamily="Cinzel, serif" fontSize={9} fill={GOLD} letterSpacing={1}>3RD RANK</text>
+      <text x={cx + R_RANK[3] + 14} y={cy + 2} fontFamily="Libre Baskerville, serif" fontSize={7} fill={GOLD2} fontStyle="italic">Middle — Intermediate Light</text>
+      {byRank[3].map((t, i) => {
+        const angle = i * 30 - 90
+        const p = rad(angle, R_RANK[3])
+        return sealGlyph(t, p.x, p.y, selectedId === t.id)
+      })}
+
+      {/* ═══════════════ CURTAIN 1 ═══════════════ */}
+      {ornateRing(R_CURTAIN_1, GOLD, 2, 36, 3, '4 3')}
+      <g className={`svg-clickable${selectedId === 'ov-curtain1' ? ' selected' : ''}`}
+        onClick={() => { const el = elements.find(e => e.id === 'ov-curtain1'); if (el) onClick('ov-curtain1', el.label, el.detail) }}>
+        <text x={cx - R_CURTAIN_1 - 8} y={cy + 4} textAnchor="end" fontFamily="Cinzel, serif" fontSize={8} fill={GOLD} letterSpacing={1}>FIRST CURTAIN</text>
+      </g>
+
+      {/* ═══════════════ RANK 2 ═══════════════ */}
+      <circle cx={cx} cy={cy} r={R_RANK[2]} fill="url(#rankPattern)" pointerEvents="none" />
+      {ornateRing(R_RANK[2], GOLD, 1.8, 12, 3)}
+      {ornateRing(R_RANK[2] - 4, GOLD3, 0.5)}
+      {byRank[2].map((t, i) => {
+        const angle = i * 30 - 90 + 15
+        const pInner = rad(angle, R_RANK[2] - 5)
+        const pOuter = rad(angle, R_CURTAIN_1 - 5)
+        return <line key={`r2conn-${i}`} x1={pInner.x} y1={pInner.y} x2={pOuter.x} y2={pOuter.y} stroke={GOLD} strokeWidth={0.4} opacity={0.35} pointerEvents="none" />
+      })}
+      <text x={cx + R_RANK[2] + 14} y={cy - 12} fontFamily="Cinzel, serif" fontSize={9} fill={GOLD} letterSpacing={1}>2ND RANK</text>
+      <text x={cx + R_RANK[2] + 14} y={cy + 2} fontFamily="Libre Baskerville, serif" fontSize={7} fill={GOLD2} fontStyle="italic">Inner — Bright Light</text>
+      {byRank[2].map((t, i) => {
+        const angle = i * 30 - 90 + 15
+        const p = rad(angle, R_RANK[2])
+        return sealGlyph(t, p.x, p.y, selectedId === t.id)
+      })}
+
+      {/* ═══════════════ RANK 1 (INNERMOST) ═══════════════ */}
+      <circle cx={cx} cy={cy} r={R_RANK[1]} fill="url(#rankPattern)" pointerEvents="none" />
+      {ornateRing(R_RANK[1], GOLD, 2.2, 12, 3)}
+      {ornateRing(R_RANK[1] - 4, GOLD3, 0.6)}
+      {/* Sacred hexagram over rank 1 */}
+      {(() => {
+        const r = R_RANK[1]
+        const pts = Array.from({ length: 6 }).map((_, i) => {
+          const a = ((i * 60 + 30) * Math.PI / 180)
+          return { x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r }
+        })
+        return (
+          <g pointerEvents="none">
+            {[0, 1, 2, 3, 4, 5].map(i => (
+              <line key={i} x1={pts[i].x} y1={pts[i].y} x2={pts[(i + 2) % 6].x} y2={pts[(i + 2) % 6].y} stroke={GOLD2} strokeWidth={0.5} opacity={0.35} />
+            ))}
+          </g>
+        )
+      })()}
+      {byRank[1].map((t, i) => {
+        const angle = i * 30 - 90
+        const pInner = rad(angle, R_INNER + 6)
+        const pOuter = rad(angle, R_RANK[1] - 5)
+        return <line key={`r1conn-${i}`} x1={pInner.x} y1={pInner.y} x2={pOuter.x} y2={pOuter.y} stroke={GOLD} strokeWidth={0.5} opacity={0.4} pointerEvents="none" />
+      })}
+      <text x={cx - R_RANK[1] - 8} y={cy - 12} textAnchor="end" fontFamily="Cinzel, serif" fontSize={9} fill={GOLD} letterSpacing={1}>1ST RANK</text>
+      <text x={cx - R_RANK[1] - 8} y={cy + 2} textAnchor="end" fontFamily="Libre Baskerville, serif" fontSize={7} fill={GOLD2} fontStyle="italic">Innermost — Pure Light</text>
+      {byRank[1].map((t, i) => {
+        const angle = i * 30 - 90
+        const p = rad(angle, R_RANK[1])
+        return sealGlyph(t, p.x, p.y, selectedId === t.id)
+      })}
+
+      {/* ═══════════════ THE GREAT INVISIBLE (CENTER) ═══════════════ */}
+      <circle cx={cx} cy={cy} r={R_RANK[1]} fill="url(#treasuryGlow)" pointerEvents="none" />
+      <g className={`svg-clickable${selectedId === 'ov-invisible' ? ' selected' : ''}`}
+        onClick={() => { const el = elements.find(e => e.id === 'ov-invisible'); if (el) onClick('ov-invisible', el.label, el.detail) }}>
+        <circle cx={cx} cy={cy} r={R_INNER} fill={INK} stroke={GOLD3} strokeWidth={3}
+          style={{ filter: 'drop-shadow(0 0 12px rgba(232,192,112,0.6))' }} />
+        {/* Inner radiating lines */}
+        {Array.from({ length: 24 }).map((_, i) => {
+          const a = (i * 15) * Math.PI / 180
+          return <line key={`ray-${i}`} x1={cx + Math.cos(a) * 10} y1={cy + Math.sin(a) * 10} x2={cx + Math.cos(a) * 32} y2={cy + Math.sin(a) * 32} stroke={GOLD3} strokeWidth={0.7} opacity={0.6} pointerEvents="none" />
+        })}
+        <text x={cx} y={cy - 4} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={GOLD3} letterSpacing={2}>GREAT</text>
+        <text x={cx} y={cy + 6} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={GOLD3} letterSpacing={2}>INVISIBLE</text>
+      </g>
+
+      {/* ═══════════════ ASCENT PATH (dashed spiral from outside to center) ═══════════════ */}
+      <g pointerEvents="none">
+        {Array.from({ length: 180 }).map((_, i) => {
+          if (i % 3 !== 0) return null
+          const t = i / 180
+          const angle = t * 1080 * Math.PI / 180
+          const r = R_OUTER_BOUNDARY - t * (R_OUTER_BOUNDARY - R_INNER)
+          const x = cx + Math.cos(angle) * r
+          const y = cy + Math.sin(angle) * r
+          return <circle key={`spiral-${i}`} cx={x} cy={y} r={0.8} fill={GOLD2} opacity={0.15 + t * 0.35} />
+        })}
+        {/* Ascent arrow near boundary */}
+        <polygon points={`${cx + 6},${cy - R_OUTER_BOUNDARY + 18} ${cx},${cy - R_OUTER_BOUNDARY + 8} ${cx - 6},${cy - R_OUTER_BOUNDARY + 18}`} fill={GOLD2} opacity={0.7} />
+        <text x={cx + 16} y={cy - R_OUTER_BOUNDARY + 24} fontFamily="Libre Baskerville, serif" fontSize={6} fill={GOLD2} fontStyle="italic">Path of Ascent</text>
+      </g>
+
+      {/* ═══════════════ SIDE ANNOTATIONS ═══════════════ */}
+      {/* Left bracket: Pleroma label */}
+      <g pointerEvents="none">
+        <line x1={36} y1={cy - R_OUTER_BOUNDARY + 24} x2={36} y2={cy + R_OUTER_BOUNDARY - 24} stroke={GOLD2} strokeWidth={1.2} />
+        <line x1={36} y1={cy - R_OUTER_BOUNDARY + 24} x2={48} y2={cy - R_OUTER_BOUNDARY + 24} stroke={GOLD2} strokeWidth={1.2} />
+        <line x1={36} y1={cy + R_OUTER_BOUNDARY - 24} x2={48} y2={cy + R_OUTER_BOUNDARY - 24} stroke={GOLD2} strokeWidth={1.2} />
+        <text x={28} y={cy} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={GOLD2} letterSpacing={4}
+          transform={`rotate(-90, 28, ${cy})`}>PLEROMA</text>
+      </g>
+
+      {/* ═══════════════ CORNER DECORATIONS ═══════════════ */}
+      <g pointerEvents="none">
+        <path d={`M12 84 L12 70 Q12 64 18 64 L30 64`} fill="none" stroke={GOLD2} strokeWidth={1.2} />
+        <path d={`M18 84 L18 74 Q18 68 24 68 L30 68`} fill="none" stroke={GOLD2} strokeWidth={0.7} />
+        <circle cx={21} cy={74} r={3} fill={GOLD2} />
+      </g>
+      <g pointerEvents="none">
+        <path d={`M${W - 12} 84 L${W - 12} 70 Q${W - 12} 64 ${W - 18} 64 L${W - 30} 64`} fill="none" stroke={GOLD2} strokeWidth={1.2} />
+        <path d={`M${W - 18} 84 L${W - 18} 74 Q${W - 18} 68 ${W - 24} 68 L${W - 30} 68`} fill="none" stroke={GOLD2} strokeWidth={0.7} />
+        <circle cx={W - 21} cy={74} r={3} fill={GOLD2} />
+      </g>
+      <g pointerEvents="none">
+        <path d={`M12 ${H - 84} L12 ${H - 70} Q12 ${H - 64} 18 ${H - 64} L30 ${H - 64}`} fill="none" stroke={GOLD2} strokeWidth={1.2} />
+        <circle cx={21} cy={H - 74} r={3} fill={GOLD2} />
+      </g>
+      <g pointerEvents="none">
+        <path d={`M${W - 12} ${H - 84} L${W - 12} ${H - 70} Q${W - 12} ${H - 64} ${W - 18} ${H - 64} L${W - 30} ${H - 64}`} fill="none" stroke={GOLD2} strokeWidth={1.2} />
+        <circle cx={W - 21} cy={H - 74} r={3} fill={GOLD2} />
+      </g>
+
+      {/* ═══════════════ LEGEND ═══════════════ */}
+      <g pointerEvents="none">
+        <line x1={70} y1={H - 100} x2={W - 70} y2={H - 100} stroke={GOLD2} strokeWidth={0.6} />
+        {/* Rank 1 indicator */}
+        <circle cx={100} cy={H - 76} r={5} fill="none" stroke={GOLD} strokeWidth={1.5} />
+        <text x={112} y={H - 72} fontFamily="Libre Baskerville, serif" fontSize={8} fill={GOLD}>1st–2nd Rank (Inner — Pure Light)</text>
+        {/* Rank 3-5 indicator */}
+        <circle cx={100} cy={H - 56} r={5} fill="none" stroke={INK3} strokeWidth={1.5} />
+        <text x={112} y={H - 52} fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3}>3rd–5th Rank (Outer — Diminished Light)</text>
+        {/* Curtain indicator */}
+        <line x1={96} y1={H - 38} x2={104} y2={H - 38} stroke={GOLD2} strokeWidth={2} strokeDasharray="3 2" />
+        <text x={112} y={H - 34} fontFamily="Libre Baskerville, serif" fontSize={8} fill={GOLD2}>Curtain of Light</text>
+        {/* Seal type indicators */}
+        <circle cx={460} cy={H - 76} r={5} fill="none" stroke={GOLD2} strokeWidth={0.8} />
+        <circle cx={460} cy={H - 76} r={2} fill={GOLD2} opacity={0.6} />
+        <text x={472} y={H - 72} fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3}>Concentric Seal</text>
+        <line x1={456} y1={H - 84} x2={464} y2={H - 68} stroke={GOLD2} strokeWidth={0.8} />
+        <line x1={456} y1={H - 68} x2={464} y2={H - 84} stroke={GOLD2} strokeWidth={0.8} />
+        <text x={472} y={H - 52} fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3}>Cross-Circle Seal</text>
+        {/* Star seal indicator */}
+        {[0, 72, 144, 216, 288].map((a, i) => {
+          const sa = a * Math.PI / 180
+          return <line key={i} x1={460} y1={H - 38} x2={460 + Math.cos(sa) * 5} y2={H - 38 + Math.sin(sa) * 5} stroke={GOLD2} strokeWidth={0.6} />
+        })}
+        <circle cx={460} cy={H - 38} r={2} fill={GOLD2} opacity={0.5} />
+        <text x={472} y={H - 34} fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3}>Star Seal</text>
+      </g>
+
+      {/* Source note */}
+      <text x={cx} y={H - 14} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6.5} fill={INK3} fontStyle="italic">
+        Based on the Book of Jeu I-II (Codex Brucianus) — All 60 Treasuries with Fathers, Ciphers, and Seal Types
+      </text>
+
+      {/* ═══════════════ INTERMEDIATE DECORATIVE RINGS ═══════════════ */}
+      {ornateRing((R_RANK[5] + R_OUTER_BOUNDARY) / 2, INK3, 0.3, 0, 0, '1 6')}
+      {ornateRing((R_RANK[2] + R_RANK[1]) / 2, GOLD3, 0.3, 0, 0, '1 4')}
+
+      {/* ═══════════════ PLEROMA CLICK REGION ═══════════════ */}
+      <g className={`svg-clickable${selectedId === 'ov-pleroma' ? ' selected' : ''}`}
+        onClick={() => { const el = elements.find(e => e.id === 'ov-pleroma'); if (el) onClick('ov-pleroma', el.label, el.detail) }}>
+        <rect x={cx - 80} y={cy + R_OUTER_BOUNDARY + 10} width={160} height={28}
+          fill={selectedId === 'ov-pleroma' ? 'rgba(200,168,74,0.12)' : 'transparent'}
+          stroke={selectedId === 'ov-pleroma' ? GOLD2 : 'transparent'} strokeWidth={1} />
+        <text x={cx} y={cy + R_OUTER_BOUNDARY + 28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={GOLD2} letterSpacing={3}>THE PLEROMA</text>
+      </g>
     </svg>
   )
 }
@@ -1073,7 +1416,7 @@ function ArchonGateDiagram({ onClick, selectedId, elements }: { onClick: (id: st
         return (
           <g key={gi}>
             {/* Outer decorative border */}
-            <rect x={gateCx - hw - 10} y={gate.y - 10} width={gate.w + 20} height={gate.h + 20} rx={4}
+            <rect x={gateCx - hw - 10} y={gate.y - 10} width={gate.w + 20} height={gate.h + 20}
               fill="none" stroke={GOLD2} strokeWidth={0.5} strokeDasharray="2,2" pointerEvents="none" />
 
             {/* Gate arch */}
@@ -1465,7 +1808,7 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
       {/* Label: Material World */}
       <g className={`svg-clickable${selectedId === 'cos-yaldabaoth' ? ' selected' : ''}`}
         onClick={() => handleClick('cos-yaldabaoth')}>
-        <rect x={cx - 110} y={cy - R_KENOMA - 28} width={220} height={24} rx={4}
+        <rect x={cx - 110} y={cy - R_KENOMA - 28} width={220} height={24}
           fill={selectedId === 'cos-yaldabaoth' ? 'rgba(200,168,74,0.12)' : 'transparent'}
           stroke={selectedId === 'cos-yaldabaoth' ? GOLD2 : 'transparent'} strokeWidth={1} />
         <text x={cx} y={cy - R_KENOMA - 12} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={13} fill={INK3} letterSpacing={3}>MATERIAL WORLD</text>
@@ -1509,7 +1852,7 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
             <line x1={pInner.x} y1={pInner.y} x2={pOuter.x} y2={pOuter.y} stroke={INK3} strokeWidth={0.5} opacity={0.4} pointerEvents="none" />
             <g className={`svg-clickable${selectedId === pa.id ? ' selected' : ''}`}
               onClick={() => handleClick(pa.id)}>
-              <rect x={p.x - 36} y={p.y - 20} width={72} height={40} rx={4}
+              <rect x={p.x - 36} y={p.y - 20} width={72} height={40}
                 fill={selectedId === pa.id ? 'rgba(200,168,74,0.12)' : 'transparent'}
                 stroke={selectedId === pa.id ? GOLD2 : INK3} strokeWidth={1} />
               <text x={p.x} y={p.y - 7} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7.5} fill={INK2}>{pa.planet}</text>
@@ -1526,7 +1869,7 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
       {/* Demiurge label */}
       <g className={`svg-clickable${selectedId === 'cos-yaldabaoth' ? ' selected' : ''}`}
         onClick={() => handleClick('cos-yaldabaoth')}>
-        <rect x={cx - 85} y={cy + R_DEMIURGE - 24} width={170} height={44} rx={5}
+        <rect x={cx - 85} y={cy + R_DEMIURGE - 24} width={170} height={44}
           fill={selectedId === 'cos-yaldabaoth' ? 'rgba(200,168,74,0.12)' : 'rgba(90,56,24,0.06)'}
           stroke={selectedId === 'cos-yaldabaoth' ? GOLD2 : '#5a3818'} strokeWidth={1.2} />
         <text x={cx} y={cy + R_DEMIURGE - 4} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={10} fill="#5a3818" letterSpacing={2}>YALDABAOTH</text>
@@ -1553,7 +1896,7 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
       {/* Sophia at the boundary */}
       <g className={`svg-clickable${selectedId === 'cos-sophia' ? ' selected' : ''}`}
         onClick={() => handleClick('cos-sophia')}>
-        <rect x={cx - R_BOUNDARY - 10} y={cy + 12} width={170} height={38} rx={4}
+        <rect x={cx - R_BOUNDARY - 10} y={cy + 12} width={170} height={38}
           fill={selectedId === 'cos-sophia' ? 'rgba(200,168,74,0.12)' : 'transparent'}
           stroke={selectedId === 'cos-sophia' ? GOLD2 : 'transparent'} strokeWidth={1} />
         <text x={cx - R_BOUNDARY + 75} y={cy + 30} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={GOLD2}>SOPHIA [so-FEE-ah]</text>
@@ -1577,7 +1920,7 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
             <line x1={p.x} y1={p.y} x2={pOuter.x} y2={pOuter.y} stroke={GOLD2} strokeWidth={0.3} opacity={0.3} pointerEvents="none" />
             <g className={`svg-clickable${selectedId === 'cos-luminaries' ? ' selected' : ''}`}
               onClick={() => handleClick('cos-luminaries')}>
-              <rect x={p.x - 34} y={p.y - 14} width={68} height={28} rx={3}
+              <rect x={p.x - 34} y={p.y - 14} width={68} height={28}
                 fill={selectedId === 'cos-luminaries' ? 'rgba(200,168,74,0.12)' : 'transparent'}
                 stroke={selectedId === 'cos-luminaries' ? GOLD2 : GOLD2} strokeWidth={0.6} />
               <text x={p.x} y={p.y - 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={GOLD}>{aeon.name.split(' [')[0]}</text>
@@ -1605,7 +1948,7 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
             <line x1={pInner.x} y1={pInner.y} x2={p.x} y2={p.y} stroke={GOLD} strokeWidth={0.6} opacity={0.5} pointerEvents="none" />
             <g className={`svg-clickable${selectedId === lum.id ? ' selected' : ''}`}
               onClick={() => handleClick(lum.id)}>
-              <rect x={p.x - 48} y={p.y - 28} width={96} height={56} rx={5}
+              <rect x={p.x - 48} y={p.y - 28} width={96} height={56}
                 fill={selectedId === lum.id ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.04)'}
                 stroke={selectedId === lum.id ? GOLD : GOLD2} strokeWidth={1.2} />
               {/* Luminary name */}
@@ -1808,7 +2151,7 @@ function AscentDiagram({ onClick, selectedId, elements }: { onClick: (id: string
         const el = elements.find(e => e.id === s.id)
         return (
           <g key={i}>
-            <rect x={cx - 90} y={s.y - 18} width={180} height={36} rx={4}
+            <rect x={cx - 90} y={s.y - 18} width={180} height={36}
               fill={selectedId === s.id ? 'rgba(200,168,74,0.15)' : 'transparent'}
               stroke={selectedId === s.id ? GOLD2 : INK3} strokeWidth={1.5}
               className="svg-clickable"
@@ -1833,13 +2176,13 @@ function LiturgyDiagram({ onClick, selectedId, elements }: { onClick: (id: strin
   return (
     <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
       <text x={cx} y={25} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK} letterSpacing={2}>THE SACRED LITURGY</text>
-      <rect x={60} y={45} width={380} height={420} rx={6} fill="none" stroke={INK3} strokeWidth={1.5} pointerEvents="none" />
-      <rect x={68} y={53} width={364} height={404} rx={4} fill="none" stroke={GOLD2} strokeWidth={0.8} pointerEvents="none" />
+      <rect x={60} y={45} width={380} height={420} fill="none" stroke={INK3} strokeWidth={1.5} pointerEvents="none" />
+      <rect x={68} y={53} width={364} height={404} fill="none" stroke={GOLD2} strokeWidth={0.8} pointerEvents="none" />
       {elements.map((el, i) => {
         const y = 80 + i * 70
         return (
           <g key={i}>
-            <rect x={85} y={y} width={330} height={55} rx={4}
+            <rect x={85} y={y} width={330} height={55}
               fill={selectedId === el.id ? 'rgba(200,168,74,0.1)' : 'transparent'}
               stroke={selectedId === el.id ? GOLD2 : INK3} strokeWidth={1.5}
               className="svg-clickable"
@@ -1861,13 +2204,13 @@ function HymnDiagram({ onClick, selectedId, elements }: { onClick: (id: string, 
   return (
     <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
       <text x={cx} y={25} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK} letterSpacing={2}>THE SACRED HYMN</text>
-      <rect x={70} y={50} width={360} height={410} rx={6} fill="none" stroke={INK3} strokeWidth={1.5} pointerEvents="none" />
-      <rect x={78} y={58} width={344} height={394} rx={4} fill="none" stroke={GOLD2} strokeWidth={0.8} pointerEvents="none" />
+      <rect x={70} y={50} width={360} height={410} fill="none" stroke={INK3} strokeWidth={1.5} pointerEvents="none" />
+      <rect x={78} y={58} width={344} height={394} fill="none" stroke={GOLD2} strokeWidth={0.8} pointerEvents="none" />
       {elements.map((el, i) => {
         const y = 80 + i * 75
         return (
           <g key={i}>
-            <rect x={95} y={y} width={310} height={60} rx={4}
+            <rect x={95} y={y} width={310} height={60}
               fill={selectedId === el.id ? 'rgba(200,168,74,0.1)' : 'transparent'}
               stroke={selectedId === el.id ? GOLD2 : INK3} strokeWidth={1.5}
               className="svg-clickable"
@@ -1944,7 +2287,7 @@ function DialogueDiagram({ onClick, selectedId, elements }: { onClick: (id: stri
         const isLeft = i % 2 === 0
         return (
           <g key={i}>
-            <rect x={isLeft ? 40 : 120} y={y} width={340} height={75} rx={6}
+            <rect x={isLeft ? 40 : 120} y={y} width={340} height={75}
               fill={selectedId === el.id ? 'rgba(200,168,74,0.1)' : 'transparent'}
               stroke={selectedId === el.id ? GOLD2 : INK3} strokeWidth={1.5}
               className="svg-clickable"
@@ -1960,15 +2303,16 @@ function DialogueDiagram({ onClick, selectedId, elements }: { onClick: (id: stri
 }
 
 /* ── Seal Diagram Router ── */
-function SealDiagram({ type, complexity, fatherName, cipher, jeuNum, onElementClick, selectedId, elements }: {
+function SealDiagram({ type, complexity, fatherName, cipher, jeuNum, onElementClick, selectedId, elements, onNavigateEntry }: {
   type: string; complexity: number; fatherName: string; cipher: string; jeuNum: number
   onElementClick: (id: string, label: string, detail: string) => void; selectedId: string | null
   elements?: { id: string; label: string; brief: string; detail: string }[]
+  onNavigateEntry?: (id: string) => void
 }) {
   const cx = 250, cy = 250
   const baseR = [80, 100, 120, 140, 160][Math.min(complexity, 5) - 1] || 100
   const props = { cx, cy, r: baseR, jeuNum, fatherName, cipher, complexity, onClick: onElementClick, selectedId }
-  const elProps = { onClick: onElementClick, selectedId, elements: elements || [] }
+  const elProps = { onClick: onElementClick, selectedId, elements: elements || [], onNavigateEntry }
 
   switch (type) {
     case 'cross-circle': return <CrossCircleSeal {...props} />
@@ -2127,7 +2471,7 @@ export default function Home() {
 
           <div className="content-grid">
             <div className="diagram-wrap">
-              {currentSacred && <SealDiagram type={currentSacred.sealType} complexity={3} fatherName="" cipher="" jeuNum={0} onElementClick={handleElementClick} selectedId={selectedElement} elements={currentSacred.elements} />}
+              {currentSacred && <SealDiagram type={currentSacred.sealType} complexity={3} fatherName="" cipher="" jeuNum={0} onElementClick={handleElementClick} selectedId={selectedElement} elements={currentSacred.elements} onNavigateEntry={handleEntrySelect} />}
               {currentTreasury && <SealDiagram type={currentTreasury.sealType} complexity={currentTreasury.sealComplexity} fatherName={currentTreasury.fatherName} cipher={currentTreasury.cipher} jeuNum={currentTreasury.jeuNum} onElementClick={handleElementClick} selectedId={selectedElement} />}
             </div>
 
