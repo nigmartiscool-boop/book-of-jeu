@@ -1,0 +1,472 @@
+  1147→/* ── Cosmos Diagram — Extremely Detailed Gnostic Cosmology ── */
+  1148→function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+  1149→  const W = 800, H = 900
+  1150→  const cx = 400, cy = 460
+  1151→
+  1152→  /* ── Realm radii ── */
+  1153→  const R_ONE = 22
+  1154→  const R_TRIAD = 52
+  1155→  const R_LUMINARIES = 110
+  1156→  const R_AEONS = 175
+  1157→  const R_BOUNDARY = 220
+  1158→  const R_DEMIURGE = 260
+  1159→  const R_PLANETS = 310
+  1160→  const R_ZODIAC = 355
+  1161→  const R_FATE = 385
+  1162→  const R_KENOMA = 420
+  1163→
+  1164→  /* ── Helper: radial position ── */
+  1165→  const rad = (angle: number, r: number) => ({
+  1166→    x: cx + Math.cos(angle * Math.PI / 180) * r,
+  1167→    y: cy + Math.sin(angle * Math.PI / 180) * r
+  1168→  })
+  1169→
+  1170→  /* ── Four Luminaries with sub-aeons ── */
+  1171→  const luminaries = [
+  1172→    { name: 'Harmozel [har-MOH-zel]', id: 'ut-luminaries', subAeons: ['Grace', 'Truth'], angle: 315 },
+  1173→    { name: 'Oroiael [or-OY-ah-el]', id: 'ut-luminaries', subAeons: ['Conception', 'Perception'], angle: 45 },
+  1174→    { name: 'Daveithai [dah-VAY-thay]', id: 'ut-luminaries', subAeons: ['Understanding', 'Love'], angle: 135 },
+  1175→    { name: 'Eleleth [el-EL-eth]', id: 'ut-luminaries', subAeons: ['Wisdom', 'Prudence'], angle: 225 }
+  1176→  ]
+  1177→
+  1178→  /* ── Twelve Aeons ── */
+  1179→  const twelveAeons = [
+  1180→    { name: 'Armedon [ar-MED-on]', angle: 0 },
+  1181→    { name: 'Sigen [SI-jen]', angle: 30 },
+  1182→    { name: 'Matricula [mah-TRIK-yoo-lah]', angle: 60 },
+  1183→    { name: 'Haram [HAH-ram]', angle: 90 },
+  1184→    { name: 'Ei [AY]', angle: 120 },
+  1185→    { name: 'Ogen [OH-jen]', angle: 150 },
+  1186→    { name: 'Mixanther [miks-AN-ther]', angle: 180 },
+  1187→    { name: 'Astere [ah-STER-ee]', angle: 210 },
+  1188→    { name: 'Aphria [AH-free-ah]', angle: 240 },
+  1189→    { name: 'Mirothea [mi-ROTH-ee-ah]', angle: 270 },
+  1190→    { name: 'Synel [SIN-el]', angle: 300 },
+  1191→    { name: 'Thales [THAY-leez]', angle: 330 }
+  1192→  ]
+  1193→
+  1194→  /* ── Seven Planetary Archons ── */
+  1195→  const planetaryArchons = [
+  1196→    { name: 'Ialdabaoth [yal-dah-BAH-oth]', planet: 'Saturn', id: 'ut-yaldabaoth', angle: 270 },
+  1197→    { name: 'Iao [EE-ah-oh]', planet: 'Jupiter', id: 'ut-yaldabaoth', angle: 320 },
+  1198→    { name: 'Sabaoth [SAH-bah-oth]', planet: 'Mars', id: 'ut-yaldabaoth', angle: 10 },
+  1199→    { name: 'Adonai [ah-DON-eye]', planet: 'Sun', id: 'ut-yaldabaoth', angle: 60 },
+  1200→    { name: 'Eloai [el-OH-eye]', planet: 'Venus', id: 'ut-yaldabaoth', angle: 110 },
+  1201→    { name: 'Oraios [or-AY-os]', planet: 'Mercury', id: 'ut-yaldabaoth', angle: 160 },
+  1202→    { name: 'Astaphaios [as-tah-FAY-os]', planet: 'Moon', id: 'ut-yaldabaoth', angle: 210 }
+  1203→  ]
+  1204→
+  1205→  /* ── Twelve Zodiac Archons ── */
+  1206→  const zodiacArchons = [
+  1207→    { name: 'Arioth [ah-REE-oth]', sign: 'Aries', angle: 0 },
+  1208→    { name: 'Thaum [THAWM]', sign: 'Taurus', angle: 30 },
+  1209→    { name: 'Gair [GARE]', sign: 'Gemini', angle: 60 },
+  1210→    { name: 'Kark [KARK]', sign: 'Cancer', angle: 90 },
+  1211→    { name: 'Leon [LAY-on]', sign: 'Leo', angle: 120 },
+  1212→    { name: 'Parthen [PAR-then]', sign: 'Virgo', angle: 150 },
+  1213→    { name: 'Mozn [MOZ-en]', sign: 'Libra', angle: 180 },
+  1214→    { name: 'Akrab [AHK-rab]', sign: 'Scorpio', angle: 210 },
+  1215→    { name: 'Qeshet [KESH-et]', sign: 'Sagittarius', angle: 240 },
+  1216→    { name: 'Gadi [GAH-dee]', sign: 'Capricorn', angle: 270 },
+  1217→    { name: 'Deli [DEL-ee]', sign: 'Aquarius', angle: 300 },
+  1218→    { name: 'Nuni [NOO-nee]', sign: 'Pisces', angle: 330 }
+  1219→  ]
+  1220→
+  1221→  /* ── Decorative: ornate double-ring with tick marks ── */
+  1222→  const ornateRing = (r: number, stroke: string, sw: number, ticks = 0, tickLen = 4, dashArray?: string) => (
+  1223→    <g pointerEvents="none">
+  1224→      <circle cx={cx} cy={cy} r={r} fill="none" stroke={stroke} strokeWidth={sw} strokeDasharray={dashArray} />
+  1225→      {ticks > 0 && Array.from({ length: ticks }).map((_, i) => {
+  1226→        const a = (i * 360 / ticks) * Math.PI / 180
+  1227→        const x1 = cx + Math.cos(a) * (r - tickLen), y1 = cy + Math.sin(a) * (r - tickLen)
+  1228→        const x2 = cx + Math.cos(a) * (r + tickLen), y2 = cy + Math.sin(a) * (r + tickLen)
+  1229→        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={stroke} strokeWidth={0.8} />
+  1230→      })}
+  1231→    </g>
+  1232→  )
+  1233→
+  1234→  /* ── Decorative: sacred geometry hexagram ── */
+  1235→  const hexagram = (r: number, stroke: string, sw: number, rotation = 0) => {
+  1236→    const pts = Array.from({ length: 6 }).map((_, i) => {
+  1237→      const a = ((i * 60 + rotation) * Math.PI / 180)
+  1238→      return { x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r }
+  1239→    })
+  1240→    return (
+  1241→      <g pointerEvents="none">
+  1242→        {[0, 1, 2, 3, 4, 5].map(i => (
+  1243→          <line key={i} x1={pts[i].x} y1={pts[i].y} x2={pts[(i + 2) % 6].x} y2={pts[(i + 2) % 6].y} stroke={stroke} strokeWidth={sw} opacity={0.5} />
+  1244→        ))}
+  1245→      </g>
+  1246→    )
+  1247→  }
+  1248→
+  1249→  /* ── Click handler helper ── */
+  1250→  const handleClick = (id: string) => {
+  1251→    const el = elements.find(e => e.id === id)
+  1252→    if (el) onClick(id, el.label, el.detail)
+  1253→  }
+  1254→
+  1255→  return (
+  1256→    <svg viewBox={`0 0 ${W} ${H}`} xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+  1257→      <defs>
+  1258→        {/* Gradient for divine center glow */}
+  1259→        <radialGradient id="divineGlow" cx="50%" cy="50%" r="50%">
+  1260→          <stop offset="0%" stopColor="#e8c070" stopOpacity={0.6} />
+  1261→          <stop offset="50%" stopColor="#c8a84a" stopOpacity={0.2} />
+  1262→          <stop offset="100%" stopColor="#c8a84a" stopOpacity={0} />
+  1263→        </radialGradient>
+  1264→        {/* Gradient for kenoma darkness */}
+  1265→        <radialGradient id="kenomaGloom" cx="50%" cy="50%" r="50%">
+  1266→          <stop offset="0%" stopColor="#3a2c14" stopOpacity={0} />
+  1267→          <stop offset="80%" stopColor="#1a1208" stopOpacity={0.08} />
+  1268→          <stop offset="100%" stopColor="#1a1208" stopOpacity={0.15} />
+  1269→        </radialGradient>
+  1270→        {/* Gradient for boundary flash */}
+  1271→        <linearGradient id="boundaryFlash" x1="0%" y1="0%" x2="100%" y2="0%">
+  1272→          <stop offset="0%" stopColor="#c8a84a" stopOpacity={0} />
+  1273→          <stop offset="50%" stopColor="#e8c070" stopOpacity={0.5} />
+  1274→          <stop offset="100%" stopColor="#c8a84a" stopOpacity={0} />
+  1275→        </linearGradient>
+  1276→        {/* Fine pattern for Pleroma region */}
+  1277→        <pattern id="pleromaPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+  1278→          <circle cx="10" cy="10" r="0.6" fill="#c8a84a" opacity={0.2} />
+  1279→        </pattern>
+  1280→        {/* Fine pattern for material region */}
+  1281→        <pattern id="kenomaPattern" width="12" height="12" patternUnits="userSpaceOnUse">
+  1282→          <line x1="0" y1="12" x2="12" y2="0" stroke="#6a5030" strokeWidth={0.3} opacity={0.3} />
+  1283→        </pattern>
+  1284→      </defs>
+  1285→
+  1286→      {/* ═══════════════ TITLE ═══════════════ */}
+  1287→      <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={18} fill={INK} letterSpacing={4} fontWeight="bold">THE GNOSTIC COSMOS</text>
+  1288→      <text x={cx} y={46} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={9} fill={INK3} fontStyle="italic">From the One to the Kenoma — The Complete Hierarchy of Being</text>
+  1289→      {/* Decorative line under title */}
+  1290→      <line x1={cx - 180} y1={54} x2={cx + 180} y2={54} stroke={GOLD2} strokeWidth={0.8} />
+  1291→      <line x1={cx - 160} y1={57} x2={cx + 160} y2={57} stroke={GOLD2} strokeWidth={0.4} />
+  1292→      <SvgCross x={cx - 185} y={55} size={3} color={GOLD2} />
+  1293→      <SvgCross x={cx + 182} y={55} size={3} color={GOLD2} />
+  1294→
+  1295→      {/* ═══════════════ OUTERMOST: KENOMA ═══════════════ */}
+  1296→      {/* Background fill for material world */}
+  1297→      <circle cx={cx} cy={cy} r={R_KENOMA + 10} fill="url(#kenomaGloom)" pointerEvents="none" />
+  1298→      <circle cx={cx} cy={cy} r={R_KENOMA} fill="url(#kenomaPattern)" pointerEvents="none" />
+  1299→      {ornateRing(R_KENOMA, INK3, 2, 72, 3)}
+  1300→      {ornateRing(R_KENOMA - 4, INK3, 0.8)}
+  1301→      {/* Label: Material World */}
+  1302→      <g className={`svg-clickable${selectedId === 'ut-yaldabaoth' ? ' selected' : ''}`}
+  1303→        onClick={() => handleClick('ut-yaldabaoth')}>
+  1304→        <rect x={cx - 80} y={cy - R_KENOMA - 22} width={160} height={18} rx={3}
+  1305→          fill={selectedId === 'ut-yaldabaoth' ? 'rgba(200,168,74,0.12)' : 'transparent'}
+  1306→          stroke={selectedId === 'ut-yaldabaoth' ? GOLD2 : 'transparent'} strokeWidth={1} />
+  1307→        <text x={cx} y={cy - R_KENOMA - 9} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={10} fill={INK3} letterSpacing={2}>MATERIAL WORLD</text>
+  1308→      </g>
+  1309→      <text x={cx + R_KENOMA + 8} y={cy + 4} fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">Kenoma [ken-OH-mah] — Deficiency</text>
+  1310→
+  1311→      {/* ═══════════════ FATE RING (Heimarmene) ═══════════════ */}
+  1312→      {ornateRing(R_FATE, INK3, 1.2, 36, 2, '2 3')}
+  1313→      <text x={cx + R_FATE + 8} y={cy - 30} fontFamily="Cinzel, serif" fontSize={6} fill={INK3} letterSpacing={1}>HEIMARMENE [hi-MAR-men-ee]</text>
+  1314→      <text x={cx + R_FATE + 8} y={cy - 20} fontFamily="Libre Baskerville, serif" fontSize={5.5} fill={INK3} fontStyle="italic">The Wheel of Fate</text>
+  1315→
+  1316→      {/* ═══════════════ ZODIAC RING ═══════════════ */}
+  1317→      {ornateRing(R_ZODIAC, INK3, 1.5, 12, 5)}
+  1318→      {ornateRing(R_ZODIAC - 3, INK3, 0.5)}
+  1319→      {zodiacArchons.map((za, i) => {
+  1320→        const p = rad(za.angle, R_ZODIAC)
+  1321→        const pInner = rad(za.angle, R_PLANETS + 5)
+  1322→        const pOuter = rad(za.angle, R_FATE - 5)
+  1323→        return (
+  1324→          <g key={`zod-${i}`}>
+  1325→            <line x1={pInner.x} y1={pInner.y} x2={pOuter.x} y2={pOuter.y} stroke={INK3} strokeWidth={0.4} opacity={0.5} pointerEvents="none" />
+  1326→            <g className={`svg-clickable${selectedId === 'ut-yaldabaoth' ? ' selected' : ''}`}
+  1327→              onClick={() => handleClick('ut-yaldabaoth')}>
+  1328→              <circle cx={p.x} cy={p.y} r={12} fill="transparent" stroke={INK3} strokeWidth={0.6} />
+  1329→              <text x={p.x} y={p.y - 2} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={4.5} fill={INK3}>{za.sign}</text>
+  1330→              <text x={p.x} y={p.y + 5} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={3.8} fill={INK3} fontStyle="italic">{za.name}</text>
+  1331→            </g>
+  1332→          </g>
+  1333→        )
+  1334→      })}
+  1335→
+  1336→      {/* ═══════════════ PLANETARY SPHERES ═══════════════ */}
+  1337→      {ornateRing(R_PLANETS, INK3, 1.8, 7, 6)}
+  1338→      {ornateRing(R_PLANETS - 3, INK3, 0.5)}
+  1339→      {planetaryArchons.map((pa, i) => {
+  1340→        const p = rad(pa.angle, R_PLANETS)
+  1341→        const pInner = rad(pa.angle, R_DEMIURGE + 5)
+  1342→        const pOuter = rad(pa.angle, R_ZODIAC - 5)
+  1343→        return (
+  1344→          <g key={`planet-${i}`}>
+  1345→            <line x1={pInner.x} y1={pInner.y} x2={pOuter.x} y2={pOuter.y} stroke={INK3} strokeWidth={0.5} opacity={0.4} pointerEvents="none" />
+  1346→            <g className={`svg-clickable${selectedId === pa.id ? ' selected' : ''}`}
+  1347→              onClick={() => handleClick(pa.id)}>
+  1348→              <rect x={p.x - 26} y={p.y - 14} width={52} height={28} rx={3}
+  1349→                fill={selectedId === pa.id ? 'rgba(200,168,74,0.12)' : 'transparent'}
+  1350→                stroke={selectedId === pa.id ? GOLD2 : INK3} strokeWidth={0.8} />
+  1351→              <text x={p.x} y={p.y - 5} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={5.5} fill={INK2}>{pa.planet}</text>
+  1352→              <text x={p.x} y={p.y + 3} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={INK3} fontStyle="italic">{pa.name.split(' [')[0]}</text>
+  1353→              <text x={p.x} y={p.y + 10} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={3.5} fill={INK3} fontStyle="italic">[{pa.name.split(' [')[1]}</text>
+  1354→            </g>
+  1355→          </g>
+  1356→        )
+  1357→      })}
+  1358→
+  1359→      {/* ═══════════════ DEMIURGE SPHERE ═══════════════ */}
+  1360→      {ornateRing(R_DEMIURGE, '#5a3818', 2.5, 24, 4)}
+  1361→      {ornateRing(R_DEMIURGE - 5, '#5a3818', 0.6)}
+  1362→      {/* Demiurge label */}
+  1363→      <g className={`svg-clickable${selectedId === 'ut-yaldabaoth' ? ' selected' : ''}`}
+  1364→        onClick={() => handleClick('ut-yaldabaoth')}>
+  1365→        <rect x={cx - 60} y={cy + R_DEMIURGE - 18} width={120} height={32} rx={4}
+  1366→          fill={selectedId === 'ut-yaldabaoth' ? 'rgba(200,168,74,0.12)' : 'rgba(90,56,24,0.06)'}
+  1367→          stroke={selectedId === 'ut-yaldabaoth' ? GOLD2 : '#5a3818'} strokeWidth={1} />
+  1368→        <text x={cx} y={cy + R_DEMIURGE - 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill="#5a3818" letterSpacing={1}>YALDABAOTH</text>
+  1369→        <text x={cx} y={cy + R_DEMIURGE + 7} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5.5} fill="#5a3818" fontStyle="italic">[yal-dah-BAH-oth] — The Demiurge</text>
+  1370→      </g>
+  1371→      {/* Lion-face symbol for Yaldabaoth */}
+  1372→      <g transform={`translate(${cx}, ${cy + R_DEMIURGE + 26})`} pointerEvents="none">
+  1373→        <text textAnchor="middle" fontFamily="serif" fontSize={10} fill="#5a3818" opacity={0.5}>&#x1F981;</text>
+  1374→      </g>
+  1375→
+  1376→      {/* ═══════════════ BOUNDARY: LIMIT / STAUROS ═══════════════ */}
+  1377→      {/* Double ring with flash — the boundary of the Pleroma */}
+  1378→      {ornateRing(R_BOUNDARY, GOLD2, 2, 48, 3)}
+  1379→      {ornateRing(R_BOUNDARY + 4, GOLD2, 0.6)}
+  1380→      {ornateRing(R_BOUNDARY - 4, GOLD2, 0.6)}
+  1381→      {/* Cross marks at cardinal points on the boundary */}
+  1382→      {[0, 90, 180, 270].map(a => {
+  1383→        const p = rad(a, R_BOUNDARY)
+  1384→        return <SvgCross key={`bCross-${a}`} x={p.x} y={p.y} size={4} color={GOLD2} />
+  1385→      })}
+  1386→      {/* Stauros / Limit label */}
+  1387→      <text x={cx - R_BOUNDARY - 8} y={cy - 8} textAnchor="end" fontFamily="Cinzel, serif" fontSize={7} fill={GOLD2} letterSpacing={1}>STAUROS [STOW-ros]</text>
+  1388→      <text x={cx - R_BOUNDARY - 8} y={cy + 2} textAnchor="end" fontFamily="Libre Baskerville, serif" fontSize={5.5} fill={GOLD2} fontStyle="italic">The Cross / Limit of the Pleroma</text>
+  1389→      {/* Sophia at the boundary */}
+  1390→      <g className={`svg-clickable${selectedId === 'ut-sophia' ? ' selected' : ''}`}
+  1391→        onClick={() => handleClick('ut-sophia')}>
+  1392→        <rect x={cx - R_BOUNDARY - 8} y={cy + 10} width={120} height={28} rx={3}
+  1393→          fill={selectedId === 'ut-sophia' ? 'rgba(200,168,74,0.12)' : 'transparent'}
+  1394→          stroke={selectedId === 'ut-sophia' ? GOLD2 : 'transparent'} strokeWidth={0.8} />
+  1395→        <text x={cx - R_BOUNDARY + 52} y={cy + 22} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={GOLD2}>SOPHIA [so-FEE-ah]</text>
+  1396→        <text x={cx - R_BOUNDARY + 52} y={cy + 32} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5} fill={GOLD2} fontStyle="italic">Wisdom — The Fallen Aeon</text>
+  1397→      </g>
+  1398→
+  1399→      {/* Pleroma region fill */}
+  1400→      <circle cx={cx} cy={cy} r={R_BOUNDARY - 6} fill="url(#pleromaPattern)" pointerEvents="none" />
+  1401→
+  1402→      {/* ═══════════════ TWELVE A EONS ═══════════════ */}
+  1403→      {ornateRing(R_AEONS, GOLD2, 1.5, 12, 5)}
+  1404→      {ornateRing(R_AEONS - 3, GOLD2, 0.5)}
+  1405→      {twelveAeons.map((aeon, i) => {
+  1406→        const p = rad(aeon.angle, R_AEONS)
+  1407→        const pInner = rad(aeon.angle, R_LUMINARIES + 8)
+  1408→        const pOuter = rad(aeon.angle, R_BOUNDARY - 8)
+  1409→        return (
+  1410→          <g key={`aeon-${i}`}>
+  1411→            {/* Radial connector lines */}
+  1412→            <line x1={pInner.x} y1={pInner.y} x2={p.x} y2={p.y} stroke={GOLD2} strokeWidth={0.4} opacity={0.4} pointerEvents="none" />
+  1413→            <line x1={p.x} y1={p.y} x2={pOuter.x} y2={pOuter.y} stroke={GOLD2} strokeWidth={0.3} opacity={0.3} pointerEvents="none" />
+  1414→            <g className={`svg-clickable${selectedId === 'ut-luminaries' ? ' selected' : ''}`}
+  1415→              onClick={() => handleClick('ut-luminaries')}>
+  1416→              <rect x={p.x - 24} y={p.y - 10} width={48} height={20} rx={2}
+  1417→                fill={selectedId === 'ut-luminaries' ? 'rgba(200,168,74,0.12)' : 'transparent'}
+  1418→                stroke={selectedId === 'ut-luminaries' ? GOLD2 : GOLD2} strokeWidth={0.5} />
+  1419→              <text x={p.x} y={p.y - 2} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={5} fill={GOLD}>{aeon.name.split(' [')[0]}</text>
+  1420→              <text x={p.x} y={p.y + 6} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={3.5} fill={GOLD2} fontStyle="italic">{aeon.name.split(' [')[1]?.replace(']', '') || ''}</text>
+  1421→            </g>
+  1422→          </g>
+  1423→        )
+  1424→      })}
+  1425→      {/* Label: Twelve Aeons */}
+  1426→      <text x={cx + R_AEONS + 10} y={cy + 4} fontFamily="Cinzel, serif" fontSize={6} fill={GOLD} letterSpacing={1}>THE TWELVE AEONS</text>
+  1427→      <text x={cx + R_AEONS + 10} y={cy + 13} fontFamily="Libre Baskerville, serif" fontSize={5} fill={GOLD2} fontStyle="italic">The Pleromic Fullness</text>
+  1428→
+  1429→      {/* ═══════════════ FOUR LUMINARIES ═══════════════ */}
+  1430→      {ornateRing(R_LUMINARIES, GOLD, 2, 24, 3)}
+  1431→      {ornateRing(R_LUMINARIES - 3, GOLD, 0.5)}
+  1432→      {hexagram(R_LUMINARIES, GOLD2, 0.6, 30)}
+  1433→      {/* Sacred geometry: inner hexagram rotated */}
+  1434→      {hexagram(R_LUMINARIES - 10, GOLD2, 0.4, 0)}
+  1435→      {luminaries.map((lum, i) => {
+  1436→        const p = rad(lum.angle, R_LUMINARIES)
+  1437→        const pInner = rad(lum.angle, R_TRIAD + 8)
+  1438→        return (
+  1439→          <g key={`lum-${i}`}>
+  1440→            {/* Connector line to triad */}
+  1441→            <line x1={pInner.x} y1={pInner.y} x2={p.x} y2={p.y} stroke={GOLD} strokeWidth={0.6} opacity={0.5} pointerEvents="none" />
+  1442→            <g className={`svg-clickable${selectedId === lum.id ? ' selected' : ''}`}
+  1443→              onClick={() => handleClick(lum.id)}>
+  1444→              <rect x={p.x - 34} y={p.y - 20} width={68} height={40} rx={4}
+  1445→                fill={selectedId === lum.id ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.04)'}
+  1446→                stroke={selectedId === lum.id ? GOLD : GOLD2} strokeWidth={1} />
+  1447→              {/* Luminary name */}
+  1448→              <text x={p.x} y={p.y - 9} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6.5} fill={GOLD} letterSpacing={1}>{lum.name.split(' [')[0]}</text>
+  1449→              <text x={p.x} y={p.y - 1} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={GOLD2} fontStyle="italic">{lum.name.split(' [')[1]?.replace(']', '') || ''}</text>
+  1450→              {/* Sub-aeons */}
+  1451→              {lum.subAeons.map((sa, j) => (
+  1452→                <text key={j} x={p.x} y={p.y + 8 + j * 6} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={GOLD2}>&#x2022; {sa}</text>
+  1453→              ))}
+  1454→            </g>
+  1455→          </g>
+  1456→        )
+  1457→      })}
+  1458→      {/* Label */}
+  1459→      <text x={cx - R_LUMINARIES - 8} y={cy + 4} textAnchor="end" fontFamily="Cinzel, serif" fontSize={6} fill={GOLD} letterSpacing={1}>FOUR LUMINARIES</text>
+  1460→      <text x={cx - R_LUMINARIES - 8} y={cy + 13} textAnchor="end" fontFamily="Libre Baskerville, serif" fontSize={5} fill={GOLD2} fontStyle="italic">Guardians of the Pleroma</text>
+  1461→
+  1462→      {/* ═══════════════ DIVINE TRIAD ═══════════════ */}
+  1463→      {ornateRing(R_TRIAD, GOLD, 2.5, 12, 3)}
+  1464→      {ornateRing(R_TRIAD - 4, GOLD3, 0.8)}
+  1465→      {/* Divine glow */}
+  1466→      <circle cx={cx} cy={cy} r={R_TRIAD} fill="url(#divineGlow)" pointerEvents="none" />
+  1467→      {/* Triangular arrangement of the Triad */}
+  1468→      <g className={`svg-clickable${selectedId === 'ut-triad' ? ' selected' : ''}`}
+  1469→        onClick={() => handleClick('ut-triad')}>
+  1470→        {/* Triangle connecting the three persons */}
+  1471→        <polygon
+  1472→          points={`${cx},${cy - 30} ${cx - 28},${cy + 18} ${cx + 28},${cy + 18}`}
+  1473→          fill="none" stroke={GOLD} strokeWidth={1.2} pointerEvents="none" />
+  1474→        {/* Father */}
+  1475→        <text x={cx} y={cy - 34} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK} letterSpacing={2}>FATHER</text>
+  1476→        <text x={cx} y={cy - 25} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={GOLD} fontStyle="italic">The Invisible Spirit</text>
+  1477→        {/* Barbelo / Mother */}
+  1478→        <text x={cx - 32} y={cy + 26} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={INK} letterSpacing={1}>BARBELO</text>
+  1479→        <text x={cx - 32} y={cy + 34} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={GOLD} fontStyle="italic">[bar-BEH-loh] Mother</text>
+  1480→        {/* Autogenes / Child */}
+  1481→        <text x={cx + 32} y={cy + 26} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={INK} letterSpacing={1}>AUTOGENES</text>
+  1482→        <text x={cx + 32} y={cy + 34} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={GOLD} fontStyle="italic">[aw-TOJ-en-eez] Child</text>
+  1483→      </g>
+  1484→
+  1485→      {/* ═══════════════ THE ONE ═══════════════ */}
+  1486→      <g className={`svg-clickable${selectedId === 'ut-one' ? ' selected' : ''}`}
+  1487→        onClick={() => handleClick('ut-one')}>
+  1488→        <circle cx={cx} cy={cy} r={R_ONE} fill={INK} stroke={GOLD3} strokeWidth={2.5}
+  1489→          style={{ filter: 'drop-shadow(0 0 6px rgba(232,192,112,0.6))' }} />
+  1490→        {/* Inner radiating lines */}
+  1491→        {Array.from({ length: 12 }).map((_, i) => {
+  1492→          const a = (i * 30) * Math.PI / 180
+  1493→          return <line key={`ray-${i}`} x1={cx + Math.cos(a) * 6} y1={cy + Math.sin(a) * 6} x2={cx + Math.cos(a) * 18} y2={cy + Math.sin(a) * 18} stroke={GOLD3} strokeWidth={0.6} opacity={0.7} pointerEvents="none" />
+  1494→        })}
+  1495→        <text x={cx} y={cy + 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={GOLD3} letterSpacing={1}>ONE</text>
+  1496→      </g>
+  1497→
+  1498→      {/* ═══════════════ DESCENT / ASCENT PATHS ═══════════════ */}
+  1499→      {/* Sophia's descent path (dashed, going down from boundary) */}
+  1500→      <g pointerEvents="none">
+  1501→        <path d={`M${cx + 50} ${cy - R_BOUNDARY + 10} Q${cx + 60} ${cy - R_DEMIURGE + 30} ${cx + 30} ${cy + R_DEMIURGE - 25}`}
+  1502→          fill="none" stroke="#5a3818" strokeWidth={1.2} strokeDasharray="4 3" opacity={0.6} />
+  1503→        <text x={cx + 65} y={cy - R_DEMIURGE + 10} fontFamily="Libre Baskerville, serif" fontSize={5} fill="#5a3818" fontStyle="italic" transform={`rotate(-75, ${cx + 65}, ${cy - R_DEMIURGE + 10})`}>Sophia&apos;s Descent</text>
+  1504→      </g>
+  1505→      {/* Christ's redemptive descent/ascent (solid gold, going up) */}
+  1506→      <g pointerEvents="none">
+  1507→        <path d={`M${cx - 50} ${cy + R_DEMIURGE - 25} Q${cx - 60} ${cy - R_DEMIURGE + 30} ${cx - 30} ${cy - R_BOUNDARY + 10}`}
+  1508→          fill="none" stroke={GOLD2} strokeWidth={1.2} opacity={0.7} />
+  1509→        {/* Arrow at top */}
+  1510→        <polygon points={`${cx - 30},${cy - R_BOUNDARY + 10} ${cx - 35},${cy - R_BOUNDARY + 18} ${cx - 25},${cy - R_BOUNDARY + 18}`} fill={GOLD2} opacity={0.7} />
+  1511→        <text x={cx - 72} y={cy - R_DEMIURGE + 10} fontFamily="Libre Baskerville, serif" fontSize={5} fill={GOLD2} fontStyle="italic" transform={`rotate(75, ${cx - 72}, ${cy - R_DEMIURGE + 10})`}>Christ&apos;s Ascent</text>
+  1512→      </g>
+  1513→
+  1514→      {/* ═══════════════ SIDE ANNOTATIONS ═══════════════ */}
+  1515→      {/* Left: Pleroma label with bracket */}
+  1516→      <g pointerEvents="none">
+  1517→        <line x1={30} y1={cy - R_BOUNDARY + 20} x2={30} y2={cy + R_BOUNDARY - 20} stroke={GOLD2} strokeWidth={1} />
+  1518→        <line x1={30} y1={cy - R_BOUNDARY + 20} x2={38} y2={cy - R_BOUNDARY + 20} stroke={GOLD2} strokeWidth={1} />
+  1519→        <line x1={30} y1={cy + R_BOUNDARY - 20} x2={38} y2={cy + R_BOUNDARY - 20} stroke={GOLD2} strokeWidth={1} />
+  1520→        <text x={26} y={cy} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={GOLD2} letterSpacing={3}
+  1521→          transform={`rotate(-90, 26, ${cy})`}>PLEROMA</text>
+  1522→        <text x={42} y={cy + R_BOUNDARY - 35} fontFamily="Libre Baskerville, serif" fontSize={5} fill={GOLD2} fontStyle="italic">[ple-ROH-mah] — Fullness</text>
+  1523→      </g>
+  1524→
+  1525→      {/* Right: Kenoma label with bracket */}
+  1526→      <g pointerEvents="none">
+  1527→        <line x1={W - 30} y1={cy - R_KENOMA + 20} x2={W - 30} y2={cy + R_KENOMA - 20} stroke={INK3} strokeWidth={1} />
+  1528→        <line x1={W - 30} y1={cy - R_KENOMA + 20} x2={W - 38} y2={cy - R_KENOMA + 20} stroke={INK3} strokeWidth={1} />
+  1529→        <line x1={W - 30} y1={cy + R_KENOMA - 20} x2={W - 38} y2={cy + R_KENOMA - 20} stroke={INK3} strokeWidth={1} />
+  1530→        <text x={W - 26} y={cy} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK3} letterSpacing={3}
+  1531→          transform={`rotate(90, ${W - 26}, ${cy})`}>KENOMA</text>
+  1532→      </g>
+  1533→
+  1534→      {/* ═══════════════ SACRED NAMES RING (between Demiurge & Planets) ═══════════════ */}
+  1535→      {/* Seven sacred vowels inscribed between Demiurge and Planets */}
+  1536→      {['A', 'E', 'I', 'O', 'U', 'O', 'S'].map((v, i) => {
+  1537→        const a = (i * 360 / 7 + 90) * Math.PI / 180
+  1538→        const vx = cx + Math.cos(a) * (R_DEMIURGE + 15), vy = cy + Math.sin(a) * (R_DEMIURGE + 15)
+  1539→        return (
+  1540→          <g key={`vowel-${i}`} pointerEvents="none">
+  1541→            <circle cx={vx} cy={vy} r={6} fill="none" stroke={INK3} strokeWidth={0.6} />
+  1542→            <text x={vx} y={vy + 2.5} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={INK3}>{v}</text>
+  1543→          </g>
+  1544→        )
+  1545→      })}
+  1546→
+  1547→      {/* ═══════════════ CORNER DECORATIONS ═══════════════ */}
+  1548→      {/* Top-left corner ornament */}
+  1549→      <g pointerEvents="none">
+  1550→        <path d={`M10 70 L10 60 Q10 55 15 55 L25 55`} fill="none" stroke={GOLD2} strokeWidth={1} />
+  1551→        <path d={`M14 70 L14 64 Q14 59 19 59 L25 59`} fill="none" stroke={GOLD2} strokeWidth={0.6} />
+  1552→        <circle cx={17} cy={62} r={2} fill={GOLD2} />
+  1553→      </g>
+  1554→      {/* Top-right corner ornament */}
+  1555→      <g pointerEvents="none">
+  1556→        <path d={`M${W - 10} 70 L${W - 10} 60 Q${W - 10} 55 ${W - 15} 55 L${W - 25} 55`} fill="none" stroke={GOLD2} strokeWidth={1} />
+  1557→        <path d={`M${W - 14} 70 L${W - 14} 64 Q${W - 14} 59 ${W - 19} 59 L${W - 25} 59`} fill="none" stroke={GOLD2} strokeWidth={0.6} />
+  1558→        <circle cx={W - 17} cy={62} r={2} fill={GOLD2} />
+  1559→      </g>
+  1560→
+  1561→      {/* ═══════════════ BOTTOM LEGEND ═══════════════ */}
+  1562→      <g pointerEvents="none">
+  1563→        <line x1={60} y1={H - 60} x2={W - 60} y2={H - 60} stroke={GOLD2} strokeWidth={0.5} />
+  1564→        {/* Pleroma indicator */}
+  1565→        <circle cx={100} cy={H - 42} r={4} fill="none" stroke={GOLD2} strokeWidth={1.5} />
+  1566→        <text x={110} y={H - 39} fontFamily="Libre Baskerville, serif" fontSize={6} fill={GOLD2}>Pleroma (Divine Fullness)</text>
+  1567→        {/* Kenoma indicator */}
+  1568→        <circle cx={300} cy={H - 42} r={4} fill="none" stroke={INK3} strokeWidth={1.5} />
+  1569→        <text x={310} y={H - 39} fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3}>Kenoma (Deficiency / Material)</text>
+  1570→        {/* Ascent path indicator */}
+  1571→        <line x1={490} y1={H - 45} x2={510} y2={H - 39} stroke={GOLD2} strokeWidth={1.2} />
+  1572→        <text x={516} y={H - 39} fontFamily="Libre Baskerville, serif" fontSize={6} fill={GOLD2}>Path of Ascent</text>
+  1573→        {/* Descent path indicator */}
+  1574→        <line x1={640} y1={H - 45} x2={660} y2={H - 39} stroke="#5a3818" strokeWidth={1.2} strokeDasharray="3 2" />
+  1575→        <text x={666} y={H - 39} fontFamily="Libre Baskerville, serif" fontSize={6} fill="#5a3818">Path of Descent</text>
+  1576→      </g>
+  1577→      {/* Source note */}
+  1578→      <text x={cx} y={H - 12} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5} fill={INK3} fontStyle="italic">
+  1579→        Based on the cosmology of the Apocryphon of John, the Book of Jeu, and the Untitled Text (Codex Brucianus)
+  1580→      </text>
+  1581→
+  1582→      {/* ═══════════════ INTERMEDIATE DECORATIVE RINGS ═══════════════ */}
+  1583→      {/* Faint ring between luminaries and aeons for visual depth */}
+  1584→      {ornateRing((R_LUMINARIES + R_AEONS) / 2, GOLD2, 0.3, 0, 0, '1 4')}
+  1585→      {/* Faint ring between aeons and boundary */}
+  1586→      {ornateRing((R_AEONS + R_BOUNDARY) / 2, GOLD2, 0.3, 0, 0, '1 6')}
+  1587→
+  1588→      {/* ═══════════════ SIXTY TREASURIES INDICATOR ═══════════════ */}
+  1589→      {/* Small dots around the aeon ring representing the 60 treasuries */}
+  1590→      {Array.from({ length: 60 }).map((_, i) => {
+  1591→        const a = (i * 6) * Math.PI / 180
+  1592→        const tr = R_AEONS + 15
+  1593→        return <circle key={`tDot-${i}`} cx={cx + Math.cos(a) * tr} cy={cy + Math.sin(a) * tr} r={0.8} fill={GOLD2} opacity={0.5} pointerEvents="none" />
+  1594→      })}
+  1595→      <text x={cx + R_AEONS + 20} y={cy + 28} fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={GOLD2} fontStyle="italic" pointerEvents="none">&#x2022; 60 Treasuries of Light</text>
+  1596→
+  1597→      {/* ═══════════════ FIVE RANKS INDICATOR ═══════════════ */}
+  1598→      {[1, 2, 3, 4, 5].map(rank => {
+  1599→        const rAngle = (rank * 72 - 90) * Math.PI / 180
+  1600→        const rR = R_TRIAD + 20
+  1601→        return (
+  1602→          <g key={`rank-${rank}`} pointerEvents="none">
+  1603→            <circle cx={cx + Math.cos(rAngle) * rR} cy={cy + Math.sin(rAngle) * rR} r={3} fill="none" stroke={GOLD3} strokeWidth={0.6} />
+  1604→            <text x={cx + Math.cos(rAngle) * (rR + 10)} y={cy + Math.sin(rAngle) * (rR + 10) + 2} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={3.5} fill={GOLD3}>Rank {rank}</text>
+  1605→          </g>
+  1606→        )
+  1607→      })}
+  1608→    </svg>
+  1609→  )
+  1610→}
+  1611→
+  1612→/* ── Ascent Diagram (for Rite of Ascent, Zostrianos) ── */
+  1613→function AscentDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+  1614→  const cx = 250
+  1615→  const stations = [
+  1616→    { id: 'as-gate1', y: 430, label: 'Gate of the Aeons' },
+
+[showing lines 1147-1616 of 2056; use offset=1617 with limit to continue reading]

@@ -1144,22 +1144,22 @@ function BaptismDiagram({ onClick, selectedId, elements }: { onClick: (id: strin
   )
 }
 
-/* ── Cosmos Diagram — Extremely Detailed Gnostic Cosmology ── */
+/* ── Cosmos Diagram — Extremely Detailed Gnostic Cosmology with Constellations ── */
 function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
-  const W = 800, H = 900
-  const cx = 400, cy = 460
+  const W = 1100, H = 1200
+  const cx = 550, cy = 600
 
-  /* ── Realm radii ── */
-  const R_ONE = 22
-  const R_TRIAD = 52
-  const R_LUMINARIES = 110
-  const R_AEONS = 175
-  const R_BOUNDARY = 220
-  const R_DEMIURGE = 260
-  const R_PLANETS = 310
-  const R_ZODIAC = 355
-  const R_FATE = 385
-  const R_KENOMA = 420
+  /* ── Realm radii (scaled up ~40%) ── */
+  const R_ONE = 30
+  const R_TRIAD = 72
+  const R_LUMINARIES = 150
+  const R_AEONS = 240
+  const R_BOUNDARY = 300
+  const R_DEMIURGE = 360
+  const R_PLANETS = 430
+  const R_ZODIAC = 490
+  const R_FATE = 530
+  const R_KENOMA = 570
 
   /* ── Helper: radial position ── */
   const rad = (angle: number, r: number) => ({
@@ -1216,6 +1216,83 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
     { name: 'Gadi [GAH-dee]', sign: 'Capricorn', angle: 270 },
     { name: 'Deli [DEL-ee]', sign: 'Aquarius', angle: 300 },
     { name: 'Nuni [NOO-nee]', sign: 'Pisces', angle: 330 }
+  ]
+
+  /* ── Constellations in the Kenoma (outer material realm) ── */
+  /* Each constellation: stars (offsets from center of constellation) + lines connecting them */
+  const constellations = [
+    {
+      name: 'Serpens [SER-penz]', label: 'The Serpent',
+      centerAngle: 200, centerR: R_KENOMA + 40,
+      stars: [[0, 0], [12, -8], [26, -6], [38, -10], [50, -4], [44, 8], [32, 12]],
+      lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]
+    },
+    {
+      name: 'Draco [DRAY-koh]', label: 'The Dragon',
+      centerAngle: 340, centerR: R_KENOMA + 35,
+      stars: [[0, 0], [-8, -14], [-18, -12], [-24, -4], [-16, 8], [-6, 10], [4, 6]],
+      lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]
+    },
+    {
+      name: 'Corvus [KOR-vus]', label: 'The Crow',
+      centerAngle: 110, centerR: R_KENOMA + 30,
+      stars: [[0, 0], [10, -12], [20, -4], [14, 10], [-6, 8]],
+      lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 0]]
+    },
+    {
+      name: 'Orion [or-EYE-on]', label: 'The Hunter',
+      centerAngle: 60, centerR: R_KENOMA + 50,
+      stars: [[0, -18], [-10, -6], [10, -6], [-12, 6], [0, 6], [12, 6], [-8, 18], [8, 18]],
+      lines: [[0, 1], [0, 2], [1, 3], [2, 5], [3, 4], [4, 5], [3, 6], [5, 7]]
+    },
+    {
+      name: 'Ursa Major [ER-sah MAY-jor]', label: 'The Great Bear',
+      centerAngle: 290, centerR: R_KENOMA + 55,
+      stars: [[0, 0], [14, -4], [24, 2], [18, 14], [4, 16], [-10, 10], [-14, 2]],
+      lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 0]]
+    },
+    {
+      name: 'Cygnus [SIG-nus]', label: 'The Swan',
+      centerAngle: 25, centerR: R_KENOMA + 35,
+      stars: [[0, -16], [0, -4], [-14, 4], [14, 4], [0, 14]],
+      lines: [[0, 1], [1, 2], [1, 3], [1, 4]]
+    },
+    {
+      name: 'Scorpius [SKOR-pee-us]', label: 'The Scorpion',
+      centerAngle: 155, centerR: R_KENOMA + 45,
+      stars: [[-20, -8], [-10, -4], [0, 0], [10, 2], [18, 8], [22, 16], [16, 22]],
+      lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]
+    },
+    {
+      name: 'Leo [LEE-oh]', label: 'The Lion',
+      centerAngle: 245, centerR: R_KENOMA + 40,
+      stars: [[-10, -10], [0, -14], [12, -10], [16, 0], [8, 10], [-4, 8], [-14, 2]],
+      lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 0]]
+    },
+    {
+      name: 'Cassiopeia [kas-ee-oh-PEE-ah]', label: 'The Queen',
+      centerAngle: 315, centerR: R_KENOMA + 65,
+      stars: [[-16, 4], [-6, -8], [4, 2], [14, -10], [22, 2]],
+      lines: [[0, 1], [1, 2], [2, 3], [3, 4]]
+    },
+    {
+      name: 'Andromeda [an-DROM-eh-dah]', label: 'The Chained Lady',
+      centerAngle: 80, centerR: R_KENOMA + 60,
+      stars: [[0, -14], [-8, -4], [8, -4], [-14, 8], [14, 8]],
+      lines: [[0, 1], [0, 2], [1, 3], [2, 4]]
+    },
+    {
+      name: 'Aquila [AH-kwi-lah]', label: 'The Eagle',
+      centerAngle: 180, centerR: R_KENOMA + 55,
+      stars: [[0, 0], [-10, -10], [10, -10], [-16, 4], [16, 4]],
+      lines: [[0, 1], [0, 2], [1, 3], [2, 4]]
+    },
+    {
+      name: 'Ophiuchus [off-ee-YOO-kus]', label: 'The Serpent-Bearer',
+      centerAngle: 130, centerR: R_KENOMA + 70,
+      stars: [[0, -16], [-8, -6], [8, -6], [0, 4], [-12, 10], [12, 10], [0, 18]],
+      lines: [[0, 1], [0, 2], [1, 3], [2, 3], [3, 4], [3, 5], [3, 6]]
+    }
   ]
 
   /* ── Decorative: ornate double-ring with tick marks ── */
@@ -1284,34 +1361,79 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
       </defs>
 
       {/* ═══════════════ TITLE ═══════════════ */}
-      <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={18} fill={INK} letterSpacing={4} fontWeight="bold">THE GNOSTIC COSMOS</text>
-      <text x={cx} y={46} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={9} fill={INK3} fontStyle="italic">From the One to the Kenoma — The Complete Hierarchy of Being</text>
+      <text x={cx} y={32} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={24} fill={INK} letterSpacing={5} fontWeight="bold">THE GNOSTIC COSMOS</text>
+      <text x={cx} y={56} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={12} fill={INK3} fontStyle="italic">From the One to the Kenoma — The Complete Hierarchy of Being</text>
       {/* Decorative line under title */}
-      <line x1={cx - 180} y1={54} x2={cx + 180} y2={54} stroke={GOLD2} strokeWidth={0.8} />
-      <line x1={cx - 160} y1={57} x2={cx + 160} y2={57} stroke={GOLD2} strokeWidth={0.4} />
-      <SvgCross x={cx - 185} y={55} size={3} color={GOLD2} />
-      <SvgCross x={cx + 182} y={55} size={3} color={GOLD2} />
+      <line x1={cx - 260} y1={66} x2={cx + 260} y2={66} stroke={GOLD2} strokeWidth={1} />
+      <line x1={cx - 240} y1={70} x2={cx + 240} y2={70} stroke={GOLD2} strokeWidth={0.5} />
+      <SvgCross x={cx - 265} y={68} size={4} color={GOLD2} />
+      <SvgCross x={cx + 261} y={68} size={4} color={GOLD2} />
+
+      {/* ═══════════════ CONSTELLATIONS IN THE KENOMA ═══════════════ */}
+      {/* Star field background */}
+      {Array.from({ length: 200 }).map((_, i) => {
+        const seed = i * 7919 + 104729
+        const px = ((seed * 13) % W)
+        const py = ((seed * 17) % (H - 100)) + 80
+        const distFromCenter = Math.sqrt((px - cx) ** 2 + (py - cy) ** 2)
+        if (distFromCenter < R_KENOMA + 15 || distFromCenter > R_KENOMA + 100) return null
+        const brightness = ((seed * 23) % 5) / 5
+        const sz = 0.5 + brightness * 1.2
+        return <circle key={`bgStar-${i}`} cx={px} cy={py} r={sz} fill={INK3} opacity={0.15 + brightness * 0.35} pointerEvents="none" />
+      })}
+      {/* Named constellations */}
+      {constellations.map((c, ci) => {
+        const center = rad(c.centerAngle, c.centerR)
+        const starPositions = c.stars.map(([sx, sy]) => ({ x: center.x + sx, y: center.y + sy }))
+        return (
+          <g key={`const-${ci}`} pointerEvents="none">
+            {/* Constellation lines */}
+            {c.lines.map(([a, b], li) => (
+              <line key={li}
+                x1={starPositions[a].x} y1={starPositions[a].y}
+                x2={starPositions[b].x} y2={starPositions[b].y}
+                stroke={INK3} strokeWidth={0.7} opacity={0.45} />
+            ))}
+            {/* Star points */}
+            {starPositions.map((sp, si) => (
+              <g key={si}>
+                <circle cx={sp.x} cy={sp.y} r={2.5} fill={INK3} opacity={0.7} />
+                <circle cx={sp.x} cy={sp.y} r={1.2} fill={PARCH} opacity={0.9} />
+              </g>
+            ))}
+            {/* Constellation label */}
+            <text x={center.x} y={center.y + (c.stars.reduce((m, s) => Math.max(m, s[1]), 0)) + 16}
+              textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={INK3} letterSpacing={1} opacity={0.8}>
+              {c.name.split(' [')[0]}
+            </text>
+            <text x={center.x} y={center.y + (c.stars.reduce((m, s) => Math.max(m, s[1]), 0)) + 26}
+              textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5.5} fill={INK3} fontStyle="italic" opacity={0.6}>
+              {c.label}
+            </text>
+          </g>
+        )
+      })}
 
       {/* ═══════════════ OUTERMOST: KENOMA ═══════════════ */}
       {/* Background fill for material world */}
       <circle cx={cx} cy={cy} r={R_KENOMA + 10} fill="url(#kenomaGloom)" pointerEvents="none" />
       <circle cx={cx} cy={cy} r={R_KENOMA} fill="url(#kenomaPattern)" pointerEvents="none" />
-      {ornateRing(R_KENOMA, INK3, 2, 72, 3)}
-      {ornateRing(R_KENOMA - 4, INK3, 0.8)}
+      {ornateRing(R_KENOMA, INK3, 2.5, 72, 3)}
+      {ornateRing(R_KENOMA - 5, INK3, 1)}
       {/* Label: Material World */}
       <g className={`svg-clickable${selectedId === 'ut-yaldabaoth' ? ' selected' : ''}`}
         onClick={() => handleClick('ut-yaldabaoth')}>
-        <rect x={cx - 80} y={cy - R_KENOMA - 22} width={160} height={18} rx={3}
+        <rect x={cx - 110} y={cy - R_KENOMA - 28} width={220} height={24} rx={4}
           fill={selectedId === 'ut-yaldabaoth' ? 'rgba(200,168,74,0.12)' : 'transparent'}
           stroke={selectedId === 'ut-yaldabaoth' ? GOLD2 : 'transparent'} strokeWidth={1} />
-        <text x={cx} y={cy - R_KENOMA - 9} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={10} fill={INK3} letterSpacing={2}>MATERIAL WORLD</text>
+        <text x={cx} y={cy - R_KENOMA - 12} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={13} fill={INK3} letterSpacing={3}>MATERIAL WORLD</text>
       </g>
-      <text x={cx + R_KENOMA + 8} y={cy + 4} fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">Kenoma [ken-OH-mah] — Deficiency</text>
+      <text x={cx + R_KENOMA + 10} y={cy + 5} fontFamily="Libre Baskerville, serif" fontSize={9} fill={INK3} fontStyle="italic">Kenoma [ken-OH-mah] — Deficiency</text>
 
       {/* ═══════════════ FATE RING (Heimarmene) ═══════════════ */}
-      {ornateRing(R_FATE, INK3, 1.2, 36, 2, '2 3')}
-      <text x={cx + R_FATE + 8} y={cy - 30} fontFamily="Cinzel, serif" fontSize={6} fill={INK3} letterSpacing={1}>HEIMARMENE [hi-MAR-men-ee]</text>
-      <text x={cx + R_FATE + 8} y={cy - 20} fontFamily="Libre Baskerville, serif" fontSize={5.5} fill={INK3} fontStyle="italic">The Wheel of Fate</text>
+      {ornateRing(R_FATE, INK3, 1.5, 36, 3, '2 3')}
+      <text x={cx + R_FATE + 10} y={cy - 40} fontFamily="Cinzel, serif" fontSize={8} fill={INK3} letterSpacing={1}>HEIMARMENE [hi-MAR-men-ee]</text>
+      <text x={cx + R_FATE + 10} y={cy - 28} fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">The Wheel of Fate</text>
 
       {/* ═══════════════ ZODIAC RING ═══════════════ */}
       {ornateRing(R_ZODIAC, INK3, 1.5, 12, 5)}
@@ -1325,9 +1447,9 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
             <line x1={pInner.x} y1={pInner.y} x2={pOuter.x} y2={pOuter.y} stroke={INK3} strokeWidth={0.4} opacity={0.5} pointerEvents="none" />
             <g className={`svg-clickable${selectedId === 'ut-yaldabaoth' ? ' selected' : ''}`}
               onClick={() => handleClick('ut-yaldabaoth')}>
-              <circle cx={p.x} cy={p.y} r={12} fill="transparent" stroke={INK3} strokeWidth={0.6} />
-              <text x={p.x} y={p.y - 2} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={4.5} fill={INK3}>{za.sign}</text>
-              <text x={p.x} y={p.y + 5} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={3.8} fill={INK3} fontStyle="italic">{za.name}</text>
+              <circle cx={p.x} cy={p.y} r={16} fill="transparent" stroke={INK3} strokeWidth={0.8} />
+              <text x={p.x} y={p.y - 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={INK3}>{za.sign}</text>
+              <text x={p.x} y={p.y + 7} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5} fill={INK3} fontStyle="italic">{za.name}</text>
             </g>
           </g>
         )
@@ -1345,12 +1467,12 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
             <line x1={pInner.x} y1={pInner.y} x2={pOuter.x} y2={pOuter.y} stroke={INK3} strokeWidth={0.5} opacity={0.4} pointerEvents="none" />
             <g className={`svg-clickable${selectedId === pa.id ? ' selected' : ''}`}
               onClick={() => handleClick(pa.id)}>
-              <rect x={p.x - 26} y={p.y - 14} width={52} height={28} rx={3}
+              <rect x={p.x - 36} y={p.y - 20} width={72} height={40} rx={4}
                 fill={selectedId === pa.id ? 'rgba(200,168,74,0.12)' : 'transparent'}
-                stroke={selectedId === pa.id ? GOLD2 : INK3} strokeWidth={0.8} />
-              <text x={p.x} y={p.y - 5} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={5.5} fill={INK2}>{pa.planet}</text>
-              <text x={p.x} y={p.y + 3} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={INK3} fontStyle="italic">{pa.name.split(' [')[0]}</text>
-              <text x={p.x} y={p.y + 10} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={3.5} fill={INK3} fontStyle="italic">[{pa.name.split(' [')[1]}</text>
+                stroke={selectedId === pa.id ? GOLD2 : INK3} strokeWidth={1} />
+              <text x={p.x} y={p.y - 7} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7.5} fill={INK2}>{pa.planet}</text>
+              <text x={p.x} y={p.y + 4} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3} fontStyle="italic">{pa.name.split(' [')[0]}</text>
+              <text x={p.x} y={p.y + 14} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={INK3} fontStyle="italic">[{pa.name.split(' [')[1]}</text>
             </g>
           </g>
         )
@@ -1362,15 +1484,15 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
       {/* Demiurge label */}
       <g className={`svg-clickable${selectedId === 'ut-yaldabaoth' ? ' selected' : ''}`}
         onClick={() => handleClick('ut-yaldabaoth')}>
-        <rect x={cx - 60} y={cy + R_DEMIURGE - 18} width={120} height={32} rx={4}
+        <rect x={cx - 85} y={cy + R_DEMIURGE - 24} width={170} height={44} rx={5}
           fill={selectedId === 'ut-yaldabaoth' ? 'rgba(200,168,74,0.12)' : 'rgba(90,56,24,0.06)'}
-          stroke={selectedId === 'ut-yaldabaoth' ? GOLD2 : '#5a3818'} strokeWidth={1} />
-        <text x={cx} y={cy + R_DEMIURGE - 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill="#5a3818" letterSpacing={1}>YALDABAOTH</text>
-        <text x={cx} y={cy + R_DEMIURGE + 7} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5.5} fill="#5a3818" fontStyle="italic">[yal-dah-BAH-oth] — The Demiurge</text>
+          stroke={selectedId === 'ut-yaldabaoth' ? GOLD2 : '#5a3818'} strokeWidth={1.2} />
+        <text x={cx} y={cy + R_DEMIURGE - 4} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={10} fill="#5a3818" letterSpacing={2}>YALDABAOTH</text>
+        <text x={cx} y={cy + R_DEMIURGE + 10} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={7.5} fill="#5a3818" fontStyle="italic">[yal-dah-BAH-oth] — The Demiurge</text>
       </g>
       {/* Lion-face symbol for Yaldabaoth */}
-      <g transform={`translate(${cx}, ${cy + R_DEMIURGE + 26})`} pointerEvents="none">
-        <text textAnchor="middle" fontFamily="serif" fontSize={10} fill="#5a3818" opacity={0.5}>&#x1F981;</text>
+      <g transform={`translate(${cx}, ${cy + R_DEMIURGE + 36})`} pointerEvents="none">
+        <text textAnchor="middle" fontFamily="serif" fontSize={14} fill="#5a3818" opacity={0.5}>&#x1F981;</text>
       </g>
 
       {/* ═══════════════ BOUNDARY: LIMIT / STAUROS ═══════════════ */}
@@ -1384,16 +1506,16 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
         return <SvgCross key={`bCross-${a}`} x={p.x} y={p.y} size={4} color={GOLD2} />
       })}
       {/* Stauros / Limit label */}
-      <text x={cx - R_BOUNDARY - 8} y={cy - 8} textAnchor="end" fontFamily="Cinzel, serif" fontSize={7} fill={GOLD2} letterSpacing={1}>STAUROS [STOW-ros]</text>
-      <text x={cx - R_BOUNDARY - 8} y={cy + 2} textAnchor="end" fontFamily="Libre Baskerville, serif" fontSize={5.5} fill={GOLD2} fontStyle="italic">The Cross / Limit of the Pleroma</text>
+      <text x={cx - R_BOUNDARY - 10} y={cy - 10} textAnchor="end" fontFamily="Cinzel, serif" fontSize={9} fill={GOLD2} letterSpacing={1}>STAUROS [STOW-ros]</text>
+      <text x={cx - R_BOUNDARY - 10} y={cy + 4} textAnchor="end" fontFamily="Libre Baskerville, serif" fontSize={7} fill={GOLD2} fontStyle="italic">The Cross / Limit of the Pleroma</text>
       {/* Sophia at the boundary */}
       <g className={`svg-clickable${selectedId === 'ut-sophia' ? ' selected' : ''}`}
         onClick={() => handleClick('ut-sophia')}>
-        <rect x={cx - R_BOUNDARY - 8} y={cy + 10} width={120} height={28} rx={3}
+        <rect x={cx - R_BOUNDARY - 10} y={cy + 12} width={170} height={38} rx={4}
           fill={selectedId === 'ut-sophia' ? 'rgba(200,168,74,0.12)' : 'transparent'}
-          stroke={selectedId === 'ut-sophia' ? GOLD2 : 'transparent'} strokeWidth={0.8} />
-        <text x={cx - R_BOUNDARY + 52} y={cy + 22} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={GOLD2}>SOPHIA [so-FEE-ah]</text>
-        <text x={cx - R_BOUNDARY + 52} y={cy + 32} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5} fill={GOLD2} fontStyle="italic">Wisdom — The Fallen Aeon</text>
+          stroke={selectedId === 'ut-sophia' ? GOLD2 : 'transparent'} strokeWidth={1} />
+        <text x={cx - R_BOUNDARY + 75} y={cy + 30} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={GOLD2}>SOPHIA [so-FEE-ah]</text>
+        <text x={cx - R_BOUNDARY + 75} y={cy + 43} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6.5} fill={GOLD2} fontStyle="italic">Wisdom — The Fallen Aeon</text>
       </g>
 
       {/* Pleroma region fill */}
@@ -1413,18 +1535,18 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
             <line x1={p.x} y1={p.y} x2={pOuter.x} y2={pOuter.y} stroke={GOLD2} strokeWidth={0.3} opacity={0.3} pointerEvents="none" />
             <g className={`svg-clickable${selectedId === 'ut-luminaries' ? ' selected' : ''}`}
               onClick={() => handleClick('ut-luminaries')}>
-              <rect x={p.x - 24} y={p.y - 10} width={48} height={20} rx={2}
+              <rect x={p.x - 34} y={p.y - 14} width={68} height={28} rx={3}
                 fill={selectedId === 'ut-luminaries' ? 'rgba(200,168,74,0.12)' : 'transparent'}
-                stroke={selectedId === 'ut-luminaries' ? GOLD2 : GOLD2} strokeWidth={0.5} />
-              <text x={p.x} y={p.y - 2} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={5} fill={GOLD}>{aeon.name.split(' [')[0]}</text>
-              <text x={p.x} y={p.y + 6} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={3.5} fill={GOLD2} fontStyle="italic">{aeon.name.split(' [')[1]?.replace(']', '') || ''}</text>
+                stroke={selectedId === 'ut-luminaries' ? GOLD2 : GOLD2} strokeWidth={0.6} />
+              <text x={p.x} y={p.y - 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={GOLD}>{aeon.name.split(' [')[0]}</text>
+              <text x={p.x} y={p.y + 8} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5} fill={GOLD2} fontStyle="italic">{aeon.name.split(' [')[1]?.replace(']', '') || ''}</text>
             </g>
           </g>
         )
       })}
       {/* Label: Twelve Aeons */}
-      <text x={cx + R_AEONS + 10} y={cy + 4} fontFamily="Cinzel, serif" fontSize={6} fill={GOLD} letterSpacing={1}>THE TWELVE AEONS</text>
-      <text x={cx + R_AEONS + 10} y={cy + 13} fontFamily="Libre Baskerville, serif" fontSize={5} fill={GOLD2} fontStyle="italic">The Pleromic Fullness</text>
+      <text x={cx + R_AEONS + 14} y={cy + 4} fontFamily="Cinzel, serif" fontSize={8} fill={GOLD} letterSpacing={1}>THE TWELVE AEONS</text>
+      <text x={cx + R_AEONS + 14} y={cy + 16} fontFamily="Libre Baskerville, serif" fontSize={6.5} fill={GOLD2} fontStyle="italic">The Pleromic Fullness</text>
 
       {/* ═══════════════ FOUR LUMINARIES ═══════════════ */}
       {ornateRing(R_LUMINARIES, GOLD, 2, 24, 3)}
@@ -1441,23 +1563,23 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
             <line x1={pInner.x} y1={pInner.y} x2={p.x} y2={p.y} stroke={GOLD} strokeWidth={0.6} opacity={0.5} pointerEvents="none" />
             <g className={`svg-clickable${selectedId === lum.id ? ' selected' : ''}`}
               onClick={() => handleClick(lum.id)}>
-              <rect x={p.x - 34} y={p.y - 20} width={68} height={40} rx={4}
+              <rect x={p.x - 48} y={p.y - 28} width={96} height={56} rx={5}
                 fill={selectedId === lum.id ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.04)'}
-                stroke={selectedId === lum.id ? GOLD : GOLD2} strokeWidth={1} />
+                stroke={selectedId === lum.id ? GOLD : GOLD2} strokeWidth={1.2} />
               {/* Luminary name */}
-              <text x={p.x} y={p.y - 9} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6.5} fill={GOLD} letterSpacing={1}>{lum.name.split(' [')[0]}</text>
-              <text x={p.x} y={p.y - 1} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={GOLD2} fontStyle="italic">{lum.name.split(' [')[1]?.replace(']', '') || ''}</text>
+              <text x={p.x} y={p.y - 13} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={GOLD} letterSpacing={1}>{lum.name.split(' [')[0]}</text>
+              <text x={p.x} y={p.y - 2} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={GOLD2} fontStyle="italic">{lum.name.split(' [')[1]?.replace(']', '') || ''}</text>
               {/* Sub-aeons */}
               {lum.subAeons.map((sa, j) => (
-                <text key={j} x={p.x} y={p.y + 8 + j * 6} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={GOLD2}>&#x2022; {sa}</text>
+                <text key={j} x={p.x} y={p.y + 12 + j * 9} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={GOLD2}>&#x2022; {sa}</text>
               ))}
             </g>
           </g>
         )
       })}
       {/* Label */}
-      <text x={cx - R_LUMINARIES - 8} y={cy + 4} textAnchor="end" fontFamily="Cinzel, serif" fontSize={6} fill={GOLD} letterSpacing={1}>FOUR LUMINARIES</text>
-      <text x={cx - R_LUMINARIES - 8} y={cy + 13} textAnchor="end" fontFamily="Libre Baskerville, serif" fontSize={5} fill={GOLD2} fontStyle="italic">Guardians of the Pleroma</text>
+      <text x={cx - R_LUMINARIES - 10} y={cy + 4} textAnchor="end" fontFamily="Cinzel, serif" fontSize={8} fill={GOLD} letterSpacing={1}>FOUR LUMINARIES</text>
+      <text x={cx - R_LUMINARIES - 10} y={cy + 16} textAnchor="end" fontFamily="Libre Baskerville, serif" fontSize={6.5} fill={GOLD2} fontStyle="italic">Guardians of the Pleroma</text>
 
       {/* ═══════════════ DIVINE TRIAD ═══════════════ */}
       {ornateRing(R_TRIAD, GOLD, 2.5, 12, 3)}
@@ -1469,30 +1591,30 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
         onClick={() => handleClick('ut-triad')}>
         {/* Triangle connecting the three persons */}
         <polygon
-          points={`${cx},${cy - 30} ${cx - 28},${cy + 18} ${cx + 28},${cy + 18}`}
-          fill="none" stroke={GOLD} strokeWidth={1.2} pointerEvents="none" />
+          points={`${cx},${cy - 42} ${cx - 40},${cy + 24} ${cx + 40},${cy + 24}`}
+          fill="none" stroke={GOLD} strokeWidth={1.5} pointerEvents="none" />
         {/* Father */}
-        <text x={cx} y={cy - 34} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK} letterSpacing={2}>FATHER</text>
-        <text x={cx} y={cy - 25} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={GOLD} fontStyle="italic">The Invisible Spirit</text>
+        <text x={cx} y={cy - 48} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={11} fill={INK} letterSpacing={3}>FATHER</text>
+        <text x={cx} y={cy - 36} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6.5} fill={GOLD} fontStyle="italic">The Invisible Spirit</text>
         {/* Barbelo / Mother */}
-        <text x={cx - 32} y={cy + 26} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={INK} letterSpacing={1}>BARBELO</text>
-        <text x={cx - 32} y={cy + 34} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={GOLD} fontStyle="italic">[bar-BEH-loh] Mother</text>
+        <text x={cx - 44} y={cy + 36} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK} letterSpacing={1}>BARBELO</text>
+        <text x={cx - 44} y={cy + 48} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6.5} fill={GOLD} fontStyle="italic">[bar-BEH-loh] Mother</text>
         {/* Autogenes / Child */}
-        <text x={cx + 32} y={cy + 26} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={INK} letterSpacing={1}>AUTOGENES</text>
-        <text x={cx + 32} y={cy + 34} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={GOLD} fontStyle="italic">[aw-TOJ-en-eez] Child</text>
+        <text x={cx + 44} y={cy + 36} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK} letterSpacing={1}>AUTOGENES</text>
+        <text x={cx + 44} y={cy + 48} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6.5} fill={GOLD} fontStyle="italic">[aw-TOJ-en-eez] Child</text>
       </g>
 
       {/* ═══════════════ THE ONE ═══════════════ */}
       <g className={`svg-clickable${selectedId === 'ut-one' ? ' selected' : ''}`}
         onClick={() => handleClick('ut-one')}>
-        <circle cx={cx} cy={cy} r={R_ONE} fill={INK} stroke={GOLD3} strokeWidth={2.5}
-          style={{ filter: 'drop-shadow(0 0 6px rgba(232,192,112,0.6))' }} />
+        <circle cx={cx} cy={cy} r={R_ONE} fill={INK} stroke={GOLD3} strokeWidth={3}
+          style={{ filter: 'drop-shadow(0 0 10px rgba(232,192,112,0.7))' }} />
         {/* Inner radiating lines */}
-        {Array.from({ length: 12 }).map((_, i) => {
-          const a = (i * 30) * Math.PI / 180
-          return <line key={`ray-${i}`} x1={cx + Math.cos(a) * 6} y1={cy + Math.sin(a) * 6} x2={cx + Math.cos(a) * 18} y2={cy + Math.sin(a) * 18} stroke={GOLD3} strokeWidth={0.6} opacity={0.7} pointerEvents="none" />
+        {Array.from({ length: 16 }).map((_, i) => {
+          const a = (i * 22.5) * Math.PI / 180
+          return <line key={`ray-${i}`} x1={cx + Math.cos(a) * 8} y1={cy + Math.sin(a) * 8} x2={cx + Math.cos(a) * 24} y2={cy + Math.sin(a) * 24} stroke={GOLD3} strokeWidth={0.8} opacity={0.7} pointerEvents="none" />
         })}
-        <text x={cx} y={cy + 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={GOLD3} letterSpacing={1}>ONE</text>
+        <text x={cx} y={cy + 4} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={GOLD3} letterSpacing={2}>ONE</text>
       </g>
 
       {/* ═══════════════ DESCENT / ASCENT PATHS ═══════════════ */}
@@ -1514,32 +1636,32 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
       {/* ═══════════════ SIDE ANNOTATIONS ═══════════════ */}
       {/* Left: Pleroma label with bracket */}
       <g pointerEvents="none">
-        <line x1={30} y1={cy - R_BOUNDARY + 20} x2={30} y2={cy + R_BOUNDARY - 20} stroke={GOLD2} strokeWidth={1} />
-        <line x1={30} y1={cy - R_BOUNDARY + 20} x2={38} y2={cy - R_BOUNDARY + 20} stroke={GOLD2} strokeWidth={1} />
-        <line x1={30} y1={cy + R_BOUNDARY - 20} x2={38} y2={cy + R_BOUNDARY - 20} stroke={GOLD2} strokeWidth={1} />
-        <text x={26} y={cy} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={GOLD2} letterSpacing={3}
-          transform={`rotate(-90, 26, ${cy})`}>PLEROMA</text>
-        <text x={42} y={cy + R_BOUNDARY - 35} fontFamily="Libre Baskerville, serif" fontSize={5} fill={GOLD2} fontStyle="italic">[ple-ROH-mah] — Fullness</text>
+        <line x1={36} y1={cy - R_BOUNDARY + 24} x2={36} y2={cy + R_BOUNDARY - 24} stroke={GOLD2} strokeWidth={1.2} />
+        <line x1={36} y1={cy - R_BOUNDARY + 24} x2={48} y2={cy - R_BOUNDARY + 24} stroke={GOLD2} strokeWidth={1.2} />
+        <line x1={36} y1={cy + R_BOUNDARY - 24} x2={48} y2={cy + R_BOUNDARY - 24} stroke={GOLD2} strokeWidth={1.2} />
+        <text x={28} y={cy} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={GOLD2} letterSpacing={4}
+          transform={`rotate(-90, 28, ${cy})`}>PLEROMA</text>
+        <text x={52} y={cy + R_BOUNDARY - 44} fontFamily="Libre Baskerville, serif" fontSize={7} fill={GOLD2} fontStyle="italic">[ple-ROH-mah] — Fullness</text>
       </g>
 
       {/* Right: Kenoma label with bracket */}
       <g pointerEvents="none">
-        <line x1={W - 30} y1={cy - R_KENOMA + 20} x2={W - 30} y2={cy + R_KENOMA - 20} stroke={INK3} strokeWidth={1} />
-        <line x1={W - 30} y1={cy - R_KENOMA + 20} x2={W - 38} y2={cy - R_KENOMA + 20} stroke={INK3} strokeWidth={1} />
-        <line x1={W - 30} y1={cy + R_KENOMA - 20} x2={W - 38} y2={cy + R_KENOMA - 20} stroke={INK3} strokeWidth={1} />
-        <text x={W - 26} y={cy} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK3} letterSpacing={3}
-          transform={`rotate(90, ${W - 26}, ${cy})`}>KENOMA</text>
+        <line x1={W - 36} y1={cy - R_KENOMA + 24} x2={W - 36} y2={cy + R_KENOMA - 24} stroke={INK3} strokeWidth={1.2} />
+        <line x1={W - 36} y1={cy - R_KENOMA + 24} x2={W - 48} y2={cy - R_KENOMA + 24} stroke={INK3} strokeWidth={1.2} />
+        <line x1={W - 36} y1={cy + R_KENOMA - 24} x2={W - 48} y2={cy + R_KENOMA - 24} stroke={INK3} strokeWidth={1.2} />
+        <text x={W - 28} y={cy} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK3} letterSpacing={4}
+          transform={`rotate(90, ${W - 28}, ${cy})`}>KENOMA</text>
       </g>
 
       {/* ═══════════════ SACRED NAMES RING (between Demiurge & Planets) ═══════════════ */}
       {/* Seven sacred vowels inscribed between Demiurge and Planets */}
       {['A', 'E', 'I', 'O', 'U', 'O', 'S'].map((v, i) => {
         const a = (i * 360 / 7 + 90) * Math.PI / 180
-        const vx = cx + Math.cos(a) * (R_DEMIURGE + 15), vy = cy + Math.sin(a) * (R_DEMIURGE + 15)
+        const vx = cx + Math.cos(a) * (R_DEMIURGE + 20), vy = cy + Math.sin(a) * (R_DEMIURGE + 20)
         return (
           <g key={`vowel-${i}`} pointerEvents="none">
-            <circle cx={vx} cy={vy} r={6} fill="none" stroke={INK3} strokeWidth={0.6} />
-            <text x={vx} y={vy + 2.5} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={INK3}>{v}</text>
+            <circle cx={vx} cy={vy} r={9} fill="none" stroke={INK3} strokeWidth={0.8} />
+            <text x={vx} y={vy + 3.5} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK3}>{v}</text>
           </g>
         )
       })}
@@ -1547,35 +1669,51 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
       {/* ═══════════════ CORNER DECORATIONS ═══════════════ */}
       {/* Top-left corner ornament */}
       <g pointerEvents="none">
-        <path d={`M10 70 L10 60 Q10 55 15 55 L25 55`} fill="none" stroke={GOLD2} strokeWidth={1} />
-        <path d={`M14 70 L14 64 Q14 59 19 59 L25 59`} fill="none" stroke={GOLD2} strokeWidth={0.6} />
-        <circle cx={17} cy={62} r={2} fill={GOLD2} />
+        <path d={`M12 80 L12 66 Q12 60 18 60 L30 60`} fill="none" stroke={GOLD2} strokeWidth={1.2} />
+        <path d={`M18 80 L18 70 Q18 64 24 64 L30 64`} fill="none" stroke={GOLD2} strokeWidth={0.7} />
+        <circle cx={21} cy={70} r={3} fill={GOLD2} />
       </g>
       {/* Top-right corner ornament */}
       <g pointerEvents="none">
-        <path d={`M${W - 10} 70 L${W - 10} 60 Q${W - 10} 55 ${W - 15} 55 L${W - 25} 55`} fill="none" stroke={GOLD2} strokeWidth={1} />
-        <path d={`M${W - 14} 70 L${W - 14} 64 Q${W - 14} 59 ${W - 19} 59 L${W - 25} 59`} fill="none" stroke={GOLD2} strokeWidth={0.6} />
-        <circle cx={W - 17} cy={62} r={2} fill={GOLD2} />
+        <path d={`M${W - 12} 80 L${W - 12} 66 Q${W - 12} 60 ${W - 18} 60 L${W - 30} 60`} fill="none" stroke={GOLD2} strokeWidth={1.2} />
+        <path d={`M${W - 18} 80 L${W - 18} 70 Q${W - 18} 64 ${W - 24} 64 L${W - 30} 64`} fill="none" stroke={GOLD2} strokeWidth={0.7} />
+        <circle cx={W - 21} cy={70} r={3} fill={GOLD2} />
+      </g>
+      {/* Bottom-left corner ornament */}
+      <g pointerEvents="none">
+        <path d={`M12 ${H - 80} L12 ${H - 66} Q12 ${H - 60} 18 ${H - 60} L30 ${H - 60}`} fill="none" stroke={GOLD2} strokeWidth={1.2} />
+        <circle cx={21} cy={H - 70} r={3} fill={GOLD2} />
+      </g>
+      {/* Bottom-right corner ornament */}
+      <g pointerEvents="none">
+        <path d={`M${W - 12} ${H - 80} L${W - 12} ${H - 66} Q${W - 12} ${H - 60} ${W - 18} ${H - 60} L${W - 30} ${H - 60}`} fill="none" stroke={GOLD2} strokeWidth={1.2} />
+        <circle cx={W - 21} cy={H - 70} r={3} fill={GOLD2} />
       </g>
 
       {/* ═══════════════ BOTTOM LEGEND ═══════════════ */}
       <g pointerEvents="none">
-        <line x1={60} y1={H - 60} x2={W - 60} y2={H - 60} stroke={GOLD2} strokeWidth={0.5} />
+        <line x1={70} y1={H - 80} x2={W - 70} y2={H - 80} stroke={GOLD2} strokeWidth={0.6} />
         {/* Pleroma indicator */}
-        <circle cx={100} cy={H - 42} r={4} fill="none" stroke={GOLD2} strokeWidth={1.5} />
-        <text x={110} y={H - 39} fontFamily="Libre Baskerville, serif" fontSize={6} fill={GOLD2}>Pleroma (Divine Fullness)</text>
+        <circle cx={120} cy={H - 58} r={5} fill="none" stroke={GOLD2} strokeWidth={1.5} />
+        <text x={132} y={H - 54} fontFamily="Libre Baskerville, serif" fontSize={8} fill={GOLD2}>Pleroma (Divine Fullness)</text>
         {/* Kenoma indicator */}
-        <circle cx={300} cy={H - 42} r={4} fill="none" stroke={INK3} strokeWidth={1.5} />
-        <text x={310} y={H - 39} fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3}>Kenoma (Deficiency / Material)</text>
+        <circle cx={380} cy={H - 58} r={5} fill="none" stroke={INK3} strokeWidth={1.5} />
+        <text x={392} y={H - 54} fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3}>Kenoma (Deficiency / Material)</text>
         {/* Ascent path indicator */}
-        <line x1={490} y1={H - 45} x2={510} y2={H - 39} stroke={GOLD2} strokeWidth={1.2} />
-        <text x={516} y={H - 39} fontFamily="Libre Baskerville, serif" fontSize={6} fill={GOLD2}>Path of Ascent</text>
+        <line x1={630} y1={H - 62} x2={660} y2={H - 54} stroke={GOLD2} strokeWidth={1.5} />
+        <text x={668} y={H - 54} fontFamily="Libre Baskerville, serif" fontSize={8} fill={GOLD2}>Path of Ascent</text>
         {/* Descent path indicator */}
-        <line x1={640} y1={H - 45} x2={660} y2={H - 39} stroke="#5a3818" strokeWidth={1.2} strokeDasharray="3 2" />
-        <text x={666} y={H - 39} fontFamily="Libre Baskerville, serif" fontSize={6} fill="#5a3818">Path of Descent</text>
+        <line x1={830} y1={H - 62} x2={860} y2={H - 54} stroke="#5a3818" strokeWidth={1.5} strokeDasharray="4 3" />
+        <text x={868} y={H - 54} fontFamily="Libre Baskerville, serif" fontSize={8} fill="#5a3818">Path of Descent</text>
+        {/* Constellation indicator */}
+        <circle cx={120} cy={H - 38} r={2} fill={INK3} opacity={0.7} />
+        <circle cx={120} cy={H - 38} r={1} fill={PARCH} opacity={0.9} />
+        <line x1={120} y1={H - 38} x2={135} y2={H - 42} stroke={INK3} strokeWidth={0.7} opacity={0.45} />
+        <circle cx={135} cy={H - 42} r={2} fill={INK3} opacity={0.7} />
+        <text x={144} y={H - 36} fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3}>Constellations of the Material Heavens</text>
       </g>
       {/* Source note */}
-      <text x={cx} y={H - 12} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5} fill={INK3} fontStyle="italic">
+      <text x={cx} y={H - 14} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6.5} fill={INK3} fontStyle="italic">
         Based on the cosmology of the Apocryphon of John, the Book of Jeu, and the Untitled Text (Codex Brucianus)
       </text>
 
@@ -1589,19 +1727,19 @@ function CosmosDiagram({ onClick, selectedId, elements }: { onClick: (id: string
       {/* Small dots around the aeon ring representing the 60 treasuries */}
       {Array.from({ length: 60 }).map((_, i) => {
         const a = (i * 6) * Math.PI / 180
-        const tr = R_AEONS + 15
-        return <circle key={`tDot-${i}`} cx={cx + Math.cos(a) * tr} cy={cy + Math.sin(a) * tr} r={0.8} fill={GOLD2} opacity={0.5} pointerEvents="none" />
+        const tr = R_AEONS + 20
+        return <circle key={`tDot-${i}`} cx={cx + Math.cos(a) * tr} cy={cy + Math.sin(a) * tr} r={1.2} fill={GOLD2} opacity={0.5} pointerEvents="none" />
       })}
-      <text x={cx + R_AEONS + 20} y={cy + 28} fontFamily="Libre Baskerville, serif" fontSize={4.5} fill={GOLD2} fontStyle="italic" pointerEvents="none">&#x2022; 60 Treasuries of Light</text>
+      <text x={cx + R_AEONS + 28} y={cy + 38} fontFamily="Libre Baskerville, serif" fontSize={6} fill={GOLD2} fontStyle="italic" pointerEvents="none">&#x2022; 60 Treasuries of Light</text>
 
       {/* ═══════════════ FIVE RANKS INDICATOR ═══════════════ */}
       {[1, 2, 3, 4, 5].map(rank => {
         const rAngle = (rank * 72 - 90) * Math.PI / 180
-        const rR = R_TRIAD + 20
+        const rR = R_TRIAD + 28
         return (
           <g key={`rank-${rank}`} pointerEvents="none">
-            <circle cx={cx + Math.cos(rAngle) * rR} cy={cy + Math.sin(rAngle) * rR} r={3} fill="none" stroke={GOLD3} strokeWidth={0.6} />
-            <text x={cx + Math.cos(rAngle) * (rR + 10)} y={cy + Math.sin(rAngle) * (rR + 10) + 2} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={3.5} fill={GOLD3}>Rank {rank}</text>
+            <circle cx={cx + Math.cos(rAngle) * rR} cy={cy + Math.sin(rAngle) * rR} r={4} fill="none" stroke={GOLD3} strokeWidth={0.8} />
+            <text x={cx + Math.cos(rAngle) * (rR + 14)} y={cy + Math.sin(rAngle) * (rR + 14) + 3} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={5} fill={GOLD3}>Rank {rank}</text>
           </g>
         )
       })}
