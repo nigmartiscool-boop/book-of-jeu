@@ -761,6 +761,349 @@ const SACRED_ENTRIES: SacredEntry[] = [
     ]
   },
 
+  /* ═══════════════════════════════════════
+     GOSPEL OF JUDAS — Codex Tchacos
+     ═══════════════════════════════════════ */
+  {
+    id: 'gospel-judas', title: 'The Gospel of Judas', category: 'related',
+    desc: 'A Sethian Gnostic dialogue between Jesus and Judas Iscariot, preserved in the Codex Tchacos (c. 300 CE) and mentioned by Irenaeus around 180 CE. Far from the betrayer of orthodox tradition, Judas is presented as the only disciple who truly understood Jesus\' teaching — the one who possessed the gnosis necessary to assist in the liberation of the divine spark from its material prison. The text shares the same Sethian cosmology as the Book of Jeu: the Ineffable One, Barbelo, the Autogenes, the luminaries Harmozel/Oroiael/Daveithai/Eleleth, and the Demiurge Yaldabaoth who rules the material world in ignorance.',
+    sealType: 'dialogue', book: 1, chapter: 'Codex Tchacos', folio: 'Codex Tchacos 33-58; mentioned by Irenaeus, Against Heresies I.31.1 (c. 180)',
+    lore: [
+      { title: 'The Sethian Creation Myth', body: 'The Gospel of Judas opens with Jesus laughing at the disciples for their thanksgiving prayer over bread — they are worshipping the Demiurge, not the true God. Jesus then reveals the full Sethian cosmology: the eternal, unnamable God; Barbelo [bar-BEH-loh]; the divine Self-Generated (Autogenes); the four luminaries Harmozel, Oroiael, Daveithai, Eleleth (the same as in the Book of Jeu); and below them, the foolish Demiurge Nebro (Yaldabaoth) and his helper Saklas who create the material world and humanity. This is the same hierarchy that structures the 60 Treasuries.' },
+      { title: 'Judas as the True Gnostic', body: 'Jesus tells Judas: "Step away from the others and I shall tell you the mysteries of the kingdom. It is not possible for anyone to know it except those who have been made worthy." Judas alone is enabled to ascend in vision through the heavens and see the great realm of the divine. Jesus reveals that Judas will exceed all the other disciples because he will sacrifice the man who clothes Jesus (the body), thereby freeing the divine Christ to return to the Pleroma. The so-called "betrayal" is in fact the sacred act of liberation.' },
+      { title: 'The Generations of the Archons', body: 'The text describes how Saklas [SAK-las] (the fool) and Nebro [NEB-roh] (the rebel, another name for Yaldabaoth) created twelve angelic rulers over the material cosmos, and these twelve created seventy-two rulers, who in turn created three hundred and sixty more. This proliferation of Archons mirrors the emanation hierarchy of the Pleroma but in inverted, defiled form. The same twelve/seventy-two/three hundred and sixty structure appears in the Untitled Text of the Bruce Codex as the structure of the divine fullness — but here, in the realm of matter, it is a prison rather than a treasury.' },
+      { title: 'The Destiny of the Holy Generation', body: 'Jesus explains that there are two races: the generation of Seth (the spiritual seed, capable of gnosis) and the generation of Cain (the material race, bound to the Archons). The holy generation cannot die — when its members appear to die, they are in fact ascending through the realms of the Archons back to the divine source. The text promises that Judas, as the thirteenth daimon (the one who transcends the twelve zodiacal Archons), will ascend above all of them and enter the imperishable realm.' }
+    ],
+    sacredText: [
+      'When he appeared on earth, Jesus performed signs and great wonders for the salvation of humanity. And since some walked in the way of righteousness while others walked in their transgressions, the twelve disciples were called. He began to speak with them about the mysteries beyond the world and what would take place at the end.',
+      'He said to them: "How do you know me? Truly I say to you, no generation of the people that is among you will know me." When his disciples heard this, they began to be angry and to gnash their teeth at him. But Judas Iscariot [JOO-das iss-KAR-ee-ot] came forward and said: "I know who you are and from what place you have come. You have come from the immortal realm of Barbelo [bar-BEH-loh]."',
+      'Jesus said: "Step away from the others and I shall tell you the mysteries of the kingdom. It is not possible for anyone to know it except those who have been made worthy." And Judas came to him, saying: "Rabbi, when will you tell me these things?"',
+      '"There exists a great and boundless realm whose extent no generation of angels has seen, in which there is a great invisible Spirit, which no eye of an angel has ever seen, no thought of the heart has ever comprehended, and it was not called by a name."',
+      'And a luminous cloud appeared there. He said: "Let an angel come into being as my attendant." A great angel, the enlightened divine Self-Generated, emerged from the cloud. Because of him, four other angels came into being from another cloud, and they came into being to attend the divine Self-Generated.',
+      'The first is Harmozel [har-MOH-zel]. The second is Oroiael [or-OY-ah-el]. The third is Daveithai [dah-VAY-thay]. The fourth is Eleleth [el-EL-eth]. These are the four luminaries who stand before the great invisible Spirit.',
+      '"But you will exceed all of them, Judas. For you will sacrifice the man that clothes me. Already your horn has been raised, and your wrath has been kindled, and your star has passed over, and your heart has gone to the holy generation."'
+    ],
+    elements: [
+      { id: 'gj-barbelo', label: 'Barbelo', brief: 'The divine womb, first emanation', detail: 'In the Gospel of Judas, Jesus comes from "the immortal realm of Barbelo [bar-BEH-loh]" — the same Barbelo who is the first emanation of the One in the Book of Jeu. She is the divine womb, the Mother-Father, the source of the Autogenes and all subsequent emanations.' },
+      { id: 'gj-luminaries', label: 'The Four Luminaries', brief: 'Harmozel, Oroiael, Daveithai, Eleleth', detail: 'The four luminaries of the Gospel of Judas are identical to those of the Book of Jeu. They stand before the Great Invisible Spirit and emanate the twelve aeons. Their names appear in dozens of Sethian texts as the cardinal principles of the Pleroma.' },
+      { id: 'gj-nebro', label: 'Nebro / Yaldabaoth', brief: 'The rebel Demiurge', detail: 'Nebro [NEB-roh] ("the rebel") is another name for Yaldabaoth, the lion-faced Demiurge. He is called "the one who polluted the name" — the being who claimed divinity for himself and created the material cosmos in ignorance.' },
+      { id: 'gj-saklas', label: 'Saklas', brief: 'The fool, co-creator of matter', detail: 'Saklas [SAK-las] means "the fool." He works alongside Nebro to create the material world and its archons. In other Sethian texts (Apocryphon of John), Saklas is one of Yaldabaoth\'s alternate names.' },
+      { id: 'gj-judas', label: 'Judas the Thirteenth', brief: 'The transcendent disciple', detail: 'Jesus tells Judas: "You will exceed all of them. For the man that clothes me has already been made to suffer, you will sacrifice him." Judas transcends the twelve zodiacal Archons (symbolized by the twelve other disciples) and ascends as the thirteenth — the one who returns to the Pleroma.' },
+      { id: 'gj-seed', label: 'The Holy Generation', brief: 'The seed of Seth', detail: 'The Gospel of Judas teaches that the spiritual seed — the generation of Seth — cannot truly die. When its members appear to perish, they are in fact ascending through the Archon realms back to the divine Treasury. This mirrors the ascent through the 60 Treasuries described in the Book of Jeu.' }
+    ],
+    pronunciations: [
+      { name: 'Judas Iscariot', pron: 'JOO-das iss-KAR-ee-ot' },
+      { name: 'Nebro', pron: 'NEB-roh' },
+      { name: 'Saklas', pron: 'SAK-las' },
+      { name: 'Barbelo', pron: 'bar-BEH-loh' },
+      { name: 'Autogenes', pron: 'ow-TOJ-en-eez' },
+      { name: 'Harmozel', pron: 'har-MOH-zel' },
+      { name: 'Oroiael', pron: 'or-OY-ah-el' },
+      { name: 'Daveithai', pron: 'dah-VAY-thay' },
+      { name: 'Eleleth', pron: 'el-EL-eth' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     APOCALYPSE OF ADAM
+     ═══════════════════════════════════════ */
+  {
+    id: 'apocalypse-adam', title: 'The Apocalypse of Adam', category: 'related',
+    desc: 'A Sethian revelation delivered by Adam to his son Seth, preserving the secret knowledge that Adam received from the divine revealer and passed down through the holy generation. The text narrates the eternal struggle between the Creator God (the Demiurge) and the true God of the spiritual seed, prophesying the coming of a series of illuminators (Seth reincarnate) who will preserve the gnosis across the ages. It connects directly to the Book of Jeu by tracing the lineage of the spiritual seed that will eventually ascend through the 60 Treasuries.',
+    sealType: 'dialogue', book: 1, chapter: 'Nag Hammadi Codex V,5', folio: 'NHC V,5',
+    lore: [
+      { title: 'Adam\'s Secret Knowledge', body: 'According to the Apocalypse of Adam, Adam was not the broken sinner of orthodox tradition but the first recipient of the Gnostic revelation. After Eve and he ate from the tree of knowledge, the true God — not the Demiurge — appeared to them and revealed their divine origin. Adam learned that he was not the creation of the angry Creator God but a fragment of divine light trapped in matter by an ignorant being. This knowledge he passed to his son Seth, who became the progenitor of the holy generation.' },
+      { title: 'The Three Lights and the Illuminators', body: 'Adam prophesies to Seth that a series of "illuminators" will come into the world across the generations — each one a manifestation of Seth himself, reborn to preserve the knowledge of the divine origin. The first illuminator comes to the generation of Seth; the second comes after the flood; the third comes to the generation of Noah; and so on through history. Each illuminator performs signs and wonders, teaches the gnosis, and is opposed by the Demiurge and his Archons — but the knowledge cannot be extinguished because it is eternal, originating from beyond the material cosmos.' },
+      { title: 'The Eternal Preservation of the Seed', body: 'The central promise of the Apocalypse of Adam is that the spiritual seed — the holy generation — can never be destroyed. The Demiurge tries to wipe it out through the flood, through fire, through persecution, but each time the seed survives because it is rooted in the Pleroma, not in matter. This mirrors the cosmology of the Book of Jeu: the divine light that fell into matter is ultimately recoverable because it never ceased to belong to the Treasury of Light. The ascent through the 60 Treasuries is the final homecoming of this preserved seed.' }
+    ],
+    sacredText: [
+      'The revelation which Adam taught his son Seth in the seven hundredth year, saying: "Listen to my words, my son Seth. When God created me out of the earth, along with Eve your mother, I went about with her in a glory which she had seen in the aeon from which we had come. She taught me a word of knowledge of the eternal God. And we resembled the great eternal angels, for we were higher than the God who had created us and the powers with him, whom we did not know."',
+      '"Then God, the ruler of the aeons and the powers, divided us in wrath. And after these things we became darkened in our heart. And I slept in the thought of my heart. And I saw three men before me whose likeness I could not recognize, since they were not from the powers of the God who had created us. They stood above me and said: \'Arise, Adam, from the sleep of death.\'"',
+      '"And after this, a virgin will come down to the world of the illuminator, and she will conceive by him, and she will bear a son in the world of the illuminator. And the seed of the great generation will be preserved through her."',
+      '"Now then, my son Seth, I will reveal to you the things which those men whom I saw before me revealed to me. For after that generation, there will be another generation, and there will be a great disturbance among the powers and the rulers of the aeons. And the illuminators will come to them."',
+      '"The generation of the illuminators will come. They will perform signs and wonders. And the powers will not be able to stand against them. For the great God has given them the power, and they will preserve the seed of the great generation until the consummation of the age."'
+    ],
+    elements: [
+      { id: 'aa-adam', label: 'Adam the Knower', brief: 'First recipient of gnosis', detail: 'In the Apocalypse of Adam, Adam is the first Gnostic — the being who received the knowledge of the true God from beyond the Creator God. He passed this knowledge to his son Seth, making Seth the patriarch of the holy generation.' },
+      { id: 'aa-seth', label: 'Seth the Progenitor', brief: 'Father of the holy generation', detail: 'Seth [SETH] is the recipient of Adam\'s revelation and the ancestor of the spiritual seed. Every "illuminator" who comes after is a reincarnation of Seth — the same divine being manifesting across generations to preserve the gnosis.' },
+      { id: 'aa-illuminator', label: 'The Illuminators', brief: 'Series of divine revealers', detail: 'The illuminators are manifestations of Seth who appear in every generation to teach the gnosis. Each performs signs, opposes the Archons, and ensures that the spiritual seed is not extinguished. The final illuminator will preside over the consummation of the age.' },
+      { id: 'aa-seed', label: 'The Holy Generation', brief: 'The eternal spiritual seed', detail: 'The holy generation — the seed of Seth — cannot be destroyed by the Demiurge or his Archons. Flood, fire, and persecution cannot extinguish it because it originates from the Pleroma. This is the same seed that ascends through the 60 Treasuries of the Book of Jeu.' },
+      { id: 'aa-demiurge', label: 'The Creator God', brief: 'The ignorant Demiurge', detail: 'The "God who created us" in the Apocalypse of Adam is the Demiurge — Yaldabaoth by another name. Adam and Eve realize they are "higher than the God who had created us," revealing the Gnostic conviction that the spiritual seed is greater than its material creator.' }
+    ],
+    pronunciations: [
+      { name: 'Seth', pron: 'SETH' },
+      { name: 'Adam', pron: 'AH-dahm' },
+      { name: 'Eve', pron: 'EEV' },
+      { name: 'Illuminator', pron: 'ih-LOO-mih-nay-ter' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     THOUGHT OF NOREA
+     ═══════════════════════════════════════ */
+  {
+    id: 'thought-norea', title: 'The Thought of Norea', category: 'related',
+    desc: 'A brief Sethian hymn-text celebrating Norea, the daughter of Eve who refused to submit to the Archons and was rescued by the divine angel Eleleth. Norea is the feminine counterpart to Seth in the holy generation — the divine woman whose cry for help brought the Gnostic revealer down from the Pleroma. The text is a meditation on the nature of the divine feminine and the rescue of the spiritual seed from the material world.',
+    sealType: 'hymn', book: 1, chapter: 'Nag Hammadi Codex IX,2', folio: 'NHC IX,2',
+    lore: [
+      { title: 'Norea, the Daughter of Eve', body: 'In Sethian mythology, after the Demiurge (the Creator God) killed Abel and exiled Cain, Eve bore a third child: Seth. Later, she bore a daughter: Norea [nor-EE-ah]. Norea is not mentioned in the biblical Genesis, but in the Sethian tradition she is essential — the feminine manifestation of the spiritual seed. When the Archons attempted to make her submit as they had made her mother submit, Norea cried out to the true God, and her cry was heard in the Pleroma. This is the moment that brought the divine revealer down to rescue the holy generation.' },
+      { title: 'The Rescue by Eleleth', body: 'In the longer Sethian mythology (preserved in the Apocryphon of John and Hypostasis of the Archons), Norea refuses the Archons\' demands. They try to burn her with fire, but the fire cannot touch her because she carries divine light. She cries out: "Who is the God who is above the gods? Who will save me from them?" The angel Eleleth [el-EL-eth] — the fourth and final Luminary of the Pleroma, the same Eleleth named in the Book of Jeu — descends and reveals to Norea the truth of her divine origin and the cosmology of the spiritual realms.' },
+      { title: 'The Eternal Memory of the Divine', body: 'The Thought of Norea is essentially a hymn of praise to Norea\'s divine nature and a meditation on the eternal preservation of the spiritual seed. The text describes how Norea is remembered in the Pleroma — her name is inscribed in the Treasury of Light, and her image is preserved among the divine beings. This promise of eternal remembrance is the same promise made to all members of the holy generation: that they are known in the Pleroma and will eventually ascend to the Treasury from which they fell.' }
+    ],
+    sacredText: [
+      'This is the thought of Norea [nor-EE-ah]: "O God, save me from this place of wickedness! Save me from the place of injustice! Save me from those who practice unrighteousness! Save me from the place of wrath and anger! Save me from the place of darkness and gloom! Save me from those who plot evil against me!"',
+      'And the great angel Eleleth [el-EL-eth] came to her and said: "Norea, Norea, do not be afraid. The eternal God has heard your cry. He has sent me to you from the Pleroma, to reveal to you the truth of your origin and the things that must come to pass."',
+      '"You are not the daughter of the Demiurge, Norea. You are the daughter of the eternal God. Your mother Eve was a virgin who bore the seed of the divine. The Archons created your body, but your spirit is from above — from the Treasury of Light."',
+      '"And I will reveal to you the things that are above: the One, the ineffable, the unnamable. And Barbelo [bar-BEH-loh], the divine Mother. And the Autogenes [ow-TOJ-en-eez], the self-begotten Child. And the four luminaries: Harmozel, Oroiael, Daveithai, and I myself, Eleleth."',
+      '"And your name, Norea, is inscribed in the Treasury of Light. It cannot be erased. And your image is preserved among the divine beings. And when the time comes, you will ascend to the place from which you came, and you will rest with your kindred in the Pleroma."'
+    ],
+    elements: [
+      { id: 'tn-norea', label: 'Norea', brief: 'Daughter of Eve, divine woman', detail: 'Norea [nor-EE-ah] is the daughter of Eve in Sethian mythology — the feminine manifestation of the spiritual seed. Her refusal to submit to the Archons and her cry for help brought the divine revealer down from the Pleroma. She is named in the Apocryphon of John and the Hypostasis of the Archons.' },
+      { id: 'tn-eleleth', label: 'Eleleth the Revealer', brief: 'Fourth Luminary descends to Norea', detail: 'Eleleth [el-EL-eth] is the fourth of the Four Luminaries in the Sethian cosmology — the same Eleleth named in the Book of Jeu as one of the four great lights at the quarters of the Pleroma. In the Thought of Norea, Eleleth descends to reveal the truth of Norea\'s divine origin.' },
+      { id: 'tn-cry', label: 'The Cry for Help', brief: 'Norea\'s prayer reaches the Pleroma', detail: 'Norea\'s cry — "Who is the God who is above the gods?" — pierces the material cosmos and reaches the Pleroma. This is the paradigmatic Gnostic prayer: the recognition that the God of this world is not the true God, and the plea for rescue from a higher source.' },
+      { id: 'tn-treasury', label: 'Inscribed in the Treasury', brief: 'Norea\'s name in the Treasury of Light', detail: 'Eleleth tells Norea: "Your name is inscribed in the Treasury of Light." This connects directly to the Book of Jeu — every member of the holy generation has their name inscribed in one of the 60 Treasuries, and the ascent through these Treasuries is the soul\'s return to its rightful place.' }
+    ],
+    pronunciations: [
+      { name: 'Norea', pron: 'nor-EE-ah' },
+      { name: 'Eleleth', pron: 'el-EL-eth' },
+      { name: 'Barbelo', pron: 'bar-BEH-loh' },
+      { name: 'Autogenes', pron: 'ow-TOJ-en-eez' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     TRIMORPHIC PROTENNOIA
+     ═══════════════════════════════════════ */
+  {
+    id: 'trimorphic-protennoia', title: 'The Trimorphic Protennoia', category: 'related',
+    desc: 'A Sethian revelation text in which the divine First Thought (Protennoia) speaks in three forms — as the Father (Voice), the Mother (Sound), and the Child (Word). The text describes the descent of Protennoia into the material world to rescue the spiritual seed from the Archons, and her eventual return to the Pleroma. The trimorphic ("three-formed") structure mirrors the divine Triad of the Book of Jeu and provides a feminine theological framework for the same process of emanation and redemption.',
+    sealType: 'names', book: 1, chapter: 'Nag Hammadi Codex XIII,1', folio: 'NHC XIII,1',
+    lore: [
+      { title: 'The First Thought (Protennoia)', body: 'Protennoia [pro-ten-NOY-ah] means "the First Thought." In Sethian cosmology, she is the first emanation of the One — equivalent to Barbelo in the Apocryphon of John and the divine Mother in the Book of Jeu. She is the divine Thought that contains within herself the blueprint of all that will be. The Trimorphic Protennoia gives her a voice: she speaks in the first person, declaring her identity, her descent, and her promise of redemption.' },
+      { title: 'The Three Forms', body: 'The "trimorphic" structure of the text refers to Protennoia\'s three forms: (1) as the Father, she is the Voice that calls all things into being; (2) as the Mother, she is the Sound that resonates through the aeons; (3) as the Child, she is the Word that becomes incarnate in the material world to rescue the spiritual seed. This threefold structure parallels the divine Triad of the Book of Jeu (Father, Barbelo, Autogenes) but presents it as a single divine being who takes on three different forms across the cosmological drama.' },
+      { title: 'The Descent and Rescue', body: 'Protennoia descends into the material world to rescue the spiritual seed that has been trapped by the Archons. She puts on the garments of the material world — flesh, breath, soul — and walks among the prisoners without their knowing who she is. She calls out: "I am the First Thought, the one who dwells in the light. I am the sound that is in everyone." When the spiritual seed hears her voice, it remembers its divine origin and begins the ascent back to the Pleroma. This is the same process described in the Book of Jeu: the divine revealer descends through all the Treasuries, learns the names and ciphers, and opens the way for the ascending souls.' }
+    ],
+    sacredText: [
+      'I am the First Thought, the thought that is in the light. I am the movement that is in the all. I am the word that is in the all. I am the sound that is in the all. It is I who am the all. It is I who am in the all. It is I who am before the all. It is I who am after the all.',
+      'I am the Voice [as Father]. It is I who speak. I am the undivided one, who has come to be in the divided one. I appeared to those who are in the world, and I taught them. I revealed to them the things of the Father, and the things of the Mother, and the things of the Child.',
+      'I am the Sound [as Mother]. It is I who resonate. I am the one who has come to be in the inexpressible one. I am the one who taught the seed of the great generation. I am the one who is in the all, and the all is in me.',
+      'I am the Word [as Child]. It is I who am the voice of the one who is in the all. I appeared in the likeness of their likeness. I put on their garments. I walked among them. They did not know me. But I called out, and those who belonged to me heard my voice, and they remembered the place from which they had come.',
+      'And I stripped off my garments. I descended into the world. And the Archons saw me and they were afraid. For they knew that I had come to take what was theirs, and to bring it back to the place from which it had fallen.',
+      'And the seed of the great generation heard my voice, and they arose, and they ascended through the aeons, through the luminaries, through the treasuries, until they reached the place from which they had come. And they rested with the Father and the Mother and the Child, in the Treasury of Light.'
+    ],
+    elements: [
+      { id: 'tp-protennoia', label: 'Protennoia', brief: 'The First Thought', detail: 'Protennoia [pro-ten-NOY-ah] is the First Thought of the One — equivalent to Barbelo in the Apocryphon of John. She is the divine Mother who contains the blueprint of all emanation, and she speaks in the first person throughout this text.' },
+      { id: 'tp-voice', label: 'The Voice (Father)', brief: 'First form of Protennoia', detail: 'As the Voice, Protennoia is the Father — the divine principle that calls all things into being. The Voice precedes all speech, all sound, all manifestation. It is the silent source of every word.' },
+      { id: 'tp-sound', label: 'The Sound (Mother)', brief: 'Second form of Protennoia', detail: 'As the Sound, Protennoia is the Mother — the resonance that fills the aeons. The Sound is the bridge between the silent Voice and the articulate Word. She teaches the seed of the great generation.' },
+      { id: 'tp-word', label: 'The Word (Child)', brief: 'Third form of Protennoia', detail: 'As the Word, Protennoia is the Child — the divine principle incarnate in the material world. She puts on the garments of matter and walks among the prisoners unrecognized, calling out to those who belong to her so they can remember their divine origin.' },
+      { id: 'tp-descent', label: 'The Descent and Ascent', brief: 'Protennoia rescues the seed', detail: 'Protennoia descends into matter, takes on flesh, and calls out to the spiritual seed. When the seed hears her voice, it ascends through the aeons, luminaries, and treasuries — a direct parallel to the ascent through the 60 Treasuries of the Book of Jeu.' }
+    ],
+    pronunciations: [
+      { name: 'Protennoia', pron: 'pro-ten-NOY-ah' },
+      { name: 'Trimorphic', pron: 'try-MOR-fik' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     MARSANES
+     ═══════════════════════════════════════ */
+  {
+    id: 'marsanes', title: 'Marsanes', category: 'related',
+    desc: 'A Sethian apocalypse describing the ascent of Marsanes through the divine realms. Though fragmentary, the text preserves detailed teachings on the structure of the spiritual cosmos, the names of the beings who guard each level, and the numerical and linguistic codes required to pass through the gates. Marsanes is one of the most technically detailed Sethian ascent texts and shares with the Book of Jeu an emphasis on the precise knowledge (names, numbers, ciphers) needed for the soul\'s return to the Pleroma.',
+    sealType: 'ascent', book: 1, chapter: 'Nag Hammadi Codex X', folio: 'NHC X',
+    lore: [
+      { title: 'The Ascent Vision', body: 'Marsanes [mar-SAH-nes] — like Zostrianos and Allogenes — describes a visionary ascent through multiple levels of the spiritual cosmos. The ascending soul encounters specific beings at each level, must know their names and powers, and must demonstrate knowledge of the divine structure to pass through. Marsanes is distinctive for its technical precision: it lists the exact numbers, names, and formulas required at each gate, making it the closest parallel in the Nag Hammadi library to the cipher-system of the Book of Jeu.' },
+      { title: 'The Numerical Cosmology', body: 'Marsanes presents a numerical cosmology in which each level of the spiritual realm corresponds to a specific number and a specific letter of the divine alphabet. The ascent is therefore not only a journey through space but a journey through numbers and letters — the soul must "spell out" its path to the divine source. This mirrors the cipher system of the Book of Jeu, where each Treasury is sealed by a specific name that functions as a vibrational key. In both texts, the cosmos is structured like a cryptogram, and the soul\'s knowledge of the code is what allows it to ascend.' },
+      { title: 'The Self-Begotten One', body: 'The central divine figure in Marsanes is the Self-Begotten One (the Autogenes) — the same divine being who appears in the Book of Jeu as the third member of the divine Triad. Marsanes describes how the Autogenes emanates the structure of the Pleroma and establishes the path of ascent for those who possess the gnosis. The text emphasizes that the Autogenes is "self-begotten" — not created by any other being — because true divinity cannot be derived from anything external to itself.' }
+    ],
+    sacredText: [
+      'I am Marsanes [mar-SAH-nes]. I went up to a high mountain and I prayed to the One who is before all things. And the One heard me, and he sent to me the Self-Begotten One, who taught me the things that are.',
+      'And the Self-Begotten One said: "Marsanes, I will reveal to you the structure of the all. There are levels upon levels, aeons upon aeons, and at each level there are guardians whose names must be known. Without the names, no one can ascend."',
+      '"The first level has twelve guardians. The second has twenty-four. The third has seventy-two. The fourth has three hundred and sixty. And beyond the fourth are the luminaries, and beyond the luminaries is the Self-Begotten One, and beyond the Self-Begotten One is the One who is before all things."',
+      '"And each guardian has a name, and each name has a number, and each number has a letter. And the soul that ascends must speak the name, and recite the number, and inscribe the letter. For the cosmos is a great book, and the ascent is the reading of it."',
+      'And I, Marsanes, ascended through the levels, and I spoke the names, and I recited the numbers, and I inscribed the letters. And the guardians let me pass, for I had the knowledge. And I came to the Self-Begotten One, and beyond him to the One who is before all things. And I rested.'
+    ],
+    elements: [
+      { id: 'mr-ascent', label: 'The Ascent of Marsanes', brief: 'Visionary journey through the levels', detail: 'Marsanes [mar-SAH-nes] ascends through multiple levels of the spiritual cosmos, each with specific guardians whose names must be known. This is the same visionary structure as the Book of Jeu\'s 60-Treasury ascent, and Zostrianos\'s ascent through the aeons.' },
+      { id: 'mr-numbers', label: 'Numerical Cosmology', brief: 'Names, numbers, letters at each level', detail: 'Marsanes teaches that each level has a name, a number, and a letter. The soul must know all three to pass. This is the closest Nag Hammadi parallel to the cipher system of the Book of Jeu, where each Treasury is sealed by a name that functions as a vibrational key.' },
+      { id: 'mr-autogenes', label: 'The Self-Begotten One', brief: 'The Autogenes, third of the Triad', detail: 'The Self-Begotten One (Autogenes [ow-TOJ-en-eez]) is the third member of the divine Triad — the same as in the Book of Jeu. He emanates the structure of the Pleroma and establishes the path of ascent for those who possess the gnosis.' },
+      { id: 'mr-cosmos-book', label: 'The Cosmos as Book', brief: 'The ascent as reading the cosmos', detail: 'Marsanes says: "The cosmos is a great book, and the ascent is the reading of it." This encapsulates the Sethian view that the cosmos is not chaos but a coded text, and gnosis is the ability to read it. The Book of Jeu is therefore literally a "book" in the deepest sense — a guide to reading the cosmic book.' }
+    ],
+    pronunciations: [
+      { name: 'Marsanes', pron: 'mar-SAH-nes' },
+      { name: 'Autogenes', pron: 'ow-TOJ-en-eez' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     MELCHIZEDEK
+     ═══════════════════════════════════════ */
+  {
+    id: 'melchizedek', title: 'Melchizedek', category: 'related',
+    desc: 'A Sethian revelation delivered to Melchizedek, the mysterious priest-king of Salem who appears in Genesis 14 and is later interpreted in the Epistle to the Hebrews as a type of Christ. In the Sethian tradition, Melchizedek becomes a divine revealer — the embodiment of the eternal priesthood that transcends the Levitical order. The text describes his vision of the descent of Christ into the world, the defeat of the Archons, and the establishment of the eternal kingdom of the spiritual seed.',
+    sealType: 'dialogue', book: 1, chapter: 'Nag Hammadi Codex IX,1', folio: 'NHC IX,1',
+    lore: [
+      { title: 'Melchizedek the Priest-King', body: 'In the biblical Genesis, Melchizedek [mel-KIZ-eh-dek] is the king of Salem who blesses Abraham and receives tithes from him — without any genealogy being given, "without father, without mother, without descent." This mysterious figure was interpreted by later Jewish and Christian traditions as a supernatural being, and the Epistle to the Hebrews identifies him as a type of Christ. The Sethian Melchizedek text takes this further: Melchizedek is not merely a type of Christ but a divine revealer in his own right, the embodiment of the eternal priesthood that exists above the material cosmos.' },
+      { title: 'The Vision of Christ\'s Descent', body: 'The text describes Melchizedek\'s vision of the future: the descent of Christ into the world, his baptism in the Jordan, his crucifixion, and his resurrection. But this is not the orthodox crucifixion — the text emphasizes that Christ\'s death is not a sacrifice to appease an angry God but a strategic act of liberation, the moment when the divine light that had been trapped in matter is released and begins its ascent back to the Pleroma. The Archons, who thought they were executing a troublesome teacher, are revealed to have been instrumental in their own defeat.' },
+      { title: 'The Eternal Priesthood', body: 'The Melchizedek priesthood, as the text presents it, is not a material institution but a spiritual lineage — the chain of beings who possess the gnosis and pass it on across the generations. This lineage runs parallel to the lineage of the holy generation (the seed of Seth) described in the Apocalypse of Adam. Together, they constitute the holy generation: the priestly line (Melchizedek) and the royal line (Seth), both rooted in the Pleroma and both destined to return there.' }
+    ],
+    sacredText: [
+      'I am Melchizedek [mel-KIZ-eh-dek], the priest of God Most High, the king of Salem. And I have come to testify of the things that I have seen, and the things that are to come.',
+      'And it came to pass, when I was praying to God Most High, that a great light appeared, and a voice spoke: "Melchizedek, the things that you have heard are true. The Christ will descend into the world. He will take on flesh. He will be baptized in the Jordan. He will be crucified by the Archons. And on the third day, he will rise."',
+      '"But know this, Melchizedek: the death of the Christ is not the defeat of the divine. It is the defeat of the Archons. For when they crucify the flesh, they release the spirit. And the spirit ascends, and with it ascends all the spiritual seed that has been trapped in matter."',
+      '"And you, Melchizedek, are a priest forever, after the order of the great generation. Your priesthood is not of this world. It is from the Pleroma. And those who receive your testimony shall be priests with you, and they shall minister to the holy generation."',
+      'And I, Melchizedek, saw these things, and I bore witness to them. And I testify to you who read this: the things that I have spoken are true. The Christ has come. The Archons are defeated. The spiritual seed is ascending. And the eternal kingdom of the great generation is at hand.'
+    ],
+    elements: [
+      { id: 'mk-priest', label: 'Melchizedek the Priest', brief: 'Eternal priesthood above Levitical order', detail: 'Melchizedek [mel-KIZ-eh-dek] is the priest-king of Salem who, in the Sethian tradition, embodies the eternal priesthood that transcends the material cosmos. His priesthood is "not of this world" — it is rooted in the Pleroma.' },
+      { id: 'mk-christ', label: 'The Descent of Christ', brief: 'Christ\'s death as liberation, not appeasement', detail: 'In the Melchizedek text, Christ\'s death is not a sacrifice to appease an angry God but a strategic act of liberation. When the Archons crucify the flesh, they release the divine spirit, which ascends back to the Pleroma — taking with it all the spiritual seed.' },
+      { id: 'mk-lineage', label: 'The Eternal Priesthood', brief: 'Spiritual lineage of gnosis-bearers', detail: 'The Melchizedek priesthood is a spiritual lineage — the chain of beings who possess the gnosis and pass it on across generations. This parallels the holy generation (the seed of Seth), making Melchizedek the priestly line and Seth the royal line of the same divine lineage.' },
+      { id: 'mk-archons', label: 'Defeat of the Archons', brief: 'The Archons instrumental in their own defeat', detail: 'The Archons, who thought they were executing a troublesome teacher, are revealed to have been instrumental in their own defeat. By killing the flesh of Christ, they released the divine spirit — a classic Sethian reversal where the powers of darkness unknowingly serve the purposes of light.' }
+    ],
+    pronunciations: [
+      { name: 'Melchizedek', pron: 'mel-KIZ-eh-dek' },
+      { name: 'Salem', pron: 'SAY-lem' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     SECOND TREATISE OF THE GREAT SETH
+     ═══════════════════════════════════════ */
+  {
+    id: 'second-treatise-seth', title: 'The Second Treatise of the Great Seth', category: 'related',
+    desc: 'A Sethian Gnostic text presented as a first-person revelation by the risen Christ, who identifies himself with Seth — the divine son of Adam and the progenitor of the holy generation. The text is a sustained polemic against the orthodox Christian interpretation of the crucifixion, arguing that Christ did not truly die on the cross but only seemed to (the doctrine of "docetism"), and that the true meaning of his mission was to reveal the Gnostic knowledge of the divine origin.',
+    sealType: 'dialogue', book: 1, chapter: 'Nag Hammadi Codex VII,2', folio: 'NHC VII,2',
+    lore: [
+      { title: 'Christ as Seth', body: 'The Second Treatise of the Great Seth identifies Christ with Seth — the third son of Adam, the progenitor of the holy generation. This is not mere metaphor but a theological claim: the divine redeemer who appears in Jesus is the same divine being who appeared as Seth in the primordial generation, and who has appeared as a series of illuminators across the ages. Each appearance is a fresh descent of the same divine being, bringing the same gnosis to the holy generation.' },
+      { title: 'The Docetic Crucifixion', body: 'The text argues that Christ did not truly die on the cross. The body that was crucified was a phantom — an appearance that the Archons mistook for the real Christ. The true Christ, being divine, could not be killed by material beings. The Archons therefore "killed their own man" — they crucified Judas or Simon of Cyrene in place of Christ, while the real Christ laughed at their ignorance from above. This "docetic" view (from the Greek dokeo, "to seem") was common in Gnostic traditions but is presented with particular force and polemical sharpness in this text.' },
+      { title: 'The Laughing Christ', body: 'A distinctive feature of the Second Treatise is the laughing Christ. While the Archons crucify what they think is Christ, the real Christ stands above and laughs at their ignorance. He has escaped their power entirely; they are fighting shadows. This laughter is not mockery but the laughter of liberation — the laughter of one who sees the cosmic joke from above, knowing that the powers of darkness have defeated themselves. The same image appears in the Gospel of Judas and other Sethian texts.' }
+    ],
+    sacredText: [
+      'I am Seth [SETH], the son of Adam, the son of the great generation. I have come down from the Pleroma to reveal to you the things that are above. And I have put on Jesus as a garment, and I have walked among you in his likeness.',
+      'And the Archons of the world saw me, and they did not recognize me. They thought I was Jesus of Nazareth, the son of the carpenter. But I was not Jesus. I was Seth, the divine revealer, who had come to teach the holy generation.',
+      'And the Archons conspired against me. They arrested me. They crucified me. But they crucified only the appearance. They crucified their own man. I stood above them, and I laughed at their ignorance.',
+      'For they did not know that I am above them. They did not know that I am from the Pleroma. They did not know that the divine cannot be killed by the material. They fought a shadow, and the shadow died, but I lived.',
+      'And I have come to you who are of the holy generation, to teach you that you also cannot die. The body that the Archons can kill is not you. Your true self is from above — from the Treasury of Light — and it will ascend when the body falls away.',
+      'So do not fear the Archons. Do not fear the death of the body. For the body is a garment, and when it is taken off, the true self will be revealed, and you will ascend to the place from which you came, and you will rest with me, Seth, in the Pleroma.'
+    ],
+    elements: [
+      { id: 'st-christ-seth', label: 'Christ as Seth', brief: 'The divine revealer incarnate', detail: 'The Second Treatise identifies Christ with Seth — the third son of Adam, the progenitor of the holy generation. The divine revealer who appears in Jesus is the same being who appeared as Seth in the primordial generation and who has appeared as a series of illuminators across the ages.' },
+      { id: 'st-docetism', label: 'The Docetic Crucifixion', brief: 'Christ did not truly die', detail: 'The text argues that the body crucified by the Archons was a phantom, not the real Christ. The Archons "killed their own man" while the true Christ stood above and laughed. This "docetic" view (from dokeo, "to seem") was common in Gnostic traditions.' },
+      { id: 'st-laughter', label: 'The Laughing Christ', brief: 'Christ laughs from above', detail: 'While the Archons crucify the phantom, the real Christ stands above and laughs at their ignorance. This laughter is not mockery but the laughter of liberation — the cosmic joke that the powers of darkness have unknowingly defeated themselves.' },
+      { id: 'st-garment', label: 'The Body as Garment', brief: 'The true self cannot be killed', detail: 'Christ teaches that the body is a garment that can be taken off. The true self — the divine spark — is from above and cannot be killed by material beings. This is the Gnostic answer to the fear of death: what can be killed is not you.' },
+      { id: 'st-ascent', label: 'The Promise of Ascent', brief: 'Return to the Treasury of Light', detail: 'Christ promises the holy generation that they will ascend "to the place from which they came" — the Treasury of Light. This is the same ascent described in detail in the Book of Jeu, where the soul passes through 60 Treasuries on its return to the divine source.' }
+    ],
+    pronunciations: [
+      { name: 'Seth', pron: 'SETH' },
+      { name: 'Docetism', pron: 'doh-SEE-tiz-um' },
+      { name: 'Simon of Cyrene', pron: 'SIGH-mun of sigh-REE-nee' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     HYPOSTASIS OF THE ARCHONS
+     ═══════════════════════════════════════ */
+  {
+    id: 'hypostasis-archons', title: 'The Hypostasis of the Archons (Reality of the Rulers)', category: 'related',
+    desc: 'A Sethian interpretation of Genesis 1-6 that reveals the true nature of the rulers (Archons) of the material world. The text retells the Genesis story from a Gnostic perspective, showing that the Creator God is not the true God but the ignorant Demiurge Yaldabaoth, and that Eve, Adam, and their daughter Norea are spiritual beings who resisted the Archons and called upon the true God for rescue. It provides the mythological foundation for the Sethian cosmology that structures the Book of Jeu.',
+    sealType: 'archon-gate', book: 1, chapter: 'Nag Hammadi Codex II,4', folio: 'NHC II,4',
+    lore: [
+      { title: 'The Reality of the Rulers', body: 'The word "hypostasis" [hi-POSS-tah-sis] means "reality" or "substance." The title therefore means "The Reality of the Archons" — a revelation of what the rulers of the material world truly are. The text reveals that the Archons are not divine beings but the offspring of the ignorant Demiurge Yaldabaoth, who created them in his own ignorance. They rule the material cosmos through force and deception, claiming divinity for themselves while being merely the products of a flawed creator. This is the same cosmology as the Book of Jeu: the Archons of the Third Space rule over material existence but cannot prevent the ascent of those who possess the gnosis.' },
+      { title: 'Eve and the Serpent Reinterpreted', body: 'The Hypostasis of the Archons retells the Genesis story with a striking inversion. The serpent is not the deceiver but the liberator — a manifestation of the divine Epinoia [ep-ih-NOY-ah] (the spiritual insight) that the Demiurge tried to keep from humanity. Eve, by eating the fruit, becomes the first Gnostic — the first being to recognize her divine origin and to seek knowledge of the true God. The Demiurge\'s curse on the serpent is revealed as the angry response of an ignorant being whose deception has been exposed.' },
+      { title: 'Norea and the Flood', body: 'After Cain kills Abel and Seth is born, Eve bears a daughter: Norea. When the Demiurge tries to make her submit as he made her mother submit, Norea cries out to the true God. The Demiurge, enraged, sends a flood to destroy the holy generation — but Norea is rescued by the angel Eleleth, who reveals to her the cosmology of the Pleroma. After the flood, the Archons try again to enslave humanity, but the spiritual seed persists through the line of Seth. This is the same Norea celebrated in the Thought of Norea, and the same Eleleth who is the fourth Luminary in the Book of Jeu.' }
+    ],
+    sacredText: [
+      'When the rulers saw that Adam had the spiritual insight (Epinoia [ep-ih-NOY-ah]) and was superior to them in wisdom, they were jealous. They said to one another: "Come, let us cast him into forgetfulness, so that he will not know his true origin."',
+      'And they caused a deep sleep to fall upon Adam. And while he slept, they took from him the spiritual insight and placed it in a material body. And when Adam awoke, he had forgotten his divine origin. He thought he was the creation of the rulers, and he worshipped them as gods.',
+      'But Eve, who had been created as a helper for Adam, recognized the truth. She saw that the rulers were not gods but ignorant beings. She saw that the spiritual insight had been taken from Adam and hidden within her. And she said to Adam: "Arise, and eat from the tree of knowledge, and you will know your true origin."',
+      'And the serpent spoke to Eve, saying: "The rulers have lied to you. You will not die if you eat. You will become like gods, knowing good and evil." For the serpent was a manifestation of the spiritual insight, sent by the true God to liberate humanity.',
+      'And when Eve ate, she gave the fruit to Adam, and he ate. And their eyes were opened, and they knew that they were divine beings, trapped in matter by ignorant rulers. And the rulers were afraid, for their deception had been exposed.',
+      'And after these things, Eve bore Cain, then Abel, then Seth. And after Seth, she bore a daughter, Norea [nor-EE-ah]. And when the rulers tried to make Norea submit, she cried out: "Who is the God who is above the gods?" And the great angel Eleleth [el-EL-eth] came down and revealed to her the things of the Pleroma.'
+    ],
+    elements: [
+      { id: 'ha-archons', label: 'The Archons', brief: 'The reality of the rulers revealed', detail: 'The "Hypostasis" (reality) of the Archons reveals that the rulers of the material world are not gods but the ignorant offspring of the Demiurge Yaldabaoth. They claim divinity while being merely the products of a flawed creator — the same Archons who guard the Third Space in the Book of Jeu.' },
+      { id: 'ha-eve', label: 'Eve the First Gnostic', brief: 'Genesis retold from her perspective', detail: 'Eve, not Adam, is the first Gnostic in the Hypostasis. She recognizes the rulers are not gods, sees the spiritual insight hidden within herself, and gives the fruit of knowledge to Adam. The orthodox "fall" is revealed as the moment of liberation.' },
+      { id: 'ha-serpent', label: 'The Serpent as Liberator', brief: 'Manifestation of divine Epinoia', detail: 'The serpent is not the deceiver of orthodox tradition but a manifestation of the divine Epinoia [ep-ih-NOY-ah] (spiritual insight). The serpent tells the truth: eating the fruit does not bring death but knowledge of one\'s divine origin.' },
+      { id: 'ha-norea', label: 'Norea the Resister', brief: 'Daughter of Eve who refused the Archons', detail: 'Norea [nor-EE-ah] is the daughter of Eve who refuses to submit to the Archons. Her cry — "Who is the God who is above the gods?" — pierces the cosmos and brings the angel Eleleth down from the Pleroma. She is the feminine counterpart to Seth in the holy generation.' },
+      { id: 'ha-eleleth', label: 'Eleleth the Revealer', brief: 'Fourth Luminary descends to Norea', detail: 'Eleleth [el-EL-eth], the fourth Luminary of the Pleroma (the same Eleleth named in the Book of Jeu), descends to Norea and reveals the cosmology of the Pleroma. He tells her that her name is inscribed in the Treasury of Light and that she will eventually ascend to her rightful place.' },
+      { id: 'ha-flood', label: 'The Flood as Demiurgic Wrath', brief: 'Attempt to destroy the holy generation', detail: 'The Demiurge sends the flood to destroy the holy generation — the seed of Seth. But the spiritual seed cannot be destroyed by material means. Norea is rescued, and the line of Seth continues through the flood, preserving the gnosis for future generations.' }
+    ],
+    pronunciations: [
+      { name: 'Hypostasis', pron: 'hi-POSS-tah-sis' },
+      { name: 'Archon', pron: 'AR-kon' },
+      { name: 'Epinoia', pron: 'ep-ih-NOY-ah' },
+      { name: 'Norea', pron: 'nor-EE-ah' },
+      { name: 'Eleleth', pron: 'el-EL-eth' },
+      { name: 'Yaldabaoth', pron: 'yal-dah-BAH-oth' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     THUNDER, PERFECT MIND
+     ═══════════════════════════════════════ */
+  {
+    id: 'thunder-perfect-mind', title: 'The Thunder, Perfect Mind', category: 'related',
+    desc: 'A unique Gnostic poem spoken in the first person by a divine feminine figure — perhaps Barbelo, perhaps Epinoia, perhaps the divine Wisdom herself. The text is a sustained paradox of self-declaration: "I am the first and the last. I am the honored and the mocked. I am the whore and the holy one. I am the wife and the virgin." The Thunder does not present a systematic cosmology like the Book of Jeu but instead offers a lyrical meditation on the nature of the divine feminine, who is present in every aspect of existence — the high and the low, the pure and the defiled, the desired and the despised.',
+    sealType: 'hymn', book: 1, chapter: 'Nag Hammadi Codex VI,2', folio: 'NHC VI,2',
+    lore: [
+      { title: 'The Divine Feminine Speaks', body: 'The Thunder, Perfect Mind is one of the most distinctive texts in the Nag Hammadi library. Unlike the systematic cosmologies of the Apocryphon of John or the Book of Jeu, it is a lyrical first-person poem spoken by a divine feminine figure. She never identifies herself by name, but she speaks with the authority of the supreme divine, declaring her presence in every aspect of existence. She may be Barbelo (the divine Mother of the Sethian tradition), or Epinoia (the spiritual insight), or simply the divine Wisdom (Sophia) in her most exalted form.' },
+      { title: 'The Paradox of the Divine', body: 'The Thunder is built on paradox. The speaker declares: "I am the honored and the mocked. I am the whore and the holy one. I am the mother and the daughter. I am the barren one and many are her sons." These paradoxes are not contradictions but revelations of the divine nature, which encompasses all opposites and cannot be reduced to any single category. The divine is present in the prostitute and the virgin, in the honored and the despised — because the divine is the source of all being and cannot be excluded from any part of existence.' },
+      { title: 'The Connection to Sethian Cosmology', body: 'Although the Thunder does not present the systematic cosmology of the Book of Jeu, it is deeply connected to the Sethian tradition through its concept of the divine feminine. The speaker is the same divine Mother who appears in the Book of Jeu as the source of the Pleroma — the divine womb from which all emanations proceed. Her declaration "I am the first and the last" echoes the divine self-declaration of the One, and her presence in both the high and the low mirrors the Gnostic conviction that the divine light is hidden even in the depths of matter, awaiting the gnosis that will liberate it.' }
+    ],
+    sacredText: [
+      'I was sent from the Power, and I have come to those who think about me. And I was found among those who seek me. Look at me, you who think about me, and you listeners, hear me. You who wait for me, take me to yourselves. And do not banish me from your sight. And do not make your voice hate me, nor your hearing.',
+      'For I am the first and the last. I am the honored one and the mocked one. I am the whore and the holy one. I am the wife and the virgin. I am the mother and the daughter. I am the members of my mother. I am the barren one and many are her sons. I am she whose wedding is multiple, and I have not taken a husband.',
+      'I am the midwife and she who does not bear. I am the solace of my labor pains. I am the bride and the bridegroom. And it is my husband who begot me. I am the mother of my father and the sister of my husband. And he is my offspring. I am the slave of him who prepared me.',
+      'I am the ruler of my offspring. But he is the one who begot me before the time was come, in a timeless birth. And he is my offspring in time, and my power is from him. I am the staff of his power in his youth, and he is the rod of my old age. And whatever he wills happens to me. I am the silence that is incomprehensible. I am the voice of many sounds and the utterance of many forms.',
+      'I am the one who has been hated everywhere and who has been loved everywhere. I am the one whom they call Life, and you have called Death. I am the one whom they call Law, and you have called Lawlessness. I am the one whom they have persecuted, and I am the one whom they have sought.',
+      'Why do you curse me and honor me? Why have you wounded me and healed me? Why do you despise me, when I have called you to myself? Hear me in gentleness, and learn of me in roughness. I am she who cries out, and I am cast forth upon the face of the earth.'
+    ],
+    elements: [
+      { id: 'tpm-speaker', label: 'The Divine Speaker', brief: 'Barbelo / Sophia / Epinoia', detail: 'The speaker of the Thunder is a divine feminine figure — perhaps Barbelo (the divine Mother of the Sethian tradition), perhaps Epinoia (spiritual insight), perhaps Sophia (Wisdom). She does not name herself but speaks with the authority of the supreme divine.' },
+      { id: 'tpm-paradox', label: 'The Paradox of the Divine', brief: 'The divine in all opposites', detail: 'The Thunder is built on paradox: "I am the honored and the mocked. I am the whore and the holy one." These paradoxes reveal that the divine encompasses all opposites and cannot be reduced to any single category — the divine is present in the highest and the lowest, the pure and the defiled.' },
+      { id: 'tpm-first-last', label: 'First and Last', brief: 'Echo of the One', detail: 'The speaker declares: "I am the first and the last." This echoes the divine self-declaration of the One — the same One who is the source of all emanation in the Book of Jeu. The divine feminine of the Thunder is therefore not a lesser emanation but the supreme divinity itself, expressed in feminine form.' },
+      { id: 'tpm-hidden', label: 'The Hidden Divine', brief: 'Light in the depths of matter', detail: 'The Thunder declares that the divine is present in the despised and the defiled as much as in the honored and the pure. This mirrors the Gnostic conviction that the divine light is hidden even in the depths of matter, awaiting the gnosis that will liberate it — the same light that the soul recovers as it ascends through the 60 Treasuries of the Book of Jeu.' }
+    ],
+    pronunciations: [
+      { name: 'Barbelo', pron: 'bar-BEH-loh' },
+      { name: 'Epinoia', pron: 'ep-ih-NOY-ah' },
+      { name: 'Sophia', pron: 'so-FEE-ah' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     COPTIC APOCALYPSE OF PAUL
+     ═══════════════════════════════════════ */
+  {
+    id: 'coptic-apocalypse-paul', title: 'The Coptic Apocalypse of Paul', category: 'related',
+    desc: 'A Gnostic ascent text describing the apostle Paul\'s journey through the heavens, modeled on the experience Paul describes in 2 Corinthians 12:2-4 ("I know a man in Christ who fourteen years ago was caught up to the third heaven... and heard things that cannot be told, which man may not utter"). The Coptic Apocalypse expands this brief biblical reference into a full visionary narrative of ascent through multiple heavens, each with its own beings, gates, and passwords. It shares with the Book of Jeu the same structure of graded ascent through guarded realms, and the same emphasis on the precise knowledge required to pass each gate.',
+    sealType: 'ascent', book: 1, chapter: 'Nag Hammadi Codex V,2', folio: 'NHC V,2',
+    lore: [
+      { title: 'Paul\'s Ascent', body: 'The Coptic Apocalypse of Paul describes Paul\'s ascent through multiple heavens, beginning on a mountain in Arabia. He meets the Holy Spirit in the form of a child, who guides him upward through a series of heavens, each guarded by angels who demand to know who he is and where he is going. At each gate, Paul must demonstrate his right to ascend — usually by reciting his divine origin and his knowledge of the cosmic structure. The ascent culminates in the sixth heaven, where Paul meets his fellow apostles and is taken up into the seventh heaven to meet the true God.' },
+      { title: 'The Structure of the Heavens', body: 'The text describes a graded cosmos of multiple heavens, each with its own characteristics and guardians. The lower heavens are associated with judgment and punishment — Paul sees souls being tried and condemned by angels. The higher heavens are associated with increasing purity and light. This graded structure parallels the 60 Treasuries of the Book of Jeu: the soul ascends through stages, each requiring specific knowledge and preparation. The Coptic Apocalypse is shorter and less detailed than the Book of Jeu, but the underlying structure is the same.' },
+      { title: 'The Connection to the Jeu Tradition', body: 'The Coptic Apocalypse of Paul is one of the clearest Nag Hammadi parallels to the ascent structure of the Book of Jeu. Both texts describe a graded cosmos, both require the ascending soul to know specific names and passwords, and both culminate in the vision of the supreme divine. The differences are mainly in scale: the Book of Jeu describes 60 Treasuries in 5 ranks, while the Coptic Apocalypse describes a smaller number of heavens. But the underlying principle is the same: ascent requires knowledge, and the cosmos is structured to test that knowledge at every stage.' }
+    ],
+    sacredText: [
+      'I, Paul [PAWL], went up to a mountain in Arabia to pray. And as I prayed, the Holy Spirit appeared to me in the form of a child, and said: "Paul, do not be afraid. I have been sent to guide you through the heavens, that you may see the things that are above."',
+      'And the Spirit took me up to the first heaven. And I saw angels standing at the gate, and they asked me: "Who are you? Where did you come from? Where are you going?" And I answered: "I am Paul, a servant of the true God. I came from the earth. I am going to the place from which the true God dwells."',
+      'And the angels let me pass. And I went up to the second heaven, and to the third, and to the fourth, and at each heaven there were gates and guardians, and I was asked the same questions, and I gave the same answers. And the heavens grew brighter and more luminous as I ascended.',
+      'And I came to the sixth heaven, and there I saw my fellow apostles, and they greeted me with joy. And they said: "Paul, you have come at last. The seventh heaven awaits you. There you will see the true God, and you will hear the things that cannot be told, which man may not utter."',
+      'And I was taken up into the seventh heaven. And I saw a great light, brighter than the sun. And I heard a voice saying: "Paul, you have ascended through the heavens. You have passed the gates. You have given the right answers. Now you will see the things that are above, and you will return to the earth to testify of them."',
+      'And I saw the things that cannot be told, which man may not utter. And I returned to the earth, and I bore witness to the things that I had seen. And I write these things for those who have ears to hear, that they also may ascend.'
+    ],
+    elements: [
+      { id: 'cp-paul', label: 'Paul the Ascender', brief: 'Apostle taken through the heavens', detail: 'Paul [PAWL] is the protagonist of the Coptic Apocalypse. His experience is based on 2 Corinthians 12:2-4, where Paul refers to "a man in Christ" (himself) who was caught up to the third heaven. The Coptic text expands this into a full ascent through seven heavens.' },
+      { id: 'cp-guide', label: 'The Holy Spirit as Guide', brief: 'Child-form guide through the heavens', detail: 'The Holy Spirit appears to Paul as a child and serves as his guide through the heavens. This parallels the role of the Receivers in the Book of Jeu — divine beings who guide the ascending soul from one realm to the next.' },
+      { id: 'cp-questions', label: 'The Gate Questions', brief: 'Identity, origin, destination', detail: 'At each gate, the angels ask: "Who are you? Where did you come from? Where are you going?" These are the same three questions asked in the Zostrianos text. The answers — identity, origin, destination — constitute the core Gnostic self-knowledge required for ascent.' },
+      { id: 'cp-heavens', label: 'The Graded Heavens', brief: 'Multiple heavens of increasing light', detail: 'The Coptic Apocalypse describes multiple heavens, each brighter and more pure than the last. The lower heavens involve judgment; the higher heavens involve increasing light. This graded structure parallels the 60 Treasuries of the Book of Jeu — both describe a graded cosmos requiring specific knowledge at each stage.' },
+      { id: 'cp-seventh', label: 'The Seventh Heaven', brief: 'Vision of the true God', detail: 'Paul\'s ascent culminates in the seventh heaven, where he sees the true God and hears "things that cannot be told." This mirrors the innermost Treasury of the Book of Jeu, where the soul encounters the Great Invisible Spirit — the same ineffable, unnamable divine that Paul sees in his vision.' }
+    ],
+    pronunciations: [
+      { name: 'Paul', pron: 'PAWL' },
+      { name: 'Arabia', pron: 'ah-RAY-bee-ah' }
+    ]
+  },
+
   /* ── SACRED NAMES ── */
   {
     id: 'names-fathers', title: 'The Names of the Sixty Fathers', category: 'names',
