@@ -471,6 +471,53 @@
     inset 0 0 60px rgba(200,168,74,0.08);
 }
 
+/* Entry image banner (inside diagram-wrap, above SVG) */
+.entry-image-banner {
+  position: relative;
+  margin-bottom: 0.85rem;
+  border: 1px solid var(--ink3);
+  background: #0a0805;
+  overflow: hidden;
+  box-shadow:
+    0 4px 18px rgba(0,0,0,0.55),
+    inset 0 0 24px rgba(200,168,74,0.06);
+}
+.entry-image-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+  object-fit: cover;
+  opacity: 0.92;
+  filter: contrast(1.08) saturate(1.05);
+}
+.entry-image-banner:hover img {
+  opacity: 1;
+  filter: contrast(1.12) saturate(1.1) brightness(1.05);
+}
+.entry-image-frame {
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(200,168,74,0.45);
+  pointer-events: none;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
+}
+.entry-image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.35rem 0.7rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #f0d878;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.95), 0 0 8px rgba(0,0,0,0.8);
+  background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
+  text-align: center;
+}
+
 /* SVG Interactive Elements */
 .svg-clickable {
   cursor: pointer;

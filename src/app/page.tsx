@@ -17,7 +17,7 @@ interface TreasuryEntry {
   password?: string; passwordPron?: string
 }
 
-type SacredCategory = 'overview' | 'cosmos' | 'liturgy' | 'hymn' | 'archon' | 'related' | 'names' | 'dialogue' | 'emanation' | 'spaces'
+type SacredCategory = 'overview' | 'cosmos' | 'liturgy' | 'hymn' | 'archon' | 'related' | 'names' | 'dialogue' | 'emanation' | 'spaces' | 'geometry'
 
 interface SacredEntry {
   id: string; title: string; category: SacredCategory
@@ -27,18 +27,19 @@ interface SacredEntry {
   elements: { id: string; label: string; brief: string; detail: string }[]
   sacredText?: string[]
   pronunciations?: { name: string; pron: string }[]
+  image?: string
 }
 
 const RANK_NAMES = ['', 'First Rank (Innermost)', 'Second Rank (Inner)', 'Third Rank (Middle)', 'Fourth Rank (Outer)', 'Fifth Rank (Outermost)']
 const CATEGORY_LABELS: Record<SacredCategory, string> = {
   overview: 'Overview', cosmos: 'Cosmos Map', liturgy: 'Liturgy & Rites', hymn: 'Hymns & Prayers',
   archon: 'Archon Gates', related: 'Related Texts', names: 'Sacred Names', dialogue: 'Dialogues',
-  emanation: 'Emanations', spaces: 'Three Spaces'
+  emanation: 'Emanations', spaces: 'Three Spaces', geometry: 'Sacred Geometry'
 }
 const CATEGORY_ICONS: Record<SacredCategory, string> = {
   overview: '\u2720', cosmos: '\u25CE', liturgy: '\u2699', hymn: '\u266B',
   archon: '\u2694', related: '\u2606', names: '\u2735', dialogue: '\u2756',
-  emanation: '\u2734', spaces: '\u25C7'
+  emanation: '\u2734', spaces: '\u25C7', geometry: '\u2733'
 }
 
 function ordinal(n: number): string {
@@ -354,6 +355,7 @@ const SACRED_ENTRIES: SacredEntry[] = [
     id: 'baptism', title: 'The Rite of the Five Seals', category: 'liturgy',
     desc: 'The Second Book of Jeu preserves a nearly complete ritual script for a fivefold baptism - the central sacrament of the Jeu community. The initiate receives five successive baptisms of water, fire, spirit, light, and the ineffable mystery, each accompanied by invocations, seal-inscriptions, and sacred names that must be spoken in precise Coptic formulas.',
     sealType: 'baptism-rite', book: 2, chapter: 'Chapters 42-52', folio: 'ff. 103r-114v',
+    image: '/images/liturgy-rites.png',
     lore: [
       { title: 'The Five Baptisms', body: 'The rite progresses through five baptisms, each more exalted than the last. The baptism of water cleanses the body; fire purifies the soul; the spirit consecrates the mind; light illuminates the inner vision; and the ineffable mystery unites the initiate with the divine source. Each baptism requires its own seal, its own invocation, and its own sacred name.' },
       { title: 'Ritual Setting', body: 'The baptism takes place in a specially prepared chamber with a font of living (flowing) water. The officiant is a priest who has himself received all five seals. The initiate fasts for three days, recites preparatory prayers, and renounces the Archons of the Aeons, the Sphere, and the Midst before the first immersion.' },
@@ -383,6 +385,7 @@ const SACRED_ENTRIES: SacredEntry[] = [
     id: 'eucharist', title: 'The Eucharist Rite', category: 'liturgy',
     desc: 'Following the five baptisms, the newly sealed initiate participates in the sacred meal - the Eucharist of Light. This rite transforms bread and wine into tokens of the Pleroma, allowing the community to partake in the divine substance of the Treasury. The prayers spoken over the elements invoke the names of the four luminaries and the Great Invisible Spirit.',
     sealType: 'liturgy', book: 2, chapter: 'Chapter 53', folio: 'ff. 115r-117v',
+    image: '/images/liturgy-rites.png',
     lore: [
       { title: 'The Sacred Meal', body: 'The Eucharist of Light differs substantially from orthodox Christian communion. The bread represents not the body of Christ but the substance of the Pleroma - the divine fullness that fills the Treasury. The wine represents not the blood of sacrifice but the light of the Great Invisible Spirit, which flows downward through all the treasuries like a river of illumination.' },
       { title: 'The Four Luminaries', body: 'The prayer over the bread invokes the four luminaries of the Pleroma: Harmozel (har-MOH-zel), Oroiael (or-OY-ah-el), Daveithai (dah-VAY-thay), and Eleleth (el-EL-eth). These four beings stand at the four corners of the Treasury and their light sustains all existence. By invoking them over the bread, the priest draws their light into the elements.' },
@@ -405,6 +408,7 @@ const SACRED_ENTRIES: SacredEntry[] = [
     id: 'ascent', title: 'The Rite of Ascent', category: 'liturgy',
     desc: 'The Rite of Ascent is the supreme ritual of the Book of Jeu - a guided meditation and liturgical drama in which the initiate, while still living, experiences the soul\'s passage through the three Archon gates and all sixty treasuries of Light. This rite serves as both rehearsal and empowerment for the soul\'s journey after death.',
     sealType: 'ascent', book: 2, chapter: 'Chapters 55-60', folio: 'ff. 118r-126v',
+    image: '/images/liturgy-rites.png',
     lore: [
       { title: 'The Living Ascent', body: 'Unlike the post-mortem ascent that every soul must undertake, the Rite of Ascent allows the initiate to experience the journey while still in the body. This living ascent imprints the pathways upon the soul, making the post-mortem journey automatic - the soul will follow the familiar path as naturally as a river follows its course.' },
       { title: 'The Three Gates', body: 'The ascent begins at the three Archon gates: the Gate of the Aeons (guarded by Paraphax), the Gate of the Sphere (guarded by Arthax), and the Gate of the Midst (guarded by Aphraphax). At each gate, the initiate must speak the correct password and display the appropriate seal. Failure at any gate results in the soul being seized and returned to rebirth.' },
@@ -430,6 +434,7 @@ const SACRED_ENTRIES: SacredEntry[] = [
     id: 'sealing', title: 'The Sealing Ritual', category: 'liturgy',
     desc: 'The Sealing Ritual is performed immediately after the five baptisms. The priest inscribes five protective seals upon the initiate\'s body - upon the forehead, the right hand, the left hand, between the eyes, and upon the heart. Each seal corresponds to one of the five baptisms and carries the power to open a specific class of gates in the post-mortem ascent.',
     sealType: 'liturgy', book: 2, chapter: 'Chapters 51-52', folio: 'ff. 112r-114v',
+    image: '/images/liturgy-rites.png',
     lore: [
       { title: 'The Five Seals', body: 'The five seals are the initiate\'s passport through the Treasury. Each seal is inscribed with sacred characters and anointed with oil. The seal of water goes on the forehead, fire on the right hand, spirit on the left hand, light between the eyes, and the mystery upon the heart. Together they form a complete spiritual armor.' },
       { title: 'The Triple Sealing', body: 'Each seal is applied three times - once in the name of the Father, once in the name of the cipher, and once in the name of the emanation. This triple application ensures that the seal corresponds to the three aspects of each treasury: the presiding Father, the key (cipher), and the power (emanation) that enforces it.' },
@@ -722,6 +727,7 @@ const SACRED_ENTRIES: SacredEntry[] = [
     id: 'three-steles', title: 'The Three Steles of Seth', category: 'related',
     desc: 'A Sethian hymn-text consisting of three hymns inscribed on three metaphorical steles, each addressed to a different aspect of the divine: the Father, Barbelo, and the Autogenes. The Three Steles represents the most purely devotional strand of Sethian literature and shares the same divine hierarchy as the Book of Jeu.',
     sealType: 'steles', book: 1, chapter: 'Nag Hammadi Codex VII,5', folio: 'NHC VII,5',
+    image: '/images/three-steles.png',
     lore: [
       { title: 'Three Hymns, Three Aspects', body: 'The Three Steles of Seth consists of three hymns, each addressed to a different person of the divine Triad. The first stele praises the Father (the One, the ineffable source); the second praises Barbelo (the Mother, the first emanation); the third praises the Autogenes (the Child, the self-begotten light). Together they form a complete liturgy of praise corresponding to the three aspects of divinity.' },
       { title: 'Seth as Liturgist', body: 'The text is attributed to Seth, the third son of Adam, who is presented as the ancestor and spiritual guide of the Gnostic race. Seth inscribes the hymns upon steles (stone pillars) as a permanent record of divine praise. The steles are metaphorical - they represent the unchanging, eternal nature of the hymns, which endure through all generations.' },
@@ -1161,6 +1167,7 @@ const SACRED_ENTRIES: SacredEntry[] = [
     id: 'three-spaces', title: 'The Three Spaces', category: 'spaces',
     desc: 'The Bruce Codex presents a unique cosmological framework dividing all existence into three Spaces: the First Space (the Ineffable, the Unnamable One), the Middle Space (the Pleroma, the realm of the 60 Treasuries and the divine emanations), and the Third Space (the realm of the Archons, the Kenoma, the material cosmos). Unlike other Sethian texts that describe a simple Pleroma/Kenoma duality, the Bruce Codex introduces this tripartite division as essential to understanding the soul\'s journey — each Space has its own guardians, its own laws, and its own requirements for passage.',
     sealType: 'three-spaces', book: 1, chapter: 'Chapters 1-5', folio: 'ff. 1r-8v',
+    image: '/images/sacred-geometry.png',
     lore: [
       { title: 'The First Space — The Ineffable', body: 'The First Space is the domain of the Unnamable, the Ineffable One who exists before all names and forms. No eye has perceived it; no tongue has described it. It is not "light" as the lower spaces understand light, for it precedes the distinction between light and darkness. The Great Invisible Spirit dwells here as the outermost emanation of the Ineffable — the closest that any being below can approach. Jeu the True God proceeds from this Space into the Middle Space, carrying with him the first light that makes the Treasuries visible. The First Space is also called the "Space of Spaces" because all other spaces exist within it, yet it transcends them all.' },
       { title: 'The Middle Space — The Pleroma', body: 'The Middle Space is the Pleroma — the Fullness — where the 60 Treasuries of Light are arranged in their five ranks. This is the domain of the Fathers, the Watchers, the Emanations, and the Four Luminaries. The Virgin of Light dwells here, distributing souls according to their destiny. The Three Curtains divide the Middle Space into concentric regions of increasing sanctity, culminating in the innermost Treasury where Jeu himself presides. The soul that has passed through the Third Space and its Archon gates enters the Middle Space at the outermost rank and must ascend inward through all 60 Treasuries.' },
@@ -1190,6 +1197,7 @@ const SACRED_ENTRIES: SacredEntry[] = [
     id: 'spaces-map', title: 'The Map of the Three Spaces', category: 'spaces',
     desc: 'A visual map of the Three Spaces as described in the Bruce Codex — from the Ineffable core of the First Space, through the radiant Pleroma of the Middle Space with its 60 Treasuries and Three Curtains, to the darkening spheres of the Third Space where the Archons rule and mortal souls are bound. Click any region on the map to learn its nature and the requirements for passage.',
     sealType: 'spaces-map', book: 1, chapter: 'Chapters 1-5', folio: 'ff. 1r-8v',
+    image: '/images/sacred-geometry.png',
     lore: [
       { title: 'The Architecture of Three', body: 'The tripartite division of the cosmos into Three Spaces is unique to the Bruce Codex among surviving Gnostic texts. While other Sethian writings (the Apocryphon of John, the Gospel of the Egyptians) describe a binary Pleroma/Kenoma structure, the Book of Jeu introduces the First Space as a transcendent reality beyond even the Pleroma. This threefold cosmology reflects the three baptisms, the three Archon gates, the three sacred vowel-names (IAO, EIE, OYO), and the three Curtains — all organized according to the same tripartite principle that pervades the entire text.' },
       { title: 'The Light Gradient', body: 'Light diminishes as one moves outward from the First Space through the Middle to the Third. In the First Space, light is not a quality but the substance of being itself — the Ineffable radiates without radiating, illuminates without being light. In the Middle Space, light becomes visible and structured, dividing into the lights of the Four Luminaries and the 60 Treasuries. In the Third Space, light is trapped in matter — the divine sparks hidden within mortal bodies are fragments of the Treasury light that fell with Sophia. The entire cosmic structure can be understood as a gradient of light, from absolute brilliance to darkness.' }
@@ -1205,6 +1213,48 @@ const SACRED_ENTRIES: SacredEntry[] = [
     pronunciations: [
       { name: 'Pleroma', pron: 'ple-ROH-mah' },
       { name: 'Kenoma', pron: 'ken-OH-mah' }
+    ]
+  },
+
+  /* ═══════════════════════════════════════
+     SACRED GEOMETRY — The mathematical order of the Pleroma
+     ═══════════════════════════════════════ */
+  {
+    id: 'sacred-geometry', title: 'The Sacred Geometry of the Pleroma', category: 'geometry',
+    desc: 'Behind every Treasury seal, every Archon gate, and every emanation tree in the Book of Jeu lies a hidden mathematical order. The Bruce Codex diagrams are not arbitrary decorations — they encode the same sacred geometries that govern the structure of the cosmos: the Vesica Piscis that generates the Treasuries, the Flower of Life that maps the 60 Fathers into 5 ranks of 12, Metatron\'s Cube that derives the four Luminaries and their 12 sub-aeons, the Sri Yantra that mirrors the three Spaces and the descent of light, and the planetary sigils of Saturn, Jupiter, Mars, Sun, Venus, Mercury and Moon that bind the seven Archon gates. Click any figure to reveal how it underlies the Jeu cosmology.',
+    sealType: 'sacred-geometry', book: 1, chapter: 'Composite — Diagrams throughout Codex Brucianus', folio: 'passim',
+    image: '/images/sacred-geometry.png',
+    lore: [
+      { title: 'Geometry as Divine Language', body: 'In the Neoplatonic and Pythagorean tradition that underlies Sethian Gnosticism, geometry is not a human invention but the language in which the divine itself thinks. The Ineffable contemplates, and the figure of that contemplation is geometric — the circle that has no beginning, the triangle that generates multiplicity from unity, the hexagram that mirrors the descent-and-ascent of light. The Bruce Codex illustrators drew their seal-figures not as artistic flourishes but as accurate depictions of the mathematical structure they perceived in visionary states. Each circle, each line, each crossing is a statement about how the Pleroma is organized.' },
+      { title: 'The Number 60 and the Five Ranks', body: 'The most fundamental number in the Jeu cosmology is 60 — the number of Treasuries. This is not arbitrary: 60 = 5 × 12, where 5 is the number of ranks and 12 is the number of Treasuries per rank (and also the number of Aeons, zodiac signs, and disciples). The number 12 itself derives from the Vesica Piscis and the Flower of Life, where 12 circles naturally fit around 1 central circle (the "thirteenth" being the source). The 5 ranks correspond to the 5 Platonic solids (tetrahedron, cube, octahedron, dodecahedron, icosahedron) — the five regular three-dimensional forms that, according to Plato\'s Timaeus, constitute the elements of the cosmos.' },
+      { title: 'The Seven Planetary Sigils', body: 'Each of the seven planetary Archons (Saturn, Jupiter, Mars, Sun, Venus, Mercury, Moon) is associated with a traditional sigil composed of a crescent, a cross, and a circle — the three primal geometric forms. The Saturn sigil (cross + scythe) signifies limitation and time; Jupiter (stylized 4) signifies expansion and rule; Mars (circle + arrow) signifies force; the Sun (circle + dot) signifies unity; Venus (circle + cross) signifies harmony; Mercury (crescent + cross + circle) signifies mediation; the Moon (crescent) signifies reflection. To pass the planetary gates, the ascending soul must inscribe the inverse of each sigil — the geometric "unlock" that dissolves the Archon\'s claim.' },
+      { title: 'The Hexagram and the Trinity', body: 'The hexagram (Star of David / Solomon\'s Seal) is two interlocking triangles — one pointing up (ascent), one pointing down (emanation). In the Jeu cosmology, this figure maps the relationship between the three Spaces (downward triangle: Ineffable → Pleroma → Kenoma) and the threefold ascent (upward triangle: Kenoma → Pleroma → Ineffable). The center where the triangles intersect is the place of the human soul — caught between matter and spirit, called to ascend. The 6 points of the hexagram correspond to the 6 days of creation in Genesis, and the central hexagon corresponds to the Sabbath — the return to the source.' },
+      { title: 'Vesica Piscis and the Generation of Multiplicity', body: 'The Vesica Piscis — the almond-shaped overlap of two equal circles whose centers lie on each other\'s circumference — is the foundational figure of sacred geometry. From it can be derived the equilateral triangle, the square, the pentagon, and the hexagon. In the Jeu cosmology, the two circles represent the Ineffable and the Great Invisible Spirit, and the Vesica is the space in which Jeu is generated — the "third" that arises from the encounter of the first two. All subsequent multiplicity (4 Luminaries, 12 Aeons, 60 Treasuries) can be geometrically derived from this single figure through successive applications of the same rule.' }
+    ],
+    sacredText: [
+      'And I saw that the Treasuries were not scattered at random, but arranged according to a most ancient geometry — the geometry by which the Ineffable contemplated itself and the worlds arose.',
+      'The number of the Treasuries is sixty, which is five times twelve. Five is the number of the ranks, and twelve is the number of the Aeons and of the watchers about each Father. From this single number, the whole order of the Pleroma is unfolded.',
+      'Each seal that I have shown you is not a drawing, but a figure of the truth. The circles are the Treasuries; the lines are the emanations; the points are the watchers. Whoever understands the geometry understands the path of ascent.',
+      'The seven sigils of the Archons are the inverse of the seven seals of the Luminaries. What is closed below is opened above; what is bound in matter is loosed in spirit. The initiate must learn to draw both, for to know one without the other is to be trapped between the worlds.'
+    ],
+    elements: [
+      { id: 'sg-flower', label: 'The Flower of Life', brief: '19 circles — generates the 5×12 Treasury grid', detail: 'The Flower of Life is the foundational figure of sacred geometry: 19 equal circles arranged in a hexagonal pattern, each circle intersecting six others. From this single pattern can be derived the five Platonic solids, the Metatron\'s Cube, the Kabbalistic Tree of Life, and — in the Jeu cosmology — the arrangement of the 60 Treasuries (5 rings of 12). The 19 circles also correspond to the 19 = 1 + 6 + 12 structure of the Pleroma: 1 Ineffable + 6 Great Invisible + 12 Aeons.' },
+      { id: 'sg-metatron', label: 'Metatron\'s Cube', brief: '13 circles — derives the 4 Luminaries + 12 Aeons', detail: 'Metatron\'s Cube is constructed by connecting the centers of 13 circles arranged in a Fruit of Life pattern. The 13 lines of connection generate all five Platonic solids simultaneously. In the Jeu cosmology, the 13 circles correspond to the 13 = 1 (Jeu) + 4 (Luminaries) + 8 (sub-aeonic structure) and the lines represent the emanative relations that bind them. The cube is named for Metatron, the angelic mediator of the divine presence — a role analogous to Jeu the True God in the Bruce Codex.' },
+      { id: 'sg-sriyantra', label: 'The Sri Yantra', brief: '9 interlocking triangles — maps the Three Spaces', detail: 'The Sri Yantra is composed of 9 interlocking triangles: 4 pointing upward (Shiva, the masculine principle of emanation) and 5 pointing downward (Shakti, the feminine principle of manifestation), generating 43 smaller triangles around a central bindu point. Though Hindu in origin, the figure encodes a universal logic of descent-and-ascent that maps cleanly onto the Jeu Three Spaces: the bindu is the Ineffable, the innermost triangle is the First Space boundary, the middle ring is the Pleroma with its 60 Treasuries (the 43 sub-triangles), and the outer square gate is the Third Space with its four Archon guardians.' },
+      { id: 'sg-vesica', label: 'The Vesica Piscis', brief: 'Two circles — the generative figure of multiplicity', detail: 'The Vesica Piscis is the almond-shaped lens formed where two equal circles overlap, each passing through the other\'s center. From this single figure, the equilateral triangle, square, pentagon, and hexagon can all be constructed with compass and straightedge — making it the root of all classical geometry. In the Jeu cosmology it represents the moment of first emanation: the Ineffable (circle 1) contemplates an "other" (circle 2), and the Vesica is the space in which Jeu the True God is generated as the third principle. All subsequent multiplicity is geometrically implicit in this overlap.' },
+      { id: 'sg-hexagram', label: 'The Hexagram', brief: 'Two triangles — ascent and emanation', detail: 'The hexagram (Star of David / Solomon\'s Seal) interlocks two equilateral triangles: one pointing upward (the path of ascent) and one pointing downward (the path of emanation). The downward triangle traces the descent of light from Ineffable → Pleroma → Kenoma; the upward triangle traces the soul\'s return from Kenoma → Pleroma → Ineffable. Their intersection forms a hexagon — the six directions of manifestation — at whose center sits the human soul, mediator between above and below. The six outer points correspond to the six days of creation and the six "ranks" of being (Ineffable, Great Invisible, Jeu, Luminaries, Aeons, Fathers).' },
+      { id: 'sg-pentagram', label: 'The Pentagram', brief: 'Five points — the human microcosm', detail: 'The pentagram is a five-pointed star drawn with a single unbroken line — a property that made it the symbol of wholeness and integrity in the Pythagorean tradition. Its internal proportions embody the Golden Ratio (φ ≈ 1.618), the same proportion that governs the spiral of galaxies, the arrangement of leaves on a stem, and the structure of the human body. In the Jeu cosmology, the five points correspond to the five baptisms (water, fire, spirit, light, mystery) and the five ranks of Treasuries. The initiate who has received all five seals is, geometrically and spiritually, a pentagram — a self-contained circuit of light.' },
+      { id: 'sg-heptagram', label: 'The Heptagram (7-point)', brief: 'Seven points — the planetary Archons', detail: 'The heptagram is a seven-pointed star drawn in one of two forms: {7/2} (connecting every second point) or {7/3} (every third point). Both forms encode the seven classical planets — Saturn, Jupiter, Mars, Sun, Venus, Mercury, Moon — and the seven Archon gates the soul must pass. In Gnostic ritual practice, the {7/3} heptagram is inscribed around the initiate\'s navel as a protective seal against the planetary powers, while the {7/2} form is drawn on the forehead as a sign of having transcended them. The 7-day week and the 7 colors of the rainbow are further manifestations of this cosmic number.' },
+      { id: 'sg-octagram', label: 'The Octagram (8-point)', brief: 'Eight points — the resurrection and the Ogdoas', detail: 'The octagram (eight-pointed star) is formed by two overlapping squares rotated 45° to each other — a figure known in some traditions as the Star of Ishtar or the Rub el Hizb. In Gnostic numerology, 8 is the number of resurrection and transcendence — the eighth day beyond the seven days of creation, the realm of the Ogdoas (the eighth heavenly sphere beyond the seven planets). In the Jeu cosmology, the octagram marks the boundary between the planetary Archons (7) and the Pleroma (the realm of the 8th day). The 8 points also correspond to the 8 directions of manifestation (N, NE, E, SE, S, SW, W, NW) and the 8 Beatitudes of the Gnostic path.' },
+      { id: 'sg-planets', label: 'The Seven Planetary Sigils', brief: '♄ ♃ ♂ ☉ ♀ ☿ ☽ — Archon gates', detail: 'The seven traditional planetary sigils — Saturn (♄: cross + scythe), Jupiter (♃: stylized 4), Mars (♂: circle + arrow), Sun (☉: circle + dot), Venus (♀: circle + cross), Mercury (☿: crescent + cross + circle), Moon (☽: crescent) — are not arbitrary symbols but compressed geometric formulas. Each combines the three primal forms (circle, cross, crescent) in a unique configuration that "keys" the corresponding Archon. To pass a planetary gate, the initiate inscribes the inverse sigil — geometrically undoing the Archon\'s claim by reversing its symbol. This is the secret meaning of "knowing the names" of the Archons: the name IS the sigil, and the sigil IS the key.' },
+      { id: 'sg-zodiac', label: 'The Twelve Zodiac Gates', brief: '♈ ♉ ♊ ♋ ♌ ♍ ♎ ♏ ♐ ♑ ♒ ♓ — 12 gates of fate', detail: 'The twelve signs of the zodiac — Aries (♈), Taurus (♉), Gemini (♊), Cancer (♋), Leo (♌), Virgo (♍), Libra (♎), Scorpio (♏), Sagittarius (♐), Capricorn (♑), Aquarius (♒), Pisces (♓) — correspond to the twelve gates through which incarnating souls pass on their descent into matter, and through which ascending souls must pass in reverse. The Jeu tradition names the twelve Archons of these gates: Arioth, Thaum, Gair, Kark, Leon, Parthen, Mozn, Akrab, Qeshet, Gadi, Deli, Nuni. Each gate tests a specific virtue, and each must be opened with its specific cipher.' },
+      { id: 'sg-elements', label: 'The Four Alchemical Elements', brief: '🜁 🜂 🜃 🜄 — Fire, Air, Earth, Water', detail: 'The four alchemical element symbols — Fire (🜂: upward triangle), Water (🜄: downward triangle), Air (🜁: upward triangle with horizontal line), Earth (🜃: downward triangle with horizontal line) — encode the two fundamental axes of manifestation: hot/cold (triangle orientation) and dry/wet (presence of the horizontal line). In the Jeu baptismal rite, Fire purifies the soul, Water cleanses the body, Air (Spirit) opens the mind, and Earth (the Mystery) grounds the divine in matter. Together they form the material substrate of the Third Space and the ritual substrate of the five seals.' }
+    ],
+    pronunciations: [
+      { name: 'Vesica Piscis', pron: 'veh-SEE-kah PIS-kis' },
+      { name: 'Sri Yantra', pron: 'shree YAN-trah' },
+      { name: 'Heptagram', pron: 'HEP-tah-gram' },
+      { name: 'Octagram', pron: 'OK-tah-gram' }
     ]
   },
 
@@ -1409,6 +1459,250 @@ const PARCH = '#ede0be'
 
 function SvgCross({ x, y, size, color }: { x: number; y: number; size: number; color: string }) {
   return <path d={`M${x} ${y-size}L${x+size*0.3} ${y-size}L${x+size*0.3} ${y-size*0.3}L${x+size} ${y-size*0.3}L${x+size} ${y+size*0.3}L${x+size*0.3} ${y+size*0.3}L${x+size*0.3} ${y+size}L${x} ${y+size}L${x-size*0.3} ${y+size}L${x-size*0.3} ${y+size*0.3}L${x-size} ${y+size*0.3}L${x-size} ${y-size*0.3}L${x-size*0.3} ${y-size*0.3}Z`} fill={color} stroke="none" />
+}
+
+/* ═══════════════════════════════════════════════════
+   SACRED GEOMETRY & SIGIL HELPERS
+   ═══════════════════════════════════════════════════ */
+
+/* ── Star polygon {n/k} - true connected-star version ── */
+function starPolygonPath(cx: number, cy: number, r: number, n: number, k: number, rotation: number = -90): string {
+  const pts: { x: number; y: number }[] = []
+  for (let i = 0; i < n; i++) {
+    const a = (rotation + i * 360 / n) * Math.PI / 180
+    pts.push({ x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r })
+  }
+  const order: string[] = []
+  for (let i = 0; i < n; i++) {
+    const idx = (i * k) % n
+    order.push(`${pts[idx].x},${pts[idx].y}`)
+  }
+  return order.join(' ')
+}
+
+/* ── Hexagram (Star of David / Solomon's Seal) ── */
+function Hexagram({ cx, cy, r, stroke, strokeWidth = 1.5, fill = 'none' }: { cx: number; cy: number; r: number; stroke: string; strokeWidth?: number; fill?: string }) {
+  // Two overlapping equilateral triangles
+  const tri1 = `${cx},${cy - r} ${cx + r * 0.866},${cy + r * 0.5} ${cx - r * 0.866},${cy + r * 0.5}`
+  const tri2 = `${cx},${cy + r} ${cx + r * 0.866},${cy - r * 0.5} ${cx - r * 0.866},${cy - r * 0.5}`
+  return <g pointerEvents="none">
+    <polygon points={tri1} fill={fill} stroke={stroke} strokeWidth={strokeWidth} />
+    <polygon points={tri2} fill={fill} stroke={stroke} strokeWidth={strokeWidth} />
+  </g>
+}
+
+/* ── Pentagram (5-pointed star, single-line {5/2}) ── */
+function Pentagram({ cx, cy, r, stroke, strokeWidth = 1.5 }: { cx: number; cy: number; r: number; stroke: string; strokeWidth?: number }) {
+  return <polygon points={starPolygonPath(cx, cy, r, 5, 2)} fill="none" stroke={stroke} strokeWidth={strokeWidth} pointerEvents="none" />
+}
+
+/* ── Heptagram {7/3} — the seven planetary Archons ── */
+function Heptagram({ cx, cy, r, stroke, strokeWidth = 1.5 }: { cx: number; cy: number; r: number; stroke: string; strokeWidth?: number }) {
+  return <polygon points={starPolygonPath(cx, cy, r, 7, 3)} fill="none" stroke={stroke} strokeWidth={strokeWidth} pointerEvents="none" />
+}
+
+/* ── Octagram (8-pointed star, two squares) ── */
+function Octagram({ cx, cy, r, stroke, strokeWidth = 1.5 }: { cx: number; cy: number; r: number; stroke: string; strokeWidth?: number }) {
+  const sq1 = `${cx + r * 0.707},${cy - r * 0.707} ${cx + r * 0.707},${cy + r * 0.707} ${cx - r * 0.707},${cy + r * 0.707} ${cx - r * 0.707},${cy - r * 0.707}`
+  const sq2 = `${cx},${cy - r} ${cx + r},${cy} ${cx},${cy + r} ${cx - r},${cy}`
+  return <g pointerEvents="none">
+    <polygon points={sq1} fill="none" stroke={stroke} strokeWidth={strokeWidth} />
+    <polygon points={sq2} fill="none" stroke={stroke} strokeWidth={strokeWidth} />
+  </g>
+}
+
+/* ── Vesica Piscis — two overlapping circles ── */
+function VesicaPiscis({ cx, cy, r, stroke, strokeWidth = 1.5 }: { cx: number; cy: number; r: number; stroke: string; strokeWidth?: number }) {
+  return <g pointerEvents="none">
+    <circle cx={cx - r / 2} cy={cy} r={r} fill="none" stroke={stroke} strokeWidth={strokeWidth} />
+    <circle cx={cx + r / 2} cy={cy} r={r} fill="none" stroke={stroke} strokeWidth={strokeWidth} />
+  </g>
+}
+
+/* ── Flower of Life — 19 equal overlapping circles ── */
+function FlowerOfLife({ cx, cy, r, stroke, strokeWidth = 1 }: { cx: number; cy: number; r: number; stroke: string; strokeWidth?: number }) {
+  // Central circle + 6 inner ring + 12 outer ring (intersections)
+  const centers: { x: number; y: number }[] = [{ x: cx, y: cy }]
+  // First ring of 6
+  for (let i = 0; i < 6; i++) {
+    const a = (i * 60) * Math.PI / 180
+    centers.push({ x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r })
+  }
+  // Second ring of 12 — at distance r*sqrt(3)
+  for (let i = 0; i < 6; i++) {
+    const a = (i * 60 + 30) * Math.PI / 180
+    centers.push({ x: cx + Math.cos(a) * r * 1.732, y: cy + Math.sin(a) * r * 1.732 })
+  }
+  // Outermost ring of 6 corners
+  for (let i = 0; i < 6; i++) {
+    const a = (i * 60) * Math.PI / 180
+    centers.push({ x: cx + Math.cos(a) * r * 1.732, y: cy + Math.sin(a) * r * 1.732 })
+  }
+  return <g pointerEvents="none">
+    {centers.map((c, i) => <circle key={i} cx={c.x} cy={c.y} r={r} fill="none" stroke={stroke} strokeWidth={strokeWidth} />)}
+  </g>
+}
+
+/* ── Metatron's Cube — 13 circles + connecting lines ── */
+function MetatronsCube({ cx, cy, r, stroke, strokeWidth = 1, lineOpacity = 0.6 }: { cx: number; cy: number; r: number; stroke: string; strokeWidth?: number; lineOpacity?: number }) {
+  // Fruit of Life: 1 center + 6 inner ring + 6 outer ring = 13
+  const centers: { x: number; y: number }[] = [{ x: cx, y: cy }]
+  for (let i = 0; i < 6; i++) {
+    const a = (i * 60) * Math.PI / 180
+    centers.push({ x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r })
+  }
+  for (let i = 0; i < 6; i++) {
+    const a = (i * 60) * Math.PI / 180
+    centers.push({ x: cx + Math.cos(a) * r * 2, y: cy + Math.sin(a) * r * 2 })
+  }
+  const lines: React.ReactElement[] = []
+  for (let i = 0; i < centers.length; i++) {
+    for (let j = i + 1; j < centers.length; j++) {
+      lines.push(<line key={`${i}-${j}`} x1={centers[i].x} y1={centers[i].y} x2={centers[j].x} y2={centers[j].y}
+        stroke={stroke} strokeWidth={strokeWidth * 0.4} opacity={lineOpacity} pointerEvents="none" />)
+    }
+  }
+  return <g pointerEvents="none">
+    {lines}
+    {centers.map((c, i) => <circle key={i} cx={c.x} cy={c.y} r={r * 0.32} fill="none" stroke={stroke} strokeWidth={strokeWidth} />)}
+  </g>
+}
+
+/* ── Sri Yantra — 9 interlocking triangles (simplified) ── */
+function SriYantra({ cx, cy, r, stroke, strokeWidth = 1.2 }: { cx: number; cy: number; r: number; stroke: string; strokeWidth?: number }) {
+  // 4 upward triangles + 5 downward triangles, scaled progressively
+  const up = (size: number, yOffset: number) =>
+    `${cx},${cy - size + yOffset} ${cx + size * 0.866},${cy + size * 0.5 + yOffset} ${cx - size * 0.866},${cy + size * 0.5 + yOffset}`
+  const dn = (size: number, yOffset: number) =>
+    `${cx},${cy + size + yOffset} ${cx + size * 0.866},${cy - size * 0.5 + yOffset} ${cx - size * 0.866},${cy - size * 0.5 + yOffset}`
+  return <g pointerEvents="none">
+    {/* Largest downward (Shakti) triangle */}
+    <polygon points={dn(r, 0)} fill="none" stroke={stroke} strokeWidth={strokeWidth} />
+    {/* Largest upward (Shiva) triangle */}
+    <polygon points={up(r * 0.85, r * 0.05)} fill="none" stroke={stroke} strokeWidth={strokeWidth} />
+    {/* Middle pair */}
+    <polygon points={dn(r * 0.7, -r * 0.05)} fill="none" stroke={stroke} strokeWidth={strokeWidth} />
+    <polygon points={up(r * 0.55, r * 0.1)} fill="none" stroke={stroke} strokeWidth={strokeWidth} />
+    {/* Inner pair */}
+    <polygon points={dn(r * 0.42, -r * 0.1)} fill="none" stroke={stroke} strokeWidth={strokeWidth} />
+    <polygon points={up(r * 0.3, r * 0.12)} fill="none" stroke={stroke} strokeWidth={strokeWidth} />
+    {/* Smallest downward */}
+    <polygon points={dn(r * 0.2, -r * 0.12)} fill="none" stroke={stroke} strokeWidth={strokeWidth} />
+    {/* Bindu (center point) */}
+    <circle cx={cx} cy={cy + r * 0.05} r={2} fill={stroke} />
+    {/* Outer square frame */}
+    <rect x={cx - r * 1.05} y={cy - r * 1.05} width={r * 2.1} height={r * 2.1} fill="none" stroke={stroke} strokeWidth={strokeWidth * 0.6} />
+    {/* Four gate markers on outer square */}
+    {[[0, -1], [0, 1], [-1, 0], [1, 0]].map(([dx, dy], i) => (
+      <path key={i} d={`M${cx + dx * r * 1.05 - 4 * dy},${cy + dy * r * 1.05 + 4 * dx} L${cx + dx * r * 1.05},${cy + dy * r * 1.05} L${cx + dx * r * 1.05 + 4 * dy},${cy + dy * r * 1.05 - 4 * dx}`} fill="none" stroke={stroke} strokeWidth={strokeWidth * 0.6} />
+    ))}
+  </g>
+}
+
+/* ── Planetary Sigil Components (SVG paths for guaranteed rendering) ── */
+/* Each draws the classical astronomical symbol for the planet, accurate to Wikipedia. */
+
+function SaturnSigil({ cx, cy, size, color }: { cx: number; cy: number; size: number; color: string }) {
+  // Cross + scythe: vertical line with cross-bar at top, scythe curve at bottom
+  const s = size
+  return <g stroke={color} strokeWidth={1.4} fill="none" pointerEvents="none">
+    <path d={`M${cx} ${cy - s * 0.8} L${cx} ${cy + s * 0.4}`} />
+    <path d={`M${cx - s * 0.35} ${cy - s * 0.4} L${cx + s * 0.35} ${cy - s * 0.4}`} />
+    {/* Scythe: curve from bottom going right and up */}
+    <path d={`M${cx} ${cy + s * 0.4} Q${cx + s * 0.6} ${cy + s * 0.7} ${cx + s * 0.7} ${cy + s * 0.2}`} />
+  </g>
+}
+
+function JupiterSigil({ cx, cy, size, color }: { cx: number; cy: number; size: number; color: string }) {
+  // Stylized "4": vertical line + horizontal cross + curl (looks like ♃)
+  const s = size
+  return <g stroke={color} strokeWidth={1.4} fill="none" pointerEvents="none">
+    <path d={`M${cx - s * 0.5} ${cy - s * 0.6} L${cx - s * 0.5} ${cy + s * 0.6}`} />
+    <path d={`M${cx - s * 0.5} ${cy - s * 0.1} L${cx + s * 0.5} ${cy - s * 0.1}`} />
+    <path d={`M${cx + s * 0.5} ${cy - s * 0.1} Q${cx + s * 0.7} ${cy - s * 0.2} ${cx + s * 0.5} ${cy - s * 0.5}`} />
+  </g>
+}
+
+function MarsSigil({ cx, cy, size, color }: { cx: number; cy: number; size: number; color: string }) {
+  // Circle + arrow: circle on left, arrow pointing upper-right
+  const s = size
+  return <g stroke={color} strokeWidth={1.4} fill="none" pointerEvents="none">
+    <circle cx={cx - s * 0.25} cy={cy + s * 0.1} r={s * 0.35} />
+    <path d={`M${cx + s * 0.05} ${cy - s * 0.1} L${cx + s * 0.6} ${cy - s * 0.65}`} />
+    <path d={`M${cx + s * 0.35} ${cy - s * 0.65} L${cx + s * 0.6} ${cy - s * 0.65} L${cx + s * 0.6} ${cy - s * 0.4}`} />
+  </g>
+}
+
+function SunSigil({ cx, cy, size, color }: { cx: number; cy: number; size: number; color: string }) {
+  // Circle with center dot
+  const s = size
+  return <g stroke={color} strokeWidth={1.4} fill="none" pointerEvents="none">
+    <circle cx={cx} cy={cy} r={s * 0.5} />
+    <circle cx={cx} cy={cy} r={1.4} fill={color} />
+  </g>
+}
+
+function VenusSigil({ cx, cy, size, color }: { cx: number; cy: number; size: number; color: string }) {
+  // Circle + cross below (♀)
+  const s = size
+  return <g stroke={color} strokeWidth={1.4} fill="none" pointerEvents="none">
+    <circle cx={cx} cy={cy - s * 0.15} r={s * 0.35} />
+    <path d={`M${cx} ${cy + s * 0.2} L${cx} ${cy + s * 0.8}`} />
+    <path d={`M${cx - s * 0.3} ${cy + s * 0.5} L${cx + s * 0.3} ${cy + s * 0.5}`} />
+  </g>
+}
+
+function MercurySigil({ cx, cy, size, color }: { cx: number; cy: number; size: number; color: string }) {
+  // Crescent on top + circle in middle + cross below (☿)
+  const s = size
+  return <g stroke={color} strokeWidth={1.4} fill="none" pointerEvents="none">
+    <path d={`M${cx - s * 0.45} ${cy - s * 0.55} Q${cx} ${cy - s * 0.85} ${cx + s * 0.45} ${cy - s * 0.55}`} />
+    <circle cx={cx} cy={cy - s * 0.05} r={s * 0.3} />
+    <path d={`M${cx} ${cy + s * 0.25} L${cx} ${cy + s * 0.8}`} />
+    <path d={`M${cx - s * 0.3} ${cy + s * 0.55} L${cx + s * 0.3} ${cy + s * 0.55}`} />
+  </g>
+}
+
+function MoonSigil({ cx, cy, size, color }: { cx: number; cy: number; size: number; color: string }) {
+  // Crescent moon
+  const s = size
+  return <g pointerEvents="none">
+    <path d={`M${cx + s * 0.3} ${cy - s * 0.55} A${s * 0.55} ${s * 0.55} 0 1 0 ${cx + s * 0.3} ${cy + s * 0.55} A${s * 0.4} ${s * 0.4} 0 1 1 ${cx + s * 0.3} ${cy - s * 0.55} Z`}
+      fill={color} stroke={color} strokeWidth={0.5} />
+  </g>
+}
+
+/* ── Dispatcher for planetary sigils ── */
+const PLANETARY_SIGILS: Record<string, React.FC<{ cx: number; cy: number; size: number; color: string }>> = {
+  Saturn: SaturnSigil, Jupiter: JupiterSigil, Mars: MarsSigil, Sun: SunSigil,
+  Venus: VenusSigil, Mercury: MercurySigil, Moon: MoonSigil
+}
+
+/* ── Alchemical Element Symbols ── */
+function FireGlyph({ cx, cy, size, color }: { cx: number; cy: number; size: number; color: string }) {
+  const s = size
+  return <polygon points={`${cx},${cy - s} ${cx + s * 0.866},${cy + s * 0.5} ${cx - s * 0.866},${cy + s * 0.5}`} fill="none" stroke={color} strokeWidth={1.5} pointerEvents="none" />
+}
+function WaterGlyph({ cx, cy, size, color }: { cx: number; cy: number; size: number; color: string }) {
+  const s = size
+  return <polygon points={`${cx},${cy + s} ${cx + s * 0.866},${cy - s * 0.5} ${cx - s * 0.866},${cy - s * 0.5}`} fill="none" stroke={color} strokeWidth={1.5} pointerEvents="none" />
+}
+function AirGlyph({ cx, cy, size, color }: { cx: number; cy: number; size: number; color: string }) {
+  const s = size
+  return <g pointerEvents="none">
+    <polygon points={`${cx},${cy - s} ${cx + s * 0.866},${cy + s * 0.5} ${cx - s * 0.866},${cy + s * 0.5}`} fill="none" stroke={color} strokeWidth={1.5} />
+    <line x1={cx - s * 0.5} y1={cy} x2={cx + s * 0.5} y2={cy} stroke={color} strokeWidth={1.5} />
+  </g>
+}
+function EarthGlyph({ cx, cy, size, color }: { cx: number; cy: number; size: number; color: string }) {
+  const s = size
+  return <g pointerEvents="none">
+    <polygon points={`${cx},${cy + s} ${cx + s * 0.866},${cy - s * 0.5} ${cx - s * 0.866},${cy - s * 0.5}`} fill="none" stroke={color} strokeWidth={1.5} />
+    <line x1={cx - s * 0.5} y1={cy} x2={cx + s * 0.5} y2={cy} stroke={color} strokeWidth={1.5} />
+  </g>
+}
+const ELEMENT_GLYPHS: Record<string, React.FC<{ cx: number; cy: number; size: number; color: string }>> = {
+  Fire: FireGlyph, Water: WaterGlyph, Air: AirGlyph, Earth: EarthGlyph
 }
 
 /* ── Cross-and-Circle Seal ── */
@@ -2080,37 +2374,85 @@ function ArchonGateDiagram({ onClick, selectedId, elements }: { onClick: (id: st
 /* ── Baptism Diagram ── */
 function BaptismDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
   const cx = 250
+  // Map each baptism to an alchemical element + sacred geometry sigil
   const baptisms = [
-    { id: 'bt-water', label: 'Water', y: 80, color: '#3a6a8a', inv: 'IAO SABAOTH' },
-    { id: 'bt-fire', label: 'Fire', y: 165, color: '#8a3a20', inv: 'ADONAI ELOHIM' },
-    { id: 'bt-spirit', label: 'Spirit', y: 250, color: '#6a5030', inv: 'EIE AZAPHAX' },
-    { id: 'bt-light', label: 'Light', y: 335, color: GOLD2, inv: 'GREAT INVISIBLE' },
-    { id: 'bt-mystery', label: 'Mystery', y: 420, color: INK, inv: 'THE INEFFABLE' }
+    { id: 'bt-water', label: 'Water', y: 80, color: '#3a6a8a', inv: 'IAO SABAOTH', element: 'Water', sigil: 'hexagram' },
+    { id: 'bt-fire', label: 'Fire', y: 165, color: '#8a3a20', inv: 'ADONAI ELOHIM', element: 'Fire', sigil: 'pentagram' },
+    { id: 'bt-spirit', label: 'Spirit', y: 250, color: '#6a5030', inv: 'EIE AZAPHAX', element: 'Air', sigil: 'heptagram' },
+    { id: 'bt-light', label: 'Light', y: 335, color: GOLD2, inv: 'GREAT INVISIBLE', element: 'Sun', sigil: 'octagram' },
+    { id: 'bt-mystery', label: 'Mystery', y: 420, color: INK, inv: 'THE INEFFABLE', element: 'Earth', sigil: 'vesica' }
   ]
+  const renderSigil = (type: string, x: number, y: number, r: number, color: string) => {
+    switch (type) {
+      case 'hexagram': return <Hexagram cx={x} cy={y} r={r} stroke={color} strokeWidth={1.1} />
+      case 'pentagram': return <Pentagram cx={x} cy={y} r={r} stroke={color} strokeWidth={1.1} />
+      case 'heptagram': return <Heptagram cx={x} cy={y} r={r} stroke={color} strokeWidth={1.1} />
+      case 'octagram': return <Octagram cx={x} cy={y} r={r} stroke={color} strokeWidth={1.1} />
+      case 'vesica': return <VesicaPiscis cx={x} cy={y} r={r * 0.9} stroke={color} strokeWidth={1.1} />
+      default: return null
+    }
+  }
   return (
     <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
-      <text x={cx} y={30} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={13} fill={INK} letterSpacing={2}>THE FIVE BAPTISMS</text>
+      <text x={cx} y={30} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={13} fill={INK} letterSpacing={3}>THE FIVE BAPTISMS</text>
+      <text x={cx} y={45} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">Five elements · Five seals · Five gates of ascent</text>
+      {/* Central axis with heptagram ornament */}
       <line x1={cx} y1={55} x2={cx} y2={455} stroke={GOLD2} strokeWidth={1.5} strokeDasharray="6,3" pointerEvents="none" />
+      <Pentagram cx={cx} cy={55} r={8} stroke={GOLD3} strokeWidth={0.8} />
+      <Pentagram cx={cx} cy={455} r={8} stroke={GOLD3} strokeWidth={0.8} />
+
       {baptisms.map((b, i) => {
         const r = 26 + i * 3
         const el = elements.find(e => e.id === b.id)
+        const isSelected = selectedId === b.id
+        const ElementGlyph = b.element ? ELEMENT_GLYPHS[b.element] : null
+        const PlanetGlyph = b.element === 'Sun' ? PLANETARY_SIGILS.Sun : null
         return (
           <g key={i}>
-            {Array.from({ length: i + 1 }, (_, ri) => (
-              <circle key={ri} cx={cx} cy={b.y} r={r + ri * 10} fill="none" stroke={ri === 0 ? b.color : INK3} strokeWidth={ri === 0 ? 2 : 0.8} pointerEvents="none" />
-            ))}
-            <circle cx={cx} cy={b.y} r={r} fill={PARCH} stroke={b.color} strokeWidth={2.5}
-              className={`svg-clickable${selectedId === b.id ? ' selected' : ''}`}
+            {/* Outer ornamental rings — now sigil-bearing instead of plain circles */}
+            {Array.from({ length: i + 1 }, (_, ri) => {
+              const ringR = r + ri * 10
+              return <g key={ri} pointerEvents="none">
+                <circle cx={cx} cy={b.y} r={ringR} fill="none" stroke={ri === 0 ? b.color : INK3} strokeWidth={ri === 0 ? 2 : 0.8} />
+                {/* Tick marks around the outermost ring (like a magic circle) */}
+                {ri === 0 && Array.from({ length: 24 }, (_, ti) => {
+                  const a = (ti * 15) * Math.PI / 180
+                  const tickLen = ti % 3 === 0 ? 4 : 2
+                  return <line key={ti}
+                    x1={cx + Math.cos(a) * (ringR + 1)} y1={b.y + Math.sin(a) * (ringR + 1)}
+                    x2={cx + Math.cos(a) * (ringR + 1 + tickLen)} y2={b.y + Math.sin(a) * (ringR + 1 + tickLen)}
+                    stroke={b.color} strokeWidth={0.5} opacity={0.7} />
+                })}
+                {/* Inner sigil on second ring */}
+                {ri === 1 && renderSigil(b.sigil, cx, b.y, ringR - 2, INK3)}
+              </g>
+            })}
+            {/* Main baptismal seal */}
+            <circle cx={cx} cy={b.y} r={r} fill={isSelected ? 'rgba(200,168,74,0.15)' : PARCH} stroke={b.color} strokeWidth={isSelected ? 3 : 2.5}
+              className={`svg-clickable${isSelected ? ' selected' : ''}`}
               onClick={() => { if (el) onClick(b.id, el.label, el.detail) }} />
-            <text x={cx} y={b.y + 5} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={15} fill={b.color}>{i + 1}</text>
-            <text x={cx + r + 15} y={b.y - 2} fontFamily="Cinzel, serif" fontSize={10} fill={INK2} letterSpacing={1}>{i + 1}. {b.label}</text>
-            <text x={cx + r + 15} y={b.y + 12} fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">{b.inv}</text>
-            <text x={cx - r - 15} y={b.y + 4} textAnchor="end" fontFamily="Cinzel, serif" fontSize={8} fill={INK3}>Seal {i + 1}</text>
-            {i < 4 && <path d={`M${cx} ${b.y + r + 8} L${cx - 4} ${b.y + r + 16} M${cx} ${b.y + r + 8} L${cx + 4} ${b.y + r + 16}`} stroke={GOLD2} strokeWidth={1.5} pointerEvents="none" />}
+            {/* Element glyph inscribed in the seal (replaces plain number) */}
+            {ElementGlyph && <ElementGlyph cx={cx} cy={b.y} size={r * 0.5} color={b.color} />}
+            {PlanetGlyph && !ElementGlyph && <PlanetGlyph cx={cx} cy={b.y} size={r * 0.5} color={b.color} />}
+            {/* Small number badge at top */}
+            <circle cx={cx} cy={b.y - r - 4} r={6} fill={INK} stroke={b.color} strokeWidth={0.8} pointerEvents="none" />
+            <text x={cx} y={b.y - r - 1} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={GOLD3} pointerEvents="none">{i + 1}</text>
+            {/* Right side: label + invocation */}
+            <text x={cx + r + 18} y={b.y - 6} fontFamily="Cinzel, serif" fontSize={10} fill={INK2} letterSpacing={1}>{i + 1}. {b.label.toUpperCase()}</text>
+            <text x={cx + r + 18} y={b.y + 6} fontFamily="Libre Baskerville, serif" fontSize={7.5} fill={INK3} fontStyle="italic">"{b.inv}"</text>
+            <text x={cx + r + 18} y={b.y + 18} fontFamily="Cinzel, serif" fontSize={7} fill={b.color} letterSpacing={1.5}>{b.element.toUpperCase()} · {b.sigil.toUpperCase()}</text>
+            {/* Left side: seal marker + element name */}
+            <text x={cx - r - 15} y={b.y - 4} textAnchor="end" fontFamily="Cinzel, serif" fontSize={8} fill={INK3} letterSpacing={1}>SEAL {i + 1}</text>
+            <text x={cx - r - 15} y={b.y + 8} textAnchor="end" fontFamily="Libre Baskerville, serif" fontSize={7} fill={b.color} fontStyle="italic">Element: {b.element}</text>
+            {/* Down arrow to next baptism */}
+            {i < 4 && <g pointerEvents="none">
+              <path d={`M${cx} ${b.y + r + 14} L${cx - 5} ${b.y + r + 24} M${cx} ${b.y + r + 14} L${cx + 5} ${b.y + r + 24}`} stroke={GOLD2} strokeWidth={1.5} />
+              <circle cx={cx} cy={b.y + r + 30} r={1.5} fill={GOLD3} />
+            </g>}
           </g>
         )
       })}
-      <text x={cx} y={488} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK3} letterSpacing={2}>UNTO THE TREASURY OF LIGHT</text>
+      <text x={cx} y={488} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK3} letterSpacing={3}>UNTO THE TREASURY OF LIGHT</text>
     </svg>
   )
 }
@@ -2759,24 +3101,68 @@ function AscentDiagram({ onClick, selectedId, elements }: { onClick: (id: string
 /* ── Liturgy Diagram ── */
 function LiturgyDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
   const cx = 250
+  // Each rite card gets a distinct sigil based on its index (rotating through sacred geometry shapes)
+  const cardSigils = ['pentagram', 'hexagram', 'heptagram', 'octagram', 'vesica', 'flower']
+  const renderCardSigil = (type: string, x: number, y: number, color: string) => {
+    const r = 14
+    switch (type) {
+      case 'pentagram': return <Pentagram cx={x} cy={y} r={r} stroke={color} strokeWidth={1.2} />
+      case 'hexagram': return <Hexagram cx={x} cy={y} r={r} stroke={color} strokeWidth={1.2} />
+      case 'heptagram': return <Heptagram cx={x} cy={y} r={r} stroke={color} strokeWidth={1.2} />
+      case 'octagram': return <Octagram cx={x} cy={y} r={r} stroke={color} strokeWidth={1.2} />
+      case 'vesica': return <VesicaPiscis cx={x} cy={y} r={r * 0.85} stroke={color} strokeWidth={1.2} />
+      case 'flower': return <FlowerOfLife cx={x} cy={y} r={r * 0.42} stroke={color} strokeWidth={0.8} />
+      default: return null
+    }
+  }
   return (
     <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
-      <text x={cx} y={25} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK} letterSpacing={2}>THE SACRED LITURGY</text>
-      <rect x={60} y={45} width={380} height={420} fill="none" stroke={INK3} strokeWidth={1.5} pointerEvents="none" />
-      <rect x={68} y={53} width={364} height={404} fill="none" stroke={GOLD2} strokeWidth={0.8} pointerEvents="none" />
+      <text x={cx} y={25} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK} letterSpacing={3}>THE SACRED LITURGY</text>
+      <text x={cx} y={40} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">Rites of the Five Seals</text>
+
+      {/* Outer frame with ornate corners */}
+      <rect x={60} y={50} width={380} height={415} fill="none" stroke={INK3} strokeWidth={1.5} pointerEvents="none" />
+      <rect x={68} y={58} width={364} height={399} fill="none" stroke={GOLD2} strokeWidth={0.8} pointerEvents="none" />
+      {/* Ornate corner flourishes */}
+      {[[68, 58], [432, 58], [68, 457], [432, 457]].map(([x, y], i) => {
+        const dx = x < 250 ? 1 : -1
+        const dy = y < 250 ? 1 : -1
+        return <g key={i} pointerEvents="none">
+          <path d={`M${x + dx * 14} ${y} Q${x + dx * 4} ${y} ${x} ${y + dy * 4} L${x} ${y + dy * 14}`} fill="none" stroke={GOLD3} strokeWidth={1} />
+          <circle cx={x + dx * 6} cy={y + dy * 6} r={1.5} fill={GOLD3} />
+        </g>
+      })}
+
       {elements.map((el, i) => {
-        const y = 80 + i * 70
+        const y = 75 + i * 70
+        const sigilType = cardSigils[i % cardSigils.length]
+        const isSelected = selectedId === el.id
         return (
           <g key={i}>
+            {/* Card background */}
             <rect x={85} y={y} width={330} height={55}
-              fill={selectedId === el.id ? 'rgba(200,168,74,0.1)' : 'transparent'}
-              stroke={selectedId === el.id ? GOLD2 : INK3} strokeWidth={1.5}
+              fill={isSelected ? 'rgba(200,168,74,0.13)' : 'rgba(200,168,74,0.02)'}
+              stroke={isSelected ? GOLD3 : INK3} strokeWidth={isSelected ? 1.8 : 1.2}
               className="svg-clickable"
               onClick={() => onClick(el.id, el.label, el.detail)} />
-            <text x={250} y={y + 20} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={11} fill={INK2}>{el.label}</text>
-            <text x={250} y={y + 38} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">{el.brief}</text>
-            <SvgCross x={95} y={y + 25} size={5} color={GOLD2} />
-            <SvgCross x={405} y={y + 25} size={5} color={GOLD2} />
+            {/* Inner card border */}
+            <rect x={88} y={y + 3} width={324} height={49} fill="none" stroke={isSelected ? GOLD2 : GOLD} strokeWidth={0.4} pointerEvents="none" />
+            {/* Left sigil medallion */}
+            <circle cx={108} cy={y + 27} r={18} fill="rgba(255,255,255,0.06)" stroke={isSelected ? GOLD3 : GOLD2} strokeWidth={0.8} pointerEvents="none" />
+            {renderCardSigil(sigilType, 108, y + 27, isSelected ? GOLD3 : GOLD2)}
+            {/* Right sigil medallion (rotated variant) */}
+            <circle cx={392} cy={y + 27} r={18} fill="rgba(255,255,255,0.06)" stroke={isSelected ? GOLD3 : GOLD2} strokeWidth={0.8} pointerEvents="none" />
+            <g transform={`rotate(180, 392, ${y + 27})`}>
+              {renderCardSigil(sigilType, 392, y + 27, isSelected ? GOLD3 : GOLD2)}
+            </g>
+            {/* Rite number in small banner at top-left */}
+            <rect x={130} y={y + 6} width={18} height={11} fill={isSelected ? GOLD3 : INK3} stroke="none" pointerEvents="none" />
+            <text x={139} y={y + 14} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={isSelected ? INK : PARCH} pointerEvents="none">{i + 1}</text>
+            {/* Label and brief */}
+            <text x={250} y={y + 22} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={10} fill={isSelected ? INK : INK2} letterSpacing={0.5}>{el.label}</text>
+            <text x={250} y={y + 38} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={7.5} fill={INK3} fontStyle="italic">{el.brief}</text>
+            {/* Bottom decorative rule */}
+            <line x1={130} y1={y + 46} x2={370} y2={y + 46} stroke={GOLD} strokeWidth={0.4} strokeDasharray="2 3" pointerEvents="none" />
           </g>
         )
       })}
@@ -2812,26 +3198,79 @@ function HymnDiagram({ onClick, selectedId, elements }: { onClick: (id: string, 
 
 /* ── Steles Diagram (for Three Steles of Seth) ── */
 function StelesDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+  // Each stele gets a distinct carved sigil (Father = hexagram, Barbelo = vesica, Autogenes = pentagram)
+  const steleSigils = [
+    { type: 'hexagram', label: 'FATHER' },
+    { type: 'vesica', label: 'BARBELO' },
+    { type: 'pentagram', label: 'AUTOGENES' }
+  ]
+  const renderSigil = (type: string, cx: number, cy: number, r: number, color: string) => {
+    if (type === 'hexagram') return <Hexagram cx={cx} cy={cy} r={r} stroke={color} strokeWidth={1.4} />
+    if (type === 'vesica') return <VesicaPiscis cx={cx} cy={cy} r={r} stroke={color} strokeWidth={1.4} />
+    if (type === 'pentagram') return <Pentagram cx={cx} cy={cy} r={r} stroke={color} strokeWidth={1.4} />
+    return null
+  }
   return (
     <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
-      <text x={250} y={25} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK} letterSpacing={2}>THE THREE STELES</text>
+      <text x={250} y={25} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={12} fill={INK} letterSpacing={3}>THE THREE STELES OF SETH</text>
+      <text x={250} y={42} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">Three hymns · Three aspects of the divine</text>
+
+      {/* Decorative ground line */}
+      <line x1={40} y1={455} x2={460} y2={455} stroke={GOLD} strokeWidth={1} pointerEvents="none" />
+      <line x1={50} y1={460} x2={450} y2={460} stroke={GOLD} strokeWidth={0.5} strokeDasharray="3 3" pointerEvents="none" />
+
       {elements.map((el, i) => {
-        const sx = 80 + i * 150, sw = 110, sh = 380, sy = 70
+        const sx = 80 + i * 150, sw = 110, sh = 360, sy = 65
+        const sigilType = steleSigils[i]?.type || 'hexagram'
+        const isSelected = selectedId === el.id
         return (
           <g key={i}>
-            {/* Stele shape - rounded top pillar */}
+            {/* Stele base (pediment) */}
+            <rect x={sx - 6} y={sy + sh + 5} width={sw + 12} height={12}
+              fill="rgba(200,168,74,0.08)" stroke={INK2} strokeWidth={1} pointerEvents="none" />
+            {/* Stele body - rounded top pillar (tombstone shape) */}
             <path d={`M${sx} ${sy + 40} L${sx} ${sy + sh} L${sx + sw} ${sy + sh} L${sx + sw} ${sy + 40} Q${sx + sw} ${sy} ${sx + sw/2} ${sy} Q${sx} ${sy} ${sx} ${sy + 40}Z`}
-              fill={selectedId === el.id ? 'rgba(200,168,74,0.1)' : 'transparent'}
-              stroke={selectedId === el.id ? GOLD2 : INK} strokeWidth={2}
+              fill={isSelected ? 'rgba(200,168,74,0.12)' : 'rgba(200,168,74,0.03)'}
+              stroke={isSelected ? GOLD3 : INK} strokeWidth={isSelected ? 2.5 : 1.8}
               className="svg-clickable"
               onClick={() => onClick(el.id, el.label, el.detail)} />
-            <text x={sx + sw/2} y={sy + 60} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={10} fill={INK2}>{el.label}</text>
-            <text x={sx + sw/2} y={sy + 80} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">{el.brief}</text>
-            {/* Cross decoration */}
-            <SvgCross x={sx + sw/2} y={sy + 120} size={8} color={GOLD2} />
+            {/* Inner border frame */}
+            <path d={`M${sx + 6} ${sy + 44} L${sx + 6} ${sy + sh - 6} L${sx + sw - 6} ${sy + sh - 6} L${sx + sw - 6} ${sy + 44} Q${sx + sw - 6} ${sy + 6} ${sx + sw/2} ${sy + 6} Q${sx + 6} ${sy + 6} ${sx + 6} ${sy + 44}Z`}
+              fill="none" stroke={isSelected ? GOLD2 : GOLD} strokeWidth={0.6} pointerEvents="none" />
+            {/* Top pediment ornament (palmette) */}
+            <path d={`M${sx + sw/2 - 12} ${sy + 4} Q${sx + sw/2} ${sy - 8} ${sx + sw/2 + 12} ${sy + 4}`}
+              fill="none" stroke={GOLD2} strokeWidth={0.8} pointerEvents="none" />
+            <circle cx={sx + sw/2} cy={sy + 2} r={1.5} fill={GOLD3} pointerEvents="none" />
+            {/* Stele title */}
+            <text x={sx + sw/2} y={sy + 38} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={isSelected ? INK : INK2} letterSpacing={1.5}>{steleSigils[i]?.label || el.label.substring(0, 8)}</text>
+            <line x1={sx + 16} y1={sy + 48} x2={sx + sw - 16} y2={sy + 48} stroke={GOLD} strokeWidth={0.5} pointerEvents="none" />
+            {/* Carved sigil at top of stele */}
+            <g transform={`translate(0, 0)`}>
+              {renderSigil(sigilType, sx + sw/2, sy + 90, 22, isSelected ? GOLD3 : GOLD2)}
+            </g>
+            {/* Inscription lines (carved text simulation) */}
+            {Array.from({ length: 6 }, (_, li) => (
+              <line key={`l${li}`} x1={sx + 14} y1={sy + 130 + li * 12} x2={sx + sw - 14} y2={sy + 130 + li * 12}
+                stroke={INK3} strokeWidth={0.4} strokeDasharray="2 2 4 2 3 1" opacity={0.5} pointerEvents="none" />
+            ))}
+            {/* Mid stele — another carved figure */}
+            <g transform={`translate(0, 0)`}>
+              <circle cx={sx + sw/2} cy={sy + 230} r={18} fill="none" stroke={isSelected ? GOLD3 : GOLD} strokeWidth={0.8} pointerEvents="none" />
+              <circle cx={sx + sw/2} cy={sy + 230} r={12} fill="none" stroke={isSelected ? GOLD3 : GOLD} strokeWidth={0.5} pointerEvents="none" />
+              <SvgCross x={sx + sw/2} y={sy + 230} size={7} color={isSelected ? GOLD3 : GOLD2} />
+            </g>
+            {/* More inscriptions */}
+            {Array.from({ length: 5 }, (_, li) => (
+              <line key={`l2${li}`} x1={sx + 14} y1={sy + 265 + li * 11} x2={sx + sw - 14} y2={sy + 265 + li * 11}
+                stroke={INK3} strokeWidth={0.4} strokeDasharray="3 2 2 1 4 2" opacity={0.45} pointerEvents="none" />
+            ))}
+            {/* Element label at bottom */}
+            <text x={sx + sw/2} y={sy + 335} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK3} fontStyle="italic">{el.brief}</text>
+            <text x={sx + sw/2} y={sy + 350} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK2}>Stele {i + 1}</text>
           </g>
         )
       })}
+      <text x={250} y={486} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK3} letterSpacing={3}>NHC VII,5 · SETHIAN HYMNS</text>
     </svg>
   )
 }
@@ -2892,80 +3331,139 @@ function DialogueDiagram({ onClick, selectedId, elements }: { onClick: (id: stri
 function ThreeSpacesDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
   const cx = 400, cy = 340
   const R1 = 55, R2 = 155, R3 = 280
+  // Planetary data with sigil keys for accurate rendering
+  const planets = [
+    { name: 'Saturn', glyph: '\u2644' },
+    { name: 'Jupiter', glyph: '\u2643' },
+    { name: 'Mars', glyph: '\u2642' },
+    { name: 'Sun', glyph: '\u2609' },
+    { name: 'Venus', glyph: '\u2640' },
+    { name: 'Mercury', glyph: '\u263F' },
+    { name: 'Moon', glyph: '\u263D' }
+  ]
+  // 12 zodiac glyphs (accurate Unicode astrological symbols)
+  const zodiac = ['\u2648', '\u2649', '\u264A', '\u264B', '\u264C', '\u264D', '\u264E', '\u264F', '\u2650', '\u2651', '\u2652', '\u2653']
   return (
     <svg viewBox="0 0 800 700" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
       <text x={cx} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={14} fill={INK} letterSpacing={3}>THE THREE SPACES</text>
+      <text x={cx} y={45} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={9} fill={INK3} fontStyle="italic">Ineffable &middot; Pleroma &middot; Kenoma</text>
+
+      {/* Outer ornamental border */}
+      <rect x={40} y={55} width={720} height={620} fill="none" stroke={INK3} strokeWidth={0.8} pointerEvents="none" />
+      <rect x={48} y={63} width={704} height={604} fill="none" stroke={GOLD2} strokeWidth={0.4} pointerEvents="none" />
+      {/* Corner ornaments */}
+      {[[48, 63], [752, 63], [48, 667], [752, 667]].map(([x, y], i) => {
+        const dx = x < 400 ? 1 : -1, dy = y < 350 ? 1 : -1
+        return <g key={i} pointerEvents="none">
+          <path d={`M${x} ${y + dy * 18} Q${x + dx * 8} ${y + dy * 8} ${x + dx * 18} ${y}`} fill="none" stroke={GOLD3} strokeWidth={0.8} />
+          <circle cx={x + dx * 8} cy={y + dy * 8} r={1.5} fill={GOLD3} />
+        </g>
+      })}
 
       {/* Third Space - Kenoma - outermost */}
       <circle cx={cx} cy={cy} r={R3} fill="rgba(60,40,20,0.08)" stroke={INK3} strokeWidth={2} className="svg-clickable" onClick={() => onClick('sp-third', 'The Third Space', elements.find(e => e.id === 'sp-third')?.detail || '')} />
       <text x={cx} y={cy - R3 + 22} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={10} fill={INK2} letterSpacing={2}>THIRD SPACE</text>
-      <text x={cx} y={cy - R3 + 36} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">The Kenoma — Deficiency</text>
+      <text x={cx} y={cy - R3 + 36} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">The Kenoma &mdash; Deficiency</text>
 
-      {/* 7 planetary circles */}
-      {['Saturn', 'Jupiter', 'Mars', 'Sun', 'Venus', 'Mercury', 'Moon'].map((p, i) => {
+      {/* 7 planetary sigils (replaces plain circles) */}
+      {planets.map((p, i) => {
         const a = (i * 51.4 - 90) * Math.PI / 180
         const pr = R3 - 50
+        const px = cx + Math.cos(a) * pr, py = cy + Math.sin(a) * pr
+        const Sigil = PLANETARY_SIGILS[p.name]
         return <g key={i}>
-          <circle cx={cx + Math.cos(a) * pr} cy={cy + Math.sin(a) * pr} r={14} fill="rgba(100,70,30,0.1)" stroke={INK3} strokeWidth={1} />
-          <text x={cx + Math.cos(a) * pr} y={cy + Math.sin(a) * pr + 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={INK3}>{p}</text>
+          {/* Hexagram framing each planet (magic circle around the sigil) */}
+          <circle cx={px} cy={py} r={16} fill="rgba(100,70,30,0.08)" stroke={INK3} strokeWidth={0.8} pointerEvents="none" />
+          <Hexagram cx={px} cy={py} r={14} stroke={INK3} strokeWidth={0.4} />
+          {Sigil && <Sigil cx={px} cy={py} size={9} color={INK2} />}
+          <text x={px} y={py + 26} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={INK3} letterSpacing={0.5}>{p.name.toUpperCase()}</text>
         </g>
       })}
 
-      {/* 12 zodiac marks */}
-      {Array.from({ length: 12 }, (_, i) => {
+      {/* 12 zodiac glyphs (replaces plain dots) */}
+      {zodiac.map((g, i) => {
         const a = (i * 30 - 90) * Math.PI / 180
         const zr = R3 - 15
-        return <circle key={`z${i}`} cx={cx + Math.cos(a) * zr} cy={cy + Math.sin(a) * zr} r={3} fill={INK3} />
+        const zx = cx + Math.cos(a) * zr, zy = cy + Math.sin(a) * zr
+        return <g key={`z${i}`} pointerEvents="none">
+          <circle cx={zx} cy={zy} r={6} fill={PARCH} stroke={INK3} strokeWidth={0.6} />
+          <text x={zx} y={zy + 2.5} textAnchor="middle" fontFamily="'Noto Sans Symbols 2', 'Segoe UI Symbol', 'Apple Symbols', serif" fontSize={9} fill={INK2}>{g}</text>
+        </g>
       })}
 
-      {/* Archon Gates between 3rd and Middle */}
+      {/* Archon Gates between 3rd and Middle — now with hexagram sigils */}
       <circle cx={cx} cy={cy} r={R2 + 22} fill="none" stroke={GOLD2} strokeWidth={1.5} strokeDasharray="6 3" pointerEvents="none" />
       {elements.filter(e => e.id.startsWith('sm-gate') || e.id === 'sp-boundary-32').map((el, i) => {
         const a = (-90 + i * 120) * Math.PI / 180
         const gr = R2 + 22
+        const gx = cx + Math.cos(a) * gr, gy = cy + Math.sin(a) * gr
+        const isSelected = selectedId === el.id
         return <g key={el.id}>
-          <rect x={cx + Math.cos(a) * gr - 30} y={cy + Math.sin(a) * gr - 12} width={60} height={24}
-            fill={selectedId === el.id ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.06)'}
-            stroke={selectedId === el.id ? GOLD3 : GOLD} strokeWidth={1.5}
+          {/* Gate frame with ornate top */}
+          <path d={`M${gx - 32} ${gy + 12} L${gx - 32} ${gy - 6} Q${gx - 32} ${gy - 14} ${gx} ${gy - 14} Q${gx + 32} ${gy - 14} ${gx + 32} ${gy - 6} L${gx + 32} ${gy + 12} Z`}
+            fill={isSelected ? 'rgba(200,168,74,0.18)' : 'rgba(200,168,74,0.06)'}
+            stroke={isSelected ? GOLD3 : GOLD} strokeWidth={1.5}
             className="svg-clickable" onClick={() => onClick(el.id, el.label, el.detail)} />
-          <text x={cx + Math.cos(a) * gr} y={cy + Math.sin(a) * gr + 3} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={7} fill={GOLD2}>{el.label.substring(0, 14)}</text>
+          {/* Hexagram seal above each gate */}
+          <Hexagram cx={gx} cy={gy - 4} r={6} stroke={isSelected ? GOLD3 : GOLD2} strokeWidth={0.7} />
+          <text x={gx} y={gy + 9} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6.5} fill={GOLD2} letterSpacing={0.5}>{el.label.substring(0, 14)}</text>
         </g>
       })}
 
       {/* Middle Space - Pleroma */}
       <circle cx={cx} cy={cy} r={R2} fill="rgba(200,168,74,0.06)" stroke={GOLD2} strokeWidth={2} className="svg-clickable" onClick={() => onClick('sp-middle', 'The Middle Space', elements.find(e => e.id === 'sp-middle')?.detail || '')} />
       <text x={cx} y={cy - R2 + 22} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={10} fill={INK2} letterSpacing={2}>MIDDLE SPACE</text>
-      <text x={cx} y={cy - R2 + 36} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">The Pleroma — Fullness</text>
+      <text x={cx} y={cy - R2 + 36} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={8} fill={INK3} fontStyle="italic">The Pleroma &mdash; Fullness</text>
 
-      {/* 3 Curtains */}
+      {/* 3 Curtains (now with sigil marks at quarter points) */}
       {[90, 130].map((cr, ci) => (
-        <circle key={`cur${ci}`} cx={cx} cy={cy} r={cr} fill="none" stroke={GOLD3} strokeWidth={0.5} strokeDasharray="3 5" pointerEvents="none" />
+        <g key={`cur${ci}`} pointerEvents="none">
+          <circle cx={cx} cy={cy} r={cr} fill="none" stroke={GOLD3} strokeWidth={0.5} strokeDasharray="3 5" />
+          {/* Small pentagrams at N, E, S, W of each curtain */}
+          {[0, 90, 180, 270].map((ang, ai) => {
+            const a = (ang - 90) * Math.PI / 180
+            const px = cx + Math.cos(a) * cr, py = cy + Math.sin(a) * cr
+            return <Pentagram key={ai} cx={px} cy={py} r={3} stroke={GOLD3} strokeWidth={0.5} />
+          })}
+        </g>
       ))}
 
-      {/* 60 treasury dots */}
+      {/* 60 treasury dots arranged in 5 rings of 12 — now alternating with tiny pentagrams */}
       {Array.from({ length: 60 }, (_, i) => {
         const ring = Math.floor(i / 12)
         const idx = i % 12
         const rByRing = [75, 95, 115, 135, 148][ring]
         const a = (idx * 30 - 90 + ring * 6) * Math.PI / 180
-        return <circle key={`t${i}`} cx={cx + Math.cos(a) * rByRing} cy={cy + Math.sin(a) * rByRing} r={2} fill={GOLD2} />
+        const tx = cx + Math.cos(a) * rByRing, ty = cy + Math.sin(a) * rByRing
+        // Every 5th treasury gets a small pentagram instead of a dot
+        if (i % 5 === 0) {
+          return <Pentagram key={`t${i}`} cx={tx} cy={ty} r={3} stroke={GOLD3} strokeWidth={0.6} />
+        }
+        return <circle key={`t${i}`} cx={tx} cy={ty} r={1.8} fill={GOLD2} />
       })}
 
-      {/* First Space - Ineffable */}
+      {/* First Space - Ineffable (now contains Flower of Life + Metatron's Cube overlay) */}
       <circle cx={cx} cy={cy} r={R1} fill="rgba(232,192,112,0.15)" stroke={GOLD3} strokeWidth={2.5} className="svg-clickable" onClick={() => onClick('sp-ineffable', 'The First Space', elements.find(e => e.id === 'sp-ineffable')?.detail || '')} />
-      <text x={cx} y={cy - 8} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK} letterSpacing={1}>FIRST SPACE</text>
-      <text x={cx} y={cy + 8} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK2} fontStyle="italic">The Ineffable</text>
-      <text x={cx} y={cy + 22} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3}>"Space of Spaces"</text>
+      {/* Flower of Life inscribed in the First Space */}
+      <FlowerOfLife cx={cx} cy={cy} r={7} stroke={GOLD3} strokeWidth={0.4} />
+      {/* Inner hexagram (the generative figure) */}
+      <Hexagram cx={cx} cy={cy} r={14} stroke={GOLD2} strokeWidth={0.8} />
+      {/* Bindu / center point */}
+      <circle cx={cx} cy={cy} r={2} fill={GOLD3} pointerEvents="none" />
+
+      <text x={cx} y={cy - R1 - 8} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={INK} letterSpacing={1}>FIRST SPACE</text>
+      <text x={cx} y={cy + R1 + 14} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={7} fill={INK2} fontStyle="italic">The Ineffable</text>
+      <text x={cx} y={cy + R1 + 26} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6} fill={INK3}>"Space of Spaces"</text>
 
       {/* Ineffable Mystery boundary */}
       <circle cx={cx} cy={cy} r={R1 + 8} fill="none" stroke={GOLD3} strokeWidth={0.7} strokeDasharray="2 4" pointerEvents="none" />
       {elements.filter(e => e.id === 'sp-boundary-21').map(el => (
         <g key={el.id}>
-          <rect x={cx - 45} y={cy + R1 + 14} width={90} height={18}
+          <rect x={cx - 45} y={cy + R1 + 14 + 18} width={90} height={18}
             fill={selectedId === el.id ? 'rgba(200,168,74,0.15)' : 'rgba(200,168,74,0.06)'}
             stroke={selectedId === el.id ? GOLD3 : GOLD} strokeWidth={1}
             className="svg-clickable" onClick={() => onClick(el.id, el.label, el.detail)} />
-          <text x={cx} y={cy + R1 + 26} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={GOLD2}>{el.label}</text>
+          <text x={cx} y={cy + R1 + 26 + 18} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={GOLD2}>{el.label}</text>
         </g>
       ))}
 
@@ -3379,6 +3877,112 @@ function SpacesMapDiagram({ onClick, selectedId, elements }: { onClick: (id: str
   return <ThreeSpacesDiagram onClick={onClick} selectedId={selectedId} elements={elements} />
 }
 
+/* ── Sacred Geometry Diagram (new) ── */
+/* Renders the canonical sacred geometry figures in a 3×4 grid, each clickable. */
+function SacredGeometryDiagram({ onClick, selectedId, elements }: { onClick: (id: string, label: string, detail: string) => void; selectedId: string | null; elements: { id: string; label: string; brief: string; detail: string }[] }) {
+  // Layout: 4 rows × 3 cols = 12 figure cells (matches our 11 elements + 1 title cell)
+  const cellW = 230, cellH = 200
+  const cols = 3
+  const gridX0 = 30, gridY0 = 70
+  // Map element IDs to figure-renderer functions
+  const renderFigure = (id: string, cx: number, cy: number, r: number, color: string) => {
+    switch (id) {
+      case 'sg-flower': return <FlowerOfLife cx={cx} cy={cy} r={r * 0.42} stroke={color} strokeWidth={0.7} />
+      case 'sg-metatron': return <MetatronsCube cx={cx} cy={cy} r={r * 0.45} stroke={color} strokeWidth={0.9} lineOpacity={0.5} />
+      case 'sg-sriyantra': return <SriYantra cx={cx} cy={cy} r={r * 0.85} stroke={color} strokeWidth={0.9} />
+      case 'sg-vesica': return <VesicaPiscis cx={cx} cy={cy} r={r * 0.65} stroke={color} strokeWidth={1.1} />
+      case 'sg-hexagram': return <Hexagram cx={cx} cy={cy} r={r * 0.85} stroke={color} strokeWidth={1.2} />
+      case 'sg-pentagram': return <Pentagram cx={cx} cy={cy} r={r * 0.9} stroke={color} strokeWidth={1.2} />
+      case 'sg-heptagram': return <Heptagram cx={cx} cy={cy} r={r * 0.9} stroke={color} strokeWidth={1.2} />
+      case 'sg-octagram': return <Octagram cx={cx} cy={cy} r={r * 0.85} stroke={color} strokeWidth={1.2} />
+      case 'sg-planets': return <g pointerEvents="none">
+        {/* Render all 7 planetary sigils in a row inside the cell */}
+        {['Saturn', 'Jupiter', 'Mars', 'Sun', 'Venus', 'Mercury', 'Moon'].map((p, i) => {
+          const Sigil = PLANETARY_SIGILS[p]
+          const offset = (i - 3) * 14
+          return <g key={p}>
+            <circle cx={cx + offset} cy={cy - 6} r={6} fill="none" stroke={color} strokeWidth={0.4} />
+            {Sigil && <Sigil cx={cx + offset} cy={cy - 6} size={4} color={color} />}
+            <text x={cx + offset} y={cy + 10} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={5} fill={color}>{p.substring(0, 3)}</text>
+          </g>
+        })}
+      </g>
+      case 'sg-zodiac': return <g pointerEvents="none">
+        {/* 12 zodiac glyphs in 2 rows of 6 */}
+        {['\u2648', '\u2649', '\u264A', '\u264B', '\u264C', '\u264D', '\u264E', '\u264F', '\u2650', '\u2651', '\u2652', '\u2653'].map((g, i) => {
+          const col = i % 6, row = Math.floor(i / 6)
+          return <g key={i}>
+            <circle cx={cx - 35 + col * 14} cy={cy - 8 + row * 18} r={6} fill="none" stroke={color} strokeWidth={0.4} />
+            <text x={cx - 35 + col * 14} y={cy - 8 + row * 18 + 3} textAnchor="middle" fontFamily="'Noto Sans Symbols 2', 'Segoe UI Symbol', serif" fontSize={9} fill={color}>{g}</text>
+          </g>
+        })}
+      </g>
+      case 'sg-elements': return <g pointerEvents="none">
+        {/* 4 element glyphs in a row */}
+        {['Fire', 'Air', 'Water', 'Earth'].map((el, i) => {
+          const Glyph = ELEMENT_GLYPHS[el]
+          const offset = (i - 1.5) * 22
+          return <g key={el}>
+            <circle cx={cx + offset} cy={cy} r={12} fill="none" stroke={color} strokeWidth={0.5} />
+            {Glyph && <Glyph cx={cx + offset} cy={cy} size={7} color={color} />}
+            <text x={cx + offset} y={cy + 22} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={6} fill={color}>{el.toUpperCase()}</text>
+          </g>
+        })}
+      </g>
+      default: return null
+    }
+  }
+
+  return (
+    <svg viewBox="0 0 760 880" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+      <text x={380} y={28} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={14} fill={INK} letterSpacing={3}>THE SACRED GEOMETRY OF THE PLEROMA</text>
+      <text x={380} y={48} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={9} fill={INK3} fontStyle="italic">The mathematical order behind the Treasuries, Gates, and Seals</text>
+
+      {/* Outer ornamental border */}
+      <rect x={20} y={60} width={720} height={810} fill="none" stroke={INK3} strokeWidth={1.2} pointerEvents="none" />
+      <rect x={28} y={68} width={704} height={794} fill="none" stroke={GOLD2} strokeWidth={0.5} pointerEvents="none" />
+
+      {/* Render each element in its grid cell */}
+      {elements.map((el, i) => {
+        const col = i % cols
+        const row = Math.floor(i / cols)
+        const cellX = gridX0 + col * cellW
+        const cellY = gridY0 + row * cellH
+        const isSelected = selectedId === el.id
+        return (
+          <g key={el.id}>
+            {/* Cell border */}
+            <rect x={cellX} y={cellY} width={cellW - 10} height={cellH - 10}
+              fill={isSelected ? 'rgba(200,168,74,0.12)' : 'rgba(200,168,74,0.02)'}
+              stroke={isSelected ? GOLD3 : INK3} strokeWidth={isSelected ? 1.8 : 0.8}
+              className="svg-clickable"
+              onClick={() => onClick(el.id, el.label, el.detail)} />
+            {/* Inner border */}
+            <rect x={cellX + 3} y={cellY + 3} width={cellW - 16} height={cellH - 16} fill="none" stroke={isSelected ? GOLD2 : GOLD} strokeWidth={0.3} pointerEvents="none" />
+            {/* Corner ornaments */}
+            {[[cellX + 3, cellY + 3], [cellX + cellW - 13, cellY + 3], [cellX + 3, cellY + cellH - 13], [cellX + cellW - 13, cellY + cellH - 13]].map(([x, y], ci) => {
+              const dx = x < cellX + cellW / 2 ? 1 : -1
+              const dy = y < cellY + cellH / 2 ? 1 : -1
+              return <path key={ci} d={`M${x + dx * 6} ${y} L${x} ${y} L${x} ${y + dy * 6}`} fill="none" stroke={isSelected ? GOLD3 : GOLD2} strokeWidth={0.5} pointerEvents="none" />
+            })}
+            {/* Cell label */}
+            <text x={cellX + (cellW - 10) / 2} y={cellY + 20} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={9} fill={isSelected ? INK : INK2} letterSpacing={1.2}>{el.label}</text>
+            {/* Cell brief */}
+            <text x={cellX + (cellW - 10) / 2} y={cellY + 33} textAnchor="middle" fontFamily="Libre Baskerville, serif" fontSize={6.5} fill={INK3} fontStyle="italic">{el.brief}</text>
+            {/* Figure in cell center */}
+            <g transform={`translate(${cellX + (cellW - 10) / 2}, ${cellY + (cellH - 10) / 2 + 10})`}>
+              {renderFigure(el.id, 0, 0, 65, isSelected ? GOLD3 : GOLD2)}
+            </g>
+          </g>
+        )
+      })}
+
+      {/* Footer caption */}
+      <text x={380} y={855} textAnchor="middle" fontFamily="Cinzel, serif" fontSize={8} fill={INK3} letterSpacing={3}>CLICK ANY FIGURE TO REVEAL ITS ROLE IN THE JEU COSMOLOGY</text>
+    </svg>
+  )
+}
+
 /* ── Seal Diagram Router ── */
 function SealDiagram({ type, complexity, fatherName, cipher, jeuNum, onElementClick, selectedId, elements, onNavigateEntry }: {
   type: string; complexity: number; fatherName: string; cipher: string; jeuNum: number
@@ -3409,6 +4013,7 @@ function SealDiagram({ type, complexity, fatherName, cipher, jeuNum, onElementCl
     case 'dialogue': return <DialogueDiagram {...elProps} />
     case 'three-spaces': return <ThreeSpacesDiagram {...elProps} />
     case 'spaces-map': return <SpacesMapDiagram {...elProps} />
+    case 'sacred-geometry': return <SacredGeometryDiagram {...elProps} />
     case 'emanation-tree': return <EmanationTreeDiagram {...elProps} />
     case 'jeu-figure': return <JeuFigureDiagram {...elProps} />
     case 'virgin-light': return <VirginOfLightDiagram {...elProps} />
@@ -3431,6 +4036,7 @@ export default function Home() {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     'cat-overview': true, 'cat-cosmos': false, 'cat-liturgy': false, 'cat-hymn': false,
     'cat-archon': false, 'cat-related': false, 'cat-names': false, 'cat-dialogue': false,
+    'cat-geometry': false,
     'rank-1': false, 'rank-2': false, 'rank-3': false, 'rank-4': false, 'rank-5': false
   })
   const [mounted, setMounted] = useState(false)
@@ -3465,7 +4071,7 @@ export default function Home() {
   }, [searchQuery])
 
   const groupedSacreds = useMemo(() => {
-    const groups: Record<SacredCategory, SacredEntry[]> = { overview: [], cosmos: [], liturgy: [], hymn: [], archon: [], related: [], names: [], dialogue: [], emanation: [], spaces: [] }
+    const groups: Record<SacredCategory, SacredEntry[]> = { overview: [], cosmos: [], liturgy: [], hymn: [], archon: [], related: [], names: [], dialogue: [], emanation: [], spaces: [], geometry: [] }
     filteredSacreds.forEach(s => { groups[s.category].push(s) })
     return groups
   }, [filteredSacreds])
@@ -3557,6 +4163,13 @@ export default function Home() {
 
           <div className="content-grid">
             <div className="diagram-wrap">
+              {currentSacred?.image && (
+                <div className="entry-image-banner">
+                  <img src={currentSacred.image} alt={currentSacred.title} />
+                  <div className="entry-image-frame" />
+                  <div className="entry-image-caption">{currentSacred.title}</div>
+                </div>
+              )}
               {currentSacred && <SealDiagram type={currentSacred.sealType} complexity={3} fatherName="" cipher="" jeuNum={0} onElementClick={handleElementClick} selectedId={selectedElement} elements={currentSacred.elements} onNavigateEntry={handleEntrySelect} />}
               {currentTreasury && <SealDiagram type={currentTreasury.sealType} complexity={currentTreasury.sealComplexity} fatherName={currentTreasury.fatherName} cipher={currentTreasury.cipher} jeuNum={currentTreasury.jeuNum} onElementClick={handleElementClick} selectedId={selectedElement} />}
             </div>
